@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+/.vs/BomberJam64/v17
+*.pdb
+*.log
+*.txt
+*.recipe
+/x64/Release/BomberJam64.tlog
+/x64/Release-EngineBuild/BomberJam64.tlog
+/x64/Debug/BomberJam64.tlog
+/x64

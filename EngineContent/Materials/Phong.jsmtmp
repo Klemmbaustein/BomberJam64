@@ -1,0 +1,5 @@
+basic.vert
+basic.frag
+ 
+u_diffuse;3;1.000000 0.250000 0.250000
+u_texture;5;testure.png

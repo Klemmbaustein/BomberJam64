@@ -1,0 +1,8 @@
+Folder/Phong_Template
+basic.vert
+basic.frag
+ 
+u_diffuse;3;1.000000 1.000000 1.000000
+u_emissive;3;0
+u_texture;5;0
+u_usetexture;0;0
