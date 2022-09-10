@@ -261,6 +261,12 @@
     <ClCompile Include="Code\Objects\Bomb.cpp">
       <Filter>Code\Objects\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Objects\WallObject.cpp">
+      <Filter>Code\Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Objects\BombPickup.cpp">
+      <Filter>Code\Objects\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\TypeEnun.h">
@@ -465,6 +471,12 @@
       <Filter>Code\Sound</Filter>
     </ClInclude>
     <ClInclude Include="Code\Objects\Bomb.h">
+      <Filter>Code\Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Objects\WallObject.h">
+      <Filter>Code\Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Objects\BombPickup.h">
       <Filter>Code\Objects\Game</Filter>
     </ClInclude>
   </ItemGroup>

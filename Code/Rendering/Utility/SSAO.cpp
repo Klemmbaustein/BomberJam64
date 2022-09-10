@@ -15,8 +15,8 @@ unsigned int noiseTexture;
 unsigned int ssaoFBO = 0;
 unsigned int ssaoColorBuffer;
 unsigned int ssaoBlurFBO, ssaoColorBufferBlur;
-unsigned int ResolutionDivider = 2;
-unsigned int Samples = 20;
+unsigned int ResolutionDivider = 1;
+unsigned int Samples = 16;
 unsigned int SSAOTexture;
 void SSAO::Init()
 {
@@ -77,7 +77,7 @@ unsigned int SSAO::Render()
 	AOShader->Bind();
 	glUniform1i(glGetUniformLocation(AOShader->GetShaderID(), "FullScreen"), 1);
 	glUniform1i(glGetUniformLocation(AOShader->GetShaderID(), "kernelSize"), Samples);
-	glUniform1f(glGetUniformLocation(AOShader->GetShaderID(), "radius"), 1.5f);
+	glUniform1f(glGetUniformLocation(AOShader->GetShaderID(), "radius"), 2.5f);
 	glUniform1i(glGetUniformLocation(AOShader->GetShaderID(), "gPosition"), 0);
 	glUniform1i(glGetUniformLocation(AOShader->GetShaderID(), "gNormal"), 1);
 	glUniform1i(glGetUniformLocation(AOShader->GetShaderID(), "ResDiv"), ResolutionDivider);

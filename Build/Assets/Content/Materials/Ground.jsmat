@@ -8,3 +8,4 @@ u_specularsize;1;0.0
 u_specularstrength;1;0.0
 u_usetexture;0;1
 u_texture;5;Grass
+u_ssao;0;1

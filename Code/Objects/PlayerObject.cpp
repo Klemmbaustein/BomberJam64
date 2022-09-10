@@ -47,15 +47,16 @@ void PlayerObject::Tick()
 		}
 
 
-		if (Input::IsKeyDown(SDLK_SPACE) && BombLayTime < 0)
+		if (BombTime > 0 && BombLayTime < 0)
 		{
 			BombLayTime = 0.2f;
 			Objects::SpawnObject<Bomb>(GetTransform() + Transform(Vector3(), Vector3(0, Random::GetRandomNumber(-100, 100), 0), Vector3(1)));
 		}
 
 		BombLayTime -= Performance::DeltaTime;
+		BombTime -= Performance::DeltaTime;
 
-		//OnGround = true;
+		BombTime = std::max(0.0f, BombTime);
 
 		if (InputVelocity != Vector2(0))
 		{
@@ -157,7 +158,6 @@ void PlayerObject::Tick()
 
 void PlayerObject::Begin()
 {
-	SetTransform(GetTransform() + Transform(Vector3(0, 15, 0), Vector3(0), Vector3(1)));
 	SpawnPoint = GetTransform().Location;
 	UI = UI::CreateUICanvas<GameUI>();
 	if(UI)
@@ -213,22 +213,30 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 			PlayerCollider->RelativeTransform = Transform(NextLastValidPosition, Vector3(), Vector3(0.0075, 0.04, 0.0075));
 			Collision::HitResponse hit = PlayerCollider->OverlapCheck({PlayerCollider2});
 
-			if (hit.Hit && Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) > 0.5)
+			if (hit.HitObject)
 			{
-				ObjectTransform.Location += Vector3(0, Performance::DeltaTime * (1.5 - Vector3::Dot(hit.Normal, Vector3())) * 25, 0);
-				return true;
+				if (hit.HitObject->GetObjectDescription().ID == 7) // if its a bomb pickup
+				{
+					BombTime = 5;
+				}
+				else if (hit.Hit && Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) > 0.5)
+				{
+					ObjectTransform.Location += Vector3(0, Performance::DeltaTime * (1.5 - Vector3::Dot(hit.Normal, Vector3())) * 25, 0);
+					return true;
+				}
+				else if (hit.Hit && Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) < -0.5)
+				{
+					VerticalVelocity = -10;
+					return false;
+				}
+				else if (hit.Hit)
+				{
+					ObjectTransform.Location += LastValidPosition;
+					if (Vector3::Dot(hit.Normal, Vector3()) < 0.5)
+						return false;
+				}
 			}
-			else if (hit.Hit && Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) < -0.5)
-			{
-				VerticalVelocity = -10;
-				return false;
-			}
-			else if (hit.Hit)
-			{
-				ObjectTransform.Location += LastValidPosition;
-				if(Vector3::Dot(hit.Normal, Vector3()) < 0.5)
-				return false;
-			}
+
 			LastValidPosition = NextLastValidPosition;
 		}
 	}

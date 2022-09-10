@@ -295,7 +295,7 @@ int Start(int argc, char** argv)
 	std::cout << " done!\n";
 	std::cout << "*Loading Startup Map\n";
 	Debugging::EngineStatus = "Loading Startup Map";
-	if (StartupMap != "")
+	if (StartupMap != std::string(""))
 	{
 		World::LoadNewScene(StartupMap);
 	}

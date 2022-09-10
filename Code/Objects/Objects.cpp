@@ -5,6 +5,8 @@
 #include <Objects/InstancedMeshObject.h>
 #include <Objects/PlayerObject.h>
 #include <Objects/Bomb.h>
+#include <Objects/WallObject.h>
+#include <Objects/BombPickup.h>
 
 template<typename T>
 inline T* Objects::SpawnObject(Transform ObjectTransform)
@@ -54,7 +56,10 @@ WorldObject* Objects::SpawnObjectFromID(uint32_t ID, Transform ObjectTransform)
 		return (WorldObject*)SpawnObject<PlayerObject>(ObjectTransform);
 	case 5:
 		return (WorldObject*)SpawnObject<Bomb>(ObjectTransform);
-
+	case 6:
+		return (WorldObject*)SpawnObject<WallObject>(ObjectTransform);
+	case 7:
+		return (WorldObject*)SpawnObject<BombPickup>(ObjectTransform);
 	default:
 		throw "Attempted to spawn unknown object";
 	}
@@ -69,5 +74,8 @@ namespace Objects
 		ObjectDescription("Sound Object", 2),
 		ObjectDescription("Instanced Mesh", 3),
 		ObjectDescription("Player Object", 4),
+		ObjectDescription("Bomb", 5),
+		ObjectDescription("Wall Object", 6),
+		ObjectDescription("Bomb Pickup", 7)
 	};
 }

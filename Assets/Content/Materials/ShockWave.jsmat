@@ -1,8 +1,0 @@
-Explosion
-explosion.vert
-explosion.frag
-1
-u_diffuse;3;1.000000 1.000000 1.000000
-u_emissive;3;0.500000 0.500000 0.500000
-u_usetexture;0;1
-u_texture;5;ShockWave

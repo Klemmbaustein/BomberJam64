@@ -1,0 +1,7 @@
+Leaves
+tree.vert
+tree.frag
+1
+u_texture;5;Leaves
+u_usetexture;0;1
+u_diffuse;3;1.000000 1.000000 1.000000

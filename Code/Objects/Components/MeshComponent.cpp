@@ -58,7 +58,7 @@ void MeshComponent::SetRelativeTransform(Transform NewRelativeTransform)
 	RelativeTransform = NewRelativeTransform;
 }
 
-Transform MeshComponent::GetRelativeTransform()
+Transform& MeshComponent::GetRelativeTransform()
 {
 	return RelativeTransform;
 }

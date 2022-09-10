@@ -13,7 +13,6 @@ void MeshObject::Tick()
 
 void MeshObject::Begin()
 {
-	Properties.push_back(Object::Property("Collision Scale", T_VECTOR3, &CollisionScale));
 }
 
 void MeshObject::LoadFromFile(std::string Filename)
@@ -32,8 +31,6 @@ void MeshObject::LoadFromFile(std::string Filename)
 
 void MeshObject::OnPropertySet()
 {
-	if(Mesh->GetModel()->HasCollision)
-	MeshCollision->CollMesh.SetTransform(Transform(Vector3(), Vector3(), CollisionScale));
 }
 
 std::string MeshObject::Serialize()

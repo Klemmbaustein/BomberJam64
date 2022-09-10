@@ -222,6 +222,7 @@
     <ClCompile Include="Code\Math\Math.cpp" />
     <ClCompile Include="Code\Math\Vector.cpp" />
     <ClCompile Include="Code\Objects\Bomb.cpp" />
+    <ClCompile Include="Code\Objects\BombPickup.cpp" />
     <ClCompile Include="Code\Objects\Components\CameraComponent.cpp" />
     <ClCompile Include="Code\Objects\Components\CollisionComponent.cpp" />
     <ClCompile Include="Code\Objects\Components\Component.cpp" />
@@ -232,6 +233,7 @@
     <ClCompile Include="Code\Objects\Objects.cpp" />
     <ClCompile Include="Code\Objects\PlayerObject.cpp" />
     <ClCompile Include="Code\Objects\SoundObject.cpp" />
+    <ClCompile Include="Code\Objects\WallObject.cpp" />
     <ClCompile Include="Code\Objects\WorldObject.cpp" />
     <ClCompile Include="Code\Rendering\Camera\Camera.cpp" />
     <ClCompile Include="Code\Rendering\Camera\CameraShake.cpp" />
@@ -284,6 +286,8 @@
     <ClInclude Include="Code\Math\Math.h" />
     <ClInclude Include="Code\Math\Vector.h" />
     <ClInclude Include="Code\Objects\Bomb.h" />
+    <ClInclude Include="Code\Objects\BombPickup.h" />
+    <ClInclude Include="Code\Objects\WallObject.h" />
     <ClInclude Include="Code\Objects\Components\CameraComponent.h" />
     <ClInclude Include="Code\Objects\Components\CollisionComponent.h" />
     <ClInclude Include="Code\Objects\Components\Component.h" />

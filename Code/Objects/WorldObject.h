@@ -52,7 +52,7 @@ public:
 		ObjectTransform = NewTransform;
 	}
 
-	virtual Transform GetTransform()
+	Transform& GetTransform()
 	{
 		return ObjectTransform;
 	}

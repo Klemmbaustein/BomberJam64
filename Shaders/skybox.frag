@@ -36,7 +36,7 @@ void main()
 {
 	f_color = vec4(mix(vec3(0.7, 0.8, 1), vec3(0.3f, 0.6f, 1.f), abs(dot(vec3(normalize(v_modelnormal)), vec3(0, 1, 0)))), 1);
 	brightcolor = vec4(vec3(f_color.xyz * 0.15f), 1);
-	f_color+= vec4(vec3(250, 250, 250) * max((dot(normalize(-v_modelnormal), normalize(u_directionallight.Direction)) - 0.9985) * 5, 0), 1);
+	//f_color+= vec4(vec3(250, 250, 250) * max((dot(normalize(-v_modelnormal), normalize(u_directionallight.Direction)) - 0.9985) * 5, 0), 1);
 	brightcolor += vec4(vec3(250, 250, 250) * max((dot(normalize(-v_modelnormal), normalize(u_directionallight.Direction)) - 0.9985) * 5, 0), 1);
 	f_normal = vec4(vec3(0), 1);
 	f_position = vec4(vec3(0), 1);

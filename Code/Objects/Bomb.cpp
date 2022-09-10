@@ -5,6 +5,7 @@
 #include <EngineRandom.h>
 #include <algorithm>
 #include <Rendering/Camera/CameraShake.h>
+#include <Objects/WallObject.h>
 
 Sound::SoundBuffer* BombSound = nullptr;
 
@@ -34,13 +35,23 @@ void Bomb::Tick()
 		if (!PlayedSound)
 		{
 			Sound::PlaySound2D(BombSound, Random::GetRandomNumber(0.8f, 1.2f), Random::GetRandomNumber(0.8f, 1.2f), false);
-			CameraShake::PlayDefaultCameraShake(1.2f);
+			CameraShake::PlayDefaultCameraShake(1.f);
+			auto AllObject = Objects::GetAllObjectsWithID(6);
+
+			for (auto* o : AllObject)
+			{
+				if (Vector3::Distance(o->GetTransform().Location, GetTransform().Location) < 15)
+				{
+					Objects::DestroyObject(o);
+				}
+			}
+
 			PlayedSound = true;
 		}
 		ExplosionMesh->SetVisibility(true);
 		BombMesh->SetVisibility(false);
-		ExplosionMesh->SetUniform("u_opacity", U_FLOAT, std::to_string(std::max(1.0f - (-DetonationTime * 5.0f), 0.0f)), 0);
-		ExplosionMesh->SetUniform("u_opacity", U_FLOAT, std::to_string(std::max(1.0f - (-DetonationTime * 5.0f), 0.0f)), 1);
+		ExplosionMesh->SetUniform("u_opacity", U_FLOAT, std::to_string(std::max(1.0f - (-DetonationTime * 3.0f), 0.0f)), 0);
+		ExplosionMesh->SetUniform("u_opacity", U_FLOAT, std::to_string(std::max(1.0f - (-DetonationTime * 3.0f), 0.0f)), 1);
 
 		ExplosionMesh->SetRelativeTransform(Transform(Vector3(), Vector3(), Vector3(10.f * -DetonationTime)));
 

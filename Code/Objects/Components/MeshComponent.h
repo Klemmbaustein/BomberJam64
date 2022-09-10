@@ -35,7 +35,7 @@ public:
 	}
 	MeshData GetMeshData();
 	void SetRelativeTransform(Transform NewRelativeTransform);
-	Transform GetRelativeTransform();
+	Transform& GetRelativeTransform();
 
 	void SetVisibility(bool NewVisibility);
 

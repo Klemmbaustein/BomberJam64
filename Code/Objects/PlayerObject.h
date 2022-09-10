@@ -20,6 +20,8 @@ public:
 	bool HasCollision = true;
 	Vector2 Velocity = Vector2(0);
 	bool OnGround = false;
+	float BombTime = 0.0f;
+
 protected:
 	Vector3 SpawnPoint;
 	GameUI* UI = nullptr;

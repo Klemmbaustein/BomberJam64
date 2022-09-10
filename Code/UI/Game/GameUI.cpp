@@ -13,6 +13,10 @@ GameUI::~GameUI()
 
 void GameUI::Render(Shader* Shader)
 {
+	int NumBombs = Player->BombTime / 0.2f;
+
+	GameTextRenderer->RenderText("Bomb: " + std::to_string(NumBombs), Vector2(-0.8f), 1.f, Vector3(1));
+
 	if (InTransition)
 	{
 		TransitionBorder->ReInit(Vector2(1 - std::min(std::pow(TransitionTime, 3.f), 2.f), -1.f), Vector2(2), 0);
