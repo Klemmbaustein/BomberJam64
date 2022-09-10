@@ -4,7 +4,6 @@
 #include <WorldParameters.h>
 void InstancedMeshObject::Destroy()
 {
-	Detach(IMComponent);
 }
 
 void InstancedMeshObject::Tick()

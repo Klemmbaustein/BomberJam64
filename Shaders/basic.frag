@@ -202,7 +202,6 @@ void main()
 	}
 
 	f_color = ApplyFogColor(vec4((ambient + (diffuse + specular) * shadow + u_emissive), 1));
-	//f_color = vec4(v_screennormal, 1);
 	brightcolor = min(vec4(min(pow(diffuse * shadow + max(u_emissive - vec3(1), 0), vec3(25)), 5), 1.0), vec4(2, 2, 2, 1.f));
 	brightcolor += specular * shadow;
 	if(u_ssao == 1)

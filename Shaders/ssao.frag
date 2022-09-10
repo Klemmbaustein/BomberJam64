@@ -12,7 +12,7 @@ uniform vec3 samples[64];
 uniform mat4 projection;
 uniform int ResDiv;
 uniform vec2 screenRes;
-float bias = 0.1;
+float bias = 0.2;
 
 // tile noise texture over screen, based on screen dimensions divided by noise size
 vec2 noiseScale = screenRes / 4 / ResDiv; 
@@ -51,7 +51,7 @@ void main()
 			float sampleDepth = texture(gPosition, offset.xy).z; // get depth value of kernel sample
 		
 			// range check & accumulate
-			float rangeCheck = smoothstep(0.0, 1.0, radius / abs(fragPos.z - sampleDepth));
+			float rangeCheck = smoothstep(0.0, 2.0, radius / abs(fragPos.z - sampleDepth));
 			occlusion += (sampleDepth >= samplePos.z + bias ? 1.0 : 0.0) * rangeCheck;
 		}
 	}

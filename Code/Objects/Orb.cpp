@@ -5,6 +5,7 @@ void Orb::Begin()
 	OrbMesh = new MeshComponent();
 	Attach(OrbMesh);
 	OrbMesh->Load("Orb");
+	OrbMesh->GetRelativeTransform().Location = Vector3(0.5);
 
 	OrbCollision = new CollisionComponent();
 	Attach(OrbCollision);

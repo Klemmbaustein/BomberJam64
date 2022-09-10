@@ -267,7 +267,9 @@
     <ClCompile Include="Code\Objects\BombPickup.cpp">
       <Filter>Code\Objects\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Objects\Orb.cpp" />
+    <ClCompile Include="Code\Objects\Orb.cpp">
+      <Filter>Code\Objects\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\TypeEnun.h">

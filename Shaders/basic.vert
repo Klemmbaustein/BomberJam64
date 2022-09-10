@@ -27,9 +27,9 @@ void main()
 	gl_Position = (u_viewpro) * vec4(v_position, 1);
 	depth = gl_Position.z;
 	v_fragposlightspace = (u_lightspacematrix * vec4(a_position, 1.f)).rgb;
-	v_modelnormal = (mat3(a_model) * a_normal);
-	v_normal = a_normal;
-	v_screennormal = normalize(transpose(inverse(mat3(a_model * u_view))) * (a_normal));
+	v_modelnormal = mat3(a_model) * a_normal;
+	v_screennormal = normalize(transpose(inverse((u_view))) * vec4(v_modelnormal, 1)).xyz;
+	//v_screennormal = abs(vec3(gl_VertexID / 100.f));
 	v_screenposition = (u_view * vec4(v_position, 1)).rgb;
 	v_texcoord = a_tex_coord;
 }

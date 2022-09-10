@@ -77,7 +77,7 @@ unsigned int SSAO::Render()
 	AOShader->Bind();
 	glUniform1i(glGetUniformLocation(AOShader->GetShaderID(), "FullScreen"), 1);
 	glUniform1i(glGetUniformLocation(AOShader->GetShaderID(), "kernelSize"), Samples);
-	glUniform1f(glGetUniformLocation(AOShader->GetShaderID(), "radius"), 2.5f);
+	glUniform1f(glGetUniformLocation(AOShader->GetShaderID(), "radius"), 5.5f);
 	glUniform1i(glGetUniformLocation(AOShader->GetShaderID(), "gPosition"), 0);
 	glUniform1i(glGetUniformLocation(AOShader->GetShaderID(), "gNormal"), 1);
 	glUniform1i(glGetUniformLocation(AOShader->GetShaderID(), "ResDiv"), ResolutionDivider);

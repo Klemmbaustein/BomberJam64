@@ -6,7 +6,6 @@ void BombPickup::Begin()
 	PickupMesh = new MeshComponent();
 	Attach(PickupMesh);
 	PickupMesh->Load("BombButton");
-	PickupMesh->GetRelativeTransform().Location += Vector3(0, 0, 0);
 
 	auto CollMesh = JSM::LoadJSModel(Assets::GetAsset("Cube.jsm"));
 

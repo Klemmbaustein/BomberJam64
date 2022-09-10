@@ -185,8 +185,6 @@ void PlayerObject::Begin()
 
 void PlayerObject::Destroy()
 {
-	delete PlayerCamera;
-	delete PlayerCollider;
 	delete UI;
 }
 
