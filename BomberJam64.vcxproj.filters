@@ -347,9 +347,6 @@
     <ClInclude Include="Code\Objects\Components\MeshComponent.h">
       <Filter>Code\Objects\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Rendering\Material.h">
-      <Filter>Code\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Rendering\Renderable.h">
       <Filter>Code\Rendering</Filter>
     </ClInclude>
@@ -531,6 +528,12 @@
     </None>
     <None Include="Shaders\ssao.frag">
       <Filter>Shaders\PostProcess</Filter>
+    </None>
+    <None Include="Shaders\explosion.frag">
+      <Filter>Shaders\3D</Filter>
+    </None>
+    <None Include="Shaders\explosion.vert">
+      <Filter>Shaders\3D</Filter>
     </None>
   </ItemGroup>
 </Project>

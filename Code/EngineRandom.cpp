@@ -11,6 +11,6 @@ int Random::GetRandomNumber(int Min, int Max)
 float Random::GetRandomNumber(float Min, float Max)
 {
 	float Range = std::abs(Max - Min);
-	float RandomNumber = std::fmod(std::rand(), Range);
+	float RandomNumber = std::fmod(std::rand() / 124.f, Range);
 	return RandomNumber + Min;
 }

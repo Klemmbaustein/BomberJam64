@@ -1,0 +1,7 @@
+explosion.vert
+explosion.frag
+u_diffuse;3;0
+u_emissive;3;0
+u_usetexture;0;0
+u_texture;5;
+u_opacity;1;0

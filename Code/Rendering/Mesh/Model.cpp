@@ -79,33 +79,36 @@ namespace CSM
 
 void Model::Render(Camera* WorldCamera)
 {
-	if (TwoSided)
+	if (Visible)
 	{
-		glDisable(GL_CULL_FACE);
-	}
-	else
-	{
-		glEnable(GL_CULL_FACE);
-	}
-	glm::mat4 ModelView;
-	if (!Graphics::IsRenderingShadows)
-	{
-		ModelViewProjection = WorldCamera->getViewProj() * MatModel;
-		ModelView = WorldCamera->getView() * MatModel;
-	}
-	glm::mat4 InvModelView = glm::transpose(glm::inverse(ModelView));
-	glBindBuffer(GL_ARRAY_BUFFER, MatBuffer);
-	for (int i = 0; i < Meshes.size(); i++)
-	{
-		Shader* CurrentShader = ((!Graphics::IsRenderingShadows || Meshes[i]->IsTransparent) ? Meshes.at(i)->MeshShader : Graphics::ShadowShader);
-		CurrentShader->Bind();
-		glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_projection"), 1, GL_FALSE, &WorldCamera->GetProjection()[0][0]);
-		glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_invmodelview"), 1, GL_FALSE, &InvModelView[0][0]);
-		glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_viewpro"), 1, GL_FALSE, &WorldCamera->getViewProj()[0][0]);
-		if(!Graphics::IsRenderingShadows)
-		glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_view"), 1, GL_FALSE, &WorldCamera->getView()[0][0]);
-		Meshes.at(i)->Render(CurrentShader);
-		Performance::DrawCalls++;
+		if (TwoSided)
+		{
+			glDisable(GL_CULL_FACE);
+		}
+		else
+		{
+			glEnable(GL_CULL_FACE);
+		}
+		glm::mat4 ModelView;
+		if (!Graphics::IsRenderingShadows)
+		{
+			ModelViewProjection = WorldCamera->getViewProj() * MatModel;
+			ModelView = WorldCamera->getView() * MatModel;
+		}
+		glm::mat4 InvModelView = glm::transpose(glm::inverse(ModelView));
+		glBindBuffer(GL_ARRAY_BUFFER, MatBuffer);
+		for (int i = 0; i < Meshes.size(); i++)
+		{
+			Shader* CurrentShader = ((!Graphics::IsRenderingShadows || Meshes[i]->IsTransparent) ? Meshes.at(i)->MeshShader : Graphics::ShadowShader);
+			CurrentShader->Bind();
+			glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_projection"), 1, GL_FALSE, &WorldCamera->GetProjection()[0][0]);
+			glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_invmodelview"), 1, GL_FALSE, &InvModelView[0][0]);
+			glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_viewpro"), 1, GL_FALSE, &WorldCamera->getViewProj()[0][0]);
+			if (!Graphics::IsRenderingShadows)
+				glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_view"), 1, GL_FALSE, &WorldCamera->getView()[0][0]);
+			Meshes.at(i)->Render(CurrentShader);
+			Performance::DrawCalls++;
+		}
 	}
 }
 
@@ -265,20 +268,23 @@ void Model::ConfigureVAO()
 
 void Model::SimpleRender(Shader* Shader)
 {
-	Shader->Bind();
-	if (TwoSided)
+	if (Visible)
 	{
-		glDisable(GL_CULL_FACE);
-	}
-	else
-	{
-		glEnable(GL_CULL_FACE);
-	}
-	glUniformMatrix4fv(glGetUniformLocation(Shader->GetShaderID(), "u_model"), 1, GL_FALSE, &MatModel[0][0]);
-	for (Mesh* m : Meshes)
-	{
-		Performance::DrawCalls++;
-		m->SimpleRender(Shader);
+		Shader->Bind();
+		if (TwoSided)
+		{
+			glDisable(GL_CULL_FACE);
+		}
+		else
+		{
+			glEnable(GL_CULL_FACE);
+		}
+		glUniformMatrix4fv(glGetUniformLocation(Shader->GetShaderID(), "u_model"), 1, GL_FALSE, &MatModel[0][0]);
+		for (Mesh* m : Meshes)
+		{
+			Performance::DrawCalls++;
+			m->SimpleRender(Shader);
+		}
 	}
 }
 
@@ -290,6 +296,7 @@ void Model::SetUniform(Uniform NewUniform, uint8_t MeshIndex)
 		if (Mesh.Name == NewUniform.Name)
 		{
 			Mesh.Value = NewUniform.Value;
+
 			if (Mesh.Content != NewUniform.Content)
 			{
 				delete Mesh.Content;

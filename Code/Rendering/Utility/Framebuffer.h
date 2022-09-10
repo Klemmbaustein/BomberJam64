@@ -73,7 +73,7 @@ public:
 	}
 	
 protected:
-	GLuint FBO;
+	GLuint FBO = 0;
 	unsigned int numbuffers = 3;
 	GLuint* Textures = new GLuint[3];
 	std::vector<GLuint> Attachements = {GL_COLOR_ATTACHMENT0, GL_DEPTH_STENCIL_ATTACHMENT, GL_COLOR_ATTACHMENT1};

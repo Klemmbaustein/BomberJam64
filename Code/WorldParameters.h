@@ -30,7 +30,7 @@ namespace Graphics
 		float Intensity = 1.f;
 		float AmbientIntensity = 0.3f;
 		Vector3 Direction = Vector3(0.5f, 0.5f, 0.7f);
-		Vector3 SunColor = Vector3(1.f, 0.95f, 0.9f);
+		Vector3 SunColor = Vector3(1.f, 0.9f, 0.9f);
 		Vector3 AmbientColor = Vector3(0.5f, 0.5f, 1.f);
 	};
 	extern Sun WorldSun;

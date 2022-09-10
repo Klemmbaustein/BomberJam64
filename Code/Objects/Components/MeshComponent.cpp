@@ -32,7 +32,7 @@ void MeshComponent::Load(std::string File)
 
 void MeshComponent::SetActiveShader(Shader* Shader)
 {
-	//CurrentShader = Shader;
+	CurrentShader = Shader;
 	//delete MeshModel;
 	//MeshModel = new Model(ModelPath);
 }
@@ -61,4 +61,9 @@ void MeshComponent::SetRelativeTransform(Transform NewRelativeTransform)
 Transform MeshComponent::GetRelativeTransform()
 {
 	return RelativeTransform;
+}
+
+void MeshComponent::SetVisibility(bool NewVisibility)
+{
+	MeshModel->Visible = NewVisibility;
 }

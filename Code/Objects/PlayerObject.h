@@ -20,7 +20,6 @@ public:
 	bool HasCollision = true;
 	Vector2 Velocity = Vector2(0);
 	bool OnGround = false;
-	unsigned int CollectedCoins = 0;
 protected:
 	Vector3 SpawnPoint;
 	GameUI* UI = nullptr;

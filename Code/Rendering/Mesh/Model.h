@@ -108,6 +108,8 @@ public:
 
 	void SetUniform(Uniform NewUniform, uint8_t MeshIndex);
 
+	bool Visible = true;
+
 	unsigned int MatBuffer = -1;
 	std::vector<Mesh*> Meshes;
 	MeshData ModelMeshData;

@@ -1,6 +1,5 @@
 #include "Mesh.h"
 #include "Math/Vector.h"
-#include "Rendering/Material.h"
 #include "Rendering/Shader.h"
 #include "Rendering/VertexBuffer.h"
 #include "Rendering/Utility/IndexBuffer.h"
@@ -75,7 +74,7 @@ void Mesh::ApplyUniforms()
 
 void Mesh::ApplyUniform(size_t Index)
 {
-	Uniform& u = Uniforms.at(Index);
+	Uniform u = Uniforms.at(Index);
 	switch (u.Value)
 	{
 	case 0:
@@ -93,4 +92,5 @@ void Mesh::ApplyUniform(size_t Index)
 	default:
 		break;
 	}
+	Uniforms[Index] = u;
 }

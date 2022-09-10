@@ -1,6 +1,5 @@
 #pragma once
 #include "Math/Vector.h"
-#include "Rendering/Material.h"
 #include "Rendering/Shader.h"
 #include "Rendering/VertexBuffer.h"
 #include <vector>
@@ -64,7 +63,6 @@ protected:
 private:
 	std::vector<Transform> Instances;
 	IndexBuffer* MeshIndexBuffer;
-	Material MeshMaterial;
 	int NumIndices;
 	int NumVertices;
 };

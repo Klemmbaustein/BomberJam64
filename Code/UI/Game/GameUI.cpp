@@ -13,7 +13,6 @@ GameUI::~GameUI()
 
 void GameUI::Render(Shader* Shader)
 {
-	GameTextRenderer->RenderText("Coins: " + std::to_string(Player->CollectedCoins), Vector2(-0.8, -0.8), 1, Vector3(1));
 	if (InTransition)
 	{
 		TransitionBorder->ReInit(Vector2(1 - std::min(std::pow(TransitionTime, 3.f), 2.f), -1.f), Vector2(2), 0);

@@ -82,7 +82,7 @@ std::string Build::TryBuildProject(std::string TargetFolder)
 			OutH << EngineHeaderString.str();
 			OutH.close();
 			Log::CreateNewLogMessage("Build: Compiling Code (this can take a while)");
-			system(("G:/Data/VisualStudio/Common7/IDE/devenv.exe " + std::string(SolutionName) + " /Build Release-EngineBuild").c_str());
+			system(("G:/Data/VisualStudio/Common7/IDE/devenv.exe " + std::string(SolutionName) + ".sln /Build Release-EngineBuild").c_str());
 
 			std::filesystem::copy("x64/Release-EngineBuild/" + std::string(SolutionName) + ".exe", TargetFolder + ProjectName + std::string(".exe"));
 			Log::CreateNewLogMessage("Build: Cleaning up");
@@ -99,6 +99,7 @@ std::string Build::TryBuildProject(std::string TargetFolder)
 	catch (std::exception& e)
 	{
 		Log::CreateNewLogMessage(std::string("Build: ") + e.what(), Vector3(1, 0, 0));
+		return "Error";
 	}
 }
 /*

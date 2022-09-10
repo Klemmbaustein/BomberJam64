@@ -50,7 +50,7 @@ void PlayerObject::Tick()
 		if (Input::IsKeyDown(SDLK_SPACE) && BombLayTime < 0)
 		{
 			BombLayTime = 0.2f;
-			Objects::SpawnObject<Bomb>(GetTransform());
+			Objects::SpawnObject<Bomb>(GetTransform() + Transform(Vector3(), Vector3(0, Random::GetRandomNumber(-100, 100), 0), Vector3(1)));
 		}
 
 		BombLayTime -= Performance::DeltaTime;

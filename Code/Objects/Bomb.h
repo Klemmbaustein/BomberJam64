@@ -12,6 +12,8 @@ public:
 	void Destroy() override;
 
 protected:
+	bool PlayedSound = false;
 	float DetonationTime = 1.0f;
 	MeshComponent* BombMesh = nullptr;
+	MeshComponent* ExplosionMesh = nullptr;
 };

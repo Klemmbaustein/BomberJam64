@@ -678,7 +678,7 @@ int Start(int argc, char** argv)
 				o->Tick();
 				if (o)
 				{
-					Objects::AllObjects.at(i)->TickComponents();
+					o->TickComponents();
 				}
 			}
 			catch (std::exception& e)
@@ -730,6 +730,8 @@ int Start(int argc, char** argv)
 		Graphics::IsRenderingShadows = false;
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		Debugging::EngineStatus = "Rendering (Main Pass)";
+		glEnable(GL_BLEND);
+
 		glViewport(0, 0, Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
 		MainFramebuffer.Bind();
 		glm::vec4 TransposedSunDirection = glm::vec4((glm::vec3)Graphics::LightRotation, 1.f);
@@ -818,6 +820,7 @@ int Start(int argc, char** argv)
 		}
 
 #endif // IsInEditor
+		glDisable(GL_BLEND);
 
 		StencilFrameBuffer.Unbind();
 		glDisable(GL_DEPTH_TEST);

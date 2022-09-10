@@ -3,9 +3,9 @@
 #include <filesystem>
 #include <Log.h>
 namespace fs = std::filesystem;
+uint8_t NumMaterials = 0;
 
 std::vector<ImportMesh> Meshes;
-std::vector<Material> Materials;
 
 void ProcessMesh(aiMesh* Mesh, const aiScene* Scene)
 {
@@ -29,60 +29,13 @@ void ProcessMesh(aiMesh* Mesh, const aiScene* Scene)
 			m.Indicies.push_back(Face.mIndices[j]);
 		}
 	}
-	m.Material = Materials.at(Mesh->mMaterialIndex);
 	Meshes.push_back(m);
 }
 
 void ProcessMaterials(const aiScene* Scene)
 {
-	if(Scene->mNumMaterials != 0)
-	for (Uint32 i = 0; i < Scene->mNumMaterials; i++)
-	{
-		Material mat = {};
-		aiMaterial* Material = Scene->mMaterials[i];
-		aiColor3D Diffuse(1.f, 1.f, 1.f);
-		if (AI_SUCCESS != Material->Get(AI_MATKEY_COLOR_DIFFUSE, Diffuse))
-		{
-			Log::CreateNewLogMessage("Error importing Mesh: No Diffuse Color found");
-			// Error: No Diffuse Color
-		}
-		mat.Diffuse.X = Diffuse.r;
-		mat.Diffuse.Y = Diffuse.g;
-		mat.Diffuse.Z = Diffuse.b;
+	NumMaterials = Scene->mNumMaterials;
 
-		aiColor3D SpecularScale;
-		if (AI_SUCCESS != Material->Get(AI_MATKEY_COLOR_SPECULAR, SpecularScale))
-		{
-			Log::CreateNewLogMessage("Error importing Mesh: No Specular Color found");
-		}
-
-
-		aiColor3D Emissive(0.f, 0.f, 0.f);
-		if (AI_SUCCESS != Material->Get(AI_MATKEY_COLOR_EMISSIVE, Emissive))
-		{
-			// Error: No Emissive Color
-		}
-		mat.Emissive.X = Emissive.r;
-		mat.Emissive.Y = Emissive.g;
-		mat.Emissive.Z = Emissive.b;
-		float SpecularSize = 0.f;
-		if (AI_SUCCESS != Material->Get(AI_MATKEY_SHININESS, SpecularSize))
-		{
-			//Error: No Shininess :(
-		}
-		mat.SpecularStrength = SpecularSize / 1;
-		Materials.push_back(mat);
-	}
-	else
-	{
-		Material mat = {};
-		mat.Diffuse = Vector3(1);
-		mat.Emissive = Vector3(0);
-		mat.SpecularSize = 0;
-		mat.SpecularStrength = 0;
-		Materials.push_back(mat);
-
-	}
 }
 
 void ProcessNode(aiNode* Node, const aiScene* Scene)
@@ -104,7 +57,6 @@ std::string ModelImporter::Import(std::string Name, std::string CurrentFilepath)
 	if (fs::exists(Name))
 	{
 		Meshes.clear();
-		Materials.clear();
 		Assimp::Importer Importer;
 		const aiScene* Scene = Importer.ReadFile(Name, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_RemoveRedundantMaterials | aiProcess_PreTransformVertices);
 
@@ -131,8 +83,8 @@ std::string ModelImporter::Import(std::string Name, std::string CurrentFilepath)
 		
 		{
 			std::ofstream Output(OutputFileName, std::ios::out | std::ios::binary);
-			int NumMaterials = Materials.size();
-			Output.write((char*)&NumMaterials, sizeof(int));
+			int iNumMaterials = NumMaterials;
+			Output.write((char*)&iNumMaterials, sizeof(int));
 
 			for (int j = 0; j < NumMaterials; j++)
 			{

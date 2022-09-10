@@ -37,6 +37,8 @@ public:
 	void SetRelativeTransform(Transform NewRelativeTransform);
 	Transform GetRelativeTransform();
 
+	void SetVisibility(bool NewVisibility);
+
 protected:
 	Model* MeshModel = nullptr;
 	Shader* CurrentShader = nullptr;

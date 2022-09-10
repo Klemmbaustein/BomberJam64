@@ -1,6 +1,5 @@
 #include "InstancedMesh.h"
 #include "Math/Vector.h"
-#include "Rendering/Material.h"
 #include "Rendering/Shader.h"
 #include "Rendering/VertexBuffer.h"
 #include "Rendering/Utility/IndexBuffer.h"
