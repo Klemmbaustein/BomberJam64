@@ -79,6 +79,7 @@ public:
 	void UpdateContentBrowser();
 	void GenUITextures();
 
+
 	UIButton* CreateNewButton(Vector2 Position, Vector2 Scale, Vector3 Color, int Index);
 
 protected:

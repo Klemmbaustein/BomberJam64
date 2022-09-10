@@ -19,7 +19,7 @@ GameUI::~GameUI()
 
 void GameUI::Render(Shader* Shader)
 {
-	int NumBombs = Player->BombTime / 0.4f;
+	int NumBombs = Player->BombTime / 0.5f;
 
 	GameTextRenderer->RenderText("x" + std::to_string(NumBombs), Vector2(-0.81f, -0.8f), 1.2f, Vector3(1));
 	GameTextRenderer->RenderText("x" + std::to_string(Player->NumOrbs), Vector2(-0.81f, -0.5f), 1.2f, Vector3(1));

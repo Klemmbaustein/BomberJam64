@@ -13,6 +13,9 @@
 #include <Objects/Bomb.h>
 #include <Objects/Objects.h>
 
+Sound::SoundBuffer* BombPlaceSound = nullptr;
+Sound::SoundBuffer* OrbSound = nullptr;
+
 std::string NextLevel;
 void LoadNextLevel()
 {
@@ -47,10 +50,11 @@ void PlayerObject::Tick()
 		}
 
 
-		if (BombTime > 0 && BombLayTime < 0)
+		if (BombTime > 0.1f && BombLayTime < 0)
 		{
-			BombLayTime = 0.4f;
+			BombLayTime = 0.5f;
 			Objects::SpawnObject<Bomb>(GetTransform() + Transform(Vector3(), Vector3(0, Random::GetRandomNumber(-100, 100), 0), Vector3(1)));
+			Sound::PlaySound2D(BombPlaceSound, 1, 0.1f);
 		}
 
 		BombLayTime -= Performance::DeltaTime;
@@ -175,6 +179,11 @@ void PlayerObject::Begin()
 	PlayerCamera = new CameraComponent();
 	Attach(PlayerCamera);
 
+	if (!BombPlaceSound)
+	{
+		BombPlaceSound = Sound::LoadSound("PlaceBomb");
+		OrbSound = Sound::LoadSound("Orb");
+	}
 
 	PlayerCamera->Use();
 	if (UI)
@@ -221,10 +230,11 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 				{
 					NumOrbs++;
 					Objects::DestroyObject(hit.HitObject);
+					Sound::PlaySound2D(OrbSound);
 				}
 				else if (Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) > 0.5)
 				{
-					ObjectTransform.Location += Vector3(0, Performance::DeltaTime * (1.5 - Vector3::Dot(hit.Normal, Vector3())) * 25, 0);
+					ObjectTransform.Location += Vector3(0, Performance::DeltaTime * (1.5 - Vector3::Dot(hit.Normal, Vector3(0, 0, 0))) * 25, 0);
 					return true;
 				}
 				else if (Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) < -0.5)
@@ -234,9 +244,11 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 				}
 				else
 				{
-					ObjectTransform.Location += LastValidPosition;
-					if (Vector3::Dot(hit.Normal, Vector3()) < 0.5)
+					ObjectTransform.Location.Y += Performance::DeltaTime * 3;
+					if (abs(Vector3::Dot(hit.Normal, Vector3(0, 1, 0))) < 0.5)
+					{
 						return false;
+					}
 				}
 			}
 

@@ -298,8 +298,11 @@ int Start(int argc, char** argv)
 	if (StartupMap != std::string(""))
 	{
 		World::LoadNewScene(StartupMap);
-	}
+#if IS_IN_EDITOR
+		EditorUI->UpdateContentBrowser();
+#endif
 
+	}
 	Uint64 EndCounter = SDL_GetPerformanceCounter();
 	Uint64 counterElapsed = EndCounter - LastCounter;
 	float LoadTime = ((float)counterElapsed) / ((float)PerfCounterFrequency);
@@ -911,6 +914,8 @@ int Start(int argc, char** argv)
 		DebugTextRenderer.RenderText("Delta: " + std::to_string((int)(Performance::DeltaTime * 1000)) + "ms", Vector2(-0.95, 0.85), 1, Vector3(1, 1, 0));
 		DebugTextRenderer.RenderText("DrawCalls: " + std::to_string(Performance::DrawCalls), Vector2(-0.95, 0.8), 1, Vector3(1, 1, 0));
 		DebugTextRenderer.RenderText("NumObjects: " + std::to_string(Objects::AllObjects.size()), Vector2(-0.95, 0.75), 1, Vector3(1, 1, 0));
+		DebugTextRenderer.RenderText("CollisonMeshes: " + std::to_string(Collision::CollisionBoxes.size()), Vector2(-0.95, 0.7), 1, Vector3(1, 1, 0));
+
 
 #endif
 		if(Graphics::UIToRender.size() > 0)
