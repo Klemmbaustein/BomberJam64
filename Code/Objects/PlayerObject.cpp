@@ -49,7 +49,7 @@ void PlayerObject::Tick()
 
 		if (BombTime > 0 && BombLayTime < 0)
 		{
-			BombLayTime = 0.2f;
+			BombLayTime = 0.4f;
 			Objects::SpawnObject<Bomb>(GetTransform() + Transform(Vector3(), Vector3(0, Random::GetRandomNumber(-100, 100), 0), Vector3(1)));
 		}
 
@@ -121,7 +121,7 @@ void PlayerObject::Tick()
 		if (GetTransform().Location.Y < -1000.f && !IsDead)
 		{
 			CameraShake::PlayDefaultCameraShake(3);
-			//UI->PlayTransition();
+			UI->PlayTransition();
 			IsDead = true;
 		}
 
@@ -219,17 +219,22 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 				{
 					BombTime = 5;
 				}
-				else if (hit.Hit && Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) > 0.5)
+				else if (hit.HitObject->GetObjectDescription().ID == 8) // if its an orb
+				{
+					NumOrbs++;
+					Objects::DestroyObject(hit.HitObject);
+				}
+				else if (Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) > 0.5)
 				{
 					ObjectTransform.Location += Vector3(0, Performance::DeltaTime * (1.5 - Vector3::Dot(hit.Normal, Vector3())) * 25, 0);
 					return true;
 				}
-				else if (hit.Hit && Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) < -0.5)
+				else if (Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) < -0.5)
 				{
 					VerticalVelocity = -10;
 					return false;
 				}
-				else if (hit.Hit)
+				else
 				{
 					ObjectTransform.Location += LastValidPosition;
 					if (Vector3::Dot(hit.Normal, Vector3()) < 0.5)

@@ -21,6 +21,7 @@ public:
 	Vector2 Velocity = Vector2(0);
 	bool OnGround = false;
 	float BombTime = 0.0f;
+	uint32_t NumOrbs = 0;
 
 protected:
 	Vector3 SpawnPoint;
@@ -34,9 +35,9 @@ protected:
 	float VerticalVelocity = 0;
 	float Time = 0;
 	bool IsDead = false;
-	float CameraDistance = 50;
+	float CameraDistance = 35;
 	float Gravity = 200;
-	float Speed = 1000;
+	float Speed = 750;
 	Vector3 PrevCameraPos = 0;
 	bool HasJumped = false;
 	bool IsClicking = false;

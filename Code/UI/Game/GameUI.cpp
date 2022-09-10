@@ -1,9 +1,15 @@
 #include "GameUI.h"
 #include <Objects/PlayerObject.h>
+#include <Rendering/Texture/Texture.h>
 
 GameUI::GameUI()
 {
+	Icons[0] = Texture::LoadTexture("BombIcon.png");
+	Icons[1] = Texture::LoadTexture("Orb.png");
 	this->Player = Player;
+	UIElements.push_back(new UIBorder(Vector2(-0.8f, -0.6f), Vector2(-2.5f) / Vector2(16, 9), Vector3(1), Icons[0], true));
+	UIElements.push_back(new UIBorder(Vector2(-0.8f, -0.3f), Vector2(-2.5f) / Vector2(16, 9), Vector3(1), Icons[1], true));
+
 }
 
 GameUI::~GameUI()
@@ -13,9 +19,10 @@ GameUI::~GameUI()
 
 void GameUI::Render(Shader* Shader)
 {
-	int NumBombs = Player->BombTime / 0.2f;
+	int NumBombs = Player->BombTime / 0.4f;
 
-	GameTextRenderer->RenderText("Bomb: " + std::to_string(NumBombs), Vector2(-0.8f), 1.f, Vector3(1));
+	GameTextRenderer->RenderText("x" + std::to_string(NumBombs), Vector2(-0.81f, -0.8f), 1.2f, Vector3(1));
+	GameTextRenderer->RenderText("x" + std::to_string(Player->NumOrbs), Vector2(-0.81f, -0.5f), 1.2f, Vector3(1));
 
 	if (InTransition)
 	{

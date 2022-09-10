@@ -1,0 +1,11 @@
+Basic
+basic.vert
+basic.frag
+0
+u_diffuse;3;0.200000 0.200000 1.000000
+u_emissive;3;0.000000 0.000000 0.000000
+u_specularsize;1;0.5
+u_specularstrength;1;0.5
+u_usetexture;0;0
+u_texture;5;
+u_ssao;0;1

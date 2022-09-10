@@ -231,6 +231,7 @@
     <ClCompile Include="Code\Objects\InstancedMeshObject.cpp" />
     <ClCompile Include="Code\Objects\MeshObject.cpp" />
     <ClCompile Include="Code\Objects\Objects.cpp" />
+    <ClCompile Include="Code\Objects\Orb.cpp" />
     <ClCompile Include="Code\Objects\PlayerObject.cpp" />
     <ClCompile Include="Code\Objects\SoundObject.cpp" />
     <ClCompile Include="Code\Objects\WallObject.cpp" />
@@ -287,6 +288,7 @@
     <ClInclude Include="Code\Math\Vector.h" />
     <ClInclude Include="Code\Objects\Bomb.h" />
     <ClInclude Include="Code\Objects\BombPickup.h" />
+    <ClInclude Include="Code\Objects\Orb.h" />
     <ClInclude Include="Code\Objects\WallObject.h" />
     <ClInclude Include="Code\Objects\Components\CameraComponent.h" />
     <ClInclude Include="Code\Objects\Components\CollisionComponent.h" />

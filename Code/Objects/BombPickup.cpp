@@ -12,7 +12,7 @@ void BombPickup::Begin()
 
 	PickupCollision = new CollisionComponent();
 	Attach(PickupCollision);
-	PickupCollision->Init(CollMesh.Vertices[0], CollMesh.Indices[0], Transform(Vector3(0, 2, 0), Vector3(), Vector3(2)));
+	PickupCollision->Init(CollMesh.Vertices[0], CollMesh.Indices[0], Transform(Vector3(0, 0, 0), Vector3(), Vector3(2)));
 }
 
 void BombPickup::Tick()

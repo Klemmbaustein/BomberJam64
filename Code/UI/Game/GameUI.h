@@ -15,9 +15,11 @@ public:
 	void EndTransition();
 
 protected:
+	unsigned int Icons[2];
+
 	bool InTransition = false;
 	bool TransitionDirection = false;
 	float TransitionTime = 0;
 	UIBorder* TransitionBorder = new UIBorder(Vector2(1, -1), Vector2(2), 0);
-	TextRenderer* GameTextRenderer = new TextRenderer("Fonts/Font.ttf", 80);
+	TextRenderer* GameTextRenderer = new TextRenderer("Fonts/Font.ttf", 100);
 };

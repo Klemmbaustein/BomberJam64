@@ -34,13 +34,13 @@ void Bomb::Tick()
 	{
 		if (!PlayedSound)
 		{
-			Sound::PlaySound2D(BombSound, Random::GetRandomNumber(0.8f, 1.2f), Random::GetRandomNumber(0.8f, 1.2f), false);
-			CameraShake::PlayDefaultCameraShake(1.f);
+			Sound::PlaySound3D(BombSound, GetTransform().Location, 5000.f, Random::GetRandomNumber(0.8f, 1.2f), 5*Random::GetRandomNumber(2.8f, 4.2f), false);
+			CameraShake::PlayDefaultCameraShake(1.0f);
 			auto AllObject = Objects::GetAllObjectsWithID(6);
 
 			for (auto* o : AllObject)
 			{
-				if (Vector3::Distance(o->GetTransform().Location, GetTransform().Location) < 15)
+				if (Vector3::Distance(o->GetTransform().Location, GetTransform().Location) < 17)
 				{
 					Objects::DestroyObject(o);
 				}
@@ -53,7 +53,7 @@ void Bomb::Tick()
 		ExplosionMesh->SetUniform("u_opacity", U_FLOAT, std::to_string(std::max(1.0f - (-DetonationTime * 3.0f), 0.0f)), 0);
 		ExplosionMesh->SetUniform("u_opacity", U_FLOAT, std::to_string(std::max(1.0f - (-DetonationTime * 3.0f), 0.0f)), 1);
 
-		ExplosionMesh->SetRelativeTransform(Transform(Vector3(), Vector3(), Vector3(10.f * -DetonationTime)));
+		ExplosionMesh->SetRelativeTransform(Transform(Vector3(), Vector3(), Vector3(15.f * -DetonationTime)));
 
 		if (DetonationTime < -0.4f)
 		{

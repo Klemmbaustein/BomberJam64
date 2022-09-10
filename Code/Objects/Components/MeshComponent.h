@@ -24,7 +24,6 @@ public:
 	virtual void Destroy() override;
 
 	void Load(std::string File);
-	void SetActiveShader(Shader* Shader);
 	Collision::Box GetBoundingBox();
 
 	void SetUniform(std::string Name, UniformType Type, std::string Content, uint8_t MeshSection);

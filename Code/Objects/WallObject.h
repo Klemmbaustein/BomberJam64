@@ -11,8 +11,12 @@ public:
 	void Begin() override;
 	void Tick() override;
 	void Destroy() override;
+	void OnPropertySet() override;
+
+	int ContainsOrb = 0;
 
 private:
+	std::string MeshName = "BreakableCube";
 	MeshComponent* WallMesh = nullptr;
 	CollisionComponent* WallCollision = nullptr;
 };

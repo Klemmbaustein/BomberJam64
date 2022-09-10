@@ -13,8 +13,6 @@ public:
 	void LoadFromFile(std::string Filename);
 	virtual void OnPropertySet() override;
 
-	void SetMaterialSlot(std::string Material);
-
 	virtual std::string Serialize() override;
 	virtual void Deserialize(std::string SerializedObject) override;
 	bool HasCollision = true;

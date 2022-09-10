@@ -30,13 +30,6 @@ void MeshComponent::Load(std::string File)
 	MeshModel->UpdateTransform();
 }
 
-void MeshComponent::SetActiveShader(Shader* Shader)
-{
-	CurrentShader = Shader;
-	//delete MeshModel;
-	//MeshModel = new Model(ModelPath);
-}
-
 Collision::Box MeshComponent::GetBoundingBox()
 {
 	return MeshModel->Size;
