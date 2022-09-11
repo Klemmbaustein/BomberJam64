@@ -13,13 +13,6 @@ bool Collision::CollisionAABB(Box a, Box b)
 		(a.minZ <= b.maxZ && a.maxZ >= b.minZ);
 }
 
-bool Collision::ModelsOverlapping(Model a, Model b)
-{
-	Box BoxA = a.Size;
-	Box BoxB = b.Size;
-
-	return CollisionAABB(BoxA, BoxB);
-} 
 
 Collision::HitResponse Collision::BoxOverlapCheck(Collision::Box a, Vector3 Offset)
 {

@@ -36,6 +36,7 @@
 #include <Rendering/Camera/CameraShake.h>
 #include <UI/Default/UICanvas.h>
 #include <Objects/Objects.h>
+#include <Rendering/Camera/FrustumCulling.h>
 
 SDL_Window* Window;
 std::vector<ButtonEvent> ButtonEvents;
@@ -742,6 +743,8 @@ int Start(int argc, char** argv)
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		Debugging::EngineStatus = "Rendering (Main Pass)";
 		glEnable(GL_BLEND);
+
+		FrustumCulling::CurrentCameraFrustum = FrustumCulling::createFrustumFromCamera(*Graphics::MainCamera);
 
 		glViewport(0, 0, Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
 		MainFramebuffer.Bind();

@@ -7,7 +7,7 @@ Camera::Camera(float FOV, float Width, float Heigth, bool Ortho)
 	if (Ortho)
 		Projection = glm::ortho(-FOV, FOV, -FOV, FOV, -FOV, FOV);
 	else
-		Projection = glm::perspective(FOV / 2, Width / Heigth, 2.f, 10000.f);
+		Projection = glm::perspective(FOV / 2, Width / Heigth, NearPlane, FarPlane);
 	View = glm::mat4(1);
 	up = glm::vec3(0.0f, 1.0f, 0.0f);
 	yaw = -90.0f;
@@ -37,6 +37,8 @@ void Camera::UpdateRotation()
 	front.z = cos(glm::radians(EffectiveRotation.X)) * sin(glm::radians(EffectiveRotation.Y));
 
 	lookAt = glm::normalize(front);
+	Right = glm::normalize(glm::cross(front, up));
+	Up = glm::normalize(glm::cross(Right, front));
 }
 
 void Camera::Update()
@@ -72,5 +74,5 @@ void Camera::ReInit(float FOV, float Width, float Heigth, bool Ortho)
 	if (Ortho)
 		Projection = glm::ortho(-FOV, FOV, -FOV, FOV, -25.f, 25.f);
 	else
-		Projection = glm::perspective(FOV / 2, Width / Heigth, 2.f, 10000.f);
+		Projection = glm::perspective(FOV / 2, Width / Heigth, NearPlane, FarPlane);
 }

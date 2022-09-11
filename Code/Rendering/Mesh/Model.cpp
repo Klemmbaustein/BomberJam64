@@ -52,7 +52,7 @@ Model::Model(std::string Filename)
 		HasCollision = ModelData.HasCollision;
 		if (ModelData.HasCollision)
 		{
-			NonScaledSize = ModelData.CollisionBox;
+			NonScaledSize = ModelData.CollisionBox.GetLength();
 		}
 		LoadMaterials(Materials);
 		ConfigureVAO();
@@ -81,33 +81,36 @@ void Model::Render(Camera* WorldCamera)
 {
 	if (Visible)
 	{
-		if (TwoSided)
+		if (Size.isOnFrustum(FrustumCulling::CurrentCameraFrustum, ModelTransform.Location, ModelTransform.Scale * NonScaledSize * 0.1))
 		{
-			glDisable(GL_CULL_FACE);
-		}
-		else
-		{
-			glEnable(GL_CULL_FACE);
-		}
-		glm::mat4 ModelView;
-		if (!Graphics::IsRenderingShadows)
-		{
-			ModelViewProjection = WorldCamera->getViewProj() * MatModel;
-			ModelView = WorldCamera->getView() * MatModel;
-		}
-		glm::mat4 InvModelView = glm::transpose(glm::inverse(ModelView));
-		glBindBuffer(GL_ARRAY_BUFFER, MatBuffer);
-		for (int i = 0; i < Meshes.size(); i++)
-		{
-			Shader* CurrentShader = ((!Graphics::IsRenderingShadows || Meshes[i]->IsTransparent) ? Meshes.at(i)->MeshShader : Graphics::ShadowShader);
-			CurrentShader->Bind();
-			glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_projection"), 1, GL_FALSE, &WorldCamera->GetProjection()[0][0]);
-			glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_invmodelview"), 1, GL_FALSE, &InvModelView[0][0]);
-			glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_viewpro"), 1, GL_FALSE, &WorldCamera->getViewProj()[0][0]);
+			if (TwoSided)
+			{
+				glDisable(GL_CULL_FACE);
+			}
+			else
+			{
+				glEnable(GL_CULL_FACE);
+			}
+			glm::mat4 ModelView;
 			if (!Graphics::IsRenderingShadows)
-				glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_view"), 1, GL_FALSE, &WorldCamera->getView()[0][0]);
-			Meshes.at(i)->Render(CurrentShader);
-			Performance::DrawCalls++;
+			{
+				ModelViewProjection = WorldCamera->getViewProj() * MatModel;
+				ModelView = WorldCamera->getView() * MatModel;
+			}
+			glm::mat4 InvModelView = glm::transpose(glm::inverse(ModelView));
+			glBindBuffer(GL_ARRAY_BUFFER, MatBuffer);
+			for (int i = 0; i < Meshes.size(); i++)
+			{
+				Shader* CurrentShader = ((!Graphics::IsRenderingShadows || Meshes[i]->IsTransparent) ? Meshes.at(i)->MeshShader : Graphics::ShadowShader);
+				CurrentShader->Bind();
+				glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_projection"), 1, GL_FALSE, &WorldCamera->GetProjection()[0][0]);
+				glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_invmodelview"), 1, GL_FALSE, &InvModelView[0][0]);
+				glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_viewpro"), 1, GL_FALSE, &WorldCamera->getViewProj()[0][0]);
+				if (!Graphics::IsRenderingShadows)
+					glUniformMatrix4fv(glGetUniformLocation(CurrentShader->GetShaderID(), "u_view"), 1, GL_FALSE, &WorldCamera->getView()[0][0]);
+				Meshes.at(i)->Render(CurrentShader);
+				Performance::DrawCalls++;
+			}
 		}
 	}
 }

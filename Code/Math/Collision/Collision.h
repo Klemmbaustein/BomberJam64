@@ -56,7 +56,6 @@ namespace Collision
 	};
 	bool CollisionAABB(Box a, Box b);
 
-	bool ModelsOverlapping(Model a, Model b);
 
 	HitResponse BoxOverlapCheck(Box a, Vector3 Offset);
 	void RunTest();

@@ -24,7 +24,7 @@ public:
 	virtual void Destroy() override;
 
 	void Load(std::string File);
-	Collision::Box GetBoundingBox();
+	FrustumCulling::AABB GetBoundingBox();
 
 	void SetUniform(std::string Name, UniformType Type, std::string Content, uint8_t MeshSection);
 

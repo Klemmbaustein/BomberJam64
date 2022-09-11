@@ -6,6 +6,9 @@
 #include "glm/glm.hpp"
 #include "glm/gtx/matrix_decompose.hpp"
 
+constexpr float NearPlane = 1.f;
+constexpr float FarPlane = 10000.f;
+
 class Camera
 {
 public:
@@ -80,11 +83,13 @@ public:
 	float pitch;
 	float roll;
 	glm::vec3 Position = glm::vec3(0.f);
+	glm::vec3 Right;
+	glm::vec3 Up;
+	float FOV;
 
 protected:
 	glm::vec3 up;
 
-	float FOV;
 	glm::mat4 Projection;
 	glm::mat4 View;
 	glm::mat4 ViewProj;

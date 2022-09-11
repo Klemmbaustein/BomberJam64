@@ -8,6 +8,7 @@
 #include "Math/Collision/CollisionBox.h"
 #include <UI/EngineUI/MaterialFunctions.h>
 #include <Rendering/Renderable.h>
+#include <Rendering/Camera/FrustumCulling.h>
 namespace MaterialUniforms
 {
 	struct Param
@@ -50,7 +51,8 @@ public:
 	{
 		MatModel = glm::mat4(1.f);
 
-		Size = (NonScaledSize * ModelTransform.Scale * 0.025f);
+		Vector3 Scale = NonScaledSize * ModelTransform.Scale;
+		Size = FrustumCulling::AABB(ModelTransform.Location, Scale.X, Scale.Y, Scale.Z);
 		MatModel = glm::translate(MatModel, (glm::vec3)ModelTransform.Location);
 		MatModel = glm::rotate(MatModel, ModelTransform.Rotation.Y, glm::vec3(0, 1, 0));
 		MatModel = glm::rotate(MatModel, ModelTransform.Rotation.Z, glm::vec3(0, 0, 1));
@@ -101,11 +103,10 @@ public:
 
 	virtual void SimpleRender(Shader* Shader) override;
 	glm::mat4 MatModel = glm::mat4(1.f);
-	Collision::Box Size;
 	Vector3 ModelCenter;
 	Transform ModelTransform;
 	bool TwoSided = false, HasCollision = true;
-
+	FrustumCulling::AABB Size = FrustumCulling::AABB(Vector3(), NonScaledSize, NonScaledSize, NonScaledSize);
 	void SetUniform(Uniform NewUniform, uint8_t MeshIndex);
 
 	bool Visible = true;
@@ -116,5 +117,5 @@ public:
 protected:
 	glm::mat4 ModelViewProjection = glm::mat4();
 	std::vector<std::string> Materials;
-	Collision::Box NonScaledSize;
+	float NonScaledSize = 1;
 };

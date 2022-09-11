@@ -28,3 +28,8 @@ Collision::Box Collision::Box::TransformBy(Transform Transform)
 	RotatedBox = RotatedBox + Transform.Location;
 	return RotatedBox;
 }
+
+float Collision::Box::GetLength()
+{
+	return sqrt(minX * minX + minY * minY + minZ * minZ + maxX * maxX + maxY * maxY + maxZ * maxZ);
+}

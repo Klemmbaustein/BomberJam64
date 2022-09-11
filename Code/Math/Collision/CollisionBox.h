@@ -28,6 +28,8 @@ namespace Collision
 
 		}
 		Box TransformBy(Transform Transform);
+
+		float GetLength();
 	};
 	Box operator*(Box a, Vector3 b);
 	Box operator+(Box a, Vector3 b);

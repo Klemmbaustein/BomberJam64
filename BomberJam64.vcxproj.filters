@@ -273,6 +273,9 @@
     <ClCompile Include="Code\Objects\HubTeleporter.cpp">
       <Filter>Code\Objects\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Rendering\Camera\FrustumCulling.cpp">
+      <Filter>Code\Rendering\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\TypeEnun.h">
@@ -490,6 +493,9 @@
     </ClInclude>
     <ClInclude Include="Code\Objects\HubTeleporter.h">
       <Filter>Code\Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Rendering\Camera\FrustumCulling.h">
+      <Filter>Code\Rendering\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

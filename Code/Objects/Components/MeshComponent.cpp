@@ -30,7 +30,7 @@ void MeshComponent::Load(std::string File)
 	MeshModel->UpdateTransform();
 }
 
-Collision::Box MeshComponent::GetBoundingBox()
+FrustumCulling::AABB MeshComponent::GetBoundingBox()
 {
 	return MeshModel->Size;
 }

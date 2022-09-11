@@ -239,6 +239,7 @@
     <ClCompile Include="Code\Objects\WorldObject.cpp" />
     <ClCompile Include="Code\Rendering\Camera\Camera.cpp" />
     <ClCompile Include="Code\Rendering\Camera\CameraShake.cpp" />
+    <ClCompile Include="Code\Rendering\Camera\FrustumCulling.cpp" />
     <ClCompile Include="Code\Rendering\Mesh\InstancedMesh.cpp" />
     <ClCompile Include="Code\Rendering\Mesh\InstancedModel.cpp" />
     <ClCompile Include="Code\Rendering\Mesh\JSModel.cpp" />
@@ -305,6 +306,7 @@
     <ClInclude Include="Code\Objects\WorldObject.h" />
     <ClInclude Include="Code\Rendering\Camera\Camera.h" />
     <ClInclude Include="Code\Rendering\Camera\CameraShake.h" />
+    <ClInclude Include="Code\Rendering\Camera\FrustumCulling.h" />
     <ClInclude Include="Code\Rendering\Mesh\InstancedMesh.h" />
     <ClInclude Include="Code\Rendering\Mesh\InstancedModel.h" />
     <ClInclude Include="Code\Rendering\Mesh\JSModel.h" />

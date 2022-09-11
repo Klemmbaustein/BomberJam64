@@ -26,6 +26,7 @@ void Bomb::Begin()
 	ExplosionMesh->Load("Explosion");
 	ExplosionMesh->SetVisibility(false);
 	BombMesh->SetRelativeTransform(Transform(Vector3(0, -2, 0), Vector3(), Vector3(0.7f)));
+
 }
 
 void Bomb::Tick()
