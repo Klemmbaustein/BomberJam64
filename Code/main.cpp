@@ -159,7 +159,7 @@ int Start(int argc, char** argv)
 	std::cout << ".";
 	std::cout << " done!";
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	
+
 
 
 	std::cout << "\n*Starting Logic";
@@ -289,7 +289,7 @@ int Start(int argc, char** argv)
 	ArrowFrameBuffer.ReInit(Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
 #endif
 #ifdef ENGINE_DEBUG
-		TextRenderer DebugTextRenderer = TextRenderer("Fonts/Font.ttf", 60);
+	TextRenderer DebugTextRenderer = TextRenderer("Fonts/Font.ttf", 60);
 #endif //ENGINE_DEBUG
 
 	std::cout << " done!\n";
@@ -332,23 +332,29 @@ int Start(int argc, char** argv)
 			if (event.type == SDL_QUIT)
 			{
 #if !IS_IN_EDITOR
+				for (WorldObject* o : Objects::AllObjects)
+				{
+					o->Destroy();
+					delete o;
+				}
+				Objects::AllObjects.clear();
 				close = true;
 #else
 				EditorUI->OnLeave(&Application::Quit);
 #endif
-			}			
+				}
 			else if (event.type == SDL_KEYDOWN)
 			{
 				std::vector<int> Indices;
 
-				if(event.key.keysym.sym < 128)
-				Input::Keys[event.key.keysym.sym] = true;
+				if (event.key.keysym.sym < 128)
+					Input::Keys[event.key.keysym.sym] = true;
 				else
 				{
 					int sym = event.key.keysym.sym;
 					sym -= 1073741755;
 					if (sym > 0)
-					Input::Keys[sym] = true;
+						Input::Keys[sym] = true;
 				}
 				switch (event.key.keysym.sym)
 				{
@@ -382,7 +388,7 @@ int Start(int argc, char** argv)
 						if (Objects::AllObjects.at(i)->IsSelected)
 						{
 							Objects::DestroyObject(Objects::AllObjects[i]);
-							
+
 						}
 					}
 				case SDLK_ESCAPE:
@@ -412,7 +418,7 @@ int Start(int argc, char** argv)
 					}
 					else
 					{
-						if(!IsWindowFullscreen) SDL_SetWindowFullscreen(Window, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP);
+						if (!IsWindowFullscreen) SDL_SetWindowFullscreen(Window, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP);
 						else SDL_SetWindowFullscreen(Window, SDL_WINDOW_OPENGL);
 						int w, h;
 						SDL_GetWindowSize(Window, &w, &h);
@@ -445,7 +451,7 @@ int Start(int argc, char** argv)
 					break;
 				}
 			}
-			else if(event.type == SDL_MOUSEBUTTONDOWN)
+			else if (event.type == SDL_MOUSEBUTTONDOWN)
 				switch (event.button.button)
 				{
 				case SDL_BUTTON_RIGHT:
@@ -458,8 +464,8 @@ int Start(int argc, char** argv)
 				}
 			else if (event.type == SDL_KEYUP)
 			{
-				if(event.key.keysym.sym < 128)
-				Input::Keys[event.key.keysym.sym] = false;
+				if (event.key.keysym.sym < 128)
+					Input::Keys[event.key.keysym.sym] = false;
 				else
 				{
 					int sym = event.key.keysym.sym;
@@ -551,7 +557,7 @@ int Start(int argc, char** argv)
 					}
 					Graphics::MainCamera->ReInit(90.f, Graphics::WindowResolution.X, Graphics::WindowResolution.Y, false);
 
-				}
+			}
 			}
 			else if (event.type == SDL_TEXTINPUT)
 			{
@@ -559,8 +565,8 @@ int Start(int argc, char** argv)
 					!(SDL_GetModState() & KMOD_CTRL &&
 						(event.text.text[0] == 'c' || event.text.text[0] == 'C' || event.text.text[0] == 'v' || event.text.text[0] == 'V')))
 				{
-					if(event.text.text[0] >= 32 && event.text.text[0] <= 128)
-					TextInput::Text.append(event.text.text);
+					if (event.text.text[0] >= 32 && event.text.text[0] <= 128)
+						TextInput::Text.append(event.text.text);
 				}
 			}
 			else if (event.type == SDL_MOUSEWHEEL)
@@ -590,7 +596,7 @@ int Start(int argc, char** argv)
 			if (RMouseLock)
 				SDL_SetRelativeMouseMode(SDL_TRUE);
 			else
-				if(Input::CursorVisible)
+				if (Input::CursorVisible)
 					SDL_SetRelativeMouseMode(SDL_FALSE);
 				else
 					SDL_SetRelativeMouseMode(SDL_TRUE);
@@ -668,41 +674,43 @@ int Start(int argc, char** argv)
 			Timer::Internal::Timers.erase(Timer::Internal::Timers.begin() + FinishedTimers.at(i));
 		}
 		WorldObject* SelectedObject = nullptr;
-		for (int i = 0; i < Objects::AllObjects.size(); i++)
+		if (!close)
 		{
-			WorldObject* o = nullptr;
-			if (SelectedObject == nullptr && Objects::AllObjects[i]->IsSelected)
+			for (int i = 0; i < Objects::AllObjects.size(); i++)
 			{
-				SelectedObject = Objects::AllObjects[i];
-			}
-			try
-			{
-				o = Objects::AllObjects.at(i);
-				o->Tick();
-				if (o)
+				WorldObject* o = nullptr;
+				if (SelectedObject == nullptr && Objects::AllObjects[i]->IsSelected)
 				{
-					o->TickComponents();
+					SelectedObject = Objects::AllObjects[i];
 				}
-			}
-			catch (std::exception& e)
-			{
-				if(o)
-				Log::CreateNewLogMessage("Ticking Objects: " + o->GetName() + e.what());
-			}
-#if IS_IN_EDITOR
-			if (Objects::AllObjects.at(i)->IsSelected)
-			{
-				for (int j = 0; j < Objects::AllObjects.at(i)->GetComponents().size(); j++)
+				try
 				{
-					if (dynamic_cast<MeshComponent*>(Objects::AllObjects.at(i)->GetComponents().at(j)) != nullptr)
+					o = Objects::AllObjects.at(i);
+					o->Tick();
+					if (o)
 					{
-						SelectedModels.push_back(dynamic_cast<MeshComponent*>(Objects::AllObjects.at(i)->GetComponents().at(j))->GetModel());
+						o->TickComponents();
 					}
 				}
-			}
+				catch (std::exception& e)
+				{
+					if (o)
+						Log::CreateNewLogMessage("Ticking Objects: " + o->GetName() + e.what());
+				}
+#if IS_IN_EDITOR
+				if (Objects::AllObjects.at(i)->IsSelected)
+				{
+					for (int j = 0; j < Objects::AllObjects.at(i)->GetComponents().size(); j++)
+					{
+						if (dynamic_cast<MeshComponent*>(Objects::AllObjects.at(i)->GetComponents().at(j)) != nullptr)
+						{
+							SelectedModels.push_back(dynamic_cast<MeshComponent*>(Objects::AllObjects.at(i)->GetComponents().at(j))->GetModel());
+						}
+					}
+				}
 #endif
+			}
 		}
-
 		Debugging::EngineStatus = "Rendering (Shadows)";
 		glViewport(0, 0, Graphics::ShadowResolution, Graphics::ShadowResolution);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -899,35 +907,38 @@ int Start(int argc, char** argv)
 		PostProcessShader.Unbind();
 		UIShader.Bind();
 		glEnable(GL_BLEND);
-		for (int i = 0; i < Graphics::UIToRender.size(); i++)
+		if (!close)
 		{
-			Debugging::EngineStatus = "Rendering (UI)";
-			if(Graphics::UIToRender.size() > i)
-			Graphics::UIToRender[i]->_RenderUIElements(&UIShader);
-			if (Graphics::UIToRender.size() > i)
-			Graphics::UIToRender[i]->Render(&UIShader);
-		}
+			for (int i = 0; i < Graphics::UIToRender.size(); i++)
+			{
+				Debugging::EngineStatus = "Rendering (UI)";
+				if (Graphics::UIToRender.size() > i)
+					Graphics::UIToRender[i]->_RenderUIElements(&UIShader);
+				if (Graphics::UIToRender.size() > i)
+					Graphics::UIToRender[i]->Render(&UIShader);
+			}
 #if !IS_IN_EDITOR && ENGINE_DEBUG
-		Debugging::EngineStatus = "Rendering (Debug Text)";
+			Debugging::EngineStatus = "Rendering (Debug Text)";
 
-		DebugTextRenderer.RenderText("FPS: " + std::to_string((int)Performance::FPS), Vector2(-0.95, 0.9), 1, Vector3(1, 1, 0));
-		DebugTextRenderer.RenderText("Delta: " + std::to_string((int)(Performance::DeltaTime * 1000)) + "ms", Vector2(-0.95, 0.85), 1, Vector3(1, 1, 0));
-		DebugTextRenderer.RenderText("DrawCalls: " + std::to_string(Performance::DrawCalls), Vector2(-0.95, 0.8), 1, Vector3(1, 1, 0));
-		DebugTextRenderer.RenderText("NumObjects: " + std::to_string(Objects::AllObjects.size()), Vector2(-0.95, 0.75), 1, Vector3(1, 1, 0));
-		DebugTextRenderer.RenderText("CollisonMeshes: " + std::to_string(Collision::CollisionBoxes.size()), Vector2(-0.95, 0.7), 1, Vector3(1, 1, 0));
+			DebugTextRenderer.RenderText("FPS: " + std::to_string((int)Performance::FPS), Vector2(-0.95, 0.9), 1, Vector3(1, 1, 0));
+			DebugTextRenderer.RenderText("Delta: " + std::to_string((int)(Performance::DeltaTime * 1000)) + "ms", Vector2(-0.95, 0.85), 1, Vector3(1, 1, 0));
+			DebugTextRenderer.RenderText("DrawCalls: " + std::to_string(Performance::DrawCalls), Vector2(-0.95, 0.8), 1, Vector3(1, 1, 0));
+			DebugTextRenderer.RenderText("NumObjects: " + std::to_string(Objects::AllObjects.size()), Vector2(-0.95, 0.75), 1, Vector3(1, 1, 0));
+			DebugTextRenderer.RenderText("CollisonMeshes: " + std::to_string(Collision::CollisionBoxes.size()), Vector2(-0.95, 0.7), 1, Vector3(1, 1, 0));
 
 
 #endif
-		if(Graphics::UIToRender.size() > 0)
-		for (ButtonEvent b : ButtonEvents)
-		{
-			b.c->OnButtonClicked(b.Index);
+
+			if (Graphics::UIToRender.size() > 0)
+				for (ButtonEvent b : ButtonEvents)
+				{
+					b.c->OnButtonClicked(b.Index);
+				}
+			ButtonEvents.clear();
+			UIShader.Unbind();
+
+			World::Tick();
 		}
-		ButtonEvents.clear();
-		UIShader.Unbind();
-
-		World::Tick();
-
 		Debugging::EngineStatus = "Rendering (Swapping framebuffers)";
 		//SDL_GL_SetSwapInterval(0);
 		SDL_GL_SwapWindow(Window);

@@ -18,7 +18,10 @@ struct SaveGame
 	SaveProperty GetPropterty(std::string Name);
 
 	void SetPropterty(SaveProperty S);
-
+	void ClearProperties()
+	{
+		Properties.clear();
+	}
 	~SaveGame();
 
 private:

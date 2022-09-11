@@ -90,7 +90,7 @@ void UIButton::Render(Shader* Shader)
 
 	}
 
-
+	glUniform1f(glGetUniformLocation(Shader->GetShaderID(), "u_opacity"), Opacity);
 	glUniform4f(glGetUniformLocation(Shader->GetShaderID(), "u_color"), RenderColor.X, RenderColor.Y, RenderColor.Z, 1.f);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	MeshVertexBuffer->Unbind();

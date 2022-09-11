@@ -13,9 +13,6 @@
     <Filter Include="Code\Objects">
       <UniqueIdentifier>{beab0df0-dd89-4d32-924b-83f2345e0808}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Code\Objects\Mesh">
-      <UniqueIdentifier>{8e30d366-4d97-465b-a018-aa188e9e2ec4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Code\Objects\Game">
       <UniqueIdentifier>{ae1e2f1b-cab4-41ac-b1d4-cf8ea9d449b9}</UniqueIdentifier>
     </Filter>
@@ -85,6 +82,9 @@
     <Filter Include="Shaders\PostProcess">
       <UniqueIdentifier>{49081c0b-077f-4eb4-81ff-006c52ba443c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Code\Objects\Game\Mesh">
+      <UniqueIdentifier>{8e30d366-4d97-465b-a018-aa188e9e2ec4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
@@ -130,10 +130,10 @@
       <Filter>Code\Math\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Code\Objects\InstancedMeshObject.cpp">
-      <Filter>Code\Objects\Mesh</Filter>
+      <Filter>Code\Objects\Game\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Code\Objects\MeshObject.cpp">
-      <Filter>Code\Objects\Mesh</Filter>
+      <Filter>Code\Objects\Game\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Code\Objects\PlayerObject.cpp">
       <Filter>Code\Objects\Game</Filter>
@@ -324,10 +324,10 @@
       <Filter>Code\Math\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Code\Objects\MeshObject.h">
-      <Filter>Code\Objects\Mesh</Filter>
+      <Filter>Code\Objects\Game\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Code\Objects\InstancedMeshObject.h">
-      <Filter>Code\Objects\Mesh</Filter>
+      <Filter>Code\Objects\Game\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Code\Objects\PlayerObject.h">
       <Filter>Code\Objects\Game</Filter>

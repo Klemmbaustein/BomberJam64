@@ -23,7 +23,8 @@ void GameUI::Render(Shader* Shader)
 
 	GameTextRenderer->RenderText("x" + std::to_string(NumBombs), Vector2(-0.81f, -0.8f), 1.2f, Vector3(1));
 	GameTextRenderer->RenderText("x" + std::to_string(Player->NumOrbs), Vector2(-0.81f, -0.5f), 1.2f, Vector3(1));
-
+	HealthBorder->Opacity = 1 - (Player->Health / 200.0f + 0.5f);
+	HealthBorder->Render(Shader);
 	if (InTransition)
 	{
 		TransitionBorder->ReInit(Vector2(1 - std::min(std::pow(TransitionTime, 3.f), 2.f), -1.f), Vector2(2), 0);

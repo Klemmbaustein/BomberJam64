@@ -126,7 +126,6 @@ public:
 	}
 
 	virtual void Render(Shader* Shader);
-	int ZOrder = 0;
 
 	virtual ~UIBorder();
 	void ScrollTick(Shader* UsedShader);
@@ -134,7 +133,7 @@ public:
 	bool UseTexture;
 	bool FlipTexture;
 	ScrollObject* CurrentScrollObject = nullptr;
-
+	float Opacity = 1.0f;
 	Vector2 Position = Vector2();
 	Vector2 Scale = Vector2();
 	Vector3 Color = Vector3();

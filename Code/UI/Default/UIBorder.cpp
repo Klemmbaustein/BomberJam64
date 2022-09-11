@@ -10,6 +10,7 @@ void UIBorder::Render(Shader* Shader)
 	MeshVertexBuffer->Bind();
 	ScrollTick(Shader);
 	glUniform4f(glGetUniformLocation(Shader->GetShaderID(), "u_color"), Color.X, Color.Y, Color.Z, 1.f);
+	glUniform1f(glGetUniformLocation(Shader->GetShaderID(), "u_opacity"), Opacity);
 
 	if(UseTexture)
 		glUniform1i(glGetUniformLocation(Shader->GetShaderID(), "u_usetexture"), 1);

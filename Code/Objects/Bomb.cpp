@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <Rendering/Camera/CameraShake.h>
 #include <Objects/WallObject.h>
+#include <Objects/PlayerObject.h>
 
 Sound::SoundBuffer* BombSound = nullptr;
 
@@ -35,17 +36,23 @@ void Bomb::Tick()
 		if (!PlayedSound)
 		{
 			Sound::PlaySound3D(BombSound, GetTransform().Location, 5000.f, Random::GetRandomNumber(0.8f, 1.2f), 5*Random::GetRandomNumber(2.8f, 4.2f), false);
-			CameraShake::PlayDefaultCameraShake(1.0f);
-			auto AllObject = Objects::GetAllObjectsWithID(6);
+			CameraShake::PlayDefaultCameraShake(1.5f);
+			auto AllWalls = Objects::GetAllObjectsWithID(6);
 
-			for (auto* o : AllObject)
+			for (auto* o : AllWalls)
 			{
 				if (Vector3::Distance(o->GetTransform().Location, GetTransform().Location) < 17)
 				{
 					Objects::DestroyObject(o);
 				}
 			}
+			auto Player = dynamic_cast<PlayerObject*>(Objects::GetAllObjectsWithID(4)[0]);
 
+			if (Vector3::Distance(Player->GetTransform().Location, GetTransform().Location) < 16)
+			{
+				Player->Health -= 60.0f;
+				CameraShake::PlayDefaultCameraShake(1.5f);
+			}
 			PlayedSound = true;
 		}
 		ExplosionMesh->SetVisibility(true);

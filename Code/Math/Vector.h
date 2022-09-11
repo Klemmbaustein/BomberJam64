@@ -84,7 +84,7 @@ struct Vector3
 
 	operator std::string() const
 	{
-		return std::to_string(X).append(", ").append(std::to_string(Y)).append(", ").append(std::to_string(Z));
+		return std::to_string(X).append(" ").append(std::to_string(Y)).append(" ").append(std::to_string(Z));
 	}
 	float at(int Index)
 	{

@@ -12,6 +12,9 @@
 #include <Save.h>
 #include <Objects/Bomb.h>
 #include <Objects/Objects.h>
+#include <Objects/WallObject.h>
+#include <Objects/Orb.h>
+#include <FileUtility.h>
 
 Sound::SoundBuffer* BombPlaceSound = nullptr;
 Sound::SoundBuffer* OrbSound = nullptr;
@@ -22,9 +25,67 @@ void LoadNextLevel()
 	World::ScheduleLoadNewScene(NextLevel);
 }
 
+void PlayerObject::TryLoadSave()
+{
+	if (!IsInEditor)
+	{
+
+		//loading progress
+		try
+		{
+			SaveGame InSave = SaveGame(GetFileNameWithoutExtensionFromPath(CurrentScene));
+			SaveGame PersistantSave = SaveGame("Main");
+			NumOrbs = std::stoi(PersistantSave.GetPropterty("OrbsCollected").Value);
+			//if the std::stoi fails, that means our "save" is new, otherwise we can try loading in everything
+			{
+				int NumWalls = std::stoi(InSave.GetPropterty("NumWalls").Value);
+				int NumOrbs = std::stoi(InSave.GetPropterty("NumOrbs").Value);
+				auto Walls = Objects::GetAllObjectsWithID(6); // Get All Walls
+
+				for (auto* w : Walls) // destroy all walls, because we are going to spawn new ones that are listed in the savegame
+				{
+					Objects::DestroyObject(w);
+				}
+				auto Orbs = Objects::GetAllObjectsWithID(8); // then do the same with the orbs
+
+				for (auto* o : Orbs)
+				{
+					Objects::DestroyObject(o);
+				}
+
+				GetTransform().Location = Vector3::stov(InSave.GetPropterty("PlayerPos").Value);
+
+				for (int i = 0; i < NumWalls; i++)
+				{
+					Vector3 Loc = Vector3::stov(InSave.GetPropterty("Walls_pos" + std::to_string(i)).Value);
+					Vector3 Rot = Vector3::stov(InSave.GetPropterty("Walls_rot" + std::to_string(i)).Value);
+					int HasOrb = std::stoi(InSave.GetPropterty("Walls_orb" + std::to_string(i)).Value);
+					Objects::SpawnObject<WallObject>(Transform(Loc, Rot, Vector3(1)))->ContainsOrb = HasOrb;
+				}
+
+				for (int i = 0; i < NumOrbs; i++)
+				{
+					Vector3 Loc = Vector3::stov(InSave.GetPropterty("Orbs_pos" + std::to_string(i)).Value);
+					Objects::SpawnObject<Orb>(Transform(Loc, Vector3(), Vector3(1)));
+				}
+			}
+		}
+		catch (std::exception& e) // in case the "Orbs collected" value does not exist, we simply ignore it, since its not that important
+		{
+			Log::CreateNewLogMessage(e.what());
+			NumOrbs = 0;
+		}
+	}
+}
 
 void PlayerObject::Tick()
 {
+	if (!LoadedSave)
+	{
+		TryLoadSave();
+		LoadedSave = true;
+	}
+
 	if (!IsInEditor)
 	{
 		if (IsDead)
@@ -50,7 +111,7 @@ void PlayerObject::Tick()
 		}
 
 
-		if (BombTime > 0.1f && BombLayTime < 0)
+		if (BombTime > 0.1f && BombLayTime < 0 && BombTime < 4.9)
 		{
 			BombLayTime = 0.5f;
 			Objects::SpawnObject<Bomb>(GetTransform() + Transform(Vector3(), Vector3(0, Random::GetRandomNumber(-100, 100), 0), Vector3(1)));
@@ -98,7 +159,13 @@ void PlayerObject::Tick()
 			Velocity.Y = 0;
 		}
 		auto BoxHit = PlayerCollider2->CollMesh.OverlapCheck({ PlayerCollider });
-
+		if (BoxHit.HitObject)
+		{
+			if (BoxHit.HitObject->GetObjectDescription().ID == 7) // if its a bomb pickup
+			{
+				BombTime = 5;
+			}
+		}
 		OnGround = BoxHit.Hit;
 
 		if (!OnGround || VerticalVelocity > 0)
@@ -120,6 +187,21 @@ void PlayerObject::Tick()
 				VerticalVelocity = 0;
 			}
 			VerticalVelocity = std::min(VerticalVelocity, 0.f);
+		}
+
+		if(Health < 0)
+		{
+			if (!IsDead)
+			{
+				CameraShake::PlayDefaultCameraShake(3);
+				UI->PlayTransition();
+				IsDead = true;
+				Health = 100.0f;
+			}
+		}
+		else
+		{
+			Health = std::min(Health + Performance::DeltaTime * 25, 100.0f);
 		}
 
 		if (GetTransform().Location.Y < -1000.f && !IsDead)
@@ -190,11 +272,46 @@ void PlayerObject::Begin()
 	{
 		UI->EndTransition();
 	}
+
 }
 
 void PlayerObject::Destroy()
 {
-	delete UI;
+	if (!IsInEditor)
+	{
+
+		delete UI;
+		SaveGame OutSave = SaveGame(GetFileNameWithoutExtensionFromPath(CurrentScene));
+		SaveGame PersistantSave = SaveGame("Main");
+		PersistantSave.SetPropterty(SaveGame::SaveProperty("OrbsCollected", std::to_string(NumOrbs), T_INT));
+		PersistantSave.SetPropterty(SaveGame::SaveProperty("CurrentMap", GetFileNameWithoutExtensionFromPath(CurrentScene), T_STRING));
+
+		OutSave.ClearProperties();
+		auto Walls = Objects::GetAllObjectsWithID(6); // Get All Walls
+		auto Orbs = Objects::GetAllObjectsWithID(8); // Get All Walls
+
+		OutSave.SetPropterty(SaveGame::SaveProperty("PlayerPos", GetTransform().Location.ToString(), T_VECTOR3));
+		OutSave.SetPropterty(SaveGame::SaveProperty("NumWalls", std::to_string(Walls.size()), T_INT));
+		OutSave.SetPropterty(SaveGame::SaveProperty("NumOrbs", std::to_string(Orbs.size()), T_INT));
+
+		int i = 0;
+		for (auto* w : Walls)
+		{
+			OutSave.SetPropterty(SaveGame::SaveProperty("Walls_pos" + std::to_string(i), w->GetTransform().Location.ToString(), T_VECTOR3));
+			OutSave.SetPropterty(SaveGame::SaveProperty("Walls_rot" + std::to_string(i), w->GetTransform().Rotation.ToString(), T_VECTOR3));
+			OutSave.SetPropterty(SaveGame::SaveProperty("Walls_orb" + std::to_string(i), std::to_string(dynamic_cast<WallObject*>(w)->ContainsOrb), T_INT));
+
+			i++;
+		}
+		i = 0;
+		for (auto* o : Orbs)
+		{
+			OutSave.SetPropterty(SaveGame::SaveProperty("Orbs_pos" + std::to_string(i), o->GetTransform().Location.ToString(), T_VECTOR3));
+
+			i++;
+		}
+	}
+
 }
 
 

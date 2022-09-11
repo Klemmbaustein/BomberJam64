@@ -20,6 +20,7 @@ protected:
 	bool InTransition = false;
 	bool TransitionDirection = false;
 	float TransitionTime = 0;
+	UIBorder* HealthBorder = new UIBorder(Vector2(-1, -1), Vector2(2), Vector3(1, 0, 0));
 	UIBorder* TransitionBorder = new UIBorder(Vector2(1, -1), Vector2(2), 0);
 	TextRenderer* GameTextRenderer = new TextRenderer("Fonts/Font.ttf", 100);
 };

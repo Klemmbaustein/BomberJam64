@@ -8,6 +8,7 @@ uniform vec4 u_color;
 uniform int u_usetexture;
 uniform sampler2D u_texture;
 uniform vec3 u_offset; //X = Y offset; Y = MaxDistance; Z MinDistance
+uniform float u_opacity;
 uniform int u_onlyalphafortexture;
 void main()
 {
@@ -32,6 +33,6 @@ void main()
 	}
 	else
 	{
-		f_color = vec4(u_color.xyz, 1.f);
+		f_color = vec4(u_color.xyz, u_opacity);
 	}
 }

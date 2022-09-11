@@ -22,8 +22,11 @@ public:
 	bool OnGround = false;
 	float BombTime = 0.0f;
 	uint32_t NumOrbs = 0;
-
+	float Health = 100.0f;
+	~PlayerObject();
 protected:
+	void TryLoadSave();
+
 	Vector3 SpawnPoint;
 	GameUI* UI = nullptr;
 	CollisionComponent* PlayerCollider = nullptr;
@@ -43,6 +46,7 @@ protected:
 	bool IsClicking = false;
 	bool SpaceDown = false;
 	bool InLevelTransition = false;
+	bool LoadedSave = false;
 	std::string Levels[3]
 	{
 		"ForestLevel",

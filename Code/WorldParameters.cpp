@@ -50,7 +50,7 @@ namespace Graphics
 	Shader* ShadowShader;
 	Shader* TextShader;
 	Shader* UIShader;
-	Vector3 LightRotation = Vector3(0.5f, 0.5f, 0.7f);
+	Vector3 LightRotation = Vector3(0.5f, 0.8f, 0.7f);
 	Vector2 MouseLocation;
 	std::vector<CollisionComponent*> Objects;
 	bool IsRenderingShadows = false;

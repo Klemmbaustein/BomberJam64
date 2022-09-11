@@ -15,6 +15,11 @@ std::string Types[] =
 
 SaveGame::SaveGame(std::string SaveName)
 {
+	if (!std::filesystem::exists("Saves/"))
+	{
+		std::filesystem::create_directory("Saves/");
+	}
+	SaveName = "Saves/" + SaveName;
 	SaveName.append(".save");
 	OpenedSave = SaveName;
 
@@ -30,7 +35,7 @@ SaveGame::SaveGame(std::string SaveName)
 		{
 			TypeEnum CurrentType = T_NULL;
 			std::string CurrentName = "unkown";
-			std::string Value = "null";
+			std::string Value = "";
 
 			std::string CurrentLine;
 			InFile.getline(CurrentBuff, 100);
@@ -68,7 +73,7 @@ SaveGame::SaveGame(std::string SaveName)
 				{
 					std::string ValueToAppend;
 					CurrentLineStream >> ValueToAppend;
-					Value.append(ValueToAppend);
+					Value.append(ValueToAppend + " ");
 				}
 
 				Properties.insert(std::pair(CurrentName, SaveProperty(CurrentName, Value, CurrentType)));
@@ -103,6 +108,7 @@ void SaveGame::SetPropterty(SaveProperty S)
 
 SaveGame::~SaveGame()
 {
+	Log::CreateNewLogMessage(OpenedSave);
 	std::ofstream OutFile = std::ofstream(OpenedSave, std::ios::out);
 
 	//loop through all the properties and write them to the "OpenedSave" variable
