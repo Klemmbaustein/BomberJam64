@@ -14,6 +14,8 @@
 #include <Objects/Objects.h>
 #include <Objects/WallObject.h>
 #include <Objects/Orb.h>
+#include <Objects/HubTeleporter.h>
+
 #include <FileUtility.h>
 
 Sound::SoundBuffer* BombPlaceSound = nullptr;
@@ -33,10 +35,11 @@ void PlayerObject::TryLoadSave()
 		//loading progress
 		try
 		{
-			SaveGame InSave = SaveGame(GetFileNameWithoutExtensionFromPath(CurrentScene));
 			SaveGame PersistantSave = SaveGame("Main");
 			NumOrbs = std::stoi(PersistantSave.GetPropterty("OrbsCollected").Value);
-			//if the std::stoi fails, that means our "save" is new, otherwise we can try loading in everything
+
+			SaveGame InSave = SaveGame(GetFileNameWithoutExtensionFromPath(CurrentScene));
+			if(!InSave.SaveGameIsNew())
 			{
 				int NumWalls = std::stoi(InSave.GetPropterty("NumWalls").Value);
 				int NumOrbs = std::stoi(InSave.GetPropterty("NumOrbs").Value);
@@ -54,7 +57,6 @@ void PlayerObject::TryLoadSave()
 				}
 
 				GetTransform().Location = Vector3::stov(InSave.GetPropterty("PlayerPos").Value);
-
 				for (int i = 0; i < NumWalls; i++)
 				{
 					Vector3 Loc = Vector3::stov(InSave.GetPropterty("Walls_pos" + std::to_string(i)).Value);
@@ -80,165 +82,172 @@ void PlayerObject::TryLoadSave()
 
 void PlayerObject::Tick()
 {
-	if (!LoadedSave)
+	if (!InLevelTransition)
 	{
-		TryLoadSave();
-		LoadedSave = true;
-	}
-
-	if (!IsInEditor)
-	{
-		if (IsDead)
+		if (!LoadedSave)
 		{
-			return;
-		}
-		Vector2 InputVelocity = Vector2(0);
-		if (Input::IsKeyDown(SDLK_w))
-		{
-			InputVelocity += Vector2(1.f, 0.f);
-		}
-		if (Input::IsKeyDown(SDLK_s))
-		{
-			InputVelocity += Vector2(-1.f, 0.f);
-		}
-		if (Input::IsKeyDown(SDLK_a))
-		{
-			InputVelocity += Vector2(0.f, -1.f);
-		}
-		if (Input::IsKeyDown(SDLK_d))
-		{
-			InputVelocity += Vector2(0.f, 1.f);
+			TryLoadSave();
+			LoadedSave = true;
 		}
 
-
-		if (BombTime > 0.1f && BombLayTime < 0 && BombTime < 4.9)
+		if (!IsInEditor)
 		{
-			BombLayTime = 0.5f;
-			Objects::SpawnObject<Bomb>(GetTransform() + Transform(Vector3(), Vector3(0, Random::GetRandomNumber(-100, 100), 0), Vector3(1)));
-			Sound::PlaySound2D(BombPlaceSound, 1, 0.1f);
-		}
-
-		BombLayTime -= Performance::DeltaTime;
-		BombTime -= Performance::DeltaTime;
-
-		BombTime = std::max(0.0f, BombTime);
-
-		if (InputVelocity != Vector2(0))
-		{
-			InputVelocity = InputVelocity / Vector2(sqrt(InputVelocity.X * InputVelocity.X + InputVelocity.Y * InputVelocity.Y));
-		}
-		if (!OnGround)
-		{
-			InputVelocity = InputVelocity / Vector2(10);
-		}
-		Vector3 ForwardVel = Vector3::GetForwardVector(glm::vec3(0, Rotation.Y, 0)) * InputVelocity.X * Performance::DeltaTime * Speed;
-
-
-		ForwardVel += Vector3::Cross(Vector3::GetForwardVector(Vector3(0, Rotation.Y, 0)), Vector3(0, 1, 0)) * InputVelocity.Y * Performance::DeltaTime * Speed;
-		Velocity += Vector2(ForwardVel.Z, ForwardVel.X);
-		if (ForwardVel != glm::vec3(0))
-		{
-			ForwardVel = ForwardVel.Normalize();
-		}
-		if (OnGround)
-		{
-			Velocity.X = std::lerp(Velocity.X, 0, std::min(Performance::DeltaTime * 15.f, 1.f));
-			Velocity.Y = std::lerp(Velocity.Y, 0, std::min(Performance::DeltaTime * 15.f, 1.f));
-		}
-		else
-		{
-			Velocity.X = std::lerp(Velocity.X, 0, std::min(Performance::DeltaTime * 2.25f, 1.f));
-			Velocity.Y = std::lerp(Velocity.Y, 0, std::min(Performance::DeltaTime * 2.25f, 1.f));
-		}
-		if (abs(Velocity.X) < 0.05f)
-		{
-			Velocity.X = 0;
-		}
-		if (abs(Velocity.Y) < 0.05f)
-		{
-			Velocity.Y = 0;
-		}
-		auto BoxHit = PlayerCollider2->CollMesh.OverlapCheck({ PlayerCollider });
-		if (BoxHit.HitObject)
-		{
-			if (BoxHit.HitObject->GetObjectDescription().ID == 7) // if its a bomb pickup
+			if (IsDead)
 			{
-				BombTime = 5;
+				return;
 			}
-		}
-		OnGround = BoxHit.Hit;
-
-		if (!OnGround || VerticalVelocity > 0)
-		{
-			VerticalVelocity -= Performance::DeltaTime * Gravity;
-			HasJumped = false;
-		}
-		else
-		{
-			VerticalVelocity = std::max(VerticalVelocity, 0.f);
-		}
-
-		TryMove(Vector3(Velocity.Y, 0, Velocity.X) * Vector3(Performance::DeltaTime), false);
-		if (!TryMove(Vector3(0, VerticalVelocity * Performance::DeltaTime, 0), true))
-		{
-			if (VerticalVelocity < 0)
+			Vector2 InputVelocity = Vector2(0);
+			if (Input::IsKeyDown(SDLK_w))
 			{
-				OnGround = true;
-				VerticalVelocity = 0;
+				InputVelocity += Vector2(1.f, 0.f);
 			}
-			VerticalVelocity = std::min(VerticalVelocity, 0.f);
-		}
+			if (Input::IsKeyDown(SDLK_s))
+			{
+				InputVelocity += Vector2(-1.f, 0.f);
+			}
+			if (Input::IsKeyDown(SDLK_a))
+			{
+				InputVelocity += Vector2(0.f, -1.f);
+			}
+			if (Input::IsKeyDown(SDLK_d))
+			{
+				InputVelocity += Vector2(0.f, 1.f);
+			}
 
-		if(Health < 0)
-		{
-			if (!IsDead)
+
+			if (BombTime > 0.1f && BombLayTime < 0 && BombTime < 4.9)
+			{
+				BombLayTime = 0.5f;
+				Objects::SpawnObject<Bomb>(GetTransform() + Transform(Vector3(), Vector3(0, Random::GetRandomNumber(-100, 100), 0), Vector3(1)));
+				Sound::PlaySound2D(BombPlaceSound, 1, 0.1f);
+			}
+
+			BombLayTime -= Performance::DeltaTime;
+			BombTime -= Performance::DeltaTime;
+
+			BombTime = std::max(0.0f, BombTime);
+
+			if (InputVelocity != Vector2(0))
+			{
+				InputVelocity = InputVelocity / Vector2(sqrt(InputVelocity.X * InputVelocity.X + InputVelocity.Y * InputVelocity.Y));
+			}
+			if (!OnGround)
+			{
+				InputVelocity = InputVelocity / Vector2(10);
+			}
+			Vector3 ForwardVel = Vector3::GetForwardVector(glm::vec3(0, Rotation.Y, 0)) * InputVelocity.X * Performance::DeltaTime * Speed;
+
+
+			ForwardVel += Vector3::Cross(Vector3::GetForwardVector(Vector3(0, Rotation.Y, 0)), Vector3(0, 1, 0)) * InputVelocity.Y * Performance::DeltaTime * Speed;
+			Velocity += Vector2(ForwardVel.Z, ForwardVel.X);
+			if (ForwardVel != glm::vec3(0))
+			{
+				ForwardVel = ForwardVel.Normalize();
+			}
+			if (OnGround)
+			{
+				Velocity.X = std::lerp(Velocity.X, 0, std::min(Performance::DeltaTime * 15.f, 1.f));
+				Velocity.Y = std::lerp(Velocity.Y, 0, std::min(Performance::DeltaTime * 15.f, 1.f));
+			}
+			else
+			{
+				Velocity.X = std::lerp(Velocity.X, 0, std::min(Performance::DeltaTime * 2.25f, 1.f));
+				Velocity.Y = std::lerp(Velocity.Y, 0, std::min(Performance::DeltaTime * 2.25f, 1.f));
+			}
+			if (abs(Velocity.X) < 0.05f)
+			{
+				Velocity.X = 0;
+			}
+			if (abs(Velocity.Y) < 0.05f)
+			{
+				Velocity.Y = 0;
+			}
+			auto BoxHit = PlayerCollider2->CollMesh.OverlapCheck({ PlayerCollider });
+			if (BoxHit.HitObject)
+			{
+				if (BoxHit.HitObject->GetObjectDescription().ID == 7) // if its a bomb pickup
+				{
+					BombTime = 5;
+				}
+			}
+			OnGround = BoxHit.Hit;
+
+			if (!OnGround || VerticalVelocity > 0)
+			{
+				VerticalVelocity -= Performance::DeltaTime * Gravity;
+				HasJumped = false;
+			}
+			else
+			{
+				VerticalVelocity = std::max(VerticalVelocity, 0.f);
+			}
+
+			TryMove(Vector3(Velocity.Y, 0, Velocity.X) * Vector3(Performance::DeltaTime), false);
+			if (!TryMove(Vector3(0, VerticalVelocity * Performance::DeltaTime, 0), true))
+			{
+				if (VerticalVelocity < 0)
+				{
+					OnGround = true;
+					VerticalVelocity = 0;
+				}
+				VerticalVelocity = std::min(VerticalVelocity, 0.f);
+			}
+
+			if (Health < 0)
+			{
+				if (!IsDead)
+				{
+					CameraShake::PlayDefaultCameraShake(3);
+					UI->PlayTransition();
+					IsDead = true;
+					Health = 100.0f;
+					BombTime = 0;
+
+				}
+			}
+			else
+			{
+				Health = std::min(Health + Performance::DeltaTime * 25, 100.0f);
+			}
+
+			if (GetTransform().Location.Y < -1000.f && !IsDead)
 			{
 				CameraShake::PlayDefaultCameraShake(3);
 				UI->PlayTransition();
 				IsDead = true;
-				Health = 100.0f;
+
 			}
-		}
-		else
-		{
-			Health = std::min(Health + Performance::DeltaTime * 25, 100.0f);
-		}
-
-		if (GetTransform().Location.Y < -1000.f && !IsDead)
-		{
-			CameraShake::PlayDefaultCameraShake(3);
-			UI->PlayTransition();
-			IsDead = true;
-		}
-
-		CameraRotation += Vector3(Vector2(Input::MouseMovement.Y, Input::MouseMovement.X), 0) * 3;
-		Rotation = Rotation * 0.8 + CameraRotation * 0.2;
-		//Clamp the camera rotation so the camera stays somewhat top-down-ish;
-		CameraRotation = Vector3(CameraRotation.X = std::max(std::min(CameraRotation.X, -35.f), -85.f), CameraRotation.Y, CameraRotation.Z);
-
-		Vector3 CameraOffset = (PrevCameraPos) * 0.9 + (Vector3::GetForwardVector(Rotation) * -CameraDistance) * 0.1 + Vector3(0, 1, 0);
-		if (Vector3(Velocity.Y, 0, Velocity.X).Length() > 0.25)
-		{
-			PlayerMesh->SetRelativeTransform(Transform(Vector3(),
-				Vector3::LookAtFunction(Vector3(), Vector3(Velocity.Y, 0, Velocity.X), true),
-				Vector3(0.5, 2, 0.5)));
-		}
-		PrevCameraPos = CameraOffset;
-		auto GroundHit = Collision::LineTrace(
-			GetTransform().Location + Vector3(0, 0.5, 0),
-			GetTransform().Location + CameraOffset,
-			{ PlayerCollider, PlayerCollider2 });
-		if (GroundHit.Hit)
-		{
-			PlayerCamera->SetTransform(Transform(Vector3::Lerp(GroundHit.ImpactPoint - GetTransform().Location, Vector3(), 0.1), Rotation, Vector3(1)));
-		}
-		else
-		{
-			PlayerCamera->SetTransform(Transform(Vector3::Lerp(CameraOffset, Vector3(), 0.1), Rotation, Vector3(1)));
-		}
 
 
-		Time += Performance::DeltaTime;
+			CameraRotation += Vector3(Vector2(Input::MouseMovement.Y, Input::MouseMovement.X), 0) * 3;
+			Rotation = Rotation * 0.8 + CameraRotation * 0.2;
+			//Clamp the camera rotation so the camera stays somewhat top-down-ish;
+			CameraRotation = Vector3(CameraRotation.X = std::max(std::min(CameraRotation.X, -35.f), -85.f), CameraRotation.Y, CameraRotation.Z);
+
+			Vector3 CameraOffset = (PrevCameraPos) * 0.9 + (Vector3::GetForwardVector(Rotation) * -CameraDistance) * 0.1 + Vector3(0, 1, 0);
+			if (Vector3(Velocity.Y, 0, Velocity.X).Length() > 0.25)
+			{
+				PlayerMesh->SetRelativeTransform(Transform(Vector3(),
+					Vector3::LookAtFunction(Vector3(), Vector3(Velocity.Y, 0, Velocity.X), true),
+					Vector3(0.5, 2, 0.5)));
+			}
+			PrevCameraPos = CameraOffset;
+			auto GroundHit = Collision::LineTrace(
+				GetTransform().Location + Vector3(0, 0.5, 0),
+				GetTransform().Location + CameraOffset,
+				{ PlayerCollider, PlayerCollider2 });
+			if (GroundHit.Hit)
+			{
+				PlayerCamera->SetTransform(Transform(Vector3::Lerp(GroundHit.ImpactPoint - GetTransform().Location, Vector3(), 0.1), Rotation, Vector3(1)));
+			}
+			else
+			{
+				PlayerCamera->SetTransform(Transform(Vector3::Lerp(CameraOffset, Vector3(), 0.1), Rotation, Vector3(1)));
+			}
+
+
+			Time += Performance::DeltaTime;
+		}
 	}
 }
 
@@ -279,7 +288,6 @@ void PlayerObject::Destroy()
 {
 	if (!IsInEditor)
 	{
-
 		delete UI;
 		SaveGame OutSave = SaveGame(GetFileNameWithoutExtensionFromPath(CurrentScene));
 		SaveGame PersistantSave = SaveGame("Main");
@@ -293,7 +301,6 @@ void PlayerObject::Destroy()
 		OutSave.SetPropterty(SaveGame::SaveProperty("PlayerPos", GetTransform().Location.ToString(), T_VECTOR3));
 		OutSave.SetPropterty(SaveGame::SaveProperty("NumWalls", std::to_string(Walls.size()), T_INT));
 		OutSave.SetPropterty(SaveGame::SaveProperty("NumOrbs", std::to_string(Orbs.size()), T_INT));
-
 		int i = 0;
 		for (auto* w : Walls)
 		{
@@ -349,9 +356,16 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 					Objects::DestroyObject(hit.HitObject);
 					Sound::PlaySound2D(OrbSound);
 				}
+				else if (hit.HitObject->GetObjectDescription().ID == 9 && !InLevelTransition)
+				{
+					InLevelTransition = true;
+					NextLevel = ((HubTeleporter*)hit.HitObject)->TargetLevel;
+					Timer::StartTimer(LoadNextLevel, 0.6);
+					UI->PlayTransition();
+				}
 				else if (Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) > 0.5)
 				{
-					ObjectTransform.Location += Vector3(0, Performance::DeltaTime * (1.5 - Vector3::Dot(hit.Normal, Vector3(0, 0, 0))) * 25, 0);
+					ObjectTransform.Location += Vector3(0, Performance::DeltaTime * (1.5 - Vector3::Dot(hit.Normal, Vector3(0, 0, 0))) * 35, 0);
 					return true;
 				}
 				else if (Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) < -0.5)
@@ -361,9 +375,9 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 				}
 				else
 				{
-					ObjectTransform.Location.Y += Performance::DeltaTime * 3;
 					if (abs(Vector3::Dot(hit.Normal, Vector3(0, 1, 0))) < 0.5)
 					{
+						GetTransform().Location += hit.Normal * Performance::DeltaTime * 2;
 						return false;
 					}
 				}

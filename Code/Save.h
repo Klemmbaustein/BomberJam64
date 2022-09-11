@@ -24,7 +24,10 @@ struct SaveGame
 	}
 	~SaveGame();
 
+	bool SaveGameIsNew();
+
 private:
 	std::map<std::string, SaveProperty> Properties;
 	std::string OpenedSave;
+	bool IsNew = true;
 };

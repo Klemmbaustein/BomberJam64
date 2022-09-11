@@ -8,6 +8,7 @@
 #include <Objects/WallObject.h>
 #include <Objects/BombPickup.h>
 #include <Objects/Orb.h>
+#include <Objects/HubTeleporter.h>
 
 template<typename T>
 inline T* Objects::SpawnObject(Transform ObjectTransform)
@@ -21,6 +22,8 @@ bool Objects::DestroyObject(WorldObject* Object)
 {
 	if (Object)
 	{
+		Object->Destroy();
+
 		for (Component* LoopComponent : Object->GetComponents())
 		{
 			LoopComponent->Destroy();
@@ -36,7 +39,6 @@ bool Objects::DestroyObject(WorldObject* Object)
 				}
 			}
 		}
-		Object->Destroy();
 		delete Object;
 		return true;
 	}
@@ -64,6 +66,8 @@ WorldObject* Objects::SpawnObjectFromID(uint32_t ID, Transform ObjectTransform)
 		return (WorldObject*)SpawnObject<BombPickup>(ObjectTransform);
 	case 8:
 		return (WorldObject*)SpawnObject<Orb>(ObjectTransform);
+	case 9:
+		return (WorldObject*)SpawnObject<HubTeleporter>(ObjectTransform);
 	default:
 		throw "Attempted to spawn unknown object";
 	}
@@ -81,6 +85,7 @@ namespace Objects
 		ObjectDescription("Bomb", 5),
 		ObjectDescription("Wall Object", 6),
 		ObjectDescription("Bomb Pickup", 7),
-		ObjectDescription("Orb", 8)
+		ObjectDescription("Orb", 8),
+		ObjectDescription("Hub Teleporter", 9)
 	};
 }

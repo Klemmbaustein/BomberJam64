@@ -27,7 +27,7 @@ SaveGame::SaveGame(std::string SaveName)
 	if (std::filesystem::exists(SaveName))
 	{
 		std::ifstream InFile = std::ifstream(SaveName, std::ios::in);
-
+		IsNew = false;
 		char CurrentBuff[100];
 
 		//iterate through all lines which (hopefully) contain save values
@@ -69,7 +69,7 @@ SaveGame::SaveGame(std::string SaveName)
 					Log::CreateNewLogMessage("Error reading save file: expected = sign (" + CurrentLine + ")", Vector3(1, 0, 0));
 				}
 				//the rest of the stream is the value of the save item
-				while(!CurrentLineStream.eof())
+				while (!CurrentLineStream.eof())
 				{
 					std::string ValueToAppend;
 					CurrentLineStream >> ValueToAppend;
@@ -108,7 +108,6 @@ void SaveGame::SetPropterty(SaveProperty S)
 
 SaveGame::~SaveGame()
 {
-	Log::CreateNewLogMessage(OpenedSave);
 	std::ofstream OutFile = std::ofstream(OpenedSave, std::ios::out);
 
 	//loop through all the properties and write them to the "OpenedSave" variable
@@ -122,6 +121,11 @@ SaveGame::~SaveGame()
 		OutFile << std::endl;
 	}
 	OutFile.close();
+}
+
+bool SaveGame::SaveGameIsNew()
+{
+	return IsNew;
 }
 
 SaveGame::SaveProperty::SaveProperty(std::string Name, std::string Value, TypeEnum Type)

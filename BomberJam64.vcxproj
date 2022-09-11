@@ -228,6 +228,7 @@
     <ClCompile Include="Code\Objects\Components\Component.cpp" />
     <ClCompile Include="Code\Objects\Components\InstancedMeshComponent.cpp" />
     <ClCompile Include="Code\Objects\Components\MeshComponent.cpp" />
+    <ClCompile Include="Code\Objects\HubTeleporter.cpp" />
     <ClCompile Include="Code\Objects\InstancedMeshObject.cpp" />
     <ClCompile Include="Code\Objects\MeshObject.cpp" />
     <ClCompile Include="Code\Objects\Objects.cpp" />
@@ -288,6 +289,7 @@
     <ClInclude Include="Code\Math\Vector.h" />
     <ClInclude Include="Code\Objects\Bomb.h" />
     <ClInclude Include="Code\Objects\BombPickup.h" />
+    <ClInclude Include="Code\Objects\HubTeleporter.h" />
     <ClInclude Include="Code\Objects\Orb.h" />
     <ClInclude Include="Code\Objects\WallObject.h" />
     <ClInclude Include="Code\Objects\Components\CameraComponent.h" />
