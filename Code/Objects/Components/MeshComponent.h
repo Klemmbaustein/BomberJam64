@@ -16,11 +16,7 @@ class MeshComponent : public Component
 {
 public:
 	virtual void Start(WorldObject* Parent) override;
-	virtual void Tick()
-	{
-		MeshModel->ModelTransform = Parent->GetTransform() + RelativeTransform;
-		MeshModel->UpdateTransform();
-	}
+	virtual void Tick() override;
 	virtual void Destroy() override;
 
 	void Load(std::string File);

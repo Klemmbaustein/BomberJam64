@@ -20,7 +20,7 @@ namespace Graphics
 {
 	Sun WorldSun;
 	Fog WorldFog;
-	unsigned int ShadowResolution = 3000;
+	unsigned int ShadowResolution = 2000;
 	std::vector<Renderable*> ModelsToRender;
 	std::vector<UICanvas*> UIToRender;
 	Vector2 WindowResolution(1600, 900);

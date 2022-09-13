@@ -1,4 +1,5 @@
 #include "MeshComponent.h"
+#include <Rendering/Mesh/Model.h>
 void MeshComponent::Start(WorldObject* Parent)
 {
 	if (MeshModel)
@@ -19,8 +20,11 @@ void MeshComponent::Destroy()
 	}
 	delete MeshModel;
 }
-
-
+void MeshComponent::Tick()
+{
+	MeshModel->ModelTransform = Parent->GetTransform() + RelativeTransform;
+	MeshModel->UpdateTransform();
+}
 void MeshComponent::Load(std::string File)
 {
 	MeshModel = new Model(Assets::GetAsset(File + ".jsm"));

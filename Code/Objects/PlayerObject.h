@@ -46,6 +46,7 @@ protected:
 	bool IsClicking = false;
 	bool SpaceDown = false;
 	bool InLevelTransition = false;
+	float TeleportCancelTime = 1.f;
 	bool LoadedSave = false;
 	std::string Levels[3]
 	{

@@ -106,26 +106,20 @@ float ShadowCalculation(vec3 fragPosWorldSpace)
 
 	float bias = 0.0125f;
 
-	bias += (abs(dot(normalize(v_modelnormal), normalize(u_directionallight.Direction)))) / 100;
-
 	bias *= max((abs(u_biasmodifier * 2)), 0.5f) / 15.f;
 	if(u_biasmodifier < -0.95)
 		bias *= 2;
-	bias *= 0.02;
-	bias *= max(4096 / textureSize(shadowMap, 0).x*1.5f, 1);
-
+	bias *= 0.05;
 	// PCF
 	float shadow = 0.f;
 	vec2 distances = vec2(mod(projCoords.x, texelSize.x), mod(projCoords.y, texelSize.y)) * vec2(u_textureres);
 	int i = 0;
-	for(int x = -1; x <= 1; x += 1)
+	for(int x = 0; x <= 1; x += 1)
 	{
-		for(int y = -1; y <= 1; y += 1)
+		for(int y = 0; y <= 1; y += 1)
 		{
-			{
-				shadow += SampleFromShadowMap(projCoords.xy + vec2(x, y) * 1 * texelSize, bias, texelSize, layer, distances, currentDepth);
-				i++;
-			}
+			shadow += SampleFromShadowMap(projCoords.xy + vec2(x, y) * 1 * texelSize, bias, texelSize, layer, distances, currentDepth);
+			i++;
 		}
 	}
 	shadow /= i;

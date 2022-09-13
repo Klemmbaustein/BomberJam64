@@ -50,10 +50,7 @@ Model::Model(std::string Filename)
 		}
 		Materials = ModelData.Materials;
 		HasCollision = ModelData.HasCollision;
-		if (ModelData.HasCollision)
-		{
-			NonScaledSize = ModelData.CollisionBox.GetLength();
-		}
+		NonScaledSize = ModelData.CollisionBox.GetLength();
 		LoadMaterials(Materials);
 		ConfigureVAO();
 	}
@@ -81,7 +78,7 @@ void Model::Render(Camera* WorldCamera)
 {
 	if (Visible)
 	{
-		if (Size.isOnFrustum(FrustumCulling::CurrentCameraFrustum, ModelTransform.Location, ModelTransform.Scale * NonScaledSize * 0.1))
+		if (Size.isOnFrustum(FrustumCulling::CurrentCameraFrustum, ModelTransform.Location, ModelTransform.Scale * NonScaledSize * 0.025))
 		{
 			if (TwoSided)
 			{
@@ -285,8 +282,8 @@ void Model::SimpleRender(Shader* Shader)
 		glUniformMatrix4fv(glGetUniformLocation(Shader->GetShaderID(), "u_model"), 1, GL_FALSE, &MatModel[0][0]);
 		for (Mesh* m : Meshes)
 		{
-			Performance::DrawCalls++;
 			m->SimpleRender(Shader);
+			Performance::DrawCalls++;
 		}
 	}
 }

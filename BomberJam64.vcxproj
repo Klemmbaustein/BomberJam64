@@ -184,7 +184,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <AdditionalDependencies>assimp.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -233,6 +233,7 @@
     <ClCompile Include="Code\Objects\MeshObject.cpp" />
     <ClCompile Include="Code\Objects\Objects.cpp" />
     <ClCompile Include="Code\Objects\Orb.cpp" />
+    <ClCompile Include="Code\Objects\OrbGate.cpp" />
     <ClCompile Include="Code\Objects\PlayerObject.cpp" />
     <ClCompile Include="Code\Objects\SoundObject.cpp" />
     <ClCompile Include="Code\Objects\WallObject.cpp" />
@@ -292,6 +293,7 @@
     <ClInclude Include="Code\Objects\BombPickup.h" />
     <ClInclude Include="Code\Objects\HubTeleporter.h" />
     <ClInclude Include="Code\Objects\Orb.h" />
+    <ClInclude Include="Code\Objects\OrbGate.h" />
     <ClInclude Include="Code\Objects\WallObject.h" />
     <ClInclude Include="Code\Objects\Components\CameraComponent.h" />
     <ClInclude Include="Code\Objects\Components\CollisionComponent.h" />

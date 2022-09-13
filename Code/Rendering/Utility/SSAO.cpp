@@ -31,7 +31,6 @@ void SSAO::Init()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ssaoColorBuffer, 0);
 
-
 	for (unsigned int i = 0; i < Samples; ++i)
 	{
 		glm::vec3 sample(

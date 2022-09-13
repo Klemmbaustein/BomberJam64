@@ -31,13 +31,13 @@ void PlayerObject::TryLoadSave()
 {
 	if (!IsInEditor)
 	{
-
-		//loading progress
 		try
 		{
+			//first load the main save game and get the data that is the same no matter what level we're in
 			SaveGame PersistantSave = SaveGame("Main");
 			NumOrbs = std::stoi(PersistantSave.GetPropterty("OrbsCollected").Value);
 
+			//then load the Level save game and load level relevant data
 			SaveGame InSave = SaveGame(GetFileNameWithoutExtensionFromPath(CurrentScene));
 			if(!InSave.SaveGameIsNew())
 			{
@@ -59,6 +59,7 @@ void PlayerObject::TryLoadSave()
 				GetTransform().Location = Vector3::stov(InSave.GetPropterty("PlayerPos").Value);
 				for (int i = 0; i < NumWalls; i++)
 				{
+					//spawn new walls that are listed in the save game
 					Vector3 Loc = Vector3::stov(InSave.GetPropterty("Walls_pos" + std::to_string(i)).Value);
 					Vector3 Rot = Vector3::stov(InSave.GetPropterty("Walls_rot" + std::to_string(i)).Value);
 					int HasOrb = std::stoi(InSave.GetPropterty("Walls_orb" + std::to_string(i)).Value);
@@ -67,15 +68,14 @@ void PlayerObject::TryLoadSave()
 
 				for (int i = 0; i < NumOrbs; i++)
 				{
+					//spawn new orbs that are listed in the save game
 					Vector3 Loc = Vector3::stov(InSave.GetPropterty("Orbs_pos" + std::to_string(i)).Value);
 					Objects::SpawnObject<Orb>(Transform(Loc, Vector3(), Vector3(1)));
 				}
 			}
 		}
-		catch (std::exception& e) // in case the "Orbs collected" value does not exist, we simply ignore it, since its not that important
+		catch (std::exception) // if we get an error when loading, that probably means the save file does not exist, so we treat this as a "new game"
 		{
-			Log::CreateNewLogMessage(e.what());
-			NumOrbs = 0;
 		}
 	}
 }
@@ -193,6 +193,11 @@ void PlayerObject::Tick()
 				VerticalVelocity = std::min(VerticalVelocity, 0.f);
 			}
 
+			if (TeleportCancelTime > 0)
+			{
+				TeleportCancelTime -= Performance::DeltaTime;
+			}
+
 			if (Health < 0)
 			{
 				if (!IsDead)
@@ -288,22 +293,30 @@ void PlayerObject::Destroy()
 {
 	if (!IsInEditor)
 	{
-		delete UI;
+		{
+			//Save general information into the main save
+			SaveGame PersistantSave = SaveGame("Main");
+			PersistantSave.SetPropterty(SaveGame::SaveProperty("OrbsCollected", std::to_string(NumOrbs), T_INT));
+			PersistantSave.SetPropterty(SaveGame::SaveProperty("CurrentMap", GetFileNameWithoutExtensionFromPath(CurrentScene), T_STRING));
+		}
+
+		//Then open a save for the current level
 		SaveGame OutSave = SaveGame(GetFileNameWithoutExtensionFromPath(CurrentScene));
-		SaveGame PersistantSave = SaveGame("Main");
-		PersistantSave.SetPropterty(SaveGame::SaveProperty("OrbsCollected", std::to_string(NumOrbs), T_INT));
-		PersistantSave.SetPropterty(SaveGame::SaveProperty("CurrentMap", GetFileNameWithoutExtensionFromPath(CurrentScene), T_STRING));
-
 		OutSave.ClearProperties();
-		auto Walls = Objects::GetAllObjectsWithID(6); // Get All Walls
-		auto Orbs = Objects::GetAllObjectsWithID(8); // Get All Walls
 
+		//Save the Player's position
 		OutSave.SetPropterty(SaveGame::SaveProperty("PlayerPos", GetTransform().Location.ToString(), T_VECTOR3));
+
+		int i = 0;
+		auto Walls = Objects::GetAllObjectsWithID(6); //Get all Walls
+		auto Orbs = Objects::GetAllObjectsWithID(8); //Get all Orbs
+
+		//then save the ammount of both into the level save file
 		OutSave.SetPropterty(SaveGame::SaveProperty("NumWalls", std::to_string(Walls.size()), T_INT));
 		OutSave.SetPropterty(SaveGame::SaveProperty("NumOrbs", std::to_string(Orbs.size()), T_INT));
-		int i = 0;
 		for (auto* w : Walls)
 		{
+			//Save all relevant information about each wall into the save file
 			OutSave.SetPropterty(SaveGame::SaveProperty("Walls_pos" + std::to_string(i), w->GetTransform().Location.ToString(), T_VECTOR3));
 			OutSave.SetPropterty(SaveGame::SaveProperty("Walls_rot" + std::to_string(i), w->GetTransform().Rotation.ToString(), T_VECTOR3));
 			OutSave.SetPropterty(SaveGame::SaveProperty("Walls_orb" + std::to_string(i), std::to_string(dynamic_cast<WallObject*>(w)->ContainsOrb), T_INT));
@@ -313,12 +326,12 @@ void PlayerObject::Destroy()
 		i = 0;
 		for (auto* o : Orbs)
 		{
+			//Save all relevant information about each orb into the save file
 			OutSave.SetPropterty(SaveGame::SaveProperty("Orbs_pos" + std::to_string(i), o->GetTransform().Location.ToString(), T_VECTOR3));
 
 			i++;
 		}
 	}
-
 }
 
 
@@ -358,10 +371,17 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 				}
 				else if (hit.HitObject->GetObjectDescription().ID == 9 && !InLevelTransition)
 				{
-					InLevelTransition = true;
-					NextLevel = ((HubTeleporter*)hit.HitObject)->TargetLevel;
-					Timer::StartTimer(LoadNextLevel, 0.6);
-					UI->PlayTransition();
+					if (TeleportCancelTime <= 0)
+					{
+						InLevelTransition = true;
+						NextLevel = ((HubTeleporter*)hit.HitObject)->TargetLevel;
+						Timer::StartTimer(LoadNextLevel, 0.6);
+						UI->PlayTransition();
+					}
+					else
+					{
+						TeleportCancelTime = 1.f;
+					}
 				}
 				else if (Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) > 0.5)
 				{

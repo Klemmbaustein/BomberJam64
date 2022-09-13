@@ -9,6 +9,7 @@
 #include <Objects/BombPickup.h>
 #include <Objects/Orb.h>
 #include <Objects/HubTeleporter.h>
+#include <Objects/OrbGate.h>
 
 template<typename T>
 inline T* Objects::SpawnObject(Transform ObjectTransform)
@@ -68,6 +69,8 @@ WorldObject* Objects::SpawnObjectFromID(uint32_t ID, Transform ObjectTransform)
 		return (WorldObject*)SpawnObject<Orb>(ObjectTransform);
 	case 9:
 		return (WorldObject*)SpawnObject<HubTeleporter>(ObjectTransform);
+	case 10:
+		return (WorldObject*)SpawnObject<OrbGate>(ObjectTransform);
 	default:
 		throw "Attempted to spawn unknown object";
 	}
@@ -86,6 +89,7 @@ namespace Objects
 		ObjectDescription("Wall Object", 6),
 		ObjectDescription("Bomb Pickup", 7),
 		ObjectDescription("Orb", 8),
-		ObjectDescription("Hub Teleporter", 9)
+		ObjectDescription("Hub Teleporter", 9),
+		ObjectDescription("Orb Gate", 10)
 	};
 }

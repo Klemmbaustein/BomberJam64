@@ -46,13 +46,13 @@ float blurssao()
 
 
 	result = mix(result, 16, min(max(LinearizeDepth(texture(u_depth, v_texcoords).z), 0), 1) / 3);
-	result += LinearizeDepth(texture(u_depth, v_texcoords).z) / 20.f;
+	result += LinearizeDepth(texture(u_depth, v_texcoords).z) / 5.f;
 	return pow(min(result / 16, 1), 2);
 }
 vec4 blursample(sampler2D tex, vec2 coords)
 {
 	vec4 color;
-	vec2 texelSize = 0.5 / textureSize(u_texture, 0);
+	vec2 texelSize = 1.f / textureSize(u_texture, 0);
 	for(int x = -1; x <= 1; ++x)
 	{
 		for(int y = -1; y <= 1; ++y)

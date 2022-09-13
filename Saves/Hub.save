@@ -1,0 +1,3 @@
+int NumOrbs = 0  
+int NumWalls = 0  
+vector3 PlayerPos = -87.926826 -8.622487 -2.705055  

@@ -845,7 +845,7 @@ int Start(int argc, char** argv)
 		if (Graphics::Bloom)
 		{
 			bool horizontal = true, first_iteration = true;
-			int amount = 10;
+			int amount = 5;
 			BloomShader.Bind();
 			glUniform1i(glGetUniformLocation(BloomShader.GetShaderID(), "FullScreen"), 1);
 			for (unsigned int i = 0; i < amount; i++)

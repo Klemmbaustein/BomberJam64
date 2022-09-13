@@ -20,8 +20,8 @@ namespace Graphics
 {
 	struct Fog
 	{
-		float Distance = 500.f;
-		float Falloff = 2000.f;
+		float Distance = 70.f;
+		float Falloff = 500.f;
 		float MaxDensity = 1.f;
 		Vector3 FogColor = Vector3(0.7f, 0.8f, 1.f);
 	};

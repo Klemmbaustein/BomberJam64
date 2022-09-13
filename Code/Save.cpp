@@ -33,6 +33,7 @@ SaveGame::SaveGame(std::string SaveName)
 		//iterate through all lines which (hopefully) contain save values
 		while (!InFile.eof())
 		{
+
 			TypeEnum CurrentType = T_NULL;
 			std::string CurrentName = "unkown";
 			std::string Value = "";

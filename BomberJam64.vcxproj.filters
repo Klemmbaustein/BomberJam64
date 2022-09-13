@@ -276,6 +276,9 @@
     <ClCompile Include="Code\Rendering\Camera\FrustumCulling.cpp">
       <Filter>Code\Rendering\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Objects\OrbGate.cpp">
+      <Filter>Code\Objects\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\TypeEnun.h">
@@ -496,6 +499,9 @@
     </ClInclude>
     <ClInclude Include="Code\Rendering\Camera\FrustumCulling.h">
       <Filter>Code\Rendering\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Objects\OrbGate.h">
+      <Filter>Code\Objects\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

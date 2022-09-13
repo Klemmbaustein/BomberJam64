@@ -1,5 +1,6 @@
 #include "CollisionComponent.h"
 #include <WorldParameters.h>
+#include <Math/Collision/Collision.h>
 
 
 Collision::HitResponse CollisionComponent::OverlapCheck(std::set<CollisionComponent*> MeshesToIgnore)
