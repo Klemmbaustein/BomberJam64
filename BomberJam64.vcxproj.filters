@@ -279,6 +279,9 @@
     <ClCompile Include="Code\Objects\OrbGate.cpp">
       <Filter>Code\Objects\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Objects\Snowman.cpp">
+      <Filter>Code\Objects\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\TypeEnun.h">
@@ -501,6 +504,9 @@
       <Filter>Code\Rendering\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Code\Objects\OrbGate.h">
+      <Filter>Code\Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Objects\Snowman.h">
       <Filter>Code\Objects\Game</Filter>
     </ClInclude>
   </ItemGroup>

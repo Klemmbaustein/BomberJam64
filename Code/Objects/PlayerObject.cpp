@@ -293,6 +293,7 @@ void PlayerObject::Destroy()
 {
 	if (!IsInEditor)
 	{
+		std::cout << "TEST";
 		{
 			//Save general information into the main save
 			SaveGame PersistantSave = SaveGame("Main");

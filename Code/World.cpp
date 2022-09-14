@@ -39,11 +39,15 @@ namespace World
 			}
 			TextInput::PollForText = false;
 			Debugging::EngineStatus = "Loading Scene";
+			std::cout << Objects::AllObjects.size();
 			for (int i = 0; i < Objects::AllObjects.size(); i++)
 			{
 				if (Objects::AllObjects[i] != nullptr)
 				{
 					Objects::DestroyObject(Objects::AllObjects[i]);
+				}
+				else
+				{
 				}
 			}
 			Objects::AllObjects.clear();
@@ -106,6 +110,8 @@ namespace World
 		}
 		else
 		{
+			std::cout << "hi";
+
 			Log::CreateNewLogMessage("Scene Loading Error: Scene \"" + OriginalString + "\" does not exist");
 		}
 	}

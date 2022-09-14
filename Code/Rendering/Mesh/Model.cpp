@@ -270,20 +270,23 @@ void Model::SimpleRender(Shader* Shader)
 {
 	if (Visible)
 	{
-		Shader->Bind();
-		if (TwoSided)
+		if (Size.isOnFrustum(FrustumCulling::CurrentCameraFrustum, ModelTransform.Location, ModelTransform.Scale * NonScaledSize * 0.025))
 		{
-			glDisable(GL_CULL_FACE);
-		}
-		else
-		{
-			glEnable(GL_CULL_FACE);
-		}
-		glUniformMatrix4fv(glGetUniformLocation(Shader->GetShaderID(), "u_model"), 1, GL_FALSE, &MatModel[0][0]);
-		for (Mesh* m : Meshes)
-		{
-			m->SimpleRender(Shader);
-			Performance::DrawCalls++;
+			Shader->Bind();
+			if (TwoSided)
+			{
+				glDisable(GL_CULL_FACE);
+			}
+			else
+			{
+				glEnable(GL_CULL_FACE);
+			}
+			glUniformMatrix4fv(glGetUniformLocation(Shader->GetShaderID(), "u_model"), 1, GL_FALSE, &MatModel[0][0]);
+			for (Mesh* m : Meshes)
+			{
+				m->SimpleRender(Shader);
+				Performance::DrawCalls++;
+			}
 		}
 	}
 }

@@ -1,0 +1,6 @@
+Water
+water.vert
+water.frag
+0
+u_color;3;0.700000 0.800000 1.000000
+u_normal;5;waternormal

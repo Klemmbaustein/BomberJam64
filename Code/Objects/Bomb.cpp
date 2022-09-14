@@ -49,6 +49,18 @@ void Bomb::Tick()
 			}
 			auto Player = dynamic_cast<PlayerObject*>(Objects::GetAllObjectsWithID(4)[0]);
 
+
+			auto AllSnowmen = Objects::GetAllObjectsWithID(11);
+
+			for (auto* o : AllSnowmen)
+			{
+				if (Vector3::Distance(o->GetTransform().Location, GetTransform().Location) < 13)
+				{
+					Player->Health = -100.0f; //Player is dead :(
+				}
+			}
+
+
 			if (Vector3::Distance(Player->GetTransform().Location, GetTransform().Location) < 16)
 			{
 				Player->Health -= 60.0f;

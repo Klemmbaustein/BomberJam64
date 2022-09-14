@@ -49,7 +49,7 @@ uniform DirectionalLight u_directionallight;
 uniform vec3 u_cameraforward;
 uniform vec3 u_cameraposition;
 uniform sampler2D u_normal;
-uniform sampler2D u_texture;
+uniform vec3 u_color;
 uniform float u_time;
 uniform float FogFalloff;
 uniform float FogDistance;
@@ -146,7 +146,7 @@ float ShadowCalculation(vec3 fragPosWorldSpace)
 void main()
 {
 	vec3 view = normalize(v_position.xyz - u_cameraposition.xyz);
-	vec3 normal = texture(u_normal, v_texcoord * 1000.f + (u_time / 3 + sin(u_time) * 0.25) / 10).rgb;
+	vec3 normal = texture(u_normal, v_texcoord * 100.f).rgb;
 	normal = normalize(normal * 2.0 - 1.0f);
 	normal = vec3(normal.x, normal.y, 1 -normal.z);
 	normal = normalize(v_normal + normal);
@@ -154,7 +154,7 @@ void main()
 	vec3 reflection = reflect(u_directionallight.Direction, normal);
 	float specular = 1 * pow(max(dot(reflection, view), 0.0000001), 50) * 1;
 
-	vec3 color = texture(u_texture, v_texcoord * 2000.f + (u_time / 3 + sin(u_time) * 0.25) / 10).xyz;
+	vec3 color = u_color;
 	color = mix(color, vec3(0.5, 0.75, 1), min(v_screenposition.z / -500, 1));
 
 	f_color = ApplyFogColor(vec4((color * u_directionallight.SunColor + specular) * shadow + color * u_directionallight.AmbientColor / 5 + max(specular - 0.5, 0) / 5, 1));

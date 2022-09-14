@@ -235,6 +235,7 @@
     <ClCompile Include="Code\Objects\Orb.cpp" />
     <ClCompile Include="Code\Objects\OrbGate.cpp" />
     <ClCompile Include="Code\Objects\PlayerObject.cpp" />
+    <ClCompile Include="Code\Objects\Snowman.cpp" />
     <ClCompile Include="Code\Objects\SoundObject.cpp" />
     <ClCompile Include="Code\Objects\WallObject.cpp" />
     <ClCompile Include="Code\Objects\WorldObject.cpp" />
@@ -294,6 +295,7 @@
     <ClInclude Include="Code\Objects\HubTeleporter.h" />
     <ClInclude Include="Code\Objects\Orb.h" />
     <ClInclude Include="Code\Objects\OrbGate.h" />
+    <ClInclude Include="Code\Objects\Snowman.h" />
     <ClInclude Include="Code\Objects\WallObject.h" />
     <ClInclude Include="Code\Objects\Components\CameraComponent.h" />
     <ClInclude Include="Code\Objects\Components\CollisionComponent.h" />
