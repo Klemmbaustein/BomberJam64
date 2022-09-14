@@ -17,4 +17,4 @@ This game requires the following libraries:
 - glm
 - Assimp*
 
-> *Only required for the Editor. When `IS_IN_EDITOR` is `folse`, it is not required for a build
+> *Only required for the Editor. When `IS_IN_EDITOR` is `false`, it is not required for a build
