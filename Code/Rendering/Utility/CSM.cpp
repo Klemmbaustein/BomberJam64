@@ -2,7 +2,7 @@
 #include <WorldParameters.h>
 namespace CSM
 {
-	const float cameraFarPlane = 500.f;
+	const float cameraFarPlane = 600.f;
 	std::vector<float> shadowCascadeLevels{ cameraFarPlane / 10.f, cameraFarPlane / 5.f, cameraFarPlane / 2.f };
 	GLuint LightFBO;
 	int Cascades = 3;

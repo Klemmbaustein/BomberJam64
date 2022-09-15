@@ -22,8 +22,11 @@ void MeshComponent::Destroy()
 }
 void MeshComponent::Tick()
 {
-	MeshModel->ModelTransform = Parent->GetTransform() + RelativeTransform;
-	MeshModel->UpdateTransform();
+	if (AutomaticallyUpdateTransform)
+	{
+		MeshModel->ModelTransform = Parent->GetTransform() + RelativeTransform;
+		MeshModel->UpdateTransform();
+	}
 }
 void MeshComponent::Load(std::string File)
 {
@@ -63,4 +66,13 @@ Transform& MeshComponent::GetRelativeTransform()
 void MeshComponent::SetVisibility(bool NewVisibility)
 {
 	MeshModel->Visible = NewVisibility;
+}
+
+void MeshComponent::UpdateTransform()
+{
+	if (!AutomaticallyUpdateTransform)
+	{
+		MeshModel->ModelTransform = Parent->GetTransform() + RelativeTransform;
+		MeshModel->UpdateTransform();
+	}
 }

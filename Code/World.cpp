@@ -39,7 +39,6 @@ namespace World
 			}
 			TextInput::PollForText = false;
 			Debugging::EngineStatus = "Loading Scene";
-			std::cout << Objects::AllObjects.size();
 			for (int i = 0; i < Objects::AllObjects.size(); i++)
 			{
 				if (Objects::AllObjects[i] != nullptr)

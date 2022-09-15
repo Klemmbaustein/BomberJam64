@@ -17,6 +17,7 @@ GameUI::~GameUI()
 	delete GameTextRenderer;
 }
 
+
 void GameUI::Render(Shader* Shader)
 {
 	int NumBombs = Player->BombTime / 0.5f;

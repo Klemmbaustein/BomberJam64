@@ -230,12 +230,7 @@ void PlayerObject::Tick()
 			CameraRotation = Vector3(CameraRotation.X = std::max(std::min(CameraRotation.X, -35.f), -85.f), CameraRotation.Y, CameraRotation.Z);
 
 			Vector3 CameraOffset = (PrevCameraPos) * 0.9 + (Vector3::GetForwardVector(Rotation) * -CameraDistance) * 0.1 + Vector3(0, 1, 0);
-			if (Vector3(Velocity.Y, 0, Velocity.X).Length() > 0.25)
-			{
-				PlayerMesh->SetRelativeTransform(Transform(Vector3(),
-					Vector3::LookAtFunction(Vector3(), Vector3(Velocity.Y, 0, Velocity.X), true),
-					Vector3(0.5, 2, 0.5)));
-			}
+
 			PrevCameraPos = CameraOffset;
 			auto GroundHit = Collision::LineTrace(
 				GetTransform().Location + Vector3(0, 0.5, 0),
@@ -250,6 +245,42 @@ void PlayerObject::Tick()
 				PlayerCamera->SetTransform(Transform(Vector3::Lerp(CameraOffset, Vector3(), 0.1), Rotation, Vector3(1)));
 			}
 
+			AnimFrameTimer += Performance::DeltaTime;
+			
+			//Chose what animation we're playing right now
+
+			//if we still have bombs, we should choose an animation that has them
+			unsigned int AnimOffset = BombTime > 0.5 ? 2 : 0;
+
+			CurrentAnim = (Vector3(Velocity, 0).Length() > 0.5) + AnimOffset;
+
+
+			//if the timer reaches 0.1f, we trigger an animation change
+			if (AnimFrameTimer > 0.1f)
+			{
+				CurrentAnimFrame++;
+
+				//Loop the animation
+				if (CurrentAnimFrame > Anims[CurrentAnim].StartingFrame + Anims[CurrentAnim].Frames)
+				{
+					CurrentAnimFrame = Anims[CurrentAnim].StartingFrame;
+				}
+
+
+				for (unsigned int i = 0; i < PLAYER_NUM_ANIM_FRAMES; i++)
+				{
+					AllAnimComponents[i]->SetVisibility(i == CurrentAnimFrame);
+
+					if (Vector3(Velocity.Y, 0, Velocity.X).Length() > 5)
+					{
+						AllAnimComponents[i]->SetRelativeTransform(Transform(Vector3(0, -4, 0),
+							Vector3::LookAtFunction(Vector3(), Vector3(Velocity.Y, 0, Velocity.X), true) + Vector3(0, M_PI, 0),
+							Vector3(1, 1, 1)));
+					}
+
+				}
+				AnimFrameTimer = 0;
+			}
 
 			Time += Performance::DeltaTime;
 		}
@@ -258,22 +289,33 @@ void PlayerObject::Tick()
 
 void PlayerObject::Begin()
 {
+
 	SpawnPoint = GetTransform().Location;
 	UI = UI::CreateUICanvas<GameUI>();
-	if(UI)
-	UI->Player = this;
-	PlayerMesh = new MeshComponent();
-	Attach(PlayerMesh);
-	PlayerMesh->Load("Cube");
-	PlayerMesh->SetRelativeTransform(Transform(Vector3(), Vector3(), Vector3(0.5, 2, 0.5)));
+	if (UI)
+		UI->Player = this;
+
+	auto CollisionMeshData = JSM::LoadJSModel(Assets::GetAsset("Cube.jsm"));
+
 	PlayerCollider = new CollisionComponent();
 	Attach(PlayerCollider);
-	PlayerCollider->Init(PlayerMesh->GetMeshData().Vertices, PlayerMesh->GetMeshData().Indices, Transform(Vector3(), Vector3(), Vector3(0.3, 1.9, 0.3)));
+	PlayerCollider->Init(CollisionMeshData.Vertices[0], CollisionMeshData.Indices[0], Transform(Vector3(), Vector3(), Vector3(0.3, 1.9, 0.3)));
+
 	PlayerCollider2 = new CollisionComponent();
 	Attach(PlayerCollider2);
-	PlayerCollider2->Init(PlayerMesh->GetMeshData().Vertices, PlayerMesh->GetMeshData().Indices, Transform(Vector3(0, -0.5, 0), Vector3(), Vector3(0.2, 1.75, 0.2)));
+	PlayerCollider2->Init(CollisionMeshData.Vertices[0], CollisionMeshData.Indices[0], Transform(Vector3(0, -0.5, 0), Vector3(), Vector3(0.2, 1.75, 0.2)));
+
 	PlayerCamera = new CameraComponent();
 	Attach(PlayerCamera);
+
+	for (unsigned int i = 0; i < PLAYER_NUM_ANIM_FRAMES; i++)
+	{
+		auto NewAnimMesh = new MeshComponent();
+		Attach(NewAnimMesh);
+		NewAnimMesh->Load(AllAnimMeshes[i]);
+		NewAnimMesh->SetRelativeTransform(Transform(Vector3(0, -4, 0), 0, 1));
+		AllAnimComponents[i] = NewAnimMesh;
+	}
 
 	if (!BombPlaceSound)
 	{
@@ -293,7 +335,6 @@ void PlayerObject::Destroy()
 {
 	if (!IsInEditor)
 	{
-		std::cout << "TEST";
 		{
 			//Save general information into the main save
 			SaveGame PersistantSave = SaveGame("Main");

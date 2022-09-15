@@ -5,6 +5,9 @@
 #include <Sound/Sound.h>
 #include <UI/Game/GameUI.h>
 
+constexpr unsigned int PLAYER_NUM_ANIM_FRAMES = 10;
+
+
 class PlayerObject : public WorldObject
 {
 public:
@@ -23,7 +26,6 @@ public:
 	float BombTime = 0.0f;
 	uint32_t NumOrbs = 0;
 	float Health = 100.0f;
-	~PlayerObject();
 protected:
 	void TryLoadSave();
 
@@ -32,7 +34,6 @@ protected:
 	CollisionComponent* PlayerCollider = nullptr;
 	CollisionComponent* PlayerCollider2 = nullptr;
 	CameraComponent* PlayerCamera = nullptr;
-	MeshComponent* PlayerMesh = nullptr;
 	Vector3 CameraRotation;
 	float BombLayTime = 0;
 	float VerticalVelocity = 0;
@@ -54,4 +55,35 @@ protected:
 		"TestScene",
 		"ForestLevel"
 	};
+
+
+	std::string AllAnimMeshes[PLAYER_NUM_ANIM_FRAMES] =
+	{
+		"Idle",		//Anim 00
+		"Walk_0",	//Anim 01
+		"Walk_1",	//Anim 02
+		"Walk_2",	//Anim 03
+		"Walk_3",	//Anim 04
+		"Idle_B",	//Anim 05
+		"Walk_0-B",	//Anim 06
+		"Walk_1-B",	//Anim 07
+		"Walk_2-B",	//Anim 08
+		"Walk_3-B"	//Anum 09
+	};
+
+	struct Animation { unsigned int Frames; unsigned int StartingFrame; };
+	Animation Anims[4] = 
+	{
+		{0, 0},
+		{3, 1},
+		{0, 5},
+		{3, 6}
+	};
+
+	MeshComponent* AllAnimComponents[PLAYER_NUM_ANIM_FRAMES] = {};
+
+	unsigned int CurrentAnim = 0;
+	unsigned int CurrentAnimFrame = 0;
+	float AnimFrameTimer = 0.0f;
+
 };

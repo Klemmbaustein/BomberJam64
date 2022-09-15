@@ -34,6 +34,9 @@ public:
 
 	void SetVisibility(bool NewVisibility);
 
+
+	bool AutomaticallyUpdateTransform = true;
+	void UpdateTransform();
 protected:
 	Model* MeshModel = nullptr;
 	Shader* CurrentShader = nullptr;

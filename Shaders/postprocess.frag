@@ -122,7 +122,7 @@ void main()
 		f_color = pow(vec4(mix(color.xyz, mix(bloomcolor, vec3(1), 0.5f) * 2.f, bloomstrength) + outlinecolor, color.w), vec4(u_gamma));
 
 		f_color = mix(f_color, enginearrows, length(enginearrows.rgb));
-		f_color *= (rand(v_texcoords) / 50) + 0.95; // To combat color banding
+		f_color *= (rand(v_texcoords) / 50) + 0.9; // To combat color banding
 		f_color -= Vignette * u_vignette;
 	}
 	else

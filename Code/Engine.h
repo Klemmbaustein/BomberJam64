@@ -4,4 +4,4 @@
 #define VERSION_STRING "0.1"
 #define ENGINE_DEBUG true
 constexpr char ProjectName[] = "BomberSnek";
-constexpr char StartupMap[] = "Level1";
+constexpr char StartupMap[] = "Level2";
