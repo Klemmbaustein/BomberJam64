@@ -2,10 +2,10 @@ Basic
 basic.vert
 basic.frag
 0
-u_diffuse;3;1.000000 1.000000 1.000000
+u_diffuse;3;5.500000 5.500000 4.500000
 u_emissive;3;0.000000 0.000000 0.000000
 u_specularsize;1;0.0
 u_specularstrength;1;0.0
-u_usetexture;0;0
-u_texture;5;
+u_usetexture;0;1
+u_texture;5;Stone
 u_ssao;0;1

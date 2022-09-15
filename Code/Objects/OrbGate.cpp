@@ -22,7 +22,7 @@ void OrbGate::Begin()
 	GateMeshComponent = new MeshComponent();
 	Attach(GateMeshComponent);
 	GateMeshComponent->Load("OrbGate");
-	GateMeshComponent->SetUniform("u_diffuse", U_VEC3, Vector3(0.8, 0.8, 1).ToString(), 0);
+	GateMeshComponent->SetUniform("u_diffuse", U_VEC3, Vector3(1, 1, 0.8).ToString(), 0);
 
 	Properties.push_back(Object::Property("Gate Index", T_INT, &TextureIndex));
 }

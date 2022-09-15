@@ -38,6 +38,11 @@
 #include <Objects/Objects.h>
 #include <Rendering/Camera/FrustumCulling.h>
 
+// uuuuughhh
+#define NOMINMAX
+#include <Windows.h>
+
+
 SDL_Window* Window;
 std::vector<ButtonEvent> ButtonEvents;
 Vector2 GetMousePosition()
@@ -76,6 +81,7 @@ MessageCallback(
 
 int Start(int argc, char** argv)
 {
+	::ShowWindow(::GetConsoleWindow(), SW_SHOW);
 	Assets::ScanForAssets();
 	std::cout << "Starting\n";
 	//Initialize DeltaTime
@@ -289,8 +295,10 @@ int Start(int argc, char** argv)
 	Model* ArrowsModel = new Model(std::string("EngineContent/Models/Arrows.jsm"));
 	ArrowFrameBuffer.ReInit(Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
 #endif
-#ifdef ENGINE_DEBUG
+#if ENGINE_DEBUG
 	TextRenderer DebugTextRenderer = TextRenderer("Fonts/Font.ttf", 60);
+#else
+	::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 #endif //ENGINE_DEBUG
 
 	std::cout << " done!\n";
@@ -304,6 +312,8 @@ int Start(int argc, char** argv)
 #endif
 
 	}
+
+
 	Uint64 EndCounter = SDL_GetPerformanceCounter();
 	Uint64 counterElapsed = EndCounter - LastCounter;
 	float LoadTime = ((float)counterElapsed) / ((float)PerfCounterFrequency);
@@ -958,6 +968,7 @@ int Start(int argc, char** argv)
 	}
 	Sound::End();
 	return 0;
+	::ShowWindow(::GetConsoleWindow(), SW_SHOW);
 }
 
 
@@ -966,9 +977,12 @@ int main(int argc, char** argv)
 	try
 	{
 		return Start(argc, argv);
+
 	}
 	catch (const std::exception& e)
 	{
+		::ShowWindow(::GetConsoleWindow(), SW_SHOW);
+
 		Sound::StopAllSounds();
 		Sound::End();
 		SDL_DestroyWindow(Window);
@@ -990,6 +1004,7 @@ int main(int argc, char** argv)
 	}
 	catch (const char* e)
 	{
+		::ShowWindow(::GetConsoleWindow(), SW_SHOW);
 		Sound::StopAllSounds();
 		Sound::End();
 		SDL_DestroyWindow(Window);

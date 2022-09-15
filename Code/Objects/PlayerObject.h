@@ -34,6 +34,7 @@ protected:
 	CollisionComponent* PlayerCollider = nullptr;
 	CollisionComponent* PlayerCollider2 = nullptr;
 	CameraComponent* PlayerCamera = nullptr;
+	Sound::SoundBuffer* Footstepsounds = Sound::LoadSound("Walk");
 	Vector3 CameraRotation;
 	float BombLayTime = 0;
 	float VerticalVelocity = 0;
@@ -47,7 +48,7 @@ protected:
 	bool IsClicking = false;
 	bool SpaceDown = false;
 	bool InLevelTransition = false;
-	float TeleportCancelTime = 1.f;
+	float TeleportCancelTime = 3.f;
 	bool LoadedSave = false;
 	std::string Levels[3]
 	{
@@ -68,7 +69,7 @@ protected:
 		"Walk_0-B",	//Anim 06
 		"Walk_1-B",	//Anim 07
 		"Walk_2-B",	//Anim 08
-		"Walk_3-B"	//Anum 09
+		"Walk_3-B"	//Anim 09
 	};
 
 	struct Animation { unsigned int Frames; unsigned int StartingFrame; };

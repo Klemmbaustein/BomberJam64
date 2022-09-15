@@ -5,7 +5,15 @@
 
 void WorldObject::Start(std::string ObjectName, Transform Transform)
 {
-	Objects::AllObjects.push_back(this);
+	//Quick hack to make sure the player object is the first object to get destroyed, so we can save the rest of the world before it gets destroyed
+	if (GetObjectDescription().ID == 4)
+	{
+		Objects::AllObjects.insert(Objects::AllObjects.begin(), this);
+	}
+	else
+	{
+		Objects::AllObjects.push_back(this);
+	}
 	Name = ObjectName;
 	ObjectTransform = Transform;
 	Begin();

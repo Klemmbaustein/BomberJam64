@@ -112,7 +112,7 @@ SaveGame::~SaveGame()
 	std::ofstream OutFile = std::ofstream(OpenedSave, std::ios::out);
 
 	//loop through all the properties and write them to the "OpenedSave" variable
-	for (auto p : Properties)
+	for (const auto& p : Properties)
 	{
 		OutFile << Types[p.second.Type + 1];
 		OutFile << " ";
@@ -120,6 +120,7 @@ SaveGame::~SaveGame()
 		OutFile << " = ";
 		OutFile << p.second.Value;
 		OutFile << std::endl;
+
 	}
 	OutFile.close();
 }

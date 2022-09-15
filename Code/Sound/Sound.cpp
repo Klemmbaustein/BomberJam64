@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <cmath>
+#include <Log.h>
 struct Source
 {
 	Source(ALuint AudioSource, float Pitch, float Volume, bool Looping, bool Is3D, Vector3 Location, float Distance, std::string Name)
@@ -229,6 +230,7 @@ namespace Sound
 		alcCloseDevice(CurrentDevice);
 		alcMakeContextCurrent(nullptr);
 		alcDestroyContext(ALContext);
+		Log::CreateNewLogMessage("Sound: Shutting down", Vector3(1, 1, 0));
 	}
 	std::string GetVersionString()
 	{

@@ -57,6 +57,8 @@ void PlayerObject::TryLoadSave()
 				}
 
 				GetTransform().Location = Vector3::stov(InSave.GetPropterty("PlayerPos").Value);
+				SpawnPoint = GetTransform().Location;
+				TeleportCancelTime = 1.0f;
 				for (int i = 0; i < NumWalls; i++)
 				{
 					//spawn new walls that are listed in the save game
@@ -271,13 +273,17 @@ void PlayerObject::Tick()
 				{
 					AllAnimComponents[i]->SetVisibility(i == CurrentAnimFrame);
 
-					if (Vector3(Velocity.Y, 0, Velocity.X).Length() > 5)
+					if (Vector3(Velocity.Y, 0, Velocity.X).Length() > 25)
 					{
 						AllAnimComponents[i]->SetRelativeTransform(Transform(Vector3(0, -4, 0),
 							Vector3::LookAtFunction(Vector3(), Vector3(Velocity.Y, 0, Velocity.X), true) + Vector3(0, M_PI, 0),
 							Vector3(1, 1, 1)));
 					}
 
+				}
+				if ((CurrentAnimFrame) % 2 && AllAnimMeshes[CurrentAnimFrame].substr(0, 4) != "Idle")
+				{
+					Sound::PlaySound2D(Footstepsounds, Random::GetRandomNumber(1.1f, 1.5f), 0.02, false);
 				}
 				AnimFrameTimer = 0;
 			}
@@ -362,7 +368,6 @@ void PlayerObject::Destroy()
 			OutSave.SetPropterty(SaveGame::SaveProperty("Walls_pos" + std::to_string(i), w->GetTransform().Location.ToString(), T_VECTOR3));
 			OutSave.SetPropterty(SaveGame::SaveProperty("Walls_rot" + std::to_string(i), w->GetTransform().Rotation.ToString(), T_VECTOR3));
 			OutSave.SetPropterty(SaveGame::SaveProperty("Walls_orb" + std::to_string(i), std::to_string(dynamic_cast<WallObject*>(w)->ContainsOrb), T_INT));
-
 			i++;
 		}
 		i = 0;
@@ -374,6 +379,7 @@ void PlayerObject::Destroy()
 			i++;
 		}
 	}
+	delete Footstepsounds;
 }
 
 
@@ -409,7 +415,7 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 				{
 					NumOrbs++;
 					Objects::DestroyObject(hit.HitObject);
-					Sound::PlaySound2D(OrbSound);
+					Sound::PlaySound2D(OrbSound, 1.f, 0.2f);
 				}
 				else if (hit.HitObject->GetObjectDescription().ID == 9 && !InLevelTransition)
 				{
@@ -422,7 +428,7 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 					}
 					else
 					{
-						TeleportCancelTime = 1.f;
+						TeleportCancelTime = 3.f;
 					}
 				}
 				else if (Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) > 0.5)

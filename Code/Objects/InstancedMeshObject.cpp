@@ -23,13 +23,13 @@ void InstancedMeshObject::Tick()
 				if (ComponentName == "")
 				{
 					AddInstance(Transform(Hit.ImpactPoint - ObjectTransform.Location,
-						Vector3::LookAtFunction(Vector3(), AxisB),
+						Vector3::LookAtFunction(Vector3(), AxisB) + Vector3(0, Random::GetRandomNumber(-100, 100), 0),
 						Scale * Random::GetRandomNumber(15, 25) / 20));
 				}
 				else if (ComponentName == Hit.HitObject->GetName())
 				{
 					AddInstance(Transform(Hit.ImpactPoint - ObjectTransform.Location,
-						Vector3::LookAtFunction(Vector3(), AxisB),
+						Vector3::LookAtFunction(Vector3(), AxisB) + Vector3(0, Random::GetRandomNumber(-100, 100), 0),
 						Scale * Random::GetRandomNumber(15, 25) / 20));
 				}
 			}

@@ -62,7 +62,7 @@ namespace World
 				Log::CreateNewLogMessage("Loaded Scene (Scene File is empty)");
 				return;
 			}
-			int ObjectLength;
+			int ObjectLength = 0;
 			Input.read((char*)&ObjectLength, sizeof(int));
 
 			for (int i = 0; i < ObjectLength; i++)
@@ -71,12 +71,12 @@ namespace World
 				{
 					Transform Transform1;
 					Input.read((char*)&Transform1, sizeof(Transform));
-					uint32_t ID;
+					uint32_t ID = 0;
 					Input.read((char*)&ID, sizeof(uint32_t));
 					std::string Name;
 					std::string Path;
 					std::string desc;
-					int len;
+					int len = 0;
 					Input.read((char*)&len, sizeof(int));
 					char* temp = new char[len + 1];
 					Input.read(temp, len);
@@ -109,8 +109,6 @@ namespace World
 		}
 		else
 		{
-			std::cout << "hi";
-
 			Log::CreateNewLogMessage("Scene Loading Error: Scene \"" + OriginalString + "\" does not exist");
 		}
 	}
@@ -175,7 +173,7 @@ namespace World
 				Log::CreateNewLogMessage("Loaded Subscene (Scene File is empty)");
 				return;
 			}
-			int ObjectLength;
+			int ObjectLength = 0;
 			Input.read((char*)&ObjectLength, sizeof(int));
 
 			for (int i = 0; i < ObjectLength; i++)
@@ -184,12 +182,12 @@ namespace World
 				{
 					Transform Transform1;
 					Input.read((char*)&Transform1, sizeof(Transform));
-					uint32_t ID;
+					uint32_t ID = 0;
 					Input.read((char*)&ID, sizeof(uint32_t));
 					std::string Name;
 					std::string Path;
 					std::string desc;
-					int len;
+					int len = 0;
 					Input.read((char*)&len, sizeof(int));
 					char* temp = new char[len + 1];
 					Input.read(temp, len);
