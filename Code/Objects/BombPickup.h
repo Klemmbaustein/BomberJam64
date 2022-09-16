@@ -11,6 +11,7 @@ public:
 	void Tick() override;
 	void Destroy() override;
 
+	float Amount = 5.f;
 private:
 	MeshComponent* PickupMesh = nullptr;
 	CollisionComponent* PickupCollision = nullptr;

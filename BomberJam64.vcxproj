@@ -225,6 +225,7 @@
     <ClCompile Include="Code\Math\Collision\CollisionBox.cpp" />
     <ClCompile Include="Code\Math\Math.cpp" />
     <ClCompile Include="Code\Math\Vector.cpp" />
+    <ClCompile Include="Code\Objects\Backpack.cpp" />
     <ClCompile Include="Code\Objects\Bomb.cpp" />
     <ClCompile Include="Code\Objects\BombPickup.cpp" />
     <ClCompile Include="Code\Objects\Components\CameraComponent.cpp" />
@@ -294,6 +295,7 @@
     <ClInclude Include="Code\Math\Collision\TriangleIntersect.h" />
     <ClInclude Include="Code\Math\Math.h" />
     <ClInclude Include="Code\Math\Vector.h" />
+    <ClInclude Include="Code\Objects\Backpack.h" />
     <ClInclude Include="Code\Objects\Bomb.h" />
     <ClInclude Include="Code\Objects\BombPickup.h" />
     <ClInclude Include="Code\Objects\HubTeleporter.h" />

@@ -11,6 +11,7 @@
 #include <Objects/HubTeleporter.h>
 #include <Objects/OrbGate.h>
 #include <Objects/Snowman.h>
+#include <Objects/Backpack.h>
 
 template<typename T>
 inline T* Objects::SpawnObject(Transform ObjectTransform)
@@ -73,6 +74,8 @@ WorldObject* Objects::SpawnObjectFromID(uint32_t ID, Transform ObjectTransform)
 		return (WorldObject*)SpawnObject<OrbGate>(ObjectTransform);
 	case 11:
 		return (WorldObject*)SpawnObject<Snowman>(ObjectTransform);
+	case 12:
+		return (WorldObject*)SpawnObject<Backpack>(ObjectTransform);
 	default:
 		throw "Attempted to spawn unknown object";
 	}
@@ -93,6 +96,7 @@ namespace Objects
 		ObjectDescription("Orb", 8),
 		ObjectDescription("Hub Teleporter", 9),
 		ObjectDescription("Orb Gate", 10),
-		ObjectDescription("Snow man", 11)
+		ObjectDescription("Snow man", 11),
+		ObjectDescription("Backpack", 12)
 	};
 }

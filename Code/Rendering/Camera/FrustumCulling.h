@@ -4,7 +4,7 @@
 
 namespace FrustumCulling
 {
-
+	extern bool Active;
 	struct Plan
 	{
 		glm::vec3 normal = { 0.f, 1.f, 0.f }; // unit vector

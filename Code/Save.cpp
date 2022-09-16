@@ -76,7 +76,12 @@ SaveGame::SaveGame(std::string SaveName)
 					CurrentLineStream >> ValueToAppend;
 					Value.append(ValueToAppend + " ");
 				}
+				const auto strBegin = Value.find_first_not_of(" ");
 
+				const auto strEnd = Value.find_last_not_of(" ");
+				const auto strRange = strEnd - strBegin + 1;
+
+				Value = Value.substr(strBegin, strRange);
 				Properties.insert(std::pair(CurrentName, SaveProperty(CurrentName, Value, CurrentType)));
 			}
 		}

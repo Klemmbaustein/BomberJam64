@@ -15,6 +15,7 @@
 #include <Objects/WallObject.h>
 #include <Objects/Orb.h>
 #include <Objects/HubTeleporter.h>
+#include <Objects/BombPickup.h>
 
 #include <FileUtility.h>
 
@@ -22,6 +23,33 @@ Sound::SoundBuffer* BombPlaceSound = nullptr;
 Sound::SoundBuffer* OrbSound = nullptr;
 
 std::string NextLevel;
+
+struct Animation { unsigned int Frames; unsigned int StartingFrame; };
+Animation Anims[4] =
+{
+	{0, 0},
+	{3, 1},
+	{0, 5},
+	{3, 6}
+};
+
+std::string AllAnimMeshes[PLAYER_NUM_ANIM_FRAMES] =
+{
+	"Idle",		//Anim 00
+	"Walk_0",	//Anim 01
+	"Walk_1",	//Anim 02
+	"Walk_2",	//Anim 03
+	"Walk_3",	//Anim 04
+	"Idle_B",	//Anim 05
+	"Walk_0-B",	//Anim 06
+	"Walk_1-B",	//Anim 07
+	"Walk_2-B",	//Anim 08
+	"Walk_3-B"	//Anim 09
+};
+
+float CameraDistance = 35;
+float Gravity = 200;
+float Speed = 750;
 void LoadNextLevel()
 {
 	World::ScheduleLoadNewScene(NextLevel);
@@ -84,6 +112,7 @@ void PlayerObject::TryLoadSave()
 
 void PlayerObject::Tick()
 {
+	if (End) return;
 	if (!InLevelTransition)
 	{
 		if (!LoadedSave)
@@ -117,7 +146,7 @@ void PlayerObject::Tick()
 			}
 
 
-			if (BombTime > 0.1f && BombLayTime < 0 && BombTime < 4.9)
+			if (BombTime > 0.1f && BombLayTime < 0 && BombTime < MaxBombs - 0.1f)
 			{
 				BombLayTime = 0.5f;
 				Objects::SpawnObject<Bomb>(GetTransform() + Transform(Vector3(), Vector3(0, Random::GetRandomNumber(-100, 100), 0), Vector3(1)));
@@ -165,13 +194,7 @@ void PlayerObject::Tick()
 				Velocity.Y = 0;
 			}
 			auto BoxHit = PlayerCollider2->CollMesh.OverlapCheck({ PlayerCollider });
-			if (BoxHit.HitObject)
-			{
-				if (BoxHit.HitObject->GetObjectDescription().ID == 7) // if its a bomb pickup
-				{
-					BombTime = 5;
-				}
-			}
+
 			OnGround = BoxHit.Hit;
 
 			if (!OnGround || VerticalVelocity > 0)
@@ -231,7 +254,8 @@ void PlayerObject::Tick()
 			//Clamp the camera rotation so the camera stays somewhat top-down-ish;
 			CameraRotation = Vector3(CameraRotation.X = std::max(std::min(CameraRotation.X, -35.f), -85.f), CameraRotation.Y, CameraRotation.Z);
 
-			Vector3 CameraOffset = (PrevCameraPos) * 0.9 + (Vector3::GetForwardVector(Rotation) * -CameraDistance) * 0.1 + Vector3(0, 1, 0);
+			Vector3 CameraOffset = (PrevCameraPos) * 0.9 + (Vector3::GetForwardVector(Rotation) * -CameraDistance) * 0.1f + Vector3(0, 1, 0);
+
 
 			PrevCameraPos = CameraOffset;
 			auto GroundHit = Collision::LineTrace(
@@ -254,7 +278,7 @@ void PlayerObject::Tick()
 			//if we still have bombs, we should choose an animation that has them
 			unsigned int AnimOffset = BombTime > 0.5 ? 2 : 0;
 
-			CurrentAnim = (Vector3(Velocity, 0).Length() > 0.5) + AnimOffset;
+			CurrentAnim = (Vector3(Velocity, 0).Length() > 15) + AnimOffset;
 
 
 			//if the timer reaches 0.1f, we trigger an animation change
@@ -273,7 +297,7 @@ void PlayerObject::Tick()
 				{
 					AllAnimComponents[i]->SetVisibility(i == CurrentAnimFrame);
 
-					if (Vector3(Velocity.Y, 0, Velocity.X).Length() > 25)
+					if (Vector3(Velocity.Y, 0, Velocity.X).Length() > 15)
 					{
 						AllAnimComponents[i]->SetRelativeTransform(Transform(Vector3(0, -4, 0),
 							Vector3::LookAtFunction(Vector3(), Vector3(Velocity.Y, 0, Velocity.X), true) + Vector3(0, M_PI, 0),
@@ -287,7 +311,6 @@ void PlayerObject::Tick()
 				}
 				AnimFrameTimer = 0;
 			}
-
 			Time += Performance::DeltaTime;
 		}
 	}
@@ -295,7 +318,7 @@ void PlayerObject::Tick()
 
 void PlayerObject::Begin()
 {
-
+	GetTransform().Rotation = 0;
 	SpawnPoint = GetTransform().Location;
 	UI = UI::CreateUICanvas<GameUI>();
 	if (UI)
@@ -409,7 +432,8 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 			{
 				if (hit.HitObject->GetObjectDescription().ID == 7) // if its a bomb pickup
 				{
-					BombTime = 5;
+					BombTime = dynamic_cast<BombPickup*>(hit.HitObject)->Amount;
+					MaxBombs = BombTime;
 				}
 				else if (hit.HitObject->GetObjectDescription().ID == 8) // if its an orb
 				{
@@ -417,7 +441,7 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 					Objects::DestroyObject(hit.HitObject);
 					Sound::PlaySound2D(OrbSound, 1.f, 0.2f);
 				}
-				else if (hit.HitObject->GetObjectDescription().ID == 9 && !InLevelTransition)
+				else if (hit.HitObject->GetObjectDescription().ID == 9 && !InLevelTransition) // if its a teleporter
 				{
 					if (TeleportCancelTime <= 0)
 					{
@@ -429,6 +453,14 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 					else
 					{
 						TeleportCancelTime = 3.f;
+					}
+				}
+				else if (hit.HitObject->GetObjectDescription().ID == 12)
+				{
+					if (TeleportCancelTime <= 0)
+					{
+						UI->PlayEndCutscene();
+						End = true;
 					}
 				}
 				else if (Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) > 0.5)

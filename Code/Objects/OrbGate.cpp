@@ -5,14 +5,16 @@ std::vector<std::string> Textures =
 {
 	"Gates_X10",
 	"Gates_X20",
-	"Gates_X30"
+	"Gates_X30",
+	"Gates_X50"
 };
 
 std::vector<unsigned int> RequiredAmounts =
 {
 	10,
 	20,
-	40
+	40,
+	50
 };
 
 void OrbGate::Begin()
@@ -35,7 +37,7 @@ void OrbGate::OnPropertySet()
 	{
 		if (!MainSaveGame.SaveGameIsNew())
 		{
-			if (std::stoi(MainSaveGame.GetPropterty("OrbsCollected").Value) > RequiredAmounts[TextureIndex])
+			if (std::stoi(MainSaveGame.GetPropterty("OrbsCollected").Value) >= RequiredAmounts[TextureIndex])
 			{
 				Objects::DestroyObject(this);
 				return;

@@ -16,4 +16,4 @@ Vignette = 0.0
 endif
 
 PCFQuality=0
-ShadowResolution=1500
+ShadowResolution=2000

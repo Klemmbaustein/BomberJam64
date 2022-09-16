@@ -38,49 +38,17 @@ protected:
 	Vector3 CameraRotation;
 	float BombLayTime = 0;
 	float VerticalVelocity = 0;
-	float Time = 0;
 	bool IsDead = false;
-	float CameraDistance = 35;
-	float Gravity = 200;
-	float Speed = 750;
 	Vector3 PrevCameraPos = 0;
 	bool HasJumped = false;
 	bool IsClicking = false;
-	bool SpaceDown = false;
 	bool InLevelTransition = false;
 	float TeleportCancelTime = 3.f;
 	bool LoadedSave = false;
-	std::string Levels[3]
-	{
-		"ForestLevel",
-		"TestScene",
-		"ForestLevel"
-	};
+	float MaxBombs = 5.0f;
+	float Time = 0.f;
 
-
-	std::string AllAnimMeshes[PLAYER_NUM_ANIM_FRAMES] =
-	{
-		"Idle",		//Anim 00
-		"Walk_0",	//Anim 01
-		"Walk_1",	//Anim 02
-		"Walk_2",	//Anim 03
-		"Walk_3",	//Anim 04
-		"Idle_B",	//Anim 05
-		"Walk_0-B",	//Anim 06
-		"Walk_1-B",	//Anim 07
-		"Walk_2-B",	//Anim 08
-		"Walk_3-B"	//Anim 09
-	};
-
-	struct Animation { unsigned int Frames; unsigned int StartingFrame; };
-	Animation Anims[4] = 
-	{
-		{0, 0},
-		{3, 1},
-		{0, 5},
-		{3, 6}
-	};
-
+	bool End = false;
 	MeshComponent* AllAnimComponents[PLAYER_NUM_ANIM_FRAMES] = {};
 
 	unsigned int CurrentAnim = 0;

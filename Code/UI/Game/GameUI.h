@@ -1,6 +1,7 @@
 #pragma once
 #include <UI/Default/UICanvas.h>
 #include <UI/Default/TextRenderer.h>
+#include <Sound/Sound.h>
 class PlayerObject;
 
 class GameUI : public UICanvas
@@ -14,9 +15,13 @@ public:
 	void PlayTransition();
 	void EndTransition();
 
+	void PlayEndCutscene();
+
 protected:
 	unsigned int Icons[2];
+	Sound::SoundBuffer* TextSound = Sound::LoadSound("Walk");
 
+	bool InEndCutscene = false;
 	bool InTransition = false;
 	bool TransitionDirection = false;
 	float TransitionTime = 0;

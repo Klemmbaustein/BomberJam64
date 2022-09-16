@@ -11,7 +11,6 @@
 #include <cmath>
 #include <Rendering/Utility/Framebuffer.h>
 #include "Math/Math.h"
-#include <algorithm>
 #if IS_IN_EDITOR
 #include "UI/EngineUI/EngineUI.h"
 #else
@@ -35,10 +34,11 @@
 #include <Rendering/Utility/SSAO.h>
 #include <Rendering/Camera/CameraShake.h>
 #include <UI/Default/UICanvas.h>
-#include <Objects/Objects.h>
+#include <Save.h>
 #include <Rendering/Camera/FrustumCulling.h>
+#include <Objects/Objects.h>
 
-// uuuuughhh
+
 #define NOMINMAX
 #include <Windows.h>
 
@@ -302,13 +302,18 @@ int Start(int argc, char** argv)
 #endif //ENGINE_DEBUG
 
 	std::cout << " done!\n";
+
+
 	std::cout << "*Loading Startup Map\n";
 	Debugging::EngineStatus = "Loading Startup Map";
 	if (StartupMap != std::string(""))
 	{
-		World::LoadNewScene(StartupMap);
 #if IS_IN_EDITOR
+		World::LoadNewScene(StartupMap);
 		EditorUI->UpdateContentBrowser();
+#else
+		SaveGame MainSave = std::string("Main");
+		World::LoadNewScene(MainSave.GetPropterty("CurrentMap").Value);
 #endif
 
 	}
@@ -723,6 +728,9 @@ int Start(int argc, char** argv)
 			}
 		}
 		Debugging::EngineStatus = "Rendering (Shadows)";
+
+		FrustumCulling::Active = false;
+
 		glViewport(0, 0, Graphics::ShadowResolution, Graphics::ShadowResolution);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		const auto LightSpaceMatrices = CSM::getLightSpaceMatrices();
@@ -754,6 +762,7 @@ int Start(int argc, char** argv)
 		Debugging::EngineStatus = "Rendering (Main Pass)";
 		glEnable(GL_BLEND);
 
+		FrustumCulling::Active = true;
 		FrustumCulling::CurrentCameraFrustum = FrustumCulling::createFrustumFromCamera(*Graphics::MainCamera);
 
 		glViewport(0, 0, Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
