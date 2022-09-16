@@ -405,7 +405,7 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 			PlayerCollider->RelativeTransform = Transform(NextLastValidPosition, Vector3(), Vector3(0.0075, 0.04, 0.0075));
 			Collision::HitResponse hit = PlayerCollider->OverlapCheck({PlayerCollider2});
 
-			if (hit.HitObject)
+			if (hit.Hit)
 			{
 				if (hit.HitObject->GetObjectDescription().ID == 7) // if its a bomb pickup
 				{
@@ -433,7 +433,7 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 				}
 				else if (Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) > 0.5)
 				{
-					ObjectTransform.Location += Vector3(0, Performance::DeltaTime * (1.5 - Vector3::Dot(hit.Normal, Vector3(0, 0, 0))) * 35, 0);
+					ObjectTransform.Location += Vector3(0, Performance::DeltaTime * (1.5 - Vector3::Dot(hit.Normal, Vector3(0, 1, 0))) * 35, 0);
 					return true;
 				}
 				else if (Vector3::Dot(hit.Normal, Vector3(0, 1, 0)) < -0.5)
@@ -443,6 +443,11 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 				}
 				else
 				{
+
+					if (std::to_string(hit.Normal.X) == "-nan(ind)")
+					{
+						GetTransform().Location = hit.ImpactPoint;
+					}
 					if (abs(Vector3::Dot(hit.Normal, Vector3(0, 1, 0))) < 0.5)
 					{
 						GetTransform().Location += hit.Normal * Performance::DeltaTime * 2;

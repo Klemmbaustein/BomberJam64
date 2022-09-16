@@ -1,0 +1,9 @@
+int NumOrbs = 0
+int NumWalls = 2
+vector3 PlayerPos = 12.283566 5.631240 18.849800
+int Walls_orb0 = 1
+int Walls_orb1 = 0
+vector3 Walls_pos0 = 144.000000 -44.160435 134.000000
+vector3 Walls_pos1 = 144.877838 -29.798948 134.000000
+vector3 Walls_rot0 = 0.000000 0.000000 0.000000
+vector3 Walls_rot1 = 0.000000 0.000000 0.000000

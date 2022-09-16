@@ -23,15 +23,15 @@ namespace Graphics
 		float Distance = 70.f;
 		float Falloff = 500.f;
 		float MaxDensity = 1.f;
-		Vector3 FogColor = Vector3(0.7f, 0.8f, 1.f);
+		Vector3 FogColor = Vector3(0.8f, 0.9f, 1.f);
 	};
 	struct Sun
 	{
 		float Intensity = 1.f;
 		float AmbientIntensity = 0.3f;
 		Vector3 Direction = Vector3(0.5f, 0.5f, 0.7f);
-		Vector3 SunColor = Vector3(1.f, 0.9f, 0.9f);
-		Vector3 AmbientColor = Vector3(0.5f, 0.5f, 1.f);
+		Vector3 SunColor = Vector3(1.2f, 1.2f, 0.9f);
+		Vector3 AmbientColor = Vector3(0.7f, 0.7f, 1.f);
 	};
 	extern Sun WorldSun;
 	extern Fog WorldFog;

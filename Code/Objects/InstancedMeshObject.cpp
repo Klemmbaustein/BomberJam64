@@ -33,9 +33,7 @@ void InstancedMeshObject::Tick()
 						Scale * Random::GetRandomNumber(15, 25) / 20));
 				}
 			}
-			else
-			{
-			}
+
 		}
 		IMComponent->UpdateInstances();
 		Initialized = true;

@@ -12,13 +12,11 @@ std::vector<unsigned int> RequiredAmounts =
 {
 	10,
 	20,
-	30
+	40
 };
 
 void OrbGate::Begin()
 {
-
-
 	GateMeshComponent = new MeshComponent();
 	Attach(GateMeshComponent);
 	GateMeshComponent->Load("OrbGate");
