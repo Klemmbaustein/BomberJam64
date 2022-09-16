@@ -313,7 +313,14 @@ int Start(int argc, char** argv)
 		EditorUI->UpdateContentBrowser();
 #else
 		SaveGame MainSave = std::string("Main");
-		World::LoadNewScene(MainSave.GetPropterty("CurrentMap").Value);
+		if (MainSave.SaveGameIsNew())
+		{
+			World::LoadNewScene(StartupMap);
+		}
+		else
+		{
+			World::LoadNewScene(MainSave.GetPropterty("CurrentMap").Value);
+		}
 #endif
 
 	}
