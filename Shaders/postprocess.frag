@@ -46,13 +46,13 @@ float blurssao()
 
 
 	result = mix(result, 16, min(max(LinearizeDepth(texture(u_depth, v_texcoords).z), 0), 1) / 3);
-	result += LinearizeDepth(texture(u_depth, v_texcoords).z) / 5.f;
+	result += LinearizeDepth(texture(u_depth, v_texcoords).z) / 20.f;
 	return pow(min(result / 16, 1), 2);
 }
 vec4 blursample(sampler2D tex, vec2 coords)
 {
 	vec4 color;
-	vec2 texelSize = 1.f / textureSize(u_texture, 0);
+	vec2 texelSize = 0.5 / textureSize(u_texture, 0);
 	for(int x = -1; x <= 1; ++x)
 	{
 		for(int y = -1; y <= 1; ++y)
@@ -122,7 +122,7 @@ void main()
 		f_color = pow(vec4(mix(color.xyz, mix(bloomcolor, vec3(1), 0.5f) * 2.f, bloomstrength) + outlinecolor, color.w), vec4(u_gamma));
 
 		f_color = mix(f_color, enginearrows, length(enginearrows.rgb));
-		f_color *= (rand(v_texcoords) / 50) + 0.9; // To combat color banding
+		f_color *= (rand(v_texcoords) / 50) + 0.95; // To combat color banding
 		f_color -= Vignette * u_vignette;
 	}
 	else

@@ -7,6 +7,8 @@
 #include <fstream>
 #include <sstream>
 
+#define VS_INSTALL_PATH "G:/Data/VisualStudio/Common7/IDE/devenv.exe "
+
 constexpr const char SolutionName[] = "BomberJam64";
 
 std::string Build::TryBuildProject(std::string TargetFolder)
@@ -46,10 +48,12 @@ std::string Build::TryBuildProject(std::string TargetFolder)
 			Debugging::EngineStatus = "Building C++ solution";
 			Log::CreateNewLogMessage("Build: Generating code");
 
+#if _WIN32
 			std::ifstream EngineFile = std::ifstream("Code/Engine.h", std::ios::in);
 
 			std::stringstream EngineHeaderString;
 			std::stringstream OriginalHeaderString;
+
 
 			unsigned int i = 0;
 			while (!EngineFile.eof())
@@ -81,14 +85,18 @@ std::string Build::TryBuildProject(std::string TargetFolder)
 			std::ofstream OutH = std::ofstream("Code/Engine.h", std::ios::out);
 			OutH << EngineHeaderString.str();
 			OutH.close();
-			Log::CreateNewLogMessage("Build: Compiling Code (this can take a while)");
-			system(("G:/Data/VisualStudio/Common7/IDE/devenv.exe " + std::string(SolutionName) + ".sln /Build Release-EngineBuild").c_str());
 
+			Log::CreateNewLogMessage("Build: Compiling Code (this can take a while)");
+			system((VS_INSTALL_PATH + std::string(SolutionName) + ".sln /Build Release-EngineBuild").c_str());
 			std::filesystem::copy("x64/Release-EngineBuild/" + std::string(SolutionName) + ".exe", TargetFolder + ProjectName + std::string(".exe"));
 			Log::CreateNewLogMessage("Build: Cleaning up");
 			OutH.open("Code/Engine.h", std::ios::out);
 			OutH << OriginalHeaderString.str();
 			OutH.close();
+#else
+			Log::CreateNewLogMessage("Build: Compiling is currently not supported on Linux.", Vector3(1, 0, 0));
+			Log::CreateNewLogMessage("Pleasse recompile the program manually with IS_IN_EDITOR and ENGINE_DEBUG as false.", Vector3(1, 0, 0));
+#endif
 			Log::CreateNewLogMessage("Build: Complete", Vector3(0, 1, 0));
 			return "Sucess";
 		}

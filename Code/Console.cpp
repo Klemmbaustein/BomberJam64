@@ -12,6 +12,7 @@
 #include <Rendering/Camera/CameraShake.h>
 #include <Log.h>
 #include <Importers/Build/Pack.h>
+#include <OS.h>
 std::map<std::string, std::string> Variables;
 namespace Application
 {
@@ -295,6 +296,7 @@ bool Console::ExecuteConsoleCommand(std::string Command, bool Verbose)
 				Log::CreateNewLogMessage(ConsoleHeader + "--------------------------------------------------------------------------");
 				Log::CreateNewLogMessage(ConsoleHeader + "Info:");
 				Log::CreateNewLogMessage(ConsoleHeader + "Version: " + std::string(VERSION_STRING) + (IS_IN_EDITOR ? "-Editor (" : " (") + std::string(ProjectName) + ")");
+				Log::CreateNewLogMessage(ConsoleHeader + "OS: " + OS::GetOSString());
 				Log::CreateNewLogMessage(ConsoleHeader + "Window Resolution: x=" + std::to_string((int)Graphics::WindowResolution.X) + " y=" + std::to_string((int)Graphics::WindowResolution.Y));
 				Log::CreateNewLogMessage(ConsoleHeader + "Sounds: " + std::to_string(Sound::GetSounds().size()) + "/255");
 				Log::CreateNewLogMessage(ConsoleHeader + "Shadow Resolution: " + std::to_string(Graphics::ShadowResolution));

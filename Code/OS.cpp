@@ -1,0 +1,143 @@
+#include "OS.h"
+#if _WIN32
+//Include Windows Headers
+#include <Windows.h>
+#include <Shlobj.h>
+#include <shobjidl.h> 
+#include <FileUtility.h>
+#endif
+
+#if __linux__
+//Currently all linux implementations are empty, so we dont need to include anything
+#endif
+
+#include <Log.h>
+
+
+#if _WIN32
+//Windows implementation
+void OS::SetConsoleWindowVisible(bool Visible)
+{
+	::ShowWindow(::GetConsoleWindow(), Visible ? SW_SHOW : SW_HIDE);
+}
+#endif
+
+#if __linux__
+//Linux Implementation
+void OS::SetConsoleWindowVisible(bool Visible)
+{
+}
+
+#endif
+
+
+
+#if _WIN32
+std::string OS::ShowOpenFileDialog()
+{
+	try
+	{
+		std::string FilePath = "";
+		HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED |
+			COINIT_DISABLE_OLE1DDE);
+		if (SUCCEEDED(hr))
+		{
+			IFileOpenDialog* pFileOpen;
+
+			// Create the FileOpenDialog object.
+			hr = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_ALL,
+				IID_IFileOpenDialog, reinterpret_cast<void**>(&pFileOpen));
+
+			if (SUCCEEDED(hr))
+			{
+				// Show the Open dialog box.
+				hr = pFileOpen->Show(NULL);
+				// Get the file name from the dialog box.
+				if (SUCCEEDED(hr))
+				{
+					IShellItem* pItem;
+					hr = pFileOpen->GetResult(&pItem);
+					if (SUCCEEDED(hr))
+					{
+						PWSTR pszFilePath;
+						hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath);
+						// Display the file name to the user.
+						if (SUCCEEDED(hr))
+						{
+							FilePath = wstrtostr(pszFilePath);
+							return FilePath;
+						}
+						pItem->Release();
+					}
+				}
+				pFileOpen->Release();
+			}
+			CoUninitialize();
+		}
+		return FilePath;
+	}
+	catch (std::exception& e)
+	{
+		Log::CreateNewLogMessage(e.what());
+	}
+	return "";
+}
+#endif
+
+#if __linux__
+std::string OS::ShowOpenFileDialog()
+{
+	Log::CreateNewLogMessage("Creating an \"Open File-Dialog\" is not currently supported on Linux", Vector3(1, 1, 0));
+	return std::string();
+}
+#endif
+
+
+
+//Get the OS's name
+#if _WIN64
+std::string OS::GetOSString()
+{
+	return "64-bit Windows";
+}
+#else
+#if _WIN32
+std::string OS::GetOSString()
+{
+	return "32-bit Windows";
+}
+#endif
+#endif
+
+#if __linux__
+std::string OS::GetOSString()
+{
+	return "Linux";
+}
+#endif
+
+#if _WIN32
+void OS::ClearConsoleWindow()
+{
+	system("CLS");
+}
+#endif
+#if __linux__
+void OS::ClearConsoleWindow()
+{
+	system("reset");
+}
+#endif
+
+#if _WIN32
+void OS::OpenFile(std::string Path)
+{
+	system(("start " + Path).c_str());
+}
+#endif
+#if __linux__
+void OS::OpenFile(std::string Path)
+{
+	system(("xdg-open " + Path).c_str());
+}
+#endif

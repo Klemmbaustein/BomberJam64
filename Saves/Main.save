@@ -1,2 +1,2 @@
-string CurrentMap = Level4
-int OrbsCollected = 54
+string CurrentMap = Level2
+int OrbsCollected = 0

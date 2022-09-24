@@ -1,8 +1,6 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #define NOMINMAX
-#include <Shlobj.h>
-#include <shobjidl.h> 
-#include <Windows.h>
+
 #include "EngineUI.h"
 #include "Utility/stb_image.h"
 #include "FileUtility.h"
@@ -19,6 +17,7 @@
 #include <Console.h>
 #include <Objects/Objects.h>
 #include <Log.h>
+#include <OS.h>
 #include <thread>
 #include <Importers/Build/Build.h>
 namespace fs = std::filesystem;
@@ -282,56 +281,13 @@ void EngineUI::OnButtonClicked(int Index)
 	{
 		if (!UserDraggingButton)
 		{
-			try
-			{
-				HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED |
-					COINIT_DISABLE_OLE1DDE);
-				if (SUCCEEDED(hr))
-				{
-					IFileOpenDialog* pFileOpen;
-
-					// Create the FileOpenDialog object.
-					hr = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_ALL,
-						IID_IFileOpenDialog, reinterpret_cast<void**>(&pFileOpen));
-
-					if (SUCCEEDED(hr))
-					{
-						// Show the Open dialog box.
-						hr = pFileOpen->Show(NULL);
-						// Get the file name from the dialog box.
-						if (SUCCEEDED(hr))
-						{
-							IShellItem* pItem;
-							hr = pFileOpen->GetResult(&pItem);
-							if (SUCCEEDED(hr))
-							{
-								PWSTR pszFilePath;
-								hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath);
-								// Display the file name to the user.
-								if (SUCCEEDED(hr))
-								{
-									std::string FilePath = wstrtostr(pszFilePath);
-									std::string Ext = FilePath.substr(FilePath.find_last_of(".") + 1);
-									if (Ext == "fbx" || Ext == "obj")
-										ModelImporter::Import(wstrtostr(pszFilePath), ContentBrowser::CurrentFilePath);
-									else if (Ext == "png" || Ext == "wav")
-										ImageImporter::Import(wstrtostr(pszFilePath), ContentBrowser::CurrentFilePath);
-									DoSafeUpdate = true;
-
-								}
-								pItem->Release();
-							}
-						}
-						pFileOpen->Release();
-					}
-					CoUninitialize();
-					DoSafeUpdate = true;
-				}
-			}
-			catch (std::exception& e)
-			{
-
-			}
+			std::string FilePath = OS::ShowOpenFileDialog();
+			std::string Ext = FilePath.substr(FilePath.find_last_of(".") + 1);
+			if (Ext == "fbx" || Ext == "obj")
+				ModelImporter::Import(FilePath, ContentBrowser::CurrentFilePath);
+			else if (Ext == "png" || Ext == "wav")
+				ImageImporter::Import(FilePath, ContentBrowser::CurrentFilePath);
+			DoSafeUpdate = true;
 		}
 	}
 	else if (Index == 52) //File path back arrow... thing?
@@ -438,7 +394,7 @@ void EngineUI::OnButtonClicked(int Index)
 			}
 			else if (Ext == "cpp" || Ext == "h" || Ext == "txt" || Ext == "jss") //Text files..?
 			{
-				system(std::string("start ").append(fs::canonical(ContentBrowser::ContentAssets.at(Index).FilePath).string()).c_str());
+				OS::OpenFile(fs::canonical(ContentBrowser::ContentAssets.at(Index).FilePath).string());
 			}
 			else if (Ext == "jscn") //Scene
 			{
@@ -476,7 +432,7 @@ void EngineUI::OnButtonClicked(int Index)
 			}
 			else if (Ext == "png")   //Pictue
 			{
-				system(("start " + fs::canonical(ContentBrowser::ContentAssets.at(Index).FilePath).string()).c_str());
+				OS::OpenFile(fs::canonical(ContentBrowser::ContentAssets.at(Index).FilePath).string());
 			}
 			else if (Ext == "wav")   //Sound file
 			{

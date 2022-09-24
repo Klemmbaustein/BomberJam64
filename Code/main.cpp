@@ -27,9 +27,6 @@
 #include "Rendering/Utility/CSM.h"
 #include <Rendering/Utility/ShaderManager.h>
 #include <Script.h>
-#pragma comment(lib, "SDL2.lib")
-#pragma comment(lib, "opengl32.lib")
-#pragma comment(lib, "glew32s.lib")
 #include <Console.h>
 #include <Rendering/Utility/SSAO.h>
 #include <Rendering/Camera/CameraShake.h>
@@ -37,10 +34,7 @@
 #include <Save.h>
 #include <Rendering/Camera/FrustumCulling.h>
 #include <Objects/Objects.h>
-
-
-#define NOMINMAX
-#include <Windows.h>
+#include <OS.h>
 
 
 SDL_Window* Window;
@@ -81,7 +75,7 @@ MessageCallback(
 
 int Start(int argc, char** argv)
 {
-	::ShowWindow(::GetConsoleWindow(), SW_SHOW);
+	OS::SetConsoleWindowVisible(true);
 	Assets::ScanForAssets();
 	std::cout << "Starting\n";
 	//Initialize DeltaTime
@@ -298,7 +292,7 @@ int Start(int argc, char** argv)
 #if ENGINE_DEBUG
 	TextRenderer DebugTextRenderer = TextRenderer("Fonts/Font.ttf", 60);
 #else
-	::ShowWindow(::GetConsoleWindow(), SW_HIDE);
+	//::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 #endif //ENGINE_DEBUG
 
 	std::cout << " done!\n";
@@ -325,7 +319,7 @@ int Start(int argc, char** argv)
 
 	}
 
-
+	Console::ExecuteConsoleCommand("info");
 	Uint64 EndCounter = SDL_GetPerformanceCounter();
 	Uint64 counterElapsed = EndCounter - LastCounter;
 	float LoadTime = ((float)counterElapsed) / ((float)PerfCounterFrequency);
@@ -339,6 +333,8 @@ int Start(int argc, char** argv)
 	ShouldIgnoreErrors = false;
 	bool SlowMode = false;
 	bool FastMode = false;
+	OS::SetConsoleWindowVisible(false);
+
 	//Main Loop
 	while (!close)
 	{
@@ -983,8 +979,8 @@ int Start(int argc, char** argv)
 		Time = Time + Performance::DeltaTime;
 	}
 	Sound::End();
+	OS::SetConsoleWindowVisible(true);
 	return 0;
-	::ShowWindow(::GetConsoleWindow(), SW_SHOW);
 }
 
 
@@ -997,7 +993,7 @@ int main(int argc, char** argv)
 	}
 	catch (const std::exception& e)
 	{
-		::ShowWindow(::GetConsoleWindow(), SW_SHOW);
+		OS::SetConsoleWindowVisible(true);
 
 		Sound::StopAllSounds();
 		Sound::End();
@@ -1020,7 +1016,7 @@ int main(int argc, char** argv)
 	}
 	catch (const char* e)
 	{
-		::ShowWindow(::GetConsoleWindow(), SW_SHOW);
+		OS::SetConsoleWindowVisible(true);
 		Sound::StopAllSounds();
 		Sound::End();
 		SDL_DestroyWindow(Window);

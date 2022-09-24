@@ -285,6 +285,9 @@
     <ClCompile Include="Code\Objects\Backpack.cpp">
       <Filter>Code\Objects\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Code\OS.cpp">
+      <Filter>Code</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\TypeEnun.h">
@@ -514,6 +517,9 @@
     </ClInclude>
     <ClInclude Include="Code\Objects\Backpack.h">
       <Filter>Code\Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\OS.h">
+      <Filter>Code</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
