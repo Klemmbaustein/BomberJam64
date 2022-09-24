@@ -11,10 +11,10 @@ This game was made for the "BomberJam 64"
 ### Build
 
 This game requires the following libraries:
-- OpenAL
+- OpenAL (soft)
 - SDL2
 - glew
 - glm
 - Assimp*
 
-> *Only required for the Editor. When `IS_IN_EDITOR` is `false`, it is not required for a build
+> *Only required for the editor. When `IS_IN_EDITOR` is `false`, it is not required for a build

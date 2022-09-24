@@ -29,8 +29,11 @@
 *.out
 *.app
 
+# Save files
+/Saves
+
 # etc
-/.vs/BomberJam64/v17
+/.vs
 *.pdb
 *.log
 *.txt
