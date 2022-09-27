@@ -92,7 +92,7 @@ void main()
 			color.z += texture2D(u_texture, v_texcoords + vec2(u_chrabbsize * Vignette, -u_chrabbsize * Vignette)).z;
 		}
 		vec2 texelSize = 1.5 / textureSize(u_texture, 0);
-		//color *= blurssao();
+		color *= blurssao();
 		vec3 outlinecolor = vec3(0.f);
 		for(int x = -1; x <= 1; ++x)
 		{
@@ -115,7 +115,7 @@ void main()
 		bloomcolor.y = texture2D(u_bloomtexture, v_texcoords + vec2(-u_chrabbsize * Vignette)).y;
 		bloomcolor.z = texture2D(u_bloomtexture, v_texcoords + vec2(u_chrabbsize * Vignette, -u_chrabbsize * Vignette)).z;
 		}
-		//color = vec4(vec3(blurssao()), 1);
+		//color = vec4(vec3(blurssao()), 1); //view SSAO buffer
 
 		float bloomstrength = min(length(bloomcolor), 1);
 		vec4 enginearrows = texture(u_enginearrows, v_texcoords);
