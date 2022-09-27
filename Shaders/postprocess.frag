@@ -92,7 +92,7 @@ void main()
 			color.z += texture2D(u_texture, v_texcoords + vec2(u_chrabbsize * Vignette, -u_chrabbsize * Vignette)).z;
 		}
 		vec2 texelSize = 1.5 / textureSize(u_texture, 0);
-		color *= blurssao();
+		//color *= blurssao();
 		vec3 outlinecolor = vec3(0.f);
 		for(int x = -1; x <= 1; ++x)
 		{

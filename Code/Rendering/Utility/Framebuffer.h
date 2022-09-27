@@ -45,8 +45,12 @@ public:
 
 	void ReInit(int Width, int Height, bool ColorAttachementType = false)
 	{
-		glDeleteFramebuffers(1, &FBO);
-		glDeleteTextures(numbuffers, Textures);
+		if (FBO)
+		{
+			glDeleteFramebuffers(1, &FBO);
+			glDeleteTextures(numbuffers, Textures);
+		}
+
 		glGenFramebuffers(1, &FBO);
 		glGenTextures(numbuffers, Textures);
 		for (unsigned int i = 0; i < numbuffers; i++)

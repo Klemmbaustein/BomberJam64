@@ -49,50 +49,11 @@ std::string Build::TryBuildProject(std::string TargetFolder)
 			Log::CreateNewLogMessage("Build: Generating code");
 
 #if _WIN32
-			std::ifstream EngineFile = std::ifstream("Code/Engine.h", std::ios::in);
-
-			std::stringstream EngineHeaderString;
-			std::stringstream OriginalHeaderString;
-
-
-			unsigned int i = 0;
-			while (!EngineFile.eof())
-			{
-				i++;
-				char addedbuf[100];
-				EngineFile.getline(addedbuf, 100);
-				if (i == 3)
-				{
-					EngineHeaderString << "#define IS_IN_EDITOR false";
-				}
-				else if (i == 5)
-				{
-					EngineHeaderString << "#define ENGINE_DEBUG false";
-				}
-				else
-				{
-					EngineHeaderString << addedbuf;
-				}
-				if (!EngineFile.eof())
-				{
-					EngineHeaderString << std::endl;
-				}
-			}
-			EngineFile.close();
-			EngineFile.open("Code/Engine.h", std::ios::in);
-			OriginalHeaderString << EngineFile.rdbuf();
-			EngineFile.close();
-			std::ofstream OutH = std::ofstream("Code/Engine.h", std::ios::out);
-			OutH << EngineHeaderString.str();
-			OutH.close();
 
 			Log::CreateNewLogMessage("Build: Compiling Code (this can take a while)");
-			system((VS_INSTALL_PATH + std::string(SolutionName) + ".sln /Build Release-EngineBuild").c_str());
-			std::filesystem::copy("x64/Release-EngineBuild/" + std::string(SolutionName) + ".exe", TargetFolder + ProjectName + std::string(".exe"));
+			system((VS_INSTALL_PATH + std::string(SolutionName) + ".sln /Build FinalBuild").c_str());
+			std::filesystem::copy("x64/FinalBuild/Engine.exe", TargetFolder + ProjectName + std::string(".exe"));
 			Log::CreateNewLogMessage("Build: Cleaning up");
-			OutH.open("Code/Engine.h", std::ios::out);
-			OutH << OriginalHeaderString.str();
-			OutH.close();
 #else
 			Log::CreateNewLogMessage("Build: Compiling is currently not supported on Linux.", Vector3(1, 0, 0));
 			Log::CreateNewLogMessage("Pleasse recompile the program manually with IS_IN_EDITOR and ENGINE_DEBUG as false.", Vector3(1, 0, 0));

@@ -55,7 +55,7 @@ namespace Application
 	}
 }
 
-bool ShouldIgnoreErrors = true;
+bool ShouldIgnoreErrors = false;
 void GLAPIENTRY
 MessageCallback(
 	GLenum source,
@@ -101,7 +101,7 @@ int Start(int argc, char** argv)
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 64);
+	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	int flags;
 
@@ -236,16 +236,14 @@ int Start(int argc, char** argv)
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, Graphics::FBO::SSAOBuffers[2], 0);
 		MainFramebuffer.AttachFramebuffer(Graphics::FBO::SSAOBuffers[2], GL_COLOR_ATTACHMENT2);
 
-		//Albedo color buffer
-		Debugging::EngineStatus = "Generating Frame Buffers: SSAO: alb";
 		Debugging::EngineStatus = "Generating Frame Buffers: SSAO - Stage 2";
 		std::cout << ".";
 		SSAO::Init();
 	}
+	Debugging::EngineStatus = "Generating Frame Buffers: CSM";
 	unsigned int pingpongFBO[2];
 	unsigned int pingpongBuffer[2];
 	glGenTextures(2, pingpongBuffer);
-	Debugging::EngineStatus = "Generating Frame Buffers: CSM";
 	std::cout << ".";
 	CSM::Init();
 	std::cout << ".";
@@ -333,7 +331,7 @@ int Start(int argc, char** argv)
 	ShouldIgnoreErrors = false;
 	bool SlowMode = false;
 	bool FastMode = false;
-	OS::SetConsoleWindowVisible(false);
+	//OS::SetConsoleWindowVisible(false);
 
 	//Main Loop
 	while (!close)
@@ -861,7 +859,6 @@ int Start(int argc, char** argv)
 		StencilFrameBuffer.Unbind();
 		glDisable(GL_DEPTH_TEST);
 
-		MainShader.Unbind();
 		Debugging::EngineStatus = "Rendering (Post process: Bloom)";
 		//Blur bloom FBO
 		if (Graphics::Bloom)

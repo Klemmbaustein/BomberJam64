@@ -1,7 +1,14 @@
 #pragma once
-
+#ifdef EDITOR
+#define IS_IN_EDITOR true
+#else
 #define IS_IN_EDITOR false
-#define VERSION_STRING "1.1"
+#endif
+#ifdef RELEASE
+#define ENGINE_DEBUG false
+#else
 #define ENGINE_DEBUG true
+#endif
 constexpr char ProjectName[] = "BomberSnek";
 constexpr char StartupMap[] = "Level1";
+#define VERSION_STRING "1.1"

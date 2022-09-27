@@ -20,16 +20,6 @@ unsigned int Samples = 16;
 unsigned int SSAOTexture;
 void SSAO::Init()
 {
-	glGenFramebuffers(1, &ssaoFBO);
-	glBindFramebuffer(GL_FRAMEBUFFER, ssaoFBO);
-	glGenTextures(1, &ssaoColorBuffer);
-	glBindTexture(GL_TEXTURE_2D, ssaoColorBuffer);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, Graphics::WindowResolution.X / ResolutionDivider, Graphics::WindowResolution.Y / ResolutionDivider, 0, GL_RED, GL_FLOAT, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ssaoColorBuffer, 0);
 
 	for (unsigned int i = 0; i < Samples; ++i)
 	{
@@ -93,8 +83,11 @@ unsigned int SSAO::Render()
 
 void SSAO::ResizeBuffer(unsigned int X, unsigned int Y)
 {
-	glDeleteTextures(1, &ssaoColorBuffer);
-	glDeleteFramebuffers(1, &ssaoFBO);
+	if (ssaoColorBuffer)
+	{
+		glDeleteTextures(1, &ssaoColorBuffer);
+		glDeleteFramebuffers(1, &ssaoFBO);
+	}
 	glGenFramebuffers(1, &ssaoFBO);
 	glBindFramebuffer(GL_FRAMEBUFFER, ssaoFBO);
 	glGenTextures(1, &ssaoColorBuffer);
