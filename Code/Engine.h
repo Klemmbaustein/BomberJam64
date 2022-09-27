@@ -1,7 +1,7 @@
 #pragma once
 
 #define IS_IN_EDITOR false
-#define VERSION_STRING "1.0"
+#define VERSION_STRING "1.1"
 #define ENGINE_DEBUG true
 constexpr char ProjectName[] = "BomberSnek";
-constexpr char StartupMap[] = "Level2";
+constexpr char StartupMap[] = "Level1";
