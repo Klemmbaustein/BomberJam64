@@ -36,6 +36,21 @@
 #include <Objects/Objects.h>
 #include <OS.h>
 
+class InitError : public std::exception
+{
+public:
+	InitError(std::string Error)
+	{
+		Exception = "Error while initializing: " + Error;
+	}
+
+	virtual const char* what() const throw()
+	{
+		return Exception.c_str();
+	}
+
+	std::string Exception;
+};
 
 SDL_Window* Window;
 std::vector<ButtonEvent> ButtonEvents;
@@ -130,6 +145,14 @@ int Start(int argc, char** argv)
 		std::cin.get();
 		return -1;
 	}
+	if (!glewIsSupported(OPENGL_MIN_REQUIRED_VERSION))
+	{
+		throw InitError(std::string("OpenGL version ")
+			+ std::string((const char*)glGetString(GL_VERSION))
+			+ std::string(" is not supported. Minimum: ") + OPENGL_MIN_REQUIRED_VERSION);
+	}
+
+
 	glEnable(GL_DEBUG_OUTPUT);
 	glDebugMessageCallback(MessageCallback, 0);
 	std::cout << "GLEW started (" << glewGetErrorString(glewInit()) << ")\n";
