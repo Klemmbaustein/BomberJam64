@@ -8,14 +8,13 @@
 #endif
 
 #if __linux__
-//Currently all linux implementations are empty, so we dont need to include anything
+//Currently no linux implementation needs to include anything
 #endif
 
 #include <Log.h>
 
 
 #if _WIN32
-//Windows implementation
 void OS::SetConsoleWindowVisible(bool Visible)
 {
 	::ShowWindow(::GetConsoleWindow(), Visible ? SW_SHOW : SW_HIDE);
@@ -23,7 +22,6 @@ void OS::SetConsoleWindowVisible(bool Visible)
 #endif
 
 #if __linux__
-//Linux Implementation
 void OS::SetConsoleWindowVisible(bool Visible)
 {
 }
