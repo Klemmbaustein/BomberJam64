@@ -109,7 +109,6 @@ int Start(int argc, char** argv)
 	Config::LoadConfigs();
 	Console::ExecuteConsoleCommand("endif");
 	std::cout << "*Starting SDL2 - ";
-	//std::future<std::string> AsyncWaitForCommand = std::async(std::launch::async, WaitForCommand);
 
 	int Errstring = SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -354,7 +353,7 @@ int Start(int argc, char** argv)
 	ShouldIgnoreErrors = false;
 	bool SlowMode = false;
 	bool FastMode = false;
-	//OS::SetConsoleWindowVisible(false);
+	OS::SetConsoleWindowVisible(false);
 
 	//Main Loop
 	while (!close)
