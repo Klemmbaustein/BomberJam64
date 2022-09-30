@@ -1,7 +1,6 @@
 #include "Vector.h"
 #include <iostream>
 #include <numeric>
-#include <format>
 #include <iomanip>
 #include <sstream>
 #include <Math/Math.h>
