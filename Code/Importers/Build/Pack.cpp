@@ -71,7 +71,7 @@ void Pack::SaveFolderToPack(std::string Folder, std::string Outf)
 		{
 			if (!entry.is_directory())
 			{
-				std::ifstream InFile = std::ifstream(entry.path(), std::ios::in, std::ios::binary);
+				std::ifstream InFile = std::ifstream(entry.path(), std::ios::in | std::ios::binary);
 				std::stringstream InStream;
 				InStream << InFile.rdbuf();
 				PackedFiles.push_back(PackFile(GetFileNameFromPath(entry.path().string()), InStream.str()));
