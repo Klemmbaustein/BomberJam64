@@ -1,6 +1,8 @@
 #include "FileUtility.h"
 #include <iostream>
+#if _WIN32
 #include <Windows.h>
+#endif
 
 std::string GetFileNameFromPath(std::string FilePath)
 {
@@ -26,6 +28,7 @@ std::string GetFilePathWithoutExtension(std::string FilePath)
 //What is this?
 std::string wstrtostr(const std::wstring& wstr)
 {
+#if _WIN32
     std::string strTo;
     char* szTo = new char[wstr.length() + 1];
     szTo[wstr.size()] = '\0';
@@ -33,6 +36,9 @@ std::string wstrtostr(const std::wstring& wstr)
     strTo = szTo;
     delete[] szTo;
     return strTo;
+#else
+    return "Function not supported on Linux";
+#endif
 }
 
 std::vector<char> StringToCharVector(std::string In)
