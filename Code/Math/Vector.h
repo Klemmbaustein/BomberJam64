@@ -135,11 +135,20 @@ Vector2 operator/(Vector2 a, Vector2 b);
 Vector2 operator/(Vector2 a, float b);
 
 bool operator==(Vector2 a, float b);
-
+inline bool operator!=(Vector2 a, float b)
+{
+	return !(a == b);
+}
 bool operator==(Vector2 a, Vector2 b);
-
 bool operator==(Vector3 a, Vector3 b);
-
+inline bool operator!=(Vector3 a, Vector3 b)
+{
+	return !(a == b);
+}
+inline bool operator!=(Vector2 a, Vector2 b)
+{
+	return !(a == b);
+}
 
 struct Transform
 {
@@ -162,6 +171,10 @@ struct Transform
 };
 
 bool operator==(Transform a, Transform b);
+inline bool operator!=(Transform a, Transform b)
+{
+	return !(a == b);
+}
 
 Transform operator+(Transform a, Transform b);
 
