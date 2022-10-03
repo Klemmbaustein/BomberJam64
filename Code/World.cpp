@@ -1,4 +1,3 @@
-#pragma once
 #include "World.h"
 #include "FileUtility.h"
 #include <filesystem>
@@ -6,6 +5,7 @@
 #include <sstream>
 #include <Log.h>
 #include <Sound/Sound.h>
+#include <UI/Default/UICanvas.h>
 namespace fs = std::filesystem;
 
 

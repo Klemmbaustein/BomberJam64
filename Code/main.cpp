@@ -61,12 +61,12 @@ Vector2 GetMousePosition()
 	SDL_GetMouseState(&x, &y);
 	return Vector2((x / Graphics::WindowResolution.X - 0.5f) * 2, 1 - (y / Graphics::WindowResolution.Y * 2));
 }
-bool close = false;
+bool ShouldClose = false;
 namespace Application
 {
 	void Quit()
 	{
-		close = true;
+		ShouldClose = true;
 	}
 }
 
@@ -115,10 +115,16 @@ int Start(int argc, char** argv)
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
+	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 16);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	int flags;
 
+	if (Errstring != 0)
+	{
+		std::cout << "Could not start SDL2 (" << SDL_GetError() << ")\n";
+	}
+	else
+		std::cout << "SDL2 started (No error)\n";
 	if (IsInEditor)
 	{
 		flags = SDL_WINDOW_OPENGL;
@@ -131,15 +137,11 @@ int Start(int argc, char** argv)
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Graphics::WindowResolution.X, Graphics::WindowResolution.Y, flags);
 	SDL_GLContext GLContext = SDL_GL_CreateContext(Window);
 	SDL_SetWindowResizable(Window, SDL_TRUE);
-	if (Errstring != 0)
-		std::cout << "Could not start SDL2 (" << SDL_GetError() << ")\n";
-	else
-		std::cout << "SDL2 started (No error)\n";
 	std::cout << "*Starting GLEW - ";
 	if (glewInit() != GLEW_OK)
 	{
 		std::cout << "GLEW Init Error:\n" << glewGetErrorString(glewInit());
-		SDL_DestroyWindow(Window);
+		//SDL_DestroyWindow(Window);
 		std::cout << "\n-Press Enter to continue-";
 		std::cin.get();
 		return -1;
@@ -311,8 +313,6 @@ int Start(int argc, char** argv)
 #endif
 #if ENGINE_DEBUG
 	TextRenderer DebugTextRenderer = TextRenderer("Fonts/Font.ttf", 60);
-#else
-	//::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 #endif //ENGINE_DEBUG
 
 	std::cout << " done!\n";
@@ -356,7 +356,7 @@ int Start(int argc, char** argv)
 	OS::SetConsoleWindowVisible(false);
 
 	//Main Loop
-	while (!close)
+	while (!ShouldClose)
 	{
 		Performance::DrawCalls = 0;
 		Uint64 LastCounterLogic = SDL_GetPerformanceCounter();
@@ -377,7 +377,7 @@ int Start(int argc, char** argv)
 					delete o;
 				}
 				Objects::AllObjects.clear();
-				close = true;
+				ShouldClose = true;
 #else
 				EditorUI->OnLeave(&Application::Quit);
 #endif
@@ -713,7 +713,7 @@ int Start(int argc, char** argv)
 			Timer::Internal::Timers.erase(Timer::Internal::Timers.begin() + FinishedTimers.at(i));
 		}
 		WorldObject* SelectedObject = nullptr;
-		if (!close)
+		if (!ShouldClose)
 		{
 			for (int i = 0; i < Objects::AllObjects.size(); i++)
 			{
@@ -951,7 +951,7 @@ int Start(int argc, char** argv)
 		PostProcessShader.Unbind();
 		UIShader.Bind();
 		glEnable(GL_BLEND);
-		if (!close)
+		if (!ShouldClose)
 		{
 			for (int i = 0; i < Graphics::UIToRender.size(); i++)
 			{

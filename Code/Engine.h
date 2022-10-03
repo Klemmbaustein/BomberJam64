@@ -2,7 +2,7 @@
 #ifdef EDITOR
 #define IS_IN_EDITOR true
 #else
-#define IS_IN_EDITOR false
+#define IS_IN_EDITOR true
 #endif
 #ifdef RELEASE
 #define ENGINE_DEBUG false
