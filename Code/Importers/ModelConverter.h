@@ -1,11 +1,11 @@
 #pragma once
 
 #include <iostream>
-#include <assimp/importer.hpp>
+#include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <vector>
 #include <assimp/postprocess.h>
-#include "Math/vector.h"
+#include "Math/Vector.h"
 #include <fstream>
 #include "FileUtility.h"
 
