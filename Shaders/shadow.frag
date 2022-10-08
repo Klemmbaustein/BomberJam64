@@ -1,4 +1,4 @@
-#version 450 core
+#version 330 core
 
 uniform sampler2D u_texture;
 uniform bool u_usetexture;

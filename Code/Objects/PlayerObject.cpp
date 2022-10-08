@@ -249,12 +249,12 @@ void PlayerObject::Tick()
 			}
 
 
-			CameraRotation += Vector3(Vector2(Input::MouseMovement.Y, Input::MouseMovement.X), 0) * 3;
-			Rotation = Rotation * 0.8 + CameraRotation * 0.2;
+			Rotation += Vector3(Vector2(Input::MouseMovement.Y, Input::MouseMovement.X), 0) * Performance::DeltaTime * 275;
 			//Clamp the camera rotation so the camera stays somewhat top-down-ish;
-			CameraRotation = Vector3(CameraRotation.X = std::max(std::min(CameraRotation.X, -35.f), -85.f), CameraRotation.Y, CameraRotation.Z);
+			Rotation = Vector3(Rotation.X = std::max(std::min(Rotation.X, -35.f), -85.f), Rotation.Y, Rotation.Z);
 
-			Vector3 CameraOffset = (PrevCameraPos) * 0.9 + (Vector3::GetForwardVector(Rotation) * -CameraDistance) * 0.1f + Vector3(0, 1, 0);
+			Vector3 CameraOffset = (PrevCameraPos * (1 - Performance::DeltaTime * 5)
+				+ (Vector3::GetForwardVector(Rotation) * -CameraDistance) * (Performance::DeltaTime * 5)) + Vector3(0, Performance::DeltaTime * 25, 0);
 
 
 			PrevCameraPos = CameraOffset;

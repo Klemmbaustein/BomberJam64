@@ -115,7 +115,7 @@ int Start(int argc, char** argv)
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 16);
+	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	int flags;
 
@@ -692,7 +692,6 @@ int Start(int argc, char** argv)
 		glEnable(GL_CULL_FACE);
 		glDisable(GL_BLEND);
 		glClearColor(0.f, 0.f, 0.f, 1.f);	//Clear color black
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		Uint64 EndCounter = SDL_GetPerformanceCounter();
 		Uint64 counterElapsed = EndCounter - LastCounterLogic;

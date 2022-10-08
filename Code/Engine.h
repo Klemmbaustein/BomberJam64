@@ -2,7 +2,7 @@
 #ifdef EDITOR
 #define IS_IN_EDITOR true
 #else
-#define IS_IN_EDITOR true
+#define IS_IN_EDITOR false
 #endif
 #ifdef RELEASE
 #define ENGINE_DEBUG false
@@ -12,4 +12,4 @@
 constexpr char ProjectName[] = "BomberSnek";
 constexpr char StartupMap[] = "Level1";
 #define VERSION_STRING "1.1"
-#define OPENGL_MIN_REQUIRED_VERSION "GL_VERSION_4_0"
+#define OPENGL_MIN_REQUIRED_VERSION "GL_VERSION_4_6"

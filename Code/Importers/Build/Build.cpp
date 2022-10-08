@@ -51,9 +51,16 @@ std::string Build::TryBuildProject(std::string TargetFolder)
 #if _WIN32
 
 			Log::CreateNewLogMessage("Build: Compiling Code (this can take a while)");
-			system((VS_INSTALL_PATH + std::string(SolutionName) + ".sln /Build FinalBuild").c_str());
-			std::filesystem::copy("x64/FinalBuild/Engine.exe", TargetFolder + ProjectName + std::string(".exe"));
-			Log::CreateNewLogMessage("Build: Cleaning up");
+			int CompileResult = system((VS_INSTALL_PATH + std::string(SolutionName) + ".sln /Build FinalBuild").c_str());
+			if(!CompileResult)
+			{
+				std::filesystem::copy("x64/FinalBuild/Engine.exe", TargetFolder + ProjectName + std::string(".exe"));
+			}
+			else
+			{
+				Log::CreateNewLogMessage("Build: Failure: MSBuild returned " + std::to_string(CompileResult), Vector3(1, 0, 0));
+				return "MSBuild Failure";
+			}
 #else
 			Log::CreateNewLogMessage("Build: Compiling is currently not supported on Linux.", Vector3(1, 0, 0));
 			Log::CreateNewLogMessage("Pleasse recompile the program manually with IS_IN_EDITOR and ENGINE_DEBUG as false.", Vector3(1, 0, 0));
@@ -67,16 +74,7 @@ std::string Build::TryBuildProject(std::string TargetFolder)
 	}
 	catch (std::exception& e)
 	{
-		Log::CreateNewLogMessage(std::string("Build: ") + e.what(), Vector3(1, 0, 0));
+		Log::CreateNewLogMessage(std::string("Build: Failure: Exception thrown: ") + e.what(), Vector3(1, 0, 0));
 		return "Error";
 	}
 }
-/*
-* Engine.h
-#pragma once
-//WARNING: IS_IN_EDITOR must always be on line 3 for the build to work
-#define IS_IN_EDITOR true
-#define VERSION_STRING "0.1"
-#define ENGINE_DEBUG true
-constexpr char ProjectName[] = "TestGame";
-*/

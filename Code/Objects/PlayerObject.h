@@ -54,5 +54,4 @@ protected:
 	unsigned int CurrentAnim = 0;
 	unsigned int CurrentAnimFrame = 0;
 	float AnimFrameTimer = 0.0f;
-
 };
