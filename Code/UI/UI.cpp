@@ -14,5 +14,4 @@ namespace Graphics
 
 void UI::Render()
 {
-	wdawd
 }

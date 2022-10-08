@@ -84,7 +84,7 @@ MessageCallback(
 {
 	if (type == GL_DEBUG_TYPE_ERROR && !ShouldIgnoreErrors)
 	{
-		Log::CreateNewLogMessage(message + std::string(" Status: ") + Debugging::EngineStatus + " For more details see console");
+		Log::CreateNewLogMessage(message + std::string(" Status: ") + Debugging::EngineStatus);
 	}
 }
 

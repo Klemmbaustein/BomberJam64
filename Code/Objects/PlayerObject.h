@@ -19,7 +19,7 @@ public:
 	bool TryMove(Vector3 Offset, bool Vertical);
 	void Respawn();
 
-	const float MovementSpeed = 5;
+	const float MovementSpeed = 6;
 	bool HasCollision = true;
 	Vector2 Velocity = Vector2(0);
 	bool OnGround = false;
