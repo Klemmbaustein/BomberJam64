@@ -299,7 +299,7 @@ bool Console::ExecuteConsoleCommand(std::string Command, bool Verbose)
 				Log::CreateNewLogMessage(ConsoleHeader + "OS: " + OS::GetOSString());
 				Log::CreateNewLogMessage(ConsoleHeader + "Window Resolution: x=" + std::to_string((int)Graphics::WindowResolution.X) + " y=" + std::to_string((int)Graphics::WindowResolution.Y));
 				Log::CreateNewLogMessage(ConsoleHeader + "Sounds: " + std::to_string(Sound::GetSounds().size()) + "/255");
-				Log::CreateNewLogMessage(ConsoleHeader + "Shadow Resolution: " + std::to_string(Graphics::ShadowResolution));
+				Log::CreateNewLogMessage(ConsoleHeader + "Shadow Resolution: " + std::to_string(Graphics::ShadowResolution) + "x" + std::to_string(Graphics::ShadowResolution) + "px");
 				Log::CreateNewLogMessage(ConsoleHeader + "OpenGL Version: " + std::string((const char*)glGetString(GL_VERSION)) + " GLSL: " + std::string((const char*)glGetString(GL_SHADING_LANGUAGE_VERSION)));
 				Log::CreateNewLogMessage(ConsoleHeader + "OpenAL Version: " + Sound::GetVersionString());
 				Log::CreateNewLogMessage(ConsoleHeader + "Shaders: " + std::to_string(GetNumShaders()));

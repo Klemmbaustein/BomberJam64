@@ -96,13 +96,43 @@ std::string OS::ShowOpenFileDialog()
 #if _WIN64
 std::string OS::GetOSString()
 {
-	return "64-bit Windows";
+	int osver = 0.0;
+
+	NTSTATUS(WINAPI * RtlGetVersion)(LPOSVERSIONINFOEXW);
+
+	OSVERSIONINFOEXW osInfo;
+
+	*(FARPROC*)&RtlGetVersion = GetProcAddress(GetModuleHandleA("ntdll"), "RtlGetVersion");
+
+	if (NULL != RtlGetVersion)
+	{
+		osInfo.dwOSVersionInfoSize = sizeof(osInfo);
+		RtlGetVersion(&osInfo);
+		osver = osInfo.dwMajorVersion;
+		return "64-bit Windows " + std::to_string(osver) + "." + std::to_string(osInfo.dwMinorVersion) + " (Build " + std::to_string(osInfo.dwBuildNumber) + ")";
+	}
+	return "64-bit Windows (Unknown version)";
 }
 #else
 #if _WIN32
 std::string OS::GetOSString()
 {
-	return "32-bit Windows";
+	int osver = 0.0;
+
+	NTSTATUS(WINAPI * RtlGetVersion)(LPOSVERSIONINFOEXW);
+
+	OSVERSIONINFOEXW osInfo;
+
+	*(FARPROC*)&RtlGetVersion = GetProcAddress(GetModuleHandleA("ntdll"), "RtlGetVersion");
+
+	if (NULL != RtlGetVersion)
+	{
+		osInfo.dwOSVersionInfoSize = sizeof(osInfo);
+		RtlGetVersion(&osInfo);
+		osver = osInfo.dwMajorVersion;
+		return "32-bit Windows " + std::to_string(osver) + "." + std::to_string(osInfo.dwMinorVersion) + " (Build " + std::to_string(osInfo.dwBuildNumber) + ")";
+	}
+	return "32-bit Windows (Unknown version)";
 }
 #endif
 #endif
