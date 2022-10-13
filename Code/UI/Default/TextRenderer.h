@@ -1,5 +1,7 @@
 #pragma once
-#include "WorldParameters.h"
+#include <GL/glew.h>
+#include <Math/Vector.h>
+#include "glm/ext.hpp"
 
 void OnWindowResized();
 struct FontVertex {
@@ -16,7 +18,7 @@ private:
 	GLuint fontVao;
 	GLuint fontVertexBufferId;
 	FontVertex* fontVertexBufferData = 0;
-	Uint32 fontVertexBufferCapacity;
+	uint32_t fontVertexBufferCapacity;
 	std::string Filename; float CharacterSizeInPixels;
 	glm::mat4 projection = glm::ortho(-800.0f, 800.0f, 450.0f, -450.f);
 public:

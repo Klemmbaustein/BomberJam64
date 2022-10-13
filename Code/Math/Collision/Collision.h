@@ -63,4 +63,5 @@ namespace Collision
 	HitResponse LineTrace(Vector3 RayStart, Vector3 RayEnd, std::set<CollisionComponent*> MeshesToIgnore = {});
 
 	HitResponse LineCheckForAABB(Box b, Vector3 RayStart, Vector3 RayEnd);
+	extern std::vector<CollisionComponent*> CollisionBoxes;
 }

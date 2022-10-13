@@ -1,6 +1,7 @@
 #include "Backpack.h"
 #include <Objects/Components/MeshComponent.h>
 #include <Objects/Components/CollisionComponent.h>
+#include <World/Stats.h>
 
 void Backpack::Begin()
 {

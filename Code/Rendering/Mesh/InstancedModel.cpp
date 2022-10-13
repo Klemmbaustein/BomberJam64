@@ -1,10 +1,13 @@
 #include "InstancedModel.h"
-#include <WorldParameters.h>
 #include <filesystem>
 #include <fstream>
 #include <Rendering/Utility/ShaderManager.h>
 #include <Rendering/Mesh/JSModel.h>
 #include <Log.h>
+#include <World/Graphics.h>
+#include <World/Assets.h>
+#include <World/Stats.h>
+
 namespace fs = std::filesystem;
 
 

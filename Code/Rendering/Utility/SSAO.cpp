@@ -3,8 +3,8 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include <Rendering/Utility/ShaderManager.h>
-#include <WorldParameters.h>
-#define GLEW_STATIC
+#include <Rendering/Camera/Camera.h>
+#include <World/Graphics.h>
 #include <GL/glew.h>
 std::uniform_real_distribution<float> randomFloats(0.0, 1.0); // random floats between [0.0, 1.0]
 std::default_random_engine generator;

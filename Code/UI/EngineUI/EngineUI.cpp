@@ -12,7 +12,7 @@
 #include "Importers/ModelConverter.h"
 #include "Importers/ImageImporter.h"
 #include "Objects/MeshObject.h"
-#include "World.h"
+#include "Scene.h"
 #include <Input.h>
 #include <Console.h>
 #include <Objects/Objects.h>
@@ -20,6 +20,11 @@
 #include <OS.h>
 #include <thread>
 #include <Importers/Build/Build.h>
+#include <World/Assets.h>
+#include <World/Graphics.h>
+#include <World/Stats.h>
+
+
 namespace fs = std::filesystem;
 namespace EngineUIVariables
 {

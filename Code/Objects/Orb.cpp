@@ -1,4 +1,5 @@
 #include "Orb.h"
+#include <World/Stats.h>
 
 void Orb::Begin()
 {

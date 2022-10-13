@@ -275,7 +275,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -321,7 +321,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;EDITOR;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -380,6 +380,7 @@
     <ClCompile Include="Code\Objects\Components\Component.cpp" />
     <ClCompile Include="Code\Objects\Components\InstancedMeshComponent.cpp" />
     <ClCompile Include="Code\Objects\Components\MeshComponent.cpp" />
+    <ClCompile Include="Code\Objects\Components\PointLightComponent.cpp" />
     <ClCompile Include="Code\Objects\HubTeleporter.cpp" />
     <ClCompile Include="Code\Objects\InstancedMeshObject.cpp" />
     <ClCompile Include="Code\Objects\MeshObject.cpp" />
@@ -424,8 +425,8 @@
     <ClCompile Include="Code\UI\EngineUI\MaterialTemplate.cpp" />
     <ClCompile Include="Code\UI\EngineUI\MeshTab.cpp" />
     <ClCompile Include="Code\UI\Game\GameUI.cpp" />
-    <ClCompile Include="Code\World.cpp" />
-    <ClCompile Include="Code\WorldParameters.cpp" />
+    <ClCompile Include="Code\Scene.cpp" />
+    <ClCompile Include="Code\World\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Console.h" />
@@ -446,6 +447,7 @@
     <ClInclude Include="Code\Objects\Backpack.h" />
     <ClInclude Include="Code\Objects\Bomb.h" />
     <ClInclude Include="Code\Objects\BombPickup.h" />
+    <ClInclude Include="Code\Objects\Components\PointLightComponent.h" />
     <ClInclude Include="Code\Objects\HubTeleporter.h" />
     <ClInclude Include="Code\Objects\Orb.h" />
     <ClInclude Include="Code\Objects\OrbGate.h" />
@@ -503,8 +505,10 @@
     <ClInclude Include="Code\UI\EngineUI\MeshTab.h" />
     <ClInclude Include="Code\UI\Game\GameUI.h" />
     <ClInclude Include="Code\UI\UI.h" />
-    <ClInclude Include="Code\World.h" />
-    <ClInclude Include="Code\WorldParameters.h" />
+    <ClInclude Include="Code\Scene.h" />
+    <ClInclude Include="Code\World\Assets.h" />
+    <ClInclude Include="Code\World\Graphics.h" />
+    <ClInclude Include="Code\World\Stats.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\basic.frag" />
@@ -513,6 +517,7 @@
     <None Include="Shaders\explosion.frag" />
     <None Include="Shaders\explosion.vert" />
     <None Include="Shaders\ground.frag" />
+    <None Include="Shaders\shared.frag" />
     <None Include="Shaders\postprocess.frag" />
     <None Include="Shaders\postprocess.vert" />
     <None Include="Shaders\shadow.frag" />

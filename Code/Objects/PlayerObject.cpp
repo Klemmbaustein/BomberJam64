@@ -1,13 +1,12 @@
 #include "PlayerObject.h"
 #include <Input.h>
 #include <Math/Collision/Collision.h>
-#include <WorldParameters.h>
 #include <Rendering/Mesh/JSModel.h>
 #include <Rendering/Camera/CameraShake.h>
 #include <EngineRandom.h>
 #include <UI/UI.h>
 #include <Log.h>
-#include <World.h>
+#include <Scene.h>
 #include <Timer.h>
 #include <Save.h>
 #include <Objects/Bomb.h>
@@ -18,6 +17,9 @@
 #include <Objects/BombPickup.h>
 
 #include <FileUtility.h>
+
+#include <World/Stats.h>
+#include <World/Assets.h>
 
 Sound::SoundBuffer* BombPlaceSound = nullptr;
 Sound::SoundBuffer* OrbSound = nullptr;

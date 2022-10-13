@@ -1,7 +1,7 @@
 #include "WorldObject.h"
 #include "Components/Component.h"
-#include <WorldParameters.h>
 #include <sstream>
+#include <Objects/Objects.h>
 
 void WorldObject::Start(std::string ObjectName, Transform Transform)
 {

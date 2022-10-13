@@ -1,5 +1,4 @@
 #include "CollisionComponent.h"
-#include <WorldParameters.h>
 #include <Math/Collision/Collision.h>
 
 

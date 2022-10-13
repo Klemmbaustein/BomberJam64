@@ -1,5 +1,4 @@
 #include "Console.h"
-#include <WorldParameters.h>
 #include <Rendering/Utility/CSM.h>
 #include <Sound/Sound.h>
 #include <Engine.h>
@@ -13,6 +12,10 @@
 #include <Log.h>
 #include <Importers/Build/Pack.h>
 #include <OS.h>
+
+#include <World/Graphics.h>
+#include <World/Stats.h>
+
 std::map<std::string, std::string> Variables;
 namespace Application
 {

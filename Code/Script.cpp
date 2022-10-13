@@ -1,12 +1,13 @@
 #include "Script.h"
 #include <fstream>
 #include <iostream>
-#include <WorldParameters.h>
 #include <Console.h>
 #include "Script.h"
 #include <FileUtility.h>
 #include <filesystem>
 #include <Log.h>
+#include <World/Stats.h>
+#include <World/Assets.h>
 
 extern const bool IsInEditor;
 extern const bool EngineDebug;

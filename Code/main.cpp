@@ -1,7 +1,6 @@
 #include "Engine.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include <Utility/stb_image.h>
-#define GLEW_STATIC
 #include <Log.h>
 #include <GL/glew.h>
 #include "Timer.h"
@@ -16,8 +15,7 @@
 #else
 #include <UI/Default/ScrollObject.h>
 #endif
-#include "WorldParameters.h"
-#include "World.h"
+#include "Scene.h"
 #include <UI/Default/TextRenderer.h>
 #include "Importers/ModelConverter.h"
 #include <vector>
@@ -35,6 +33,15 @@
 #include <Rendering/Camera/FrustumCulling.h>
 #include <Objects/Objects.h>
 #include <OS.h>
+
+#include <World/Assets.h>
+#include <World/Graphics.h>
+#include <World/Stats.h>
+
+namespace Input
+{
+	extern bool Keys[351];
+}
 
 class InitError : public std::exception
 {
@@ -93,7 +100,6 @@ int Start(int argc, char** argv)
 	OS::SetConsoleWindowVisible(true);
 	Assets::ScanForAssets();
 	std::cout << "Starting\n";
-	//Initialize DeltaTime
 	Debugging::EngineStatus = "Initializing";
 	Uint64 PerfCounterFrequency = SDL_GetPerformanceFrequency();
 	Uint64 LastCounter = SDL_GetPerformanceCounter();
@@ -349,11 +355,12 @@ int Start(int argc, char** argv)
 	Performance::FPS = 60;
 	Performance::DeltaTime = 0.016;
 	LastCounter = EndCounter;
-	Time = 0;
+	Stats::Time = 0;
 	ShouldIgnoreErrors = false;
 	bool SlowMode = false;
 	bool FastMode = false;
 	OS::SetConsoleWindowVisible(false);
+
 
 	//Main Loop
 	while (!ShouldClose)
@@ -363,7 +370,6 @@ int Start(int argc, char** argv)
 		Debugging::EngineStatus = "Polling for input";
 		bool bMouseMoved = false;
 		Input::MouseLocation = GetMousePosition();
-
 		SDL_Event event;
 		//Poll Events
 		while (SDL_PollEvent(&event))
@@ -820,7 +826,7 @@ int Start(int argc, char** argv)
 				glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.SunColor"), 1, &Graphics::WorldSun.SunColor.X);
 				glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.AmbientColor"), 1, &Graphics::WorldSun.AmbientColor.X);
 
-				glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_time"), Time);
+				glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_time"), Stats::Time);
 				for (size_t i = 0; i < LightSpaceMatrices.size(); ++i)
 				{
 					glUniformMatrix4fv(glGetUniformLocation(s.second.Shader->GetShaderID(),
@@ -830,6 +836,24 @@ int Start(int argc, char** argv)
 				{
 					glUniform1fv(glGetUniformLocation(s.second.Shader->GetShaderID(),
 						((std::string("cascadePlaneDistances[") + std::to_string(i)) + "]").c_str()), 1, &CSM::shadowCascadeLevels[i]);
+				}
+
+				for (int i = 0; i < 16; i++)
+				{
+					std::string CurrentLight = "u_lights[" + std::to_string(i) + "]";
+					if (i < Graphics::Lights.size())
+					{
+						glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Position").c_str()), 1, &Graphics::Lights[i].Position.X);
+						glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Color").c_str()), 1, &Graphics::Lights[i].Color.X);
+						glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Falloff").c_str()), Graphics::Lights[i].Falloff);
+						glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Intensity").c_str()), Graphics::Lights[i].Intensity);
+
+						glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Active").c_str()), 1);
+					}
+					else
+					{
+						glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Active").c_str()), 0);
+					}
 				}
 			}
 		}
@@ -994,7 +1018,7 @@ int Start(int argc, char** argv)
 		Performance::FPS = ((float)PerfCounterFrequency) / (float)counterElapsed;
 		Performance::DeltaTime = std::min(Performance::DeltaTime, 0.1f);
 		LastCounter = EndCounter;
-		Time = Time + Performance::DeltaTime;
+		Stats::Time = Stats::Time + Performance::DeltaTime;
 	}
 	Sound::End();
 	OS::SetConsoleWindowVisible(true);

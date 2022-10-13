@@ -3,6 +3,8 @@
 #include <Rendering/Texture/Texture.h>
 #include <EngineRandom.h>
 
+#include <World/Stats.h>
+
 namespace Application
 {
 	void Quit();

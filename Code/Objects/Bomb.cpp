@@ -8,6 +8,10 @@
 #include <Objects/WallObject.h>
 #include <Objects/PlayerObject.h>
 
+#include <World/Graphics.h>
+#include <World/Stats.h>
+#include <World/Assets.h>
+
 Sound::SoundBuffer* BombSound = nullptr;
 
 void Bomb::Begin()
@@ -27,6 +31,12 @@ void Bomb::Begin()
 	ExplosionMesh->SetVisibility(false);
 	BombMesh->SetRelativeTransform(Transform(Vector3(0, -2, 0), Vector3(), Vector3(0.7f)));
 
+	PointLight = new PointLightComponent();
+	Attach(PointLight);
+	PointLight->SetRelativeLocation(Vector3(0, -1, 0));
+	PointLight->SetFalloff(15);
+	PointLight->SetColor(Vector3(1, 0.5f, 0));
+	PointLight->SetIntensity(0);
 }
 
 void Bomb::Tick()
@@ -68,10 +78,11 @@ void Bomb::Tick()
 			}
 			PlayedSound = true;
 		}
+		PointLight->SetIntensity(std::max((-DetonationTime * 2.5f), 0.0f));
 		ExplosionMesh->SetVisibility(true);
 		BombMesh->SetVisibility(false);
-		ExplosionMesh->SetUniform("u_opacity", U_FLOAT, std::to_string(std::max(1.0f - (-DetonationTime * 3.0f), 0.0f)), 0);
-		ExplosionMesh->SetUniform("u_opacity", U_FLOAT, std::to_string(std::max(1.0f - (-DetonationTime * 3.0f), 0.0f)), 1);
+		ExplosionMesh->SetUniform("u_opacity", U_FLOAT, std::to_string(std::max(1.0f - (-DetonationTime * 2.0f), 0.0f)), 0);
+		ExplosionMesh->SetUniform("u_opacity", U_FLOAT, std::to_string(std::max(1.0f - (-DetonationTime * 2.0f), 0.0f)), 1);
 
 		ExplosionMesh->SetRelativeTransform(Transform(Vector3(), Vector3(), Vector3(15.f * -DetonationTime)));
 

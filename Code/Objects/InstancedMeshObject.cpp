@@ -1,7 +1,6 @@
 #include "InstancedMeshObject.h"
 #include <EngineRandom.h>
 #include <Math/Collision/Collision.h>
-#include <WorldParameters.h>
 void InstancedMeshObject::Destroy()
 {
 }

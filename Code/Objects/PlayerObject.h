@@ -6,8 +6,6 @@
 #include <UI/Game/GameUI.h>
 
 constexpr unsigned int PLAYER_NUM_ANIM_FRAMES = 10;
-
-
 class PlayerObject : public WorldObject
 {
 public:
@@ -19,7 +17,7 @@ public:
 	bool TryMove(Vector3 Offset, bool Vertical);
 	void Respawn();
 
-	const float MovementSpeed = 6;
+	const float MovementSpeed = 5;
 	bool HasCollision = true;
 	Vector2 Velocity = Vector2(0);
 	bool OnGround = false;

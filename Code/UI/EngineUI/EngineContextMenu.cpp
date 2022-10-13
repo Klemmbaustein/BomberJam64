@@ -2,7 +2,6 @@
 #include <Input.h>
 #include <glm/glm.hpp>
 #include <FileUtility.h>
-#include <Objects/WorldObject.h>
 #include <UI/EngineUI/EngineUI.h>
 
 bool ShouldUpdate = false;

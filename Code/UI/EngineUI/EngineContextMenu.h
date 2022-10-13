@@ -1,9 +1,10 @@
 #pragma once
 #include <UI/Default/UICanvas.h>
-#include <WorldParameters.h>
 #include <UI/Default/VectorInputField.h>
 #include <UI/Default/TextRenderer.h>
 #include <UI/Default/ScrollObject.h>
+#include <Objects/WorldObject.h>
+
 class EngineContextMenu : UICanvas
 {
 public:
@@ -34,5 +35,4 @@ protected:
 	std::vector<UIBorder*> Properties;
 	std::vector<VectorInputField*> TransformTextFields;
 	ScrollObject ContextMenuScrollObject = ScrollObject(Vector2(1.f, -0.25f), Vector2(0.3, 0.75), 15);
-	friend WorldObject;
 };

@@ -2,12 +2,15 @@
 #include <AL/al.h>
 #include <FileUtility.h>
 #include <AL/alc.h>
-#include <WorldParameters.h>
 #include "AL/alext.h"
 #include <fstream>
 #include <sstream>
 #include <cmath>
 #include <Log.h>
+#include <Rendering/Camera/Camera.h>
+#include <World/Assets.h>
+#include <iostream>
+#include <World/Graphics.h>
 struct Source
 {
 	Source(ALuint AudioSource, float Pitch, float Volume, bool Looping, bool Is3D, Vector3 Location, float Distance, std::string Name)

@@ -1,5 +1,5 @@
 #include "Objects.h"
-#include <World.h>
+#include <Scene.h>
 #include <Objects/MeshObject.h>
 #include <Objects/SoundObject.h>
 #include <Objects/InstancedMeshObject.h>

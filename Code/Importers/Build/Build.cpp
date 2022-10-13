@@ -1,11 +1,11 @@
 #include "Build.h"
 #include <filesystem>
-#include <WorldParameters.h>
 #include <Importers/Build/Pack.h>
 #include <Log.h>
 #include <Engine.h>
 #include <fstream>
 #include <sstream>
+#include <World/Stats.h>
 
 #define VS_INSTALL_PATH "G:/Data/VisualStudio/Common7/IDE/devenv.exe "
 

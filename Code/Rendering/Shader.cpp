@@ -91,14 +91,17 @@ GLuint Shader::CreateShader(const char* VertexShader, const char* FragmentShader
 {
 	std::string vertexCode;
 	std::string fragmentCode;
+	std::string sharedCode;
 	std::string geometryCode;
 	std::ifstream vShaderFile;
 	std::ifstream fShaderFile;
+	std::ifstream fSharedFile;
 	std::ifstream gShaderFile;
 	// ensure ifstream objects can throw exceptions:
 	vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	gShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+	fSharedFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
 	if (EngineDebug || IsInEditor)
 	{
@@ -108,16 +111,20 @@ GLuint Shader::CreateShader(const char* VertexShader, const char* FragmentShader
 			// open files
 			vShaderFile.open(VertexShader);
 			fShaderFile.open(FragmentShader);
-			std::stringstream vShaderStream, fShaderStream;
+			fSharedFile.open("Shaders/shared.frag");
+			std::stringstream vShaderStream, fShaderStream, fSharedStream;
 			// read file's buffer contents into streams
 			vShaderStream << vShaderFile.rdbuf();
 			fShaderStream << fShaderFile.rdbuf();
+			fSharedStream << fSharedFile.rdbuf();
 			// close file handlers
 			vShaderFile.close();
 			fShaderFile.close();
+			fSharedFile.close();
 			// convert stream into string
 			vertexCode = vShaderStream.str();
 			fragmentCode = fShaderStream.str();
+			sharedCode = fSharedStream.str();
 			// if geometry shader path is present, also load a geometry shader
 			if (GeometryShader != nullptr)
 			{
@@ -137,12 +144,15 @@ GLuint Shader::CreateShader(const char* VertexShader, const char* FragmentShader
 	{
 		vertexCode = Pack::GetFile(VertexShader);
 		fragmentCode = Pack::GetFile(FragmentShader);
+		sharedCode = Pack::GetFile(FragmentShader);
 		// if geometry shader path is present, also load a geometry shader
 		if (GeometryShader != nullptr)
 		{
 			geometryCode = Pack::GetFile(GeometryShader);
 		}
 	}
+	if(fragmentCode.substr(0, 3) == "//!")
+	fragmentCode = sharedCode + fragmentCode;
 	const char* vShaderCode = vertexCode.c_str();
 	const char* fShaderCode = fragmentCode.c_str();
 	// 2. compile shaders
@@ -156,7 +166,8 @@ GLuint Shader::CreateShader(const char* VertexShader, const char* FragmentShader
 	fragment = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragment, 1, &fShaderCode, NULL);
 	glCompileShader(fragment);
-	checkCompileErrors(fragment, "FRAGMENT", FragmentShader);
+	checkCompileErrors(fragment, "FRAGMENT", fShaderCode);
+	// fragment common functions Shader
 	// if geometry shader is given, compile geometry shader
 	unsigned int geometry;
 	if (GeometryShader != nullptr)
@@ -198,6 +209,8 @@ void Shader::checkCompileErrors(GLuint shader, std::string type, std::string Sha
 
 			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
 			std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n INFO LOG: \n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+			std::cin.get();
+
 		}
 	}
 	else
@@ -209,6 +222,8 @@ void Shader::checkCompileErrors(GLuint shader, std::string type, std::string Sha
 
 			glGetProgramInfoLog(shader, 1024, NULL, infoLog);
 			std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n INFO LOG: \n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+			std::cin.get();
+
 		}
 	}
 }

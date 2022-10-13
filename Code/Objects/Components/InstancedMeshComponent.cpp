@@ -1,6 +1,6 @@
 #include "InstancedMeshComponent.h"
-#include <WorldParameters.h>
-
+#include <World/Graphics.h>
+#include <World/Assets.h>
 InstancedMeshComponent::InstancedMeshComponent(std::string File)
 {
 	Mesh = new InstancedModel(Assets::GetAsset(File));

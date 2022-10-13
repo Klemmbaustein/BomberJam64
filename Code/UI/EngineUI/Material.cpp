@@ -4,6 +4,7 @@
 #include <fstream>
 #include <filesystem>
 #include <Log.h>
+#include <World/Assets.h>
 namespace fs = std::filesystem;
 
 bool Material_DoSafeUpdate = false;

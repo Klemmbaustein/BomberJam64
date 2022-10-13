@@ -1,4 +1,4 @@
-#include "World.h"
+#include "Scene.h"
 #include "FileUtility.h"
 #include <filesystem>
 #include <Objects/Objects.h>
@@ -6,6 +6,10 @@
 #include <Log.h>
 #include <Sound/Sound.h>
 #include <UI/Default/UICanvas.h>
+#include <World/Assets.h>
+#include <World/Graphics.h>
+#include <World/Stats.h>
+#include <Input.h>
 namespace fs = std::filesystem;
 
 

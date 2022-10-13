@@ -1,6 +1,7 @@
 #pragma once
 #include <Objects/WorldObject.h>
 #include <Objects/Components/MeshComponent.h>
+#include <Objects/Components/PointLightComponent.h>
 
 class Bomb : public WorldObject
 {
@@ -16,4 +17,5 @@ protected:
 	float DetonationTime = 1.0f;
 	MeshComponent* BombMesh = nullptr;
 	MeshComponent* ExplosionMesh = nullptr;
+	PointLightComponent* PointLight = nullptr;
 };

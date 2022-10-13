@@ -1,5 +1,9 @@
 #include "CSM.h"
-#include <WorldParameters.h>
+#include <Rendering/Camera/Camera.h>
+#include <World/Graphics.h>
+#include <iostream>
+#include <cmath>
+
 namespace CSM
 {
 	const float cameraFarPlane = 800.f;
