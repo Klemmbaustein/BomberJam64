@@ -1,5 +1,4 @@
 #include "ShaderManager.h"
-#include <WorldParameters.h>
 #include <Log.h>
 
 std::map<ShaderDescription, ShaderElement> Shaders;

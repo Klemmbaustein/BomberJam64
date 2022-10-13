@@ -3,13 +3,15 @@
 #include <fstream>
 #include <vector>
 #include <iostream>
-#include "WorldParameters.h"
 #include "Rendering/Camera/Camera.h"
 #include <filesystem>
 #include <Rendering/Utility/ShaderManager.h>
 #include <Log.h>
 #include <UI/EngineUI/MaterialFunctions.h>
 #include <Rendering/Mesh/JSModel.h>
+#include <World/Graphics.h>
+#include <World/Stats.h>
+#include <World/Assets.h>
 namespace fs = std::filesystem;
 
 const extern bool IsInEditor;

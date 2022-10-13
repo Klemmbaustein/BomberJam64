@@ -1,5 +1,4 @@
 #include "ModelConverter.h"
-#include "WorldParameters.h"
 #include <filesystem>
 #include <Log.h>
 namespace fs = std::filesystem;
@@ -10,7 +9,7 @@ std::vector<ImportMesh> Meshes;
 void ProcessMesh(aiMesh* Mesh, const aiScene* Scene)
 {
 	ImportMesh m;
-	for (Uint32 i = 0; i < Mesh->mNumVertices; i++)
+	for (uint32_t i = 0; i < Mesh->mNumVertices; i++)
 	{
 		m.Positions.push_back(Vector3(Mesh->mVertices[i].x, Mesh->mVertices[i].y, Mesh->mVertices[i].z));
 		m.Normals.push_back(Vector3(Mesh->mNormals[i].x, Mesh->mNormals[i].y, Mesh->mNormals[i].z));
@@ -19,7 +18,7 @@ void ProcessMesh(aiMesh* Mesh, const aiScene* Scene)
 		else m.UVs.push_back(Vector2());
 	}
 
-	for (Uint32 i = 0; i < Mesh->mNumFaces; i++)
+	for (uint32_t i = 0; i < Mesh->mNumFaces; i++)
 	{
 
 		aiFace Face = Mesh->mFaces[i];
@@ -40,13 +39,13 @@ void ProcessMaterials(const aiScene* Scene)
 
 void ProcessNode(aiNode* Node, const aiScene* Scene)
 {
-	for (Uint32 i = 0; i < Node->mNumMeshes; i++)
+	for (uint32_t i = 0; i < Node->mNumMeshes; i++)
 	{
 		aiMesh* Mesh = Scene->mMeshes[Node->mMeshes[i]];
 		ProcessMesh(Mesh, Scene);
 	}
 
-	for (Uint32 i = 0; i < Node->mNumChildren; i++)
+	for (uint32_t i = 0; i < Node->mNumChildren; i++)
 	{
 		ProcessNode(Node->mChildren[i], Scene);
 	}

@@ -1,5 +1,6 @@
 #include "BombPickup.h"
 #include <Rendering/Mesh/JSModel.h>
+#include <World/Assets.h>
 
 void BombPickup::Begin()
 {

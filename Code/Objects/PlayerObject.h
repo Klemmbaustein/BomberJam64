@@ -6,8 +6,6 @@
 #include <UI/Game/GameUI.h>
 
 constexpr unsigned int PLAYER_NUM_ANIM_FRAMES = 10;
-
-
 class PlayerObject : public WorldObject
 {
 public:

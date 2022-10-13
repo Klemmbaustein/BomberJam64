@@ -1,6 +1,8 @@
 #include "OrbGate.h"
 #include <Save.h>
 #include <Log.h>
+#include <World/Stats.h>
+
 std::vector<std::string> Textures =
 {
 	"Gates_X10",

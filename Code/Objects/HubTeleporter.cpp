@@ -1,5 +1,6 @@
 #include "HubTeleporter.h"
 #include <Rendering/Mesh/JSModel.h>
+#include <World/Assets.h>
 
 void HubTeleporter::Begin()
 {

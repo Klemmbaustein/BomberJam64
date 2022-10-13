@@ -1,5 +1,7 @@
-#include "WorldParameters.h"
-#include <string>
+#include <World/Assets.h>
+#include <World/Graphics.h>
+#include <World/Stats.h>
+
 #include <fstream>
 #include "Objects/MeshObject.h"
 #include <iostream>
@@ -8,9 +10,12 @@
 #include "Engine.h"
 #include <UI/Default/ScrollObject.h>
 #include <FileUtility.h>
-#include <World.h>
+#include <Scene.h>
 #include <Rendering/Utility/SSAO.h>
 #include <Log.h>
+
+#include <SDL.h>
+
 namespace Engine
 {
 	std::string CurrentProjectName = ProjectName;
@@ -18,6 +23,7 @@ namespace Engine
 }
 namespace Graphics
 {
+	std::vector<Light> Lights;
 	Sun WorldSun;
 	Fog WorldFog;
 	unsigned int ShadowResolution = 2000;
@@ -51,7 +57,6 @@ namespace Graphics
 	Shader* TextShader;
 	Shader* UIShader;
 	Vector3 LightRotation = Vector3(0.5f, 0.8f, 0.7f);
-	Vector2 MouseLocation;
 	std::vector<CollisionComponent*> Objects;
 	bool IsRenderingShadows = false;
 	namespace UI
@@ -137,14 +142,11 @@ namespace Objects
 	}
 }
 
-float Time = 0;
-
-namespace Input
+namespace Stats
 {
-	Vector2 MouseLocation = Vector2(-2);
-	bool CursorVisible = false;
-	bool Keys[351];
+	float Time = 0;
 }
+
 
 namespace TextInput
 {

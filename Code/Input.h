@@ -1,5 +1,8 @@
 #pragma once
 #include <Math/Vector.h>
+#ifndef SDL_MAIN_HANDLED
+#define SDL_MAIN_HANDLED
+#endif
 #include <SDL.h>
 
 namespace Input
@@ -10,4 +13,11 @@ namespace Input
 	extern bool IsLMBDown;
 	extern bool IsRMBDown;
 	extern bool CursorVisible;
+	extern Vector2 MouseLocation;
+}
+
+namespace TextInput
+{
+	extern bool PollForText;
+	extern std::string Text;
 }

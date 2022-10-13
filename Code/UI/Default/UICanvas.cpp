@@ -1,5 +1,4 @@
 #include "UICanvas.h"
-#include "WorldParameters.h"
 
 void UICanvas::OnButtonClicked(int Index)
 {

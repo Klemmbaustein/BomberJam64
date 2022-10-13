@@ -8,6 +8,10 @@
 #include <Objects/WallObject.h>
 #include <Objects/PlayerObject.h>
 
+#include <World/Graphics.h>
+#include <World/Stats.h>
+#include <World/Assets.h>
+
 Sound::SoundBuffer* BombSound = nullptr;
 
 void Bomb::Begin()

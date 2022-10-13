@@ -1,11 +1,12 @@
 #include "UI/Default/UICanvas.h"
 #include "TextField.h"
-#include "WorldParameters.h"
+#include "World/Graphics.h"
 #include "Math/Math.h"
 #include <Timer.h>
 #include <Input.h>
 #include "VectorInputField.h"
 #include <UI/Default/ScrollObject.h>
+#include <Input.h>
 bool CurrentLineDisplayVisible = false;
 
 bool TextFieldInitialized = false;

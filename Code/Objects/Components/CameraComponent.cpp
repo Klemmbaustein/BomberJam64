@@ -1,5 +1,6 @@
 #pragma once
 #include "CameraComponent.h"
+#include <World/Stats.h>
 
 void CameraComponent::Start(WorldObject* Parent)
 {

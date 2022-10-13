@@ -1,6 +1,7 @@
 #include "Snowman.h"
 #include <Objects/Components/MeshComponent.h>
 #include <Objects/Components/CollisionComponent.h>
+#include <World/Stats.h>
 void Snowman::Begin()
 {
 	MeshComponent* NewMeshComponent = new MeshComponent();

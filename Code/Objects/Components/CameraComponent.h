@@ -1,6 +1,7 @@
 #pragma once
 #include <Objects/Components/Component.h>
-#include <WorldParameters.h>
+#include <World/Graphics.h>
+#include <Rendering/Camera/Camera.h>
 
 class CameraComponent : public Component
 {

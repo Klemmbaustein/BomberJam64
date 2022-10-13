@@ -1,6 +1,7 @@
 #include <UI/Default/ScrollObject.h>
-#include <WorldParameters.h>
 #include <Math/Math.h>
+#include <World/Graphics.h>
+#include <Input.h>
 
 
 ScrollObject::ScrollObject(Vector2 Position, Vector2 Scale, float MaxScroll)

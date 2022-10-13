@@ -46,9 +46,6 @@
     <Filter Include="Code\FileUtility\Importers\Build">
       <UniqueIdentifier>{131ad89e-2c57-41fd-b4ab-83cdb7640c7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Code\Sound">
-      <UniqueIdentifier>{41f44cc7-e4bf-4803-9888-4396a73fec50}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Code\Math">
       <UniqueIdentifier>{7152b9f5-4925-4d9d-a503-4eeedd4b7da2}</UniqueIdentifier>
     </Filter>
@@ -85,15 +82,18 @@
     <Filter Include="Code\Objects\Mesh">
       <UniqueIdentifier>{8e30d366-4d97-465b-a018-aa188e9e2ec4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Code\World">
+      <UniqueIdentifier>{b2edb64d-e3c8-4da8-8df1-33d33b7598ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Sound">
+      <UniqueIdentifier>{41f44cc7-e4bf-4803-9888-4396a73fec50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\main.cpp">
       <Filter>Code</Filter>
     </ClCompile>
-    <ClCompile Include="Code\World.cpp">
-      <Filter>Code</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\WorldParameters.cpp">
+    <ClCompile Include="Code\Scene.cpp">
       <Filter>Code</Filter>
     </ClCompile>
     <ClCompile Include="Code\Input.cpp">
@@ -288,15 +288,15 @@
     <ClCompile Include="Code\OS.cpp">
       <Filter>Code</Filter>
     </ClCompile>
+    <ClCompile Include="Code\World\World.cpp">
+      <Filter>Code\World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\TypeEnun.h">
       <Filter>Code</Filter>
     </ClInclude>
-    <ClInclude Include="Code\World.h">
-      <Filter>Code</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\WorldParameters.h">
+    <ClInclude Include="Code\Scene.h">
       <Filter>Code</Filter>
     </ClInclude>
     <ClInclude Include="Code\Log.h">
@@ -521,6 +521,15 @@
     <ClInclude Include="Code\OS.h">
       <Filter>Code</Filter>
     </ClInclude>
+    <ClInclude Include="Code\World\Graphics.h">
+      <Filter>Code\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\World\Stats.h">
+      <Filter>Code\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\World\Assets.h">
+      <Filter>Code\World</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\basic.frag">
@@ -587,6 +596,9 @@
       <Filter>Shaders\3D</Filter>
     </None>
     <None Include="Shaders\explosion.vert">
+      <Filter>Shaders\3D</Filter>
+    </None>
+    <None Include="Shaders\shared.frag">
       <Filter>Shaders\3D</Filter>
     </None>
   </ItemGroup>

@@ -1,5 +1,8 @@
 #include "MeshComponent.h"
 #include <Rendering/Mesh/Model.h>
+#include <World/Graphics.h>
+#include <World/Assets.h>
+
 void MeshComponent::Start(WorldObject* Parent)
 {
 	if (MeshModel)

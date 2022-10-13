@@ -1,5 +1,4 @@
 #include "MeshObject.h"
-#include "WorldParameters.h"
 
 
 void MeshObject::Destroy()

@@ -1,6 +1,5 @@
 #include "Collision.h"
 #include <algorithm>
-#include "WorldParameters.h"
 #include <Math/Collision/TriangleIntersect.h>
 #include <Objects/Components/CollisionComponent.h>
 #include <Log.h>

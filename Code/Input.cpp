@@ -1,5 +1,11 @@
-#include "WorldParameters.h"
 #include "Input.h"
+
+namespace Input
+{
+	Vector2 MouseLocation = Vector2(-2);
+	bool CursorVisible = false;
+	bool Keys[351];
+}
 
 bool Input::IsKeyDown(int Key)
 {
@@ -15,6 +21,5 @@ namespace Input
 {
 	bool IsLMBDown = false;
 	bool IsRMBDown = false;
+	Vector2 Input::MouseMovement;
 }
-
-Vector2 Input::MouseMovement;

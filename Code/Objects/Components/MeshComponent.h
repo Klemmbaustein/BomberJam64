@@ -1,6 +1,5 @@
 #pragma once
 #include <Objects/Components/Component.h>
-#include <WorldParameters.h>
 #include <Rendering/Mesh/Model.h>
 
 enum UniformType

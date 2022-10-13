@@ -2,16 +2,19 @@
 #include "UI/Default/UICanvas.h"
 #include "UI/Default/TextRenderer.h"
 #include "UI/Default/UIButton.h"
-#include "WorldParameters.h"
 #include <UI/Default/TextField.h>
 #include <UI/EngineUI/MaterialTemplate.h>
 #include <UI/EngineUI/EngineTab.h>
-#include <memory>
 #include "Material.h"
 #include "EngineContextMenu.h"
 #include "MeshTab.h"
 #include "AddNewItemTab.h"
 #include <UI/Default/ScrollObject.h>
+
+#ifndef SDL_MAIN_HANDLED
+#define SDL_MAIN_HANDLED
+#endif
+
 #include <SDL.h>
 #include <thread>
 

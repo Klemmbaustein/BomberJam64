@@ -7,7 +7,6 @@
 #include <fstream>
 #include <Rendering/Texture/Texture.h>
 #include <iostream>
-#include <WorldParameters.h>
 
 InstancedMesh::InstancedMesh(std::vector<Vertex> Vertices, std::vector<int> Indices)
 {

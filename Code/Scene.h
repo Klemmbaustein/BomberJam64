@@ -1,6 +1,5 @@
 #pragma once
 #include "Objects/WorldObject.h"
-#include "WorldParameters.h"
 #include <fstream>
 #include <Objects/MeshObject.h>
 

@@ -5,6 +5,11 @@
 #include <FileUtility.h>
 #include <UI/Default/ScrollObject.h>
 #include <Log.h>
+#include <Rendering/Shader.h>
+#include <SDL.h>
+#include <World/Stats.h>
+#include <World/Graphics.h>
+
 std::vector<TextRenderer*> Renderers;
 TextRenderer::TextRenderer(std::string filename, float CharacterSizeInPixels)
 {
