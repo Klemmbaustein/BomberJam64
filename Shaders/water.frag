@@ -47,7 +47,7 @@ vec4 ApplyFogColor(vec4 InColor)
 void main()
 {
 	vec3 view = normalize(v_position.xyz - u_cameraposition.xyz);
-	vec3 normal = texture(u_normal, v_texcoord * 50.f).rgb;
+	vec3 normal = texture(u_normal, v_texcoord * 5.f).rgb;
 	normal = normalize(normal * 2.0 - 1.0f);
 	normal = vec3(normal.x, normal.y, 1 -normal.z);
 	normal = normalize(v_normal + normal);

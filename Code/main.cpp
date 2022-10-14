@@ -813,16 +813,16 @@ int Start(int argc, char** argv)
 				Vector3 CameraForward = Vector3::GetForwardVector(Graphics::MainCamera->Rotation);
 				glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_cameraforward"), 1, &CameraForward.X);
 				glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_cameraposition"), 1, &Graphics::MainCamera->Position.x);
-				glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_shadowQuality"), Graphics::PCFQuality);
-				glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_shadows"), 1);
-				glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "FogFalloff"), Graphics::WorldFog.Falloff);
-				glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "FogDistance"), Graphics::WorldFog.Distance);
-				glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "FogMaxDensity"), Graphics::WorldFog.MaxDensity);
+				glUniform1i (glGetUniformLocation(s.second.Shader->GetShaderID(), "u_shadowQuality"), Graphics::PCFQuality);
+				glUniform1i (glGetUniformLocation(s.second.Shader->GetShaderID(), "u_shadows"), 1);
+				glUniform1f (glGetUniformLocation(s.second.Shader->GetShaderID(), "FogFalloff"), Graphics::WorldFog.Falloff);
+				glUniform1f (glGetUniformLocation(s.second.Shader->GetShaderID(), "FogDistance"), Graphics::WorldFog.Distance);
+				glUniform1f (glGetUniformLocation(s.second.Shader->GetShaderID(), "FogMaxDensity"), Graphics::WorldFog.MaxDensity);
 				glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "FogColor"), 1, &Graphics::WorldFog.FogColor.X);
 
 				glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.Direction"), 1, &Graphics::WorldSun.Direction.X);
-				glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.Intensity"), Graphics::WorldSun.Intensity);
-				glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.AmbientIntensity"), Graphics::WorldSun.AmbientIntensity);
+				glUniform1f (glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.Intensity"), Graphics::WorldSun.Intensity);
+				glUniform1f (glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.AmbientIntensity"), Graphics::WorldSun.AmbientIntensity);
 				glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.SunColor"), 1, &Graphics::WorldSun.SunColor.X);
 				glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.AmbientColor"), 1, &Graphics::WorldSun.AmbientColor.X);
 
@@ -867,7 +867,6 @@ int Start(int argc, char** argv)
 				Graphics::ModelsToRender[i]->Render(Graphics::MainCamera);
 			}
 		}
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 #if IS_IN_EDITOR
 

@@ -3,7 +3,7 @@ basic.vert
 basic.frag
 0
 u_diffuse;3;0.200000 0.200000 1.000000
-u_emissive;3;0.500000 0.500000 2.000000
+u_emissive;3;1.000000 1.000000 3.000000
 u_specularsize;1;0.0
 u_specularstrength;1;0.0
 u_usetexture;0;0

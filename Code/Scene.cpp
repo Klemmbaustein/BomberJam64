@@ -53,6 +53,8 @@ namespace World
 				{
 				}
 			}
+
+			Graphics::Lights.clear();
 			Objects::AllObjects.clear();
 			Graphics::ModelsToRender.clear();
 			Collision::CollisionBoxes.clear();

@@ -105,46 +105,38 @@ GLuint Shader::CreateShader(const char* VertexShader, const char* FragmentShader
 
 	if (EngineDebug || IsInEditor)
 	{
-
-		try
+		// open files
+		vShaderFile.open(VertexShader);
+		fShaderFile.open(FragmentShader);
+		fSharedFile.open("Shaders/shared.frag");
+		std::stringstream vShaderStream, fShaderStream, fSharedStream;
+		// read file's buffer contents into streams
+		vShaderStream << vShaderFile.rdbuf();
+		fShaderStream << fShaderFile.rdbuf();
+		fSharedStream << fSharedFile.rdbuf();
+		// close file handlers
+		vShaderFile.close();
+		fShaderFile.close();
+		fSharedFile.close();
+		// convert stream into string
+		vertexCode = vShaderStream.str();
+		fragmentCode = fShaderStream.str();
+		sharedCode = fSharedStream.str();
+		// if geometry shader path is present, also load a geometry shader
+		if (GeometryShader != nullptr)
 		{
-			// open files
-			vShaderFile.open(VertexShader);
-			fShaderFile.open(FragmentShader);
-			fSharedFile.open("Shaders/shared.frag");
-			std::stringstream vShaderStream, fShaderStream, fSharedStream;
-			// read file's buffer contents into streams
-			vShaderStream << vShaderFile.rdbuf();
-			fShaderStream << fShaderFile.rdbuf();
-			fSharedStream << fSharedFile.rdbuf();
-			// close file handlers
-			vShaderFile.close();
-			fShaderFile.close();
-			fSharedFile.close();
-			// convert stream into string
-			vertexCode = vShaderStream.str();
-			fragmentCode = fShaderStream.str();
-			sharedCode = fSharedStream.str();
-			// if geometry shader path is present, also load a geometry shader
-			if (GeometryShader != nullptr)
-			{
-				gShaderFile.open(GeometryShader);
-				std::stringstream gShaderStream;
-				gShaderStream << gShaderFile.rdbuf();
-				gShaderFile.close();
-				geometryCode = gShaderStream.str();
-			}
-		}
-		catch (std::ifstream::failure& e)
-		{
-			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ: " << e.what() << std::endl;
+			gShaderFile.open(GeometryShader);
+			std::stringstream gShaderStream;
+			gShaderStream << gShaderFile.rdbuf();
+			gShaderFile.close();
+			geometryCode = gShaderStream.str();
 		}
 	}
 	else
 	{
 		vertexCode = Pack::GetFile(VertexShader);
 		fragmentCode = Pack::GetFile(FragmentShader);
-		sharedCode = Pack::GetFile(FragmentShader);
+		sharedCode = Pack::GetFile("shared.frag");
 		// if geometry shader path is present, also load a geometry shader
 		if (GeometryShader != nullptr)
 		{

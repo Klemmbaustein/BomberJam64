@@ -117,7 +117,7 @@ void main()
 		}
 		//color = vec4(vec3(blurssao()), 1); //view SSAO buffer
 
-		float bloomstrength = min(length(bloomcolor), 1) / 15.f;
+		float bloomstrength = min(length(bloomcolor), 1) / 10.f;
 		vec4 enginearrows = texture(u_enginearrows, v_texcoords);
 		f_color = pow(vec4(mix(color.xyz, mix(bloomcolor, vec3(1), 0.5f) * 2.f, bloomstrength) + outlinecolor, color.w), vec4(u_gamma));
 
