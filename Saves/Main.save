@@ -1,2 +1,2 @@
-string CurrentMap = Level2
+string CurrentMap = Hub
 int OrbsCollected = 55
