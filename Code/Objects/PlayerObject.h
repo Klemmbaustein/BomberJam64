@@ -24,11 +24,12 @@ public:
 	float BombTime = 0.0f;
 	uint32_t NumOrbs = 0;
 	float Health = 100.0f;
+	GameUI* UI = nullptr;
+
 protected:
 	void TryLoadSave();
 
 	Vector3 SpawnPoint;
-	GameUI* UI = nullptr;
 	CollisionComponent* PlayerCollider = nullptr;
 	CollisionComponent* PlayerCollider2 = nullptr;
 	CameraComponent* PlayerCamera = nullptr;

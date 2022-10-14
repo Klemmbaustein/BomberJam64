@@ -3,6 +3,7 @@
 #include <Rendering/Texture/Texture.h>
 #include <EngineRandom.h>
 
+#include <Objects/Objects.h>
 #include <World/Stats.h>
 
 namespace Application
@@ -34,9 +35,10 @@ std::string EndCutsceneStrings[NUM_CUTSCENE_STRINGS] =
 	"You have found a new backpack!",
 	"Now you will no longer have to drop bombs.",
 	"That makes you happy.",
-	"The End      ...?",
-	"(Yes.)"
+	"The End.",
 };
+
+bool CutsceneIsEnd = false;
 
 float EndTimer = 0.0f;
 
@@ -56,43 +58,61 @@ void GameUI::Render(Shader* Shader)
 		TransitionTime += Performance::DeltaTime * (TransitionDirection ? -3 : 3);
 		if (TransitionTime > 2)
 		{
-			if (!InEndCutscene)
+			for (auto* b : Objects::GetAllObjectsWithID(5))
+			{
+				Objects::DestroyObject(b);
+			}
+			if (!InCutscene)
 			{
 				EndTransition();
 				Player->Respawn();
 			}
 			else
 			{
-				EndTimer += Performance::DeltaTime;
-				if (EndTimer > 0.1f && EndCutsceneStrings[CurrentEndLine].length() > CurrentEndLetter)
+				if (CutsceneIsEnd)
 				{
-					CurrentEndLetter++;
-					EndTimer = 0.0f;
-					if (EndCutsceneStrings[CurrentEndLine][CurrentEndLetter] != ' ')
-					Sound::PlaySound2D(TextSound, Random::GetRandomNumber(1.1f, 1.5f), 0.02f);
-				}
-				else if (EndTimer > 0.5f && CurrentEndLine < NUM_CUTSCENE_STRINGS)
-				{
-					CurrentEndLine++;
-					CurrentEndLetter = 0;
-					EndTimer = 0.0f;
-				}
-				else if (EndTimer > 5)
-				{
-					Application::Quit();
-				}
-				for (unsigned int i = 0; i < NUM_CUTSCENE_STRINGS; i++)
-				{
-					if (i <= CurrentEndLine)
+					EndTimer += Performance::DeltaTime;
+					if (EndTimer > 0.1f && EndCutsceneStrings[CurrentEndLine].length() > CurrentEndLetter)
 					{
-						if (i == CurrentEndLine)
+						CurrentEndLetter++;
+						EndTimer = 0.0f;
+						if (EndCutsceneStrings[CurrentEndLine][CurrentEndLetter] != ' ')
+							Sound::PlaySound2D(TextSound, Random::GetRandomNumber(1.1f, 1.5f), 0.02f);
+					}
+					else if (EndTimer > 0.5f && CurrentEndLine < NUM_CUTSCENE_STRINGS)
+					{
+						CurrentEndLine++;
+						CurrentEndLetter = 0;
+						EndTimer = 0.0f;
+					}
+					else if (EndTimer > 5)
+					{
+						Application::Quit();
+					}
+					for (unsigned int i = 0; i < NUM_CUTSCENE_STRINGS; i++)
+					{
+						if (i <= CurrentEndLine)
 						{
-							GameTextRenderer->RenderText(EndCutsceneStrings[i].substr(0, CurrentEndLetter), Vector2(-0.5f, 0.25f - (i / 8.f)), 0.9f, 1.f);
+							if (i == CurrentEndLine)
+							{
+								GameTextRenderer->RenderText(EndCutsceneStrings[i].substr(0, CurrentEndLetter), Vector2(-0.5f, 0.25f - (i / 8.f)), 0.9f, 1.f);
+							}
+							else
+							{
+								GameTextRenderer->RenderText(EndCutsceneStrings[i], Vector2(-0.5f, 0.25f - (i / 8.f)), 0.9f, 1.f);
+							}
 						}
-						else
-						{
-							GameTextRenderer->RenderText(EndCutsceneStrings[i], Vector2(-0.5f, 0.25f - (i / 8.f)), 0.9f, 1.f);
-						}
+					}
+				}
+				else
+				{
+					Player->BombTime = 0;
+					GameTextRenderer->RenderText("Do not destroy the snowmen", Vector2(-0.5f, 0.2f), 1.5f, 1.f);
+					if (TransitionTime > 7)
+					{
+						EndTransition();
+						Player->Respawn();
+						InCutscene = false;
 					}
 				}
 			}
@@ -120,9 +140,20 @@ void GameUI::EndTransition()
 
 void GameUI::PlayEndCutscene()
 {
-	if (!InEndCutscene)
+	if (!InCutscene)
 	{
-		InEndCutscene = true;
+		CutsceneIsEnd = true;
+		InCutscene = true;
+		PlayTransition();
+	}
+}
+
+void GameUI::RespawnSnowman()
+{
+	if (!InCutscene)
+	{
+		InCutscene = true;
+		CutsceneIsEnd = false;
 		PlayTransition();
 	}
 }

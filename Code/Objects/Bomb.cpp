@@ -66,7 +66,7 @@ void Bomb::Tick()
 			{
 				if (Vector3::Distance(o->GetTransform().Location, GetTransform().Location) < 13)
 				{
-					Player->Health = -100.0f; //Player is dead :(
+					Player->UI->RespawnSnowman();
 				}
 			}
 

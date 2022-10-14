@@ -15,13 +15,14 @@ public:
 	void PlayTransition();
 	void EndTransition();
 
+	void RespawnSnowman();
 	void PlayEndCutscene();
 
 protected:
 	unsigned int Icons[2];
 	Sound::SoundBuffer* TextSound = Sound::LoadSound("Walk");
 
-	bool InEndCutscene = false;
+	bool InCutscene = false;
 	bool InTransition = false;
 	bool TransitionDirection = false;
 	float TransitionTime = 0;
