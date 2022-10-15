@@ -49,9 +49,6 @@ namespace World
 				{
 					Objects::DestroyObject(Objects::AllObjects[i]);
 				}
-				else
-				{
-				}
 			}
 
 			Graphics::Lights.clear();
