@@ -6,7 +6,7 @@
 class VectorInputField : public UIBorder
 {
 public:
-	VectorInputField(Vector2 Position, Vector2 Scale, Vector3 Color, int Index, TextRenderer* TextRenderer, UIBorder* ParentUI, Vector3 StartValue = Vector3()) : UIBorder(Position, Scale, Color)
+	VectorInputField(Vector2 Position, int Index, TextRenderer* TextRenderer, UIBorder* ParentUI, Vector3 StartValue = Vector3()) : UIBorder(Position, Vector2(0.045f, 0.08), Vector3(0.12f))
 	{
 		Position += Vector2(0.03f, 0.f);
 		Value = StartValue;

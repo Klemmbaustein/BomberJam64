@@ -401,9 +401,11 @@
     <ClCompile Include="Code\Rendering\Mesh\JSModel.cpp" />
     <ClCompile Include="Code\Rendering\Mesh\Mesh.cpp" />
     <ClCompile Include="Code\Rendering\Mesh\Model.cpp" />
+    <ClCompile Include="Code\Rendering\Particle.cpp" />
     <ClCompile Include="Code\Rendering\Shader.cpp" />
     <ClCompile Include="Code\Rendering\Texture\Texture.cpp" />
     <ClCompile Include="Code\Rendering\Utility\CSM.cpp" />
+    <ClCompile Include="Code\Rendering\Utility\Framebuffer.cpp" />
     <ClCompile Include="Code\Rendering\Utility\ShaderManager.cpp" />
     <ClCompile Include="Code\Rendering\Utility\SSAO.cpp" />
     <ClCompile Include="Code\Save.cpp" />
@@ -424,6 +426,7 @@
     <ClCompile Include="Code\UI\EngineUI\MaterialFunctions.cpp" />
     <ClCompile Include="Code\UI\EngineUI\MaterialTemplate.cpp" />
     <ClCompile Include="Code\UI\EngineUI\MeshTab.cpp" />
+    <ClCompile Include="Code\UI\EngineUI\ParticleEditorTab.cpp" />
     <ClCompile Include="Code\UI\Game\GameUI.cpp" />
     <ClCompile Include="Code\Scene.cpp" />
     <ClCompile Include="Code\World\World.cpp" />
@@ -447,6 +450,7 @@
     <ClInclude Include="Code\Objects\Backpack.h" />
     <ClInclude Include="Code\Objects\Bomb.h" />
     <ClInclude Include="Code\Objects\BombPickup.h" />
+    <ClInclude Include="Code\Objects\Components\ParticleComponent.h" />
     <ClInclude Include="Code\Objects\Components\PointLightComponent.h" />
     <ClInclude Include="Code\Objects\HubTeleporter.h" />
     <ClInclude Include="Code\Objects\Orb.h" />
@@ -473,6 +477,7 @@
     <ClInclude Include="Code\Rendering\Mesh\JSModel.h" />
     <ClInclude Include="Code\Rendering\Mesh\Mesh.h" />
     <ClInclude Include="Code\Rendering\Mesh\Model.h" />
+    <ClInclude Include="Code\Rendering\Particle.h" />
     <ClInclude Include="Code\Rendering\Renderable.h" />
     <ClInclude Include="Code\Rendering\Shader.h" />
     <ClInclude Include="Code\Rendering\Texture\Texture.h" />
@@ -503,6 +508,7 @@
     <ClInclude Include="Code\UI\EngineUI\MaterialFunctions.h" />
     <ClInclude Include="Code\UI\EngineUI\MaterialTemplate.h" />
     <ClInclude Include="Code\UI\EngineUI\MeshTab.h" />
+    <ClInclude Include="Code\UI\EngineUI\ParticleEditorTab.h" />
     <ClInclude Include="Code\UI\Game\GameUI.h" />
     <ClInclude Include="Code\UI\UI.h" />
     <ClInclude Include="Code\Scene.h" />

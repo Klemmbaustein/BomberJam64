@@ -6,7 +6,7 @@
 class CameraComponent : public Component
 {
 public:
-	virtual void Start(WorldObject* Parent) override;
+	virtual void Start() override;
 	virtual void Tick() override;
 	virtual void Destroy() override;
 

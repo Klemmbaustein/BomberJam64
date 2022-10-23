@@ -1,15 +1,15 @@
 #include "InstancedMeshComponent.h"
 #include <World/Graphics.h>
 #include <World/Assets.h>
+#include <Rendering/Utility/Framebuffer.h>
 InstancedMeshComponent::InstancedMeshComponent(std::string File)
 {
 	Mesh = new InstancedModel(Assets::GetAsset(File));
-	Graphics::ModelsToRender.push_back(Mesh);
+	Graphics::MainFramebuffer->Renderables.push_back(Mesh);
 }
 
-void InstancedMeshComponent::Start(WorldObject* Parent)
+void InstancedMeshComponent::Start()
 {
-	this->Parent = Parent;
 }
 
 void InstancedMeshComponent::Tick()
@@ -18,11 +18,14 @@ void InstancedMeshComponent::Tick()
 
 void InstancedMeshComponent::Destroy()
 {
-	for (int i = 0; i < Graphics::ModelsToRender.size(); i++)
+	for (auto* f : Graphics::AllFramebuffers)
 	{
-		if (Mesh == Graphics::ModelsToRender[i])
+		for (int i = 0; i < f->Renderables.size(); i++)
 		{
-			Graphics::ModelsToRender.erase(Graphics::ModelsToRender.begin() + i);
+			if (Mesh == f->Renderables[i])
+			{
+				f->Renderables.erase(f->Renderables.begin() + i);
+			}
 		}
 	}
 	delete Mesh;

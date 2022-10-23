@@ -14,7 +14,7 @@ enum UniformType
 class MeshComponent : public Component
 {
 public:
-	virtual void Start(WorldObject* Parent) override;
+	virtual void Start() override;
 	virtual void Tick() override;
 	virtual void Destroy() override;
 
@@ -41,5 +41,4 @@ protected:
 	Shader* CurrentShader = nullptr;
 	std::string ModelPath;
 	Transform RelativeTransform;
-	int ModelIndex = 0;
 };

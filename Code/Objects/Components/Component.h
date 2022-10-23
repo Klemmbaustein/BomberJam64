@@ -6,7 +6,7 @@ class ComponentSetter;
 class Component
 {
 public:
-	virtual void Start(WorldObject* Parent);
+	virtual void Start();
 	virtual void Tick();
 	virtual void Destroy();
 	WorldObject* GetParent();

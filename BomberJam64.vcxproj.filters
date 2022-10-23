@@ -22,24 +22,6 @@
     <Filter Include="Code\Objects\Components">
       <UniqueIdentifier>{f876c1cc-d63d-452b-a717-7e4650660692}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Code\Rendering">
-      <UniqueIdentifier>{4b7eaad4-3673-46ae-8162-173968e2733a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Rendering\Mesh">
-      <UniqueIdentifier>{96548092-8053-4767-805f-97a7d158addd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Rendering\Mesh\Instanced">
-      <UniqueIdentifier>{9a3f11c6-5fa8-4c34-b929-441047149157}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Rendering\Camera">
-      <UniqueIdentifier>{9ac94b28-f577-490d-8a30-1b77e1c0d6b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Rendering\Texture">
-      <UniqueIdentifier>{3d0e3e20-7e13-4669-ab24-888d5c472700}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Rendering\Utility">
-      <UniqueIdentifier>{650fac35-96b4-4eae-ba43-dea85571be07}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Code\FileUtility\Importers">
       <UniqueIdentifier>{b9494dcf-ef2a-41d0-9e73-a8e43aaea0dd}</UniqueIdentifier>
     </Filter>
@@ -87,6 +69,24 @@
     </Filter>
     <Filter Include="Code\Sound">
       <UniqueIdentifier>{41f44cc7-e4bf-4803-9888-4396a73fec50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Rendering">
+      <UniqueIdentifier>{4b7eaad4-3673-46ae-8162-173968e2733a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Rendering\Mesh">
+      <UniqueIdentifier>{96548092-8053-4767-805f-97a7d158addd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Rendering\Mesh\Instanced">
+      <UniqueIdentifier>{9a3f11c6-5fa8-4c34-b929-441047149157}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Rendering\Camera">
+      <UniqueIdentifier>{9ac94b28-f577-490d-8a30-1b77e1c0d6b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Rendering\Texture">
+      <UniqueIdentifier>{3d0e3e20-7e13-4669-ab24-888d5c472700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Rendering\Utility">
+      <UniqueIdentifier>{650fac35-96b4-4eae-ba43-dea85571be07}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +293,15 @@
     </ClCompile>
     <ClCompile Include="Code\Objects\Components\PointLightComponent.cpp">
       <Filter>Code\Objects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Rendering\Particle.cpp">
+      <Filter>Code\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Rendering\Utility\Framebuffer.cpp">
+      <Filter>Code\Rendering\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\UI\EngineUI\ParticleEditorTab.cpp">
+      <Filter>Code\UI\EngineUI\Tabs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -534,6 +543,15 @@
       <Filter>Code\World</Filter>
     </ClInclude>
     <ClInclude Include="Code\Objects\Components\PointLightComponent.h">
+      <Filter>Code\Objects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Rendering\Particle.h">
+      <Filter>Code\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\UI\EngineUI\ParticleEditorTab.h">
+      <Filter>Code\UI\EngineUI\Tabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Objects\Components\ParticleComponent.h">
       <Filter>Code\Objects\Components</Filter>
     </ClInclude>
   </ItemGroup>

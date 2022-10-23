@@ -2,23 +2,26 @@
 #include <Rendering/Mesh/Model.h>
 #include <World/Graphics.h>
 #include <World/Assets.h>
+#include <Rendering/Utility/Framebuffer.h>
 
-void MeshComponent::Start(WorldObject* Parent)
+void MeshComponent::Start()
 {
 	if (MeshModel)
 	{
 		MeshModel->ModelTransform = Parent->GetTransform() + RelativeTransform;
 	}
-	this->Parent = Parent;
 }
 
 void MeshComponent::Destroy()
 {
-	for (int i = 0; i < Graphics::ModelsToRender.size(); i++)
+	for (auto* f : Graphics::AllFramebuffers)
 	{
-		if (MeshModel == Graphics::ModelsToRender[i])
+		for (int i = 0; i < f->Renderables.size(); i++)
 		{
-			Graphics::ModelsToRender.erase(Graphics::ModelsToRender.begin() + i);
+			if (MeshModel == f->Renderables[i])
+			{
+				f->Renderables.erase(f->Renderables.begin() + i);
+			}
 		}
 	}
 	delete MeshModel;
@@ -35,8 +38,7 @@ void MeshComponent::Load(std::string File)
 {
 	MeshModel = new Model(Assets::GetAsset(File + ".jsm"));
 	ModelPath = File;
-	Graphics::ModelsToRender.push_back(MeshModel);
-	ModelIndex = Graphics::ModelsToRender.size() - 1;
+	Graphics::MainFramebuffer->Renderables.push_back(MeshModel);
 	MeshModel->UpdateTransform();
 }
 

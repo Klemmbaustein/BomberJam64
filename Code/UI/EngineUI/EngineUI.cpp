@@ -226,6 +226,7 @@ EngineUI::EngineUI() : UICanvas()
 	TabWidgets.push_back(new MaterialUI(Vector2(), Vector2(1), Vector3(1), &EngineUITextRenderer, Textures.at(7), Textures.at(8)));
 	TabWidgets.push_back(new MeshTab(&EngineUITextRenderer));
 	TabWidgets.push_back(new AddNewItemTab(&EngineUITextRenderer, this));
+	TabWidgets.push_back(new ParticleEditorTab(&EngineUITextRenderer, Textures[7], Textures[8]));
 	//Create cursors
 	CrossCursor = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_CROSSHAIR);
 	GrabCursor = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND);
@@ -442,6 +443,12 @@ void EngineUI::OnButtonClicked(int Index)
 			else if (Ext == "wav")   //Sound file
 			{
 				Console::ExecuteConsoleCommand("playsound " + GetFileNameWithoutExtensionFromPath(ContentBrowser::ContentAssets.at(Index).FilePath), true);
+			}
+			else if (Ext == "jspart")
+			{
+				EngineUIVariables::Tabs.push_back(EngineUIVariables::Tab(5, GetFileNameWithoutExtensionFromPath(ContentBrowser::ContentAssets.at(Index).FilePath),
+					ContentBrowser::ContentAssets.at(Index).FilePath));
+				DoSafeUpdate = true;
 			}
 		}
 		else
@@ -729,7 +736,7 @@ void EngineUI::Render(Shader* Shader)
 	EngineUITextRenderer.RenderText(
 		std::string(
 			"OBJ: " + std::to_string(Objects::AllObjects.size())+ 
-			", DRW: " + std::to_string(Performance::DrawCalls) + "-" + std::to_string(Graphics::ModelsToRender.size()) +
+			", DRW: " + std::to_string(Performance::DrawCalls) + "-" + std::to_string(Graphics::AllFramebuffers.size()) +
 			", CLL: " + std::to_string(Collision::CollisionBoxes.size())),
 		Vector2(-0.7, 0.95), 1.7f, Vector3(0.5));
 

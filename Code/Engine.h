@@ -11,5 +11,5 @@
 #endif
 constexpr char ProjectName[] = "BomberSnek";
 constexpr char StartupMap[] = "Level1";
-#define VERSION_STRING "1.1"
+#define VERSION_STRING "1.2"
 #define OPENGL_MIN_REQUIRED_VERSION "GL_VERSION_4_3"

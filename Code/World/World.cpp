@@ -13,6 +13,7 @@
 #include <Scene.h>
 #include <Rendering/Utility/SSAO.h>
 #include <Log.h>
+#include <Rendering/Utility/Framebuffer.h>
 
 #include <SDL.h>
 
@@ -33,6 +34,13 @@ namespace Graphics
 	unsigned int PCFQuality = 0;
 	void SetWindowResolution(Vector2 NewResolution)
 	{
+		for (FramebufferObject* o : AllFramebuffers)
+		{
+			if (o->UseMainWindowResolution)
+			{
+				o->GetBuffer()->ReInit(NewResolution.X, NewResolution.Y);
+			}
+		}
 		WindowResolution = NewResolution;
 		SSAO::ResizeBuffer(NewResolution.X, NewResolution.Y);
 	}
@@ -70,6 +78,8 @@ namespace Graphics
 		unsigned int ssaoColorBuffer;
 		unsigned int ssaoFBO;
 	}
+	FramebufferObject* MainFramebuffer; 
+	std::vector<FramebufferObject*> AllFramebuffers;
 }
 
 

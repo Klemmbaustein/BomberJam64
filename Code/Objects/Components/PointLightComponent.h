@@ -5,7 +5,7 @@
 class PointLightComponent : public Component
 {
 public:
-	void Start(WorldObject* Parent) override;
+	void Start() override;
 	void Tick() override;
 	void Destroy() override;
 

@@ -77,20 +77,20 @@ public:
 	}
 
 	float mouseSensitivity = 0.3f;
-	glm::vec3 lookAt;
-	Vector3 Rotation;
-	float yaw;
-	float pitch;
-	float roll;
+	glm::vec3 lookAt = glm::vec3(0);
+	Vector3 Rotation = 0;
+	float yaw = 0;
+	float pitch = 0;
+	float roll = 0;
 	glm::vec3 Position = glm::vec3(0.f);
-	glm::vec3 Right;
-	glm::vec3 Up;
+	glm::vec3 Right = glm::vec3(0);
+	glm::vec3 Up = glm::vec3(0);
 	float FOV;
 
 protected:
-	glm::vec3 up;
+	glm::vec3 up = glm::vec3(0);
 
-	glm::mat4 Projection;
-	glm::mat4 View;
-	glm::mat4 ViewProj;
+	glm::mat4 Projection = glm::mat4(0);
+	glm::mat4 View = glm::mat4(0);
+	glm::mat4 ViewProj = glm::mat4(0);
 };

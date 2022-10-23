@@ -1,8 +1,7 @@
 #include <Objects/Components/Component.h>
 
-void Component::Start(WorldObject* Parent)
+void Component::Start()
 {
-	this->Parent = Parent;
 }
 
 void Component::Tick()

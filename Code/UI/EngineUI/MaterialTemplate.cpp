@@ -224,7 +224,7 @@ void MaterialTemplate::GenerateUI()
 		}
 		else
 		{
-			TextFields.push_back(new VectorInputField(Vector2(0.f, 0.13f + i / -36.f), Vector2(0.4f, 0.075f), Vector3(0.12f), i + 2, Renderer, this,
+			TextFields.push_back(new VectorInputField(Vector2(0.f, 0.13f + i / -36.f), i + 2, Renderer, this,
 				Vector3::stov(Parameters.at(i / 3).Value)));
 		}
 	}

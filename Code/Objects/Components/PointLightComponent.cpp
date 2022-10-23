@@ -1,8 +1,7 @@
 #include "PointLightComponent.h"
 
-void PointLightComponent::Start(WorldObject* Parent)
+void PointLightComponent::Start()
 {
-	this->Parent = Parent;
 	Graphics::Lights.push_back(CurrentLight);
 }
 

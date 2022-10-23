@@ -35,7 +35,7 @@ int WorldObject::Attach(Component* Component)
 {
 	Components.push_back(Component);
 	ComponentSetter::SetParent(Component, this);
-	Component->Start(this);
+	Component->Start();
 	return Components.size() - 1;
 }
 

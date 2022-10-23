@@ -2,7 +2,7 @@
 #include "CameraComponent.h"
 #include <World/Stats.h>
 
-void CameraComponent::Start(WorldObject* Parent)
+void CameraComponent::Start()
 {
 	this->Parent = Parent;
 }

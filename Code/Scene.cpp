@@ -10,6 +10,7 @@
 #include <World/Graphics.h>
 #include <World/Stats.h>
 #include <Input.h>
+#include <Rendering/Utility/Framebuffer.h>
 namespace fs = std::filesystem;
 
 
@@ -53,7 +54,29 @@ namespace World
 
 			Graphics::Lights.clear();
 			Objects::AllObjects.clear();
-			Graphics::ModelsToRender.clear();
+			if (!IsInEditor)
+			{
+				for (FramebufferObject* f : Graphics::AllFramebuffers)
+				{
+					if (f != Graphics::MainFramebuffer)
+					{
+						delete f;
+					}
+				}
+				Graphics::AllFramebuffers.clear();
+				Graphics::AllFramebuffers.push_back(Graphics::MainFramebuffer);
+				for (FramebufferObject* f : Graphics::AllFramebuffers)
+				{
+					if (f != Graphics::MainFramebuffer)
+					{
+						delete f;
+					}
+				}
+				Graphics::AllFramebuffers.clear();
+				Graphics::AllFramebuffers.push_back(Graphics::MainFramebuffer);
+			}
+			Graphics::MainFramebuffer->ClearContent();
+
 			Collision::CollisionBoxes.clear();
 			std::ifstream Input(FilePath, std::ios::in | std::ios::binary);
 			std::vector<WorldObject> WorldObjects;

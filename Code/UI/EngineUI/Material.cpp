@@ -370,7 +370,7 @@ void MaterialUI::GenerateUI()
 		}
 		else
 		{
-			TextFields.push_back(new VectorInputField(Vector2(0.f, 0.13f + i / -12.f), Vector2(0.4f, 0.075f), Vector3(0.12f), i, Renderer, this, Vector3::stov(Paramters.at(i).Value)));
+			TextFields.push_back(new VectorInputField(Vector2(0.f, 0.13f + i / -12.f), i, Renderer, this, Vector3::stov(Paramters.at(i).Value)));
 		}
 	}
 }

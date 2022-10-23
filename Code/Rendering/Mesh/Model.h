@@ -85,21 +85,6 @@ public:
 		ModelTransform.Location.Z += Offset.Z;
 	}
 	void ConfigureVAO();
-	//Get Model Transform
-
-	/*Transform GetModelTransform()
-	{
-		glm::vec3 Location;
-		glm::quat Rotation;
-		glm::vec3 Scale;
-
-		glm::vec3 Skew;
-		glm::vec4 Perspective;
-
-		glm::decompose(MatModel, Scale, Rotation, Location, Skew, Perspective);
-
-		return Transform(Vec3ToVector3(Location), Vec3ToVector3(Rotation), Vec3ToVector3(Scale));
-	}*/
 
 	virtual void SimpleRender(Shader* Shader) override;
 	glm::mat4 MatModel = glm::mat4(1.f);

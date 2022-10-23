@@ -11,11 +11,11 @@ public:
 	EngineContextMenu(TextRenderer* Renderer) : UICanvas()
 	{
 		this->Renderer = Renderer;
-		TransformTextFields.push_back(new VectorInputField(Vector2(0.7, -0.5), Vector2(0.045f, 0.08), Vector3(1), 1, Renderer, this, Vector3()));
+		TransformTextFields.push_back(new VectorInputField(Vector2(0.7, -0.5), 1, Renderer, this, Vector3()));
 		UIElements.push_back(TransformTextFields.at(0));
-		TransformTextFields.push_back(new VectorInputField(Vector2(0.7, -0.6), Vector2(0.045f, 0.08), Vector3(1), 2, Renderer, this, Vector3()));
+		TransformTextFields.push_back(new VectorInputField(Vector2(0.7, -0.6), 2, Renderer, this, Vector3()));
 		UIElements.push_back(TransformTextFields.at(1));
-		TransformTextFields.push_back(new VectorInputField(Vector2(0.7, -0.7), Vector2(0.045f, 0.08), Vector3(1), 3, Renderer, this, Vector3()));
+		TransformTextFields.push_back(new VectorInputField(Vector2(0.7, -0.7), 3, Renderer, this, Vector3()));
 		UIElements.push_back(TransformTextFields.at(2));
 		for (VectorInputField* t : TransformTextFields)
 		{

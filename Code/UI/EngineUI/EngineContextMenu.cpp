@@ -151,7 +151,7 @@ void EngineContextMenu::Generate()
 				break;
 			case T_VECTOR3:
 				delete NewTextField;
-				NewTextField = (TextField*)new VectorInputField(Vector2(0.7, -0.9 - (float)i / 7.f), Vector2(0.15, 0.1), Vector3(0.2), i + 4, Renderer, this, *(Vector3*)p.Data);
+				NewTextField = (TextField*)new VectorInputField(Vector2(0.7, -0.9 - (float)i / 7.f), i + 4, Renderer, this, *(Vector3*)p.Data);
 				break;
 			default:
 				break;

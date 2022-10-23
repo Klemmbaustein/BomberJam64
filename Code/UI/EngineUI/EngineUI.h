@@ -9,6 +9,7 @@
 #include "EngineContextMenu.h"
 #include "MeshTab.h"
 #include "AddNewItemTab.h"
+#include "ParticleEditorTab.h"
 #include <UI/Default/ScrollObject.h>
 
 #ifndef SDL_MAIN_HANDLED

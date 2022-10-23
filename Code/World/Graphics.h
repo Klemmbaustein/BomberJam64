@@ -6,6 +6,7 @@ class UICanvas;
 class Camera;
 class Shader;
 class ScrollObject;
+class FramebufferObject;
 
 namespace Graphics
 {
@@ -54,7 +55,6 @@ namespace Graphics
 	extern Sun WorldSun;
 	extern Fog WorldFog;
 	extern unsigned int ShadowResolution;
-	extern std::vector<Renderable*> ModelsToRender;
 	extern std::vector<UICanvas*> UIToRender;
 	extern Vector2 WindowResolution;
 	void SetWindowResolution(Vector2 NewResolution);
@@ -69,6 +69,7 @@ namespace Graphics
 	extern Shader* UIShader;
 	extern unsigned int PCFQuality;
 	extern Vector3 LightRotation;
+	extern FramebufferObject* MainFramebuffer;
 	namespace UI
 	{
 		extern std::vector<ScrollObject*> ScrollObjects;
@@ -80,4 +81,5 @@ namespace Graphics
 		extern unsigned int ssaoColorBuffer;
 		extern unsigned int ssaoFBO;
 	}
+	extern std::vector<FramebufferObject*> AllFramebuffers;
 }

@@ -4,21 +4,15 @@
 #include <Log.h>
 #include <GL/glew.h>
 #include "Timer.h"
-#include "glm/ext.hpp"
-#include "glm/ext/matrix_transform.hpp"
-#include "glm/gtc/matrix_transform.hpp"
 #include <cmath>
 #include <Rendering/Utility/Framebuffer.h>
 #include "Math/Math.h"
 #if IS_IN_EDITOR
 #include "UI/EngineUI/EngineUI.h"
-#else
-#include <UI/Default/ScrollObject.h>
 #endif
+#include <UI/Default/ScrollObject.h>
 #include "Scene.h"
 #include <UI/Default/TextRenderer.h>
-#include "Importers/ModelConverter.h"
-#include <vector>
 #include "Rendering/Mesh/Model.h"
 #include "Input.h"
 #include <Sound/Sound.h>
@@ -33,6 +27,8 @@
 #include <Rendering/Camera/FrustumCulling.h>
 #include <Objects/Objects.h>
 #include <OS.h>
+#include <Rendering/Particle.h>
+#include <cmath>
 
 #include <World/Assets.h>
 #include <World/Graphics.h>
@@ -89,7 +85,7 @@ MessageCallback(
 	const void* userParam
 )
 {
-	if (type == GL_DEBUG_TYPE_ERROR && !ShouldIgnoreErrors)
+	if ((type == GL_DEBUG_TYPE_ERROR || type == GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR || type == GL_DEBUG_TYPE_PORTABILITY) && !ShouldIgnoreErrors)
 	{
 		Log::CreateNewLogMessage(message + std::string(" Status: ") + Debugging::EngineStatus);
 	}
@@ -225,15 +221,12 @@ int Start(int argc, char** argv)
 
 
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-#if IS_IN_EDITOR
-	EngineUI* EditorUI = new EngineUI();
-	Graphics::UIToRender.push_back(EditorUI);
-#endif
 	std::cout << "              done!\n";
 	std::cout << "*Generating Frame Buffers";
 	Debugging::EngineStatus = "Generating Frame Buffers";
 	std::cout << ".";
-	Framebuffer MainFramebuffer(Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
+	Graphics::MainFramebuffer = new FramebufferObject();
+	Graphics::MainFramebuffer->FramebufferCamera = Graphics::MainCamera;
 	std::cout << ".";
 	Framebuffer StencilFrameBuffer(Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
 	{
@@ -251,7 +244,7 @@ int Start(int argc, char** argv)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		MainFramebuffer.AttachFramebuffer(Graphics::FBO::SSAOBuffers[1], GL_COLOR_ATTACHMENT3);
+		Graphics::MainFramebuffer->GetBuffer()->AttachFramebuffer(Graphics::FBO::SSAOBuffers[1], GL_COLOR_ATTACHMENT3);
 		Debugging::EngineStatus = "Generating Frame Buffers: SSAO: norm";
 
 		// - normal color buffer
@@ -264,7 +257,7 @@ int Start(int argc, char** argv)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, Graphics::FBO::SSAOBuffers[2], 0);
-		MainFramebuffer.AttachFramebuffer(Graphics::FBO::SSAOBuffers[2], GL_COLOR_ATTACHMENT2);
+		Graphics::MainFramebuffer->GetBuffer()->AttachFramebuffer(Graphics::FBO::SSAOBuffers[2], GL_COLOR_ATTACHMENT2);
 
 		Debugging::EngineStatus = "Generating Frame Buffers: SSAO - Stage 2";
 		std::cout << ".";
@@ -307,7 +300,7 @@ int Start(int argc, char** argv)
 	int w, h;
 	SDL_GetWindowSize(Window, &w, &h);
 	Graphics::SetWindowResolution(Vector2(w, h));
-	MainFramebuffer.ReInit(Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
+	Graphics::MainFramebuffer->GetBuffer()->ReInit(Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
 	StencilFrameBuffer.ReInit(Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
 
 #if IS_IN_EDITOR
@@ -322,7 +315,10 @@ int Start(int argc, char** argv)
 #endif //ENGINE_DEBUG
 
 	std::cout << " done!\n";
-
+#if IS_IN_EDITOR
+	EngineUI* EditorUI = new EngineUI();
+	Graphics::UIToRender.push_back(EditorUI);
+#endif
 
 	std::cout << "*Loading Startup Map\n";
 	Debugging::EngineStatus = "Loading Startup Map";
@@ -359,9 +355,10 @@ int Start(int argc, char** argv)
 	ShouldIgnoreErrors = false;
 	bool SlowMode = false;
 	bool FastMode = false;
-	OS::SetConsoleWindowVisible(false);
-
-
+	if (!(ENGINE_DEBUG || IS_IN_EDITOR))
+	{
+		OS::SetConsoleWindowVisible(false);
+	}
 	//Main Loop
 	while (!ShouldClose)
 	{
@@ -468,7 +465,6 @@ int Start(int argc, char** argv)
 						int w, h;
 						SDL_GetWindowSize(Window, &w, &h);
 						Graphics::SetWindowResolution(Vector2(w, h));
-						MainFramebuffer.ReInit(Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
 						StencilFrameBuffer.ReInit(Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
 						glDeleteFramebuffers(2, pingpongFBO);
 						glDeleteTextures(2, pingpongBuffer);
@@ -490,7 +486,6 @@ int Start(int argc, char** argv)
 								GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pingpongBuffer[i], 0
 							);
 						}
-						Graphics::MainCamera->ReInit(90.f, Graphics::WindowResolution.X, Graphics::WindowResolution.Y, false);
 						IsWindowFullscreen = !IsWindowFullscreen;
 					}
 					break;
@@ -578,7 +573,6 @@ int Start(int argc, char** argv)
 					int w, h;
 					SDL_GetWindowSize(Window, &w, &h);
 					Graphics::SetWindowResolution(Vector2(w, h));
-					MainFramebuffer.ReInit(Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
 					StencilFrameBuffer.ReInit(Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
 					glDeleteFramebuffers(2, pingpongFBO);
 					glDeleteTextures(2, pingpongBuffer);
@@ -600,7 +594,6 @@ int Start(int argc, char** argv)
 							GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pingpongBuffer[i], 0
 						);
 					}
-					Graphics::MainCamera->ReInit(90.f, Graphics::WindowResolution.X, Graphics::WindowResolution.Y, false);
 
 			}
 			}
@@ -697,8 +690,7 @@ int Start(int argc, char** argv)
 		CameraShake::Tick();
 		glEnable(GL_CULL_FACE);
 		glDisable(GL_BLEND);
-		glClearColor(0.f, 0.f, 0.f, 1.f);	//Clear color black
-
+		glClearColor(0.f, 0.f, 0.f, 1.f);		//Clear color black
 		Uint64 EndCounter = SDL_GetPerformanceCounter();
 		Uint64 counterElapsed = EndCounter - LastCounterLogic;
 		std::vector<Model*> SelectedModels;
@@ -717,6 +709,15 @@ int Start(int argc, char** argv)
 		{
 			Timer::Internal::Timers.erase(Timer::Internal::Timers.begin() + FinishedTimers.at(i));
 		}
+
+		for (FramebufferObject* b : Graphics::AllFramebuffers)
+		{
+			for (auto* p : b->ParticleEmitters)
+			{
+				p->Update(b->FramebufferCamera);
+			}
+		}
+
 		WorldObject* SelectedObject = nullptr;
 		if (!ShouldClose)
 		{
@@ -755,116 +756,123 @@ int Start(int argc, char** argv)
 #endif
 			}
 		}
-		Debugging::EngineStatus = "Rendering (Shadows)";
-
-		FrustumCulling::Active = false;
-
-		glViewport(0, 0, Graphics::ShadowResolution, Graphics::ShadowResolution);
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		const auto LightSpaceMatrices = CSM::getLightSpaceMatrices();
-		glEnable(GL_DEPTH_TEST);
-
-		glBindBuffer(GL_UNIFORM_BUFFER, matricesUBO);
-		for (size_t i = 0; i < LightSpaceMatrices.size(); ++i)
+		for (FramebufferObject* b : Graphics::AllFramebuffers)
 		{
-			glBufferSubData(GL_UNIFORM_BUFFER, i * sizeof(glm::mat4x4), sizeof(glm::mat4x4), &LightSpaceMatrices[i]);
-		}
+			Debugging::EngineStatus = "Rendering (Shadows)";
 
-		Graphics::IsRenderingShadows = true;
-		{
-			glBindFramebuffer(GL_FRAMEBUFFER, CSM::LightFBO);
-			glClear(GL_DEPTH_BUFFER_BIT);
-			for (int j = 0; j < Graphics::ModelsToRender.size(); j++)
-			{
-				if (Graphics::ModelsToRender.at(j) != nullptr)
-				{
-					if(Graphics::ModelsToRender[j]->CastShadow)
-						Graphics::ModelsToRender.at(j)->SimpleRender(Graphics::ShadowShader);
-				}
-			}
+			FrustumCulling::Active = false;
+
+			glViewport(0, 0, Graphics::ShadowResolution, Graphics::ShadowResolution);
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		}
+			const auto LightSpaceMatrices = CSM::getLightSpaceMatrices();
+			glEnable(GL_DEPTH_TEST);
 
-		Graphics::IsRenderingShadows = false;
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		Debugging::EngineStatus = "Rendering (Main Pass)";
-		glEnable(GL_BLEND);
-
-		FrustumCulling::Active = true;
-		FrustumCulling::CurrentCameraFrustum = FrustumCulling::createFrustumFromCamera(*Graphics::MainCamera);
-
-		glViewport(0, 0, Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
-		MainFramebuffer.Bind();
-		glm::vec4 TransposedSunDirection = glm::vec4((glm::vec3)Graphics::LightRotation, 1.f);
-		for (std::pair<ShaderDescription, ShaderElement> s : Shaders)
-		{
-			if (s.second.Shader != nullptr)
+			glBindBuffer(GL_UNIFORM_BUFFER, matricesUBO);
+			for (size_t i = 0; i < LightSpaceMatrices.size(); ++i)
 			{
-				s.second.Shader->Bind();
-				glActiveTexture(GL_TEXTURE1);
-				glBindTexture(GL_TEXTURE_2D_ARRAY, CSM::ShadowMaps);
-				glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), "farPlane"), CSM::cameraFarPlane);
-				glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), "cascadeCount"), CSM::shadowCascadeLevels.size());
-				glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_textureres"), Graphics::ShadowResolution);
-				glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), "shadowMap"), 1);
-				glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_biasmodifier"), (Vector3::Dot(
-					Vector3::GetForwardVector(Graphics::MainCamera->Rotation),
-					Graphics::LightRotation.Normalize())));
-				Vector3 CameraForward = Vector3::GetForwardVector(Graphics::MainCamera->Rotation);
-				glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_cameraforward"), 1, &CameraForward.X);
-				glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_cameraposition"), 1, &Graphics::MainCamera->Position.x);
-				glUniform1i (glGetUniformLocation(s.second.Shader->GetShaderID(), "u_shadowQuality"), Graphics::PCFQuality);
-				glUniform1i (glGetUniformLocation(s.second.Shader->GetShaderID(), "u_shadows"), 1);
-				glUniform1f (glGetUniformLocation(s.second.Shader->GetShaderID(), "FogFalloff"), Graphics::WorldFog.Falloff);
-				glUniform1f (glGetUniformLocation(s.second.Shader->GetShaderID(), "FogDistance"), Graphics::WorldFog.Distance);
-				glUniform1f (glGetUniformLocation(s.second.Shader->GetShaderID(), "FogMaxDensity"), Graphics::WorldFog.MaxDensity);
-				glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "FogColor"), 1, &Graphics::WorldFog.FogColor.X);
+				glBufferSubData(GL_UNIFORM_BUFFER, i * sizeof(glm::mat4x4), sizeof(glm::mat4x4), &LightSpaceMatrices[i]);
+			}
 
-				glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.Direction"), 1, &Graphics::WorldSun.Direction.X);
-				glUniform1f (glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.Intensity"), Graphics::WorldSun.Intensity);
-				glUniform1f (glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.AmbientIntensity"), Graphics::WorldSun.AmbientIntensity);
-				glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.SunColor"), 1, &Graphics::WorldSun.SunColor.X);
-				glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.AmbientColor"), 1, &Graphics::WorldSun.AmbientColor.X);
-
-				glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_time"), Stats::Time);
-				for (size_t i = 0; i < LightSpaceMatrices.size(); ++i)
+			Graphics::IsRenderingShadows = true;
+			{
+				glBindFramebuffer(GL_FRAMEBUFFER, CSM::LightFBO);
+				glClear(GL_DEPTH_BUFFER_BIT);
+				for (int j = 0; j < b->Renderables.size(); j++)
 				{
-					glUniformMatrix4fv(glGetUniformLocation(s.second.Shader->GetShaderID(),
-						((std::string("lightSpaceMatrices[") + std::to_string(i)) + "]").c_str()), 1, GL_FALSE, &LightSpaceMatrices.at(i)[0][0]);
-				}
-				for (size_t i = 0; i < CSM::shadowCascadeLevels.size(); ++i)
-				{
-					glUniform1fv(glGetUniformLocation(s.second.Shader->GetShaderID(),
-						((std::string("cascadePlaneDistances[") + std::to_string(i)) + "]").c_str()), 1, &CSM::shadowCascadeLevels[i]);
-				}
-
-				for (int i = 0; i < 16; i++)
-				{
-					std::string CurrentLight = "u_lights[" + std::to_string(i) + "]";
-					if (i < Graphics::Lights.size())
+					if (b->Renderables.at(j) != nullptr)
 					{
-						glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Position").c_str()), 1, &Graphics::Lights[i].Position.X);
-						glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Color").c_str()), 1, &Graphics::Lights[i].Color.X);
-						glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Falloff").c_str()), Graphics::Lights[i].Falloff);
-						glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Intensity").c_str()), Graphics::Lights[i].Intensity);
-
-						glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Active").c_str()), 1);
+						if(b->Renderables[j]->CastShadow)
+							b->Renderables.at(j)->SimpleRender(Graphics::ShadowShader);
 					}
-					else
+				}
+				glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			}
+
+			Graphics::IsRenderingShadows = false;
+			Debugging::EngineStatus = "Rendering (Main Pass)";
+			glEnable(GL_BLEND);
+
+			FrustumCulling::Active = true;
+			FrustumCulling::CurrentCameraFrustum = FrustumCulling::createFrustumFromCamera(*Graphics::MainFramebuffer->FramebufferCamera);
+
+			glViewport(0, 0, Graphics::WindowResolution.X, Graphics::WindowResolution.Y);
+			b->GetBuffer()->Bind();
+			glm::vec4 TransposedSunDirection = glm::vec4((glm::vec3)Graphics::LightRotation, 1.f);
+			for (std::pair<ShaderDescription, ShaderElement> s : Shaders)
+			{
+				if (s.second.Shader != nullptr)
+				{
+					s.second.Shader->Bind();
+					glActiveTexture(GL_TEXTURE1);
+					glBindTexture(GL_TEXTURE_2D_ARRAY, CSM::ShadowMaps);
+					glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), "farPlane"), CSM::cameraFarPlane);
+					glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), "cascadeCount"), CSM::shadowCascadeLevels.size());
+					glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_textureres"), Graphics::ShadowResolution);
+					glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), "shadowMap"), 1);
+					glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_biasmodifier"), (Vector3::Dot(
+						Vector3::GetForwardVector(Graphics::MainCamera->Rotation),
+						Graphics::LightRotation.Normalize())));
+					Vector3 CameraForward = Vector3::GetForwardVector(Graphics::MainCamera->Rotation);
+					glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_cameraforward"), 1, &CameraForward.X);
+					glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_cameraposition"), 1, &Graphics::MainFramebuffer->FramebufferCamera->Position.x);
+					glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_shadowQuality"), Graphics::PCFQuality);
+					glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_shadows"), 1);
+					glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "FogFalloff"), Graphics::WorldFog.Falloff);
+					glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "FogDistance"), Graphics::WorldFog.Distance);
+					glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "FogMaxDensity"), Graphics::WorldFog.MaxDensity);
+					glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "FogColor"), 1, &Graphics::WorldFog.FogColor.X);
+
+					glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.Direction"), 1, &Graphics::WorldSun.Direction.X);
+					glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.Intensity"), Graphics::WorldSun.Intensity);
+					glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.AmbientIntensity"), Graphics::WorldSun.AmbientIntensity);
+					glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.SunColor"), 1, &Graphics::WorldSun.SunColor.X);
+					glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_directionallight.AmbientColor"), 1, &Graphics::WorldSun.AmbientColor.X);
+
+					glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), "u_time"), Stats::Time);
+					for (size_t i = 0; i < LightSpaceMatrices.size(); ++i)
 					{
-						glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Active").c_str()), 0);
+						glUniformMatrix4fv(glGetUniformLocation(s.second.Shader->GetShaderID(),
+							((std::string("lightSpaceMatrices[") + std::to_string(i)) + "]").c_str()), 1, GL_FALSE, &LightSpaceMatrices.at(i)[0][0]);
+					}
+					for (size_t i = 0; i < CSM::shadowCascadeLevels.size(); ++i)
+					{
+						glUniform1fv(glGetUniformLocation(s.second.Shader->GetShaderID(),
+							((std::string("cascadePlaneDistances[") + std::to_string(i)) + "]").c_str()), 1, &CSM::shadowCascadeLevels[i]);
+					}
+
+					for (int i = 0; i < 16; i++)
+					{
+						std::string CurrentLight = "u_lights[" + std::to_string(i) + "]";
+						if (i < Graphics::Lights.size())
+						{
+							glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Position").c_str()), 1, &Graphics::Lights[i].Position.X);
+							glUniform3fv(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Color").c_str()), 1, &Graphics::Lights[i].Color.X);
+							glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Falloff").c_str()), Graphics::Lights[i].Falloff);
+							glUniform1f(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Intensity").c_str()), Graphics::Lights[i].Intensity);
+
+							glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Active").c_str()), 1);
+						}
+						else
+						{
+							glUniform1i(glGetUniformLocation(s.second.Shader->GetShaderID(), (CurrentLight + ".Active").c_str()), 0);
+						}
 					}
 				}
 			}
-		}
-
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0.f, 0.f, 0.f, 1.f);
-		for (unsigned int i = 0; i < Graphics::ModelsToRender.size(); i++)
-		{
-			if (Graphics::ModelsToRender[i] != nullptr)
+			glClearColor(0.0f, 0.f, 0.f, 1.f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			for (unsigned int i = 0; i < b->Renderables.size(); i++)
 			{
-				Graphics::ModelsToRender[i]->Render(Graphics::MainCamera);
+				if (b->Renderables[i] != nullptr)
+				{
+					b->Renderables[i]->Render(b->FramebufferCamera);
+				}
+			}
+			Debugging::EngineStatus = "Rendering (Particles)";
+			b->GetBuffer()->Bind();
+			for (auto* p : b->ParticleEmitters)
+			{
+				p->Draw(b->FramebufferCamera, b == Graphics::MainFramebuffer);
 			}
 		}
 
@@ -917,7 +925,7 @@ int Start(int argc, char** argv)
 				glUniform1i(glGetUniformLocation(BloomShader.GetShaderID(), "horizontal"), horizontal);
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(
-					GL_TEXTURE_2D, first_iteration ? MainFramebuffer.GetTextureID(2) : pingpongBuffer[!horizontal]
+					GL_TEXTURE_2D, first_iteration ? Graphics::MainFramebuffer->GetBuffer()->GetTextureID(2) : pingpongBuffer[!horizontal]
 				);
 				glDrawArrays(GL_TRIANGLES, 0, 3);
 				horizontal = !horizontal;
@@ -930,14 +938,14 @@ int Start(int argc, char** argv)
 		Debugging::EngineStatus = "Rendering (Post process: SSAO)";
 		for (int i = 2; i < 5; i++)
 		{
-			Graphics::FBO::SSAOBuffers[i - 2] = MainFramebuffer.GetTextureID(i);
+			Graphics::FBO::SSAOBuffers[i - 2] = Graphics::MainFramebuffer->GetBuffer()->GetTextureID(i);
 		}
 		unsigned int SSAOFBO = SSAO::Render();		//<- WARING: SSAO::Render Unbinds current Shader/Framebuffer/Texture
 		Debugging::EngineStatus = "Rendering (Post process: Main)";
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, MainFramebuffer.GetTextureID(0));
+		glBindTexture(GL_TEXTURE_2D, Graphics::MainFramebuffer->GetBuffer()->GetTextureID(0));
 
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, StencilFrameBuffer.GetTextureID(1));
@@ -950,7 +958,7 @@ int Start(int argc, char** argv)
 		glActiveTexture(GL_TEXTURE5);
 		glBindTexture(GL_TEXTURE_2D, SSAOFBO);
 		glActiveTexture(GL_TEXTURE6);
-		glBindTexture(GL_TEXTURE_2D, MainFramebuffer.GetTextureID(1));
+		glBindTexture(GL_TEXTURE_2D, Graphics::MainFramebuffer->GetBuffer()->GetTextureID(1));
 		PostProcessShader.Bind();
 		glUniform1f(glGetUniformLocation(PostProcessShader.GetShaderID(), "u_gamma"), Graphics::Gamma);
 		glUniform1i(glGetUniformLocation(PostProcessShader.GetShaderID(), "FullScreen"), !IsInEditor);

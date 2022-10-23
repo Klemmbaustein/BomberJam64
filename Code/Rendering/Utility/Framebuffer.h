@@ -1,5 +1,9 @@
 #pragma once
 #include <GL/glew.h>
+#include <vector>
+#include <Rendering/Renderable.h>
+#include <Rendering/Particle.h>
+
 class Framebuffer
 {
 public:
@@ -81,4 +85,24 @@ protected:
 	GLuint* Textures = new GLuint[3];
 	std::vector<GLuint> Attachements = {GL_COLOR_ATTACHMENT0, GL_DEPTH_STENCIL_ATTACHMENT, GL_COLOR_ATTACHMENT1};
 
+};
+
+class FramebufferObject
+{
+public:
+	bool UseMainWindowResolution = true;
+	Vector2 CustomFramebufferResolution = Vector2(800, 600);
+	FramebufferObject();
+	~FramebufferObject();
+
+	unsigned int GetTextureID();
+	void ClearContent();
+	Camera* FramebufferCamera = nullptr;
+	void ReInit();
+	void UseWith(Renderable* r);
+	std::vector<Particles::ParticleEmitter*> ParticleEmitters;
+	Framebuffer* GetBuffer();
+	std::vector<Renderable*> Renderables;
+protected:
+	Framebuffer* buf;
 };
