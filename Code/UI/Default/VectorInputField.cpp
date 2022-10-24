@@ -77,5 +77,4 @@ void VectorInputField::OnEnteredValue(float Value, int Index)
 	{
 		dynamic_cast<UICanvas*>(ParentUI)->OnButtonClicked(this->Index);
 	}
-	SetValue(this->Value);
 }

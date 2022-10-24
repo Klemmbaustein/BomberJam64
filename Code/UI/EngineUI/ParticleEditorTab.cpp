@@ -137,9 +137,9 @@ void ParticleEditorTab::Generate()
 		GeneratedUI.push_back(new UIButton(Vector2(-0.65f, 0.4f - (i / 8.f)), Vector2(0.3f, 0.1f), Color, this, 200 + i));
 	}
 
-	if (Particle->ParticleElements.size())
+	SettingsButtons.clear();
+	if (SelectedElement < Particle->ParticleElements.size())
 	{
-		SettingsButtons.clear();
 		auto& SelectedParticle = Particle->ParticleElements[SelectedElement];
 		VectorInputField* NewVecField = new VectorInputField(Vector2(-0.1f, 0.4f), 100, TabText, this, SelectedParticle.Direction);
 		NewVecField->CurrentScrollObject = &ElementScrollObject;
@@ -214,8 +214,7 @@ void ParticleEditorTab::OnButtonClicked(int Index)
 		}
 		if (Index == 1)
 		{
-			ElementMaterials.erase(ElementMaterials.begin() + 1);
-			Particle->AddElement(Particles::ParticleElement());
+			Particle->RemoveElement(SelectedElement);
 			Generate();
 			return;
 		}
@@ -252,7 +251,7 @@ void ParticleEditorTab::OnButtonClicked(int Index)
 		if (Index == 104)
 		{
 			Particle->ParticleElements[SelectedElement].SpawnDelay = std::stof(((TextField*)SettingsButtons[Index - 100])->Text);
-			Generate();
+			//Generate();
 			return;
 		}
 		if (Index == 105)

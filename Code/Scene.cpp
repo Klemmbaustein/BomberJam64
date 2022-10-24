@@ -65,15 +65,6 @@ namespace World
 				}
 				Graphics::AllFramebuffers.clear();
 				Graphics::AllFramebuffers.push_back(Graphics::MainFramebuffer);
-				for (FramebufferObject* f : Graphics::AllFramebuffers)
-				{
-					if (f != Graphics::MainFramebuffer)
-					{
-						delete f;
-					}
-				}
-				Graphics::AllFramebuffers.clear();
-				Graphics::AllFramebuffers.push_back(Graphics::MainFramebuffer);
 			}
 			Graphics::MainFramebuffer->ClearContent();
 

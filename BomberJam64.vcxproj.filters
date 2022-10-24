@@ -303,6 +303,9 @@
     <ClCompile Include="Code\UI\EngineUI\ParticleEditorTab.cpp">
       <Filter>Code\UI\EngineUI\Tabs</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Objects\Components\ParticleComponent.cpp">
+      <Filter>Code\Objects\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\TypeEnun.h">

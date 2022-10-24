@@ -1,11 +1,15 @@
 #pragma once
 #include <Objects/Components/Component.h>
 
-class ParticleEmitter;
+namespace Particles
+{
+	class ParticleEmitter;
+}
 
 class ParticleComponent : public Component
 {
-	ParticleEmitter* Emitter;
+	Particles::ParticleEmitter* Emitter;
+	Vector3 Position;
 public:
 	void Start() override;
 	void Tick() override;
@@ -15,6 +19,6 @@ public:
 	void SetActive(bool Active);
 	bool GetActive();
 
-	void SetPosition();
-	Vector3 GetPosition();
+	void SetRelativePosition(Vector3 NewPos);
+	Vector3 GetRelativePosition();
 };

@@ -380,6 +380,7 @@
     <ClCompile Include="Code\Objects\Components\Component.cpp" />
     <ClCompile Include="Code\Objects\Components\InstancedMeshComponent.cpp" />
     <ClCompile Include="Code\Objects\Components\MeshComponent.cpp" />
+    <ClCompile Include="Code\Objects\Components\ParticleComponent.cpp" />
     <ClCompile Include="Code\Objects\Components\PointLightComponent.cpp" />
     <ClCompile Include="Code\Objects\HubTeleporter.cpp" />
     <ClCompile Include="Code\Objects\InstancedMeshObject.cpp" />

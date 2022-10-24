@@ -1,6 +1,7 @@
 #pragma once
 #include "CameraComponent.h"
 #include <World/Stats.h>
+#include <Rendering/Utility/Framebuffer.h>
 
 void CameraComponent::Start()
 {
@@ -42,6 +43,7 @@ void CameraComponent::Use()
 {
 	if (!IsInEditor)
 	{
+		Graphics::MainFramebuffer->FramebufferCamera = &ComponentCamera;
 		Graphics::MainCamera = &ComponentCamera;
 	}
 }

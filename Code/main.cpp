@@ -595,7 +595,7 @@ int Start(int argc, char** argv)
 						);
 					}
 
-			}
+				}
 			}
 			else if (event.type == SDL_TEXTINPUT)
 			{
@@ -863,10 +863,7 @@ int Start(int argc, char** argv)
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			for (unsigned int i = 0; i < b->Renderables.size(); i++)
 			{
-				if (b->Renderables[i] != nullptr)
-				{
-					b->Renderables[i]->Render(b->FramebufferCamera);
-				}
+				b->Renderables[i]->Render(b->FramebufferCamera);
 			}
 			Debugging::EngineStatus = "Rendering (Particles)";
 			b->GetBuffer()->Bind();

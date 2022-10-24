@@ -1,4 +1,4 @@
 int NumOrbs = 1
 int NumWalls = 0
 vector3 Orbs_pos0 = 75.222633 3.761905 156.297256
-vector3 PlayerPos = -80.187050 54.957970 -130.723404
+vector3 PlayerPos = -80.925896 55.497406 -119.129547

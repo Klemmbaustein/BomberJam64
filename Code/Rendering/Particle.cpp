@@ -214,6 +214,23 @@ Particles::ParticleEmitter::ParticleEmitter()
 {
 }
 
+#define REMOVE_ARRAY_IND(Arr, Ind) Arr.erase(Arr.begin() + Ind)
+void Particles::ParticleEmitter::RemoveElement(unsigned int Index)
+{
+	REMOVE_ARRAY_IND(ParticleElements, Index);
+	REMOVE_ARRAY_IND(SpawnDelays, Index);
+	ParticleInstances.push_back(std::vector<ParticleInstance>());
+
+	delete ParticleVertexBuffers[Index];
+	delete ParticleIndexBuffers[Index];
+	
+	REMOVE_ARRAY_IND(ParticleVertexBuffers, Index);
+	REMOVE_ARRAY_IND(ParticleIndexBuffers, Index);
+
+	REMOVE_ARRAY_IND(ParticleShaders, Index);
+	REMOVE_ARRAY_IND(Uniforms, Index);
+}
+
 Particles::ParticleEmitter::~ParticleEmitter()
 {
 	for (auto* buf : ParticleVertexBuffers)

@@ -51,6 +51,7 @@ namespace Particles
 		std::vector<std::vector<ParticleInstance>> ParticleInstances;
 
 		void AddElement(ParticleElement NewElement);
+		void RemoveElement(unsigned int Index);
 		std::vector<VertexBuffer*> ParticleVertexBuffers;
 		std::vector<IndexBuffer*> ParticleIndexBuffers;
 		unsigned int MatBuffer = -1;

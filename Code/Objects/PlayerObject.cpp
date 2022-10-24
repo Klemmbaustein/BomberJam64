@@ -146,8 +146,6 @@ void PlayerObject::Tick()
 			{
 				InputVelocity += Vector2(0.f, 1.f);
 			}
-
-
 			if (BombTime > 0.1f && BombLayTime < 0 && BombTime < MaxBombs - 0.1f)
 			{
 				BombLayTime = 0.5f;
@@ -251,7 +249,7 @@ void PlayerObject::Tick()
 			}
 
 
-			Rotation += Vector3(Vector2(Input::MouseMovement.Y, Input::MouseMovement.X), 0) * Performance::DeltaTime * 275;
+			Rotation += Vector3(Vector2(Input::MouseMovement.Y, Input::MouseMovement.X), 0) * Performance::DeltaTime * 360;
 			//Clamp the camera rotation so the camera stays somewhat top-down-ish;
 			Rotation = Vector3(Rotation.X = std::max(std::min(Rotation.X, -35.f), -85.f), Rotation.Y, Rotation.Z);
 
@@ -449,6 +447,9 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 					{
 						InLevelTransition = true;
 						NextLevel = ((HubTeleporter*)hit.HitObject)->TargetLevel;
+						((HubTeleporter*)hit.HitObject)->TeleportParticles = new ParticleComponent();
+						((HubTeleporter*)hit.HitObject)->Attach(((HubTeleporter*)hit.HitObject)->TeleportParticles);
+						((HubTeleporter*)hit.HitObject)->TeleportParticles->LoadParticle("Teleporter");
 						Timer::StartTimer(LoadNextLevel, 0.6);
 						UI->PlayTransition();
 					}
