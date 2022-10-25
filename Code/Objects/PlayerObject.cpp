@@ -478,11 +478,6 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 				}
 				else
 				{
-
-					if (std::to_string(hit.Normal.X) == "-nan(ind)")
-					{
-						GetTransform().Location = hit.ImpactPoint;
-					}
 					if (abs(Vector3::Dot(hit.Normal, Vector3(0, 1, 0))) < 0.5)
 					{
 						GetTransform().Location += hit.Normal * Performance::DeltaTime * 2;

@@ -49,7 +49,10 @@ void Particles::ParticleEmitter::AddElement(ParticleElement NewElement)
 	ParticleIndexBuffers.push_back(new IndexBuffer(ParticleIndices.data(), ParticleIndices.size(), sizeof(int)));
 	ParticleShaders.push_back(nullptr);
 	Uniforms.push_back(std::vector<Uniform>());
-	SetMaterial(ParticleShaders.size() - 1, "NONE");
+	if (IsInEditor)
+	{
+		SetMaterial(ParticleShaders.size() - 1, "NONE");
+	}
 }
 
 std::vector<Particles::ParticleElement> Particles::ParticleEmitter::LoadParticleFile(std::string File, std::vector<std::string>& Materials)
