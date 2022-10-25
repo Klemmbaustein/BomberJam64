@@ -3,10 +3,12 @@
 #include <Objects/Components/CollisionComponent.h>
 #include <Objects/Components/MeshComponent.h>
 #include "Rendering/Mesh/Model.h"
+#include <GENERATED/GENERATED_MeshObject.h>
 class MeshObject : public WorldObject
 {
 public:
-	MeshObject() : WorldObject(ObjectDescription("Mesh Object", 1)) {};
+	MESHOBJECT_GENERATED()
+
 	virtual void Destroy();
 	virtual void Tick();
 	virtual void Begin();

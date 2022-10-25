@@ -2,11 +2,12 @@
 #include <Objects/WorldObject.h>
 #include <Objects/Components/MeshComponent.h>
 #include <Objects/Components/CollisionComponent.h>
+#include <GENERATED/GENERATED_BombPickup.h>
 
 class BombPickup : public WorldObject
 {
 public:
-	BombPickup() : WorldObject(ObjectDescription("Bomb Pickup", 7)) {}
+	BOMBPICKUP_GENERATED()
 	void Begin() override;
 	void Tick() override;
 	void Destroy() override;

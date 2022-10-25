@@ -1,6 +1,7 @@
 #pragma once
 #include <Objects/Components/InstancedMeshComponent.h>
 #include <Objects/Objects.h>
+#include <GENERATED/GENERATED_InstancedMeshObject.h>
 
 class InstancedMeshObject : public WorldObject
 {
@@ -11,8 +12,7 @@ public:
 	void LoadFromFile(std::string Filename);
 	virtual void OnPropertySet() override;
 	size_t AddInstance(Transform T);
-	InstancedMeshObject() : WorldObject(ObjectDescription("Instanced Mesh", 3)) {}
-
+	INSTANCEDMESHOBJECT_GENERATED()
 
 	virtual std::string Serialize() override;
 	virtual void Deserialize(std::string SerializedObject) override;

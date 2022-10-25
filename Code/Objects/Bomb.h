@@ -2,11 +2,12 @@
 #include <Objects/WorldObject.h>
 #include <Objects/Components/MeshComponent.h>
 #include <Objects/Components/PointLightComponent.h>
+#include <GENERATED/GENERATED_Bomb.h>
 
 class Bomb : public WorldObject
 {
 public:
-	Bomb() : WorldObject(ObjectDescription("Bomb", 5)) {}
+	BOMB_GENERATED()
 
 	void Begin() override;
 	void Tick() override;

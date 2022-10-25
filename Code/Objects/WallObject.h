@@ -2,11 +2,12 @@
 #include <Objects/WorldObject.h>
 #include <Objects/Components/MeshComponent.h>
 #include <Objects/Components/CollisionComponent.h>
+#include <GENERATED/GENERATED_WallObject.h>
 
 class WallObject : public WorldObject
 {
 public:
-	WallObject() : WorldObject(ObjectDescription("Wall Object", 6)) {}
+	WALLOBJECT_GENERATED()
 
 	void Begin() override;
 	void Tick() override;

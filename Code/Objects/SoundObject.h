@@ -1,10 +1,11 @@
 #pragma once
 #include <Objects/WorldObject.h>
 #include <Sound/Sound.h>
+#include <GENERATED/GENERATED_SoundObject.h>
 class SoundObject : public WorldObject
 {
 public:
-	SoundObject() : WorldObject(ObjectDescription("Sound Object", 2)) {}
+	SOUNDOBJECT_GENERATED();
 	virtual void Begin() override;
 	virtual void Tick() override;
 	virtual void OnPropertySet() override;

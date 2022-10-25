@@ -42,3 +42,5 @@
 /x64/Release-EngineBuild/BomberJam64.tlog
 /x64/Debug/BomberJam64.tlog
 /x64
+/BuildTool/x64/Debug/BuildTool.tlog
+/BuildTool/x64/Debug

@@ -3,11 +3,12 @@
 #include <Objects/Components/MeshComponent.h>
 #include <Objects/Components/CollisionComponent.h>
 #include <Objects/Components/ParticleComponent.h>
+#include <GENERATED/GENERATED_HubTeleporter.h>
 
 class HubTeleporter : public WorldObject
 {
 public:
-	HubTeleporter() : WorldObject(ObjectDescription("Hub Teleporter", 9)) {}
+	HUBTELEPORTER_GENERATED()
 	void Begin() override;
 	void Tick() override;
 	void Destroy() override;

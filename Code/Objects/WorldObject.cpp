@@ -2,11 +2,12 @@
 #include "Components/Component.h"
 #include <sstream>
 #include <Objects/Objects.h>
+#include <Objects/PlayerObject.h>
 
 void WorldObject::Start(std::string ObjectName, Transform Transform)
 {
 	//Quick hack to make sure the player object is the first object to get destroyed, so we can save the rest of the world before it gets destroyed
-	if (GetObjectDescription().ID == 4)
+	if (GetObjectDescription().ID == PlayerObject::GetID())
 	{
 		Objects::AllObjects.insert(Objects::AllObjects.begin(), this);
 	}

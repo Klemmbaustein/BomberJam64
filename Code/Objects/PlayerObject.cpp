@@ -15,6 +15,7 @@
 #include <Objects/Orb.h>
 #include <Objects/HubTeleporter.h>
 #include <Objects/BombPickup.h>
+#include <Objects/Backpack.h>
 
 #include <FileUtility.h>
 
@@ -458,7 +459,7 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 						TeleportCancelTime = 3.f;
 					}
 				}
-				else if (hit.HitObject->GetObjectDescription().ID == 12)
+				else if (hit.HitObject->GetObjectDescription().ID == Backpack::GetID())
 				{
 					if (TeleportCancelTime <= 0)
 					{

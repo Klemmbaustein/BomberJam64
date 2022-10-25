@@ -1,10 +1,11 @@
 #pragma once
 #include <Objects/WorldObject.h>
+#include <GENERATED/GENERATED_Backpack.h>
 
 class Backpack : public WorldObject
 {
 public:
-	Backpack() : WorldObject(ObjectDescription("Backpack", 12)) {}
+	BACKPACK_GENERATED()
 	void Begin() override;
 	void Tick() override;
 };

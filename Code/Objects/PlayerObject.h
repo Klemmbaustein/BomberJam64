@@ -4,13 +4,15 @@
 #include "Components/CollisionComponent.h"
 #include <Sound/Sound.h>
 #include <UI/Game/GameUI.h>
+#include <GENERATED/GENERATED_PlayerObject.h>
 
 constexpr unsigned int PLAYER_NUM_ANIM_FRAMES = 10;
 class PlayerObject : public WorldObject
 {
 public:
+	PLAYEROBJECT_GENERATED()
+		
 	Vector3 Rotation = glm::vec3(0);
-	PlayerObject() : WorldObject(ObjectDescription("PlayerObject", 4)) {}
 	void Tick() override;
 	void Begin() override;
 	void Destroy() override;

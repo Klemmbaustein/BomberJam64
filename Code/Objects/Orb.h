@@ -4,11 +4,12 @@
 #include <Objects/Components/CollisionComponent.h>
 #include <Objects/Components/ParticleComponent.h>
 #include <Objects/Components/PointLightComponent.h>
+#include <GENERATED/GENERATED_Orb.h>
 
 class Orb : public WorldObject
 {
 public:
-	Orb() : WorldObject(ObjectDescription("Orb", 8)) {}
+	ORB_GENERATED()
 	void Begin() override;
 	void Tick() override;
 	void Destroy() override;

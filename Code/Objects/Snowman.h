@@ -1,9 +1,10 @@
 #pragma once
 #include <Objects/Objects.h>
+#include <GENERATED/GENERATED_Snowman.h>
 
 class Snowman : public WorldObject
 {
 public:
-	Snowman() : WorldObject(ObjectDescription("Snow man", 11)) {}
+	SNOWMAN_GENERATED()
 	void Begin() override;
 };

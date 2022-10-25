@@ -2,6 +2,7 @@
 #include <Objects/Objects.h>
 #include <Objects/Components/MeshComponent.h>
 #include <Objects/Components/CollisionComponent.h>
+#include <GENERATED/GENERATED_OrbGate.h>
 
 class OrbGate : public WorldObject
 {
@@ -9,7 +10,7 @@ class OrbGate : public WorldObject
 	CollisionComponent* GateCollisionComponent = nullptr;
 	int TextureIndex = 0;
 public:
-	OrbGate() : WorldObject(ObjectDescription("Orb Gate", 10)) {}
+	ORBGATE_GENERATED()
 
 	void Begin() override;
 	void OnPropertySet() override;
