@@ -1,7 +1,7 @@
 #include "Console.h"
 #include <Rendering/Utility/CSM.h>
 #include <Sound/Sound.h>
-#include <Engine.h>
+#include <EngineProperties.h>
 #include <sstream>
 #include <Rendering/Utility/ShaderManager.h>
 #include <map>
@@ -261,15 +261,13 @@ bool Console::ExecuteConsoleCommand(std::string Command, bool Verbose)
 			}
 			if (CurrentName == "sndlist" || CurrentName == "snd" || CurrentName == "sndinfo")
 			{
-				Log::CreateNewLogMessage(ConsoleHeader + "--------------------------------------------------------------------------");
 				RanCommand = true;
 				std::vector<std::string> sounds = Sound::GetSounds();
-				Log::CreateNewLogMessage(ConsoleHeader + "Sound List: " + std::to_string(sounds.size()) + "/255");
+				Log::CreateNewLogMessage(ConsoleHeader + "--------------[Sound List: " + std::to_string(sounds.size()) + "/255]-----------");
 				for (std::string s : sounds)
 				{
 					Log::CreateNewLogMessage(ConsoleHeader + s);
 				}
-				Log::CreateNewLogMessage(ConsoleHeader + "--------------------------------------------------------------------------");
 			}
 			if (CurrentName.substr(0, 9) == "playsound")
 			{
@@ -296,8 +294,7 @@ bool Console::ExecuteConsoleCommand(std::string Command, bool Verbose)
 			if (CurrentName == "info" || CurrentName == "?")
 			{
 				RanCommand = true;
-				Log::CreateNewLogMessage(ConsoleHeader + "--------------------------------------------------------------------------");
-				Log::CreateNewLogMessage(ConsoleHeader + "Info:");
+				Log::CreateNewLogMessage(ConsoleHeader + "---------------------------------[Info]-----------------------------------");
 				Log::CreateNewLogMessage(ConsoleHeader + "Version: " + std::string(VERSION_STRING) + (IS_IN_EDITOR ? "-Editor (" : " (") + std::string(ProjectName) + ")");
 				Log::CreateNewLogMessage(ConsoleHeader + "OS: " + OS::GetOSString());
 				Log::CreateNewLogMessage(ConsoleHeader + "Window Resolution: x=" + std::to_string((int)Graphics::WindowResolution.X) + " y=" + std::to_string((int)Graphics::WindowResolution.Y));
@@ -406,8 +403,7 @@ bool Console::ExecuteConsoleCommand(std::string Command, bool Verbose)
 			if (OriginalCommand == "listdef")
 			{
 				RanCommand = true;
-				Log::CreateNewLogMessage(ConsoleHeader + "--------------------------------------------------------------------------");
-				Log::CreateNewLogMessage(ConsoleHeader + "All definitions:");
+				Log::CreateNewLogMessage(ConsoleHeader + "----------------------------[All definitions]-----------------------------");
 				for (std::pair<std::string, std::string> v : Variables)
 				{
 					Log::CreateNewLogMessage(ConsoleHeader + v.first + " = " + v.second);

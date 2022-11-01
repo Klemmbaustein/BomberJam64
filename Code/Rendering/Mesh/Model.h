@@ -6,7 +6,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtx/matrix_decompose.hpp"
 #include "Math/Collision/CollisionBox.h"
-#include <UI/EngineUI/MaterialFunctions.h>
+#include <UI/EditorUI/MaterialFunctions.h>
 #include <Rendering/Renderable.h>
 #include <Rendering/Camera/FrustumCulling.h>
 namespace MaterialUniforms

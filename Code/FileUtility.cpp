@@ -25,7 +25,6 @@ std::string GetFilePathWithoutExtension(std::string FilePath)
 }
 
 //https://www.cplusplus.com/forum/windows/74644/
-//What is this?
 std::string wstrtostr(const std::wstring& wstr)
 {
 #if _WIN32

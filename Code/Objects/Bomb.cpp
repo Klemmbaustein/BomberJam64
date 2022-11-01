@@ -7,6 +7,7 @@
 #include <Rendering/Camera/CameraShake.h>
 #include <Objects/WallObject.h>
 #include <Objects/PlayerObject.h>
+#include <Objects/Snowman.h>
 
 #include <World/Graphics.h>
 #include <World/Stats.h>
@@ -48,7 +49,7 @@ void Bomb::Tick()
 		{
 			Sound::PlaySound3D(BombSound, GetTransform().Location, 5000.f, Random::GetRandomNumber(0.8f, 1.2f), 5*Random::GetRandomNumber(2.8f, 4.2f), false);
 			CameraShake::PlayDefaultCameraShake(1.5f);
-			auto AllWalls = Objects::GetAllObjectsWithID(6);
+			auto AllWalls = Objects::GetAllObjectsWithID(WallObject::GetID());
 
 			for (auto* o : AllWalls)
 			{
@@ -57,10 +58,10 @@ void Bomb::Tick()
 					Objects::DestroyObject(o);
 				}
 			}
-			auto Player = dynamic_cast<PlayerObject*>(Objects::GetAllObjectsWithID(4)[0]);
+			auto Player = dynamic_cast<PlayerObject*>(Objects::GetAllObjectsWithID(PlayerObject::GetID())[0]);
 
 
-			auto AllSnowmen = Objects::GetAllObjectsWithID(11);
+			auto AllSnowmen = Objects::GetAllObjectsWithID(Snowman::GetID());
 
 			for (auto* o : AllSnowmen)
 			{

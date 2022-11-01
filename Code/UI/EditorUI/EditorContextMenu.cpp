@@ -1,8 +1,8 @@
-#include "EngineContextMenu.h"
+#include "EditorContextMenu.h"
 #include <Input.h>
 #include <glm/glm.hpp>
 #include <FileUtility.h>
-#include <UI/EngineUI/EngineUI.h>
+#include <UI/EditorUI/EditorUI.h>
 
 bool ShouldUpdate = false;
 

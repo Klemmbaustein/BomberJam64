@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{5906f879-d77d-48bd-83eb-7d7994078a10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Camera">
+      <UniqueIdentifier>{09aa916a-e7e4-474b-9ea6-9e7d4d13c0b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Mesh">
+      <UniqueIdentifier>{334df583-f099-49ee-ab9f-b0ce5759049e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Texture">
+      <UniqueIdentifier>{2cc70f86-cfae-4aa6-87c3-85cbc8b16e3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Utility">
+      <UniqueIdentifier>{815d5acb-b4d0-40c5-8ad7-01f803c862e6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Code\Rendering\Particle.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Shader.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\VertexBuffer.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Camera\Camera.cpp">
+      <Filter>Rendering\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Camera\CameraShake.cpp">
+      <Filter>Rendering\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Camera\FrustumCulling.cpp">
+      <Filter>Rendering\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Mesh\InstancedMesh.cpp">
+      <Filter>Rendering\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Mesh\InstancedModel.cpp">
+      <Filter>Rendering\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Mesh\JSModel.cpp">
+      <Filter>Rendering\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Mesh\Mesh.cpp">
+      <Filter>Rendering\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Mesh\Model.cpp">
+      <Filter>Rendering\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Texture\Texture.cpp">
+      <Filter>Rendering\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Utility\CSM.cpp">
+      <Filter>Rendering\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Utility\Framebuffer.cpp">
+      <Filter>Rendering\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Utility\IndexBuffer.cpp">
+      <Filter>Rendering\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Utility\ShaderManager.cpp">
+      <Filter>Rendering\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Code\Rendering\Utility\SSAO.cpp">
+      <Filter>Rendering\Utility</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Code\Rendering\Particle.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Renderable.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Shader.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Vertex.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\VertexBuffer.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Camera\Camera.h">
+      <Filter>Rendering\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Camera\CameraShake.h">
+      <Filter>Rendering\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Camera\FrustumCulling.h">
+      <Filter>Rendering\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Mesh\InstancedMesh.h">
+      <Filter>Rendering\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Mesh\InstancedModel.h">
+      <Filter>Rendering\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Mesh\JSModel.h">
+      <Filter>Rendering\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Mesh\Mesh.h">
+      <Filter>Rendering\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Mesh\Model.h">
+      <Filter>Rendering\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Texture\Texture.h">
+      <Filter>Rendering\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Utility\CSM.h">
+      <Filter>Rendering\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Utility\Framebuffer.h">
+      <Filter>Rendering\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Utility\IndexBuffer.h">
+      <Filter>Rendering\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Utility\ShaderManager.h">
+      <Filter>Rendering\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\Rendering\Utility\SSAO.h">
+      <Filter>Rendering\Utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

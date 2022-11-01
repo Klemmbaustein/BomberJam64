@@ -2,7 +2,7 @@
 #include <filesystem>
 #include <Importers/Build/Pack.h>
 #include <Log.h>
-#include <Engine.h>
+#include <EngineProperties.h>
 #include <fstream>
 #include <sstream>
 #include <World/Stats.h>

@@ -7,7 +7,7 @@
 #include <iostream>
 #include <filesystem>
 #include <Objects/Components/CollisionComponent.h>
-#include "Engine.h"
+#include <EngineProperties.h>
 #include <UI/Default/ScrollObject.h>
 #include <FileUtility.h>
 #include <Scene.h>

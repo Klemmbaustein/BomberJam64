@@ -7,6 +7,7 @@
 #include <World/Graphics.h>
 #include <World/Assets.h>
 #include <World/Stats.h>
+#include <GL/glew.h>
 
 namespace fs = std::filesystem;
 

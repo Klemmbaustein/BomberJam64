@@ -1,4 +1,4 @@
-#include "Engine.h"
+#include <EngineProperties.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include <Utility/stb_image.h>
 #include <Log.h>
@@ -8,7 +8,7 @@
 #include <Rendering/Utility/Framebuffer.h>
 #include "Math/Math.h"
 #if IS_IN_EDITOR
-#include "UI/EngineUI/EngineUI.h"
+#include "UI/EditorUI/EditorUI.h"
 #endif
 #include <UI/Default/ScrollObject.h>
 #include "Scene.h"

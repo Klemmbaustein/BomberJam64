@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Editor|Win32">
       <Configuration>Editor</Configuration>
       <Platform>Win32</Platform>
@@ -13,12 +9,12 @@
       <Configuration>Editor</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="FinalBuild|Win32">
-      <Configuration>FinalBuild</Configuration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="FinalBuild|x64">
-      <Configuration>FinalBuild</Configuration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release-EngineBuild|Win32">
@@ -27,18 +23,6 @@
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release-EngineBuild|x64">
       <Configuration>Release-EngineBuild</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|x64">
-      <Configuration>Debug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|x64">
-      <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
@@ -52,19 +36,6 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='FinalBuild|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
@@ -86,20 +57,6 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <WholeProgramOptimization>false</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='FinalBuild|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
@@ -125,13 +82,7 @@
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='FinalBuild|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Editor|Win32'" Label="PropertySheets">
@@ -140,13 +91,7 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-EngineBuild|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='FinalBuild|x64'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Editor|x64'" Label="PropertySheets">
@@ -157,55 +102,18 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\VS\OpenAL\include;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;G:\VSProjects\glm\include;D:\VS\BomberJam64\BuildTool\Output;G:\VSProjects\AssimpInclude\include;D:\VS\BomberJam64\Code;$(IncludePath)</IncludePath>
-    <LibraryPath>G:\VSProjects\Assimp5.0.1Libs;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\lib\x64;G:\VSProjects\glew\glew-2.1.0\bin\Release\x64;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:\VS\OpenAL\include;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;G:\VSProjects\glm\include;D:\VS\BomberJam64\BuildTool\Output;G:\VSProjects\AssimpInclude\include;D:\VS\BomberJam64\Code;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\VS\OpenAL\bin;G:\VSProjects\Assimp5.0.1Libs;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\lib\x64;G:\VSProjects\glew\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='FinalBuild|x64'">
-    <IncludePath>D:\VS\OpenAL\include;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;G:\VSProjects\glm\include;D:\VS\BomberJam64\BuildTool\Output;G:\VSProjects\AssimpInclude\include;D:\VS\BomberJam64\Code;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\VS\OpenAL\bin;G:\VSProjects\Assimp5.0.1Libs;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\lib\x64;G:\VSProjects\glew\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\VS\BomberJam64\BuildTool\Output;D:\VS\OpenAL\include;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;G:\VSProjects\glm\include;G:\VSProjects\AssimpInclude\include;D:\VS\BomberJam64\Code;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\VS\BomberJam64\Components\lib;D:\VS\OpenAL\bin;G:\VSProjects\Assimp5.0.1Libs;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\lib\x64;G:\VSProjects\glew\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Editor|x64'">
-    <IncludePath>D:\VS\OpenAL\include;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;G:\VSProjects\glm\include;D:\VS\BomberJam64\BuildTool\Output;G:\VSProjects\AssimpInclude\include;D:\VS\BomberJam64\Code;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\VS\OpenAL\bin;G:\VSProjects\Assimp5.0.1Libs;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\lib\x64;G:\VSProjects\glew\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\VS\BomberJam64\BuildTool\Output;D:\VS\OpenAL\include;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;G:\VSProjects\glm\include;G:\VSProjects\AssimpInclude\include;D:\VS\BomberJam64\Code;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\VS\BomberJam64\Components\lib;D:\VS\OpenAL\bin;G:\VSProjects\Assimp5.0.1Libs;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\lib\x64;G:\VSProjects\glew\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-EngineBuild|x64'">
-    <IncludePath>D:\VS\OpenAL\include;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;G:\VSProjects\glm\include;D:\VS\BomberJam64\BuildTool\Output;G:\VSProjects\AssimpInclude\include;D:\VS\BomberJam64\Code;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\VS\OpenAL\bin;G:\VSProjects\Assimp5.0.1Libs;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\lib\x64;G:\VSProjects\glew\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\VS\BomberJam64\BuildTool\Output;D:\VS\OpenAL\include;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;G:\VSProjects\glm\include;G:\VSProjects\AssimpInclude\include;D:\VS\BomberJam64\Code;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\VS\BomberJam64\Components\lib;D:\VS\OpenAL\bin;G:\VSProjects\Assimp5.0.1Libs;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\lib\x64;G:\VSProjects\glew\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);IS_IN_EDITOR = true</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='FinalBuild|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -258,20 +166,6 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level1</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <WarningLevel>Level1</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -281,36 +175,15 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <PrecompiledHeaderFile>glm/glm.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <AdditionalDependencies>assimp.lib;OpenAL32.lib;SDL2.lib;opengl32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='FinalBuild|x64'">
-    <ClCompile>
-      <WarningLevel>Level1</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;RELEASE;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <Optimization>MaxSpeed</Optimization>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <AdditionalDependencies>assimp.lib;OpenAL32.lib;SDL2.lib;opengl32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;OpenAL32.lib;SDL2.lib;opengl32.lib;glew32s.lib;Rendering.lib;UI.lib;Editor.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
@@ -327,13 +200,15 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <PrecompiledHeaderFile>glm_precompiled.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <AdditionalDependencies>assimp.lib;OpenAL32.lib;SDL2.lib;opengl32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;OpenAL32.lib;SDL2.lib;opengl32.lib;glew32s.lib;Rendering.lib;UI.lib;Editor.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
@@ -349,13 +224,15 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <PrecompiledHeaderFile>glm/glm.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp.lib;OpenAL32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;OpenAL32.lib;SDL2.lib;opengl32.lib;glew32s.lib;Rendering.lib;UI.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -394,47 +271,17 @@
     <ClCompile Include="Code\Objects\WallObject.cpp" />
     <ClCompile Include="Code\Objects\WorldObject.cpp" />
     <ClCompile Include="Code\OS.cpp" />
-    <ClCompile Include="Code\Rendering\Camera\Camera.cpp" />
-    <ClCompile Include="Code\Rendering\Camera\CameraShake.cpp" />
-    <ClCompile Include="Code\Rendering\Camera\FrustumCulling.cpp" />
-    <ClCompile Include="Code\Rendering\Mesh\InstancedMesh.cpp" />
-    <ClCompile Include="Code\Rendering\Mesh\InstancedModel.cpp" />
-    <ClCompile Include="Code\Rendering\Mesh\JSModel.cpp" />
-    <ClCompile Include="Code\Rendering\Mesh\Mesh.cpp" />
-    <ClCompile Include="Code\Rendering\Mesh\Model.cpp" />
-    <ClCompile Include="Code\Rendering\Particle.cpp" />
-    <ClCompile Include="Code\Rendering\Shader.cpp" />
-    <ClCompile Include="Code\Rendering\Texture\Texture.cpp" />
-    <ClCompile Include="Code\Rendering\Utility\CSM.cpp" />
-    <ClCompile Include="Code\Rendering\Utility\Framebuffer.cpp" />
-    <ClCompile Include="Code\Rendering\Utility\ShaderManager.cpp" />
-    <ClCompile Include="Code\Rendering\Utility\SSAO.cpp" />
     <ClCompile Include="Code\Save.cpp" />
     <ClCompile Include="Code\Script.cpp" />
     <ClCompile Include="Code\Sound\Sound.cpp" />
     <ClCompile Include="Code\Timer.cpp" />
-    <ClCompile Include="Code\UI\Default\ScrollObject.cpp" />
-    <ClCompile Include="Code\UI\Default\TextField.cpp" />
-    <ClCompile Include="Code\UI\Default\TextRenderer.cpp" />
-    <ClCompile Include="Code\UI\Default\UIBorder.cpp" />
-    <ClCompile Include="Code\UI\Default\UIButton.cpp" />
-    <ClCompile Include="Code\UI\Default\UICanvas.cpp" />
-    <ClCompile Include="Code\UI\Default\VectorInputField.cpp" />
-    <ClCompile Include="Code\UI\EngineUI\AddNewItemTab.cpp" />
-    <ClCompile Include="Code\UI\EngineUI\EngineContextMenu.cpp" />
-    <ClCompile Include="Code\UI\EngineUI\EngineUI.cpp" />
-    <ClCompile Include="Code\UI\EngineUI\Material.cpp" />
-    <ClCompile Include="Code\UI\EngineUI\MaterialFunctions.cpp" />
-    <ClCompile Include="Code\UI\EngineUI\MaterialTemplate.cpp" />
-    <ClCompile Include="Code\UI\EngineUI\MeshTab.cpp" />
-    <ClCompile Include="Code\UI\EngineUI\ParticleEditorTab.cpp" />
     <ClCompile Include="Code\UI\Game\GameUI.cpp" />
     <ClCompile Include="Code\Scene.cpp" />
     <ClCompile Include="Code\World\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Console.h" />
-    <ClInclude Include="Code\Engine.h" />
+    <ClInclude Include="Code\EngineProperties.h" />
     <ClInclude Include="Code\EngineRandom.h" />
     <ClInclude Include="Code\FileUtility.h" />
     <ClInclude Include="Code\Importers\Build\Build.h" />
@@ -470,46 +317,11 @@
     <ClInclude Include="Code\Objects\SoundObject.h" />
     <ClInclude Include="Code\Objects\WorldObject.h" />
     <ClInclude Include="Code\OS.h" />
-    <ClInclude Include="Code\Rendering\Camera\Camera.h" />
-    <ClInclude Include="Code\Rendering\Camera\CameraShake.h" />
-    <ClInclude Include="Code\Rendering\Camera\FrustumCulling.h" />
-    <ClInclude Include="Code\Rendering\Mesh\InstancedMesh.h" />
-    <ClInclude Include="Code\Rendering\Mesh\InstancedModel.h" />
-    <ClInclude Include="Code\Rendering\Mesh\JSModel.h" />
-    <ClInclude Include="Code\Rendering\Mesh\Mesh.h" />
-    <ClInclude Include="Code\Rendering\Mesh\Model.h" />
-    <ClInclude Include="Code\Rendering\Particle.h" />
-    <ClInclude Include="Code\Rendering\Renderable.h" />
-    <ClInclude Include="Code\Rendering\Shader.h" />
-    <ClInclude Include="Code\Rendering\Texture\Texture.h" />
-    <ClInclude Include="Code\Rendering\Utility\CSM.h" />
-    <ClInclude Include="Code\Rendering\Utility\Framebuffer.h" />
-    <ClInclude Include="Code\Rendering\Utility\IndexBuffer.h" />
-    <ClInclude Include="Code\Rendering\Utility\ShaderManager.h" />
-    <ClInclude Include="Code\Rendering\Utility\SSAO.h" />
-    <ClInclude Include="Code\Rendering\Vertex.h" />
-    <ClInclude Include="Code\Rendering\VertexBuffer.h" />
     <ClInclude Include="Code\Save.h" />
     <ClInclude Include="Code\Script.h" />
     <ClInclude Include="Code\Sound\Sound.h" />
     <ClInclude Include="Code\Timer.h" />
     <ClInclude Include="Code\TypeEnun.h" />
-    <ClInclude Include="Code\UI\Default\ScrollObject.h" />
-    <ClInclude Include="Code\UI\Default\TextField.h" />
-    <ClInclude Include="Code\UI\Default\TextRenderer.h" />
-    <ClInclude Include="Code\UI\Default\UIBorder.h" />
-    <ClInclude Include="Code\UI\Default\UIButton.h" />
-    <ClInclude Include="Code\UI\Default\UICanvas.h" />
-    <ClInclude Include="Code\UI\Default\VectorInputField.h" />
-    <ClInclude Include="Code\UI\EngineUI\AddNewItemTab.h" />
-    <ClInclude Include="Code\UI\EngineUI\EngineContextMenu.h" />
-    <ClInclude Include="Code\UI\EngineUI\EngineTab.h" />
-    <ClInclude Include="Code\UI\EngineUI\EngineUI.h" />
-    <ClInclude Include="Code\UI\EngineUI\Material.h" />
-    <ClInclude Include="Code\UI\EngineUI\MaterialFunctions.h" />
-    <ClInclude Include="Code\UI\EngineUI\MaterialTemplate.h" />
-    <ClInclude Include="Code\UI\EngineUI\MeshTab.h" />
-    <ClInclude Include="Code\UI\EngineUI\ParticleEditorTab.h" />
     <ClInclude Include="Code\UI\Game\GameUI.h" />
     <ClInclude Include="Code\UI\UI.h" />
     <ClInclude Include="Code\Scene.h" />
@@ -519,29 +331,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Config.jss" />
-    <None Include="Shaders\basic.frag" />
-    <None Include="Shaders\basic.vert" />
-    <None Include="Shaders\bloom.frag" />
-    <None Include="Shaders\explosion.frag" />
-    <None Include="Shaders\explosion.vert" />
-    <None Include="Shaders\ground.frag" />
-    <None Include="Shaders\shared.frag" />
-    <None Include="Shaders\postprocess.frag" />
-    <None Include="Shaders\postprocess.vert" />
-    <None Include="Shaders\shadow.frag" />
-    <None Include="Shaders\shadow.geom" />
-    <None Include="Shaders\shadow.vert" />
-    <None Include="Shaders\skybox.frag" />
-    <None Include="Shaders\skybox.vert" />
-    <None Include="Shaders\ssao.frag" />
-    <None Include="Shaders\text.frag" />
-    <None Include="Shaders\text.vert" />
-    <None Include="Shaders\tree.frag" />
-    <None Include="Shaders\tree.vert" />
-    <None Include="Shaders\uishader.frag" />
-    <None Include="Shaders\uishader.vert" />
-    <None Include="Shaders\water.frag" />
-    <None Include="Shaders\water.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Code\Engine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

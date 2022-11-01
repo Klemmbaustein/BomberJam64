@@ -114,28 +114,13 @@ float ShadowCalculation(vec3 fragPosWorldSpace, vec3 v_modelnormal)
 	float shadow = 0.f;
 	vec2 distances = vec2(mod(projCoords.x, texelSize.x), mod(projCoords.y, texelSize.y)) * vec2(u_textureres);
 	int i = 0;
-	for(int x = -1; x <= 1; x += 1)
+	for(int x = 0; x <= 1; x += 1)
 	{
-		for(int y = -1; y <= 1; y += 1)
+		for(int y = 0; y <= 1; y += 1)
 		{
 			{
 				shadow += SampleFromShadowMap(projCoords.xy + vec2(x, y) * (u_shadowQuality - 1) * texelSize, bias, texelSize, layer, distances, currentDepth);
 				i++;
-			}
-		}
-	}
-	if(shadow != 8 && shadow != 0)
-	{
-		for(int x = -u_shadowQuality; x <= u_shadowQuality; ++x)
-		{
-			for(int y = -u_shadowQuality; y <= u_shadowQuality; ++y)
-			{
-				if(abs(x) > 1 && abs(x) > 1);
-				{
-					shadow += SampleFromShadowMap(projCoords.xy + vec2(x, y) * (u_shadowQuality - 1) * texelSize, bias, texelSize, layer, distances, currentDepth);
-					//shadow += SampleFromShadowMapCheap(projCoords.xy + vec2(x, y) * texelSize, bias, layer, currentDepth);
-					i++;
-				}
 			}
 		}
 	}

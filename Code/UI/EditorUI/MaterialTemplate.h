@@ -1,7 +1,7 @@
 #pragma once
 #include <UI/Default/UICanvas.h>
 #include <UI/Default/TextField.h>
-#include <UI/EngineUI/EngineTab.h>
+#include <UI/EditorUI/EditorTab.h>
 
 namespace MaterialTemplates
 {

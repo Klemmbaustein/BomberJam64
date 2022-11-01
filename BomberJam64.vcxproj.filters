@@ -40,27 +40,6 @@
     <Filter Include="Code\UI\Game">
       <UniqueIdentifier>{bf6b999c-4531-4be7-854d-8325000ce2f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Code\UI\EngineUI">
-      <UniqueIdentifier>{c2b19c7e-32ff-43a8-91b5-0991eacc8422}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\UI\EngineUI\Tabs">
-      <UniqueIdentifier>{3a297c6d-1a61-4bd7-8e29-bc5aebba8041}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\UI\Default">
-      <UniqueIdentifier>{0a00bfa8-e067-4e71-9ed7-8e3e766516a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{cc64fdbc-ab4a-40f6-9d31-d12d04e3338d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders\3D">
-      <UniqueIdentifier>{5ab6781c-2dcc-41b5-8222-798857b0b61f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders\2D">
-      <UniqueIdentifier>{95c720c7-0457-4c97-a74c-fc800414293b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders\PostProcess">
-      <UniqueIdentifier>{49081c0b-077f-4eb4-81ff-006c52ba443c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Code\Objects\Mesh">
       <UniqueIdentifier>{8e30d366-4d97-465b-a018-aa188e9e2ec4}</UniqueIdentifier>
     </Filter>
@@ -69,24 +48,6 @@
     </Filter>
     <Filter Include="Code\Sound">
       <UniqueIdentifier>{41f44cc7-e4bf-4803-9888-4396a73fec50}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Rendering">
-      <UniqueIdentifier>{4b7eaad4-3673-46ae-8162-173968e2733a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Rendering\Mesh">
-      <UniqueIdentifier>{96548092-8053-4767-805f-97a7d158addd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Rendering\Mesh\Instanced">
-      <UniqueIdentifier>{9a3f11c6-5fa8-4c34-b929-441047149157}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Rendering\Camera">
-      <UniqueIdentifier>{9ac94b28-f577-490d-8a30-1b77e1c0d6b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Rendering\Texture">
-      <UniqueIdentifier>{3d0e3e20-7e13-4669-ab24-888d5c472700}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Rendering\Utility">
-      <UniqueIdentifier>{650fac35-96b4-4eae-ba43-dea85571be07}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -162,42 +123,6 @@
     <ClCompile Include="Code\Objects\Components\MeshComponent.cpp">
       <Filter>Code\Objects\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Rendering\Shader.cpp">
-      <Filter>Code\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Rendering\Mesh\JSModel.cpp">
-      <Filter>Code\Rendering\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Rendering\Mesh\Mesh.cpp">
-      <Filter>Code\Rendering\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Rendering\Mesh\Model.cpp">
-      <Filter>Code\Rendering\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Rendering\Mesh\InstancedMesh.cpp">
-      <Filter>Code\Rendering\Mesh\Instanced</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Rendering\Mesh\InstancedModel.cpp">
-      <Filter>Code\Rendering\Mesh\Instanced</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Rendering\Texture\Texture.cpp">
-      <Filter>Code\Rendering\Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Rendering\Camera\Camera.cpp">
-      <Filter>Code\Rendering\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Rendering\Camera\CameraShake.cpp">
-      <Filter>Code\Rendering\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Rendering\Utility\CSM.cpp">
-      <Filter>Code\Rendering\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Rendering\Utility\ShaderManager.cpp">
-      <Filter>Code\Rendering\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Rendering\Utility\SSAO.cpp">
-      <Filter>Code\Rendering\Utility</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Importers\ImageImporter.cpp">
       <Filter>Code\FileUtility\Importers</Filter>
     </ClCompile>
@@ -212,48 +137,6 @@
     </ClCompile>
     <ClCompile Include="Code\UI\Game\GameUI.cpp">
       <Filter>Code\UI\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\EngineUI\EngineUI.cpp">
-      <Filter>Code\UI\EngineUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\EngineUI\MaterialFunctions.cpp">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\EngineUI\MaterialTemplate.cpp">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\EngineUI\MeshTab.cpp">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\EngineUI\Material.cpp">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\EngineUI\EngineContextMenu.cpp">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\EngineUI\AddNewItemTab.cpp">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\Default\ScrollObject.cpp">
-      <Filter>Code\UI\Default</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\Default\TextField.cpp">
-      <Filter>Code\UI\Default</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\Default\TextRenderer.cpp">
-      <Filter>Code\UI\Default</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\Default\UIBorder.cpp">
-      <Filter>Code\UI\Default</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\Default\UIButton.cpp">
-      <Filter>Code\UI\Default</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\Default\UICanvas.cpp">
-      <Filter>Code\UI\Default</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\Default\VectorInputField.cpp">
-      <Filter>Code\UI\Default</Filter>
     </ClCompile>
     <ClCompile Include="Code\Sound\Sound.cpp">
       <Filter>Code\Sound</Filter>
@@ -273,9 +156,6 @@
     <ClCompile Include="Code\Objects\HubTeleporter.cpp">
       <Filter>Code\Objects\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Rendering\Camera\FrustumCulling.cpp">
-      <Filter>Code\Rendering\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Objects\OrbGate.cpp">
       <Filter>Code\Objects\Game</Filter>
     </ClCompile>
@@ -294,15 +174,6 @@
     <ClCompile Include="Code\Objects\Components\PointLightComponent.cpp">
       <Filter>Code\Objects\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Rendering\Particle.cpp">
-      <Filter>Code\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Rendering\Utility\Framebuffer.cpp">
-      <Filter>Code\Rendering\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\UI\EngineUI\ParticleEditorTab.cpp">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Objects\Components\ParticleComponent.cpp">
       <Filter>Code\Objects\Components</Filter>
     </ClCompile>
@@ -320,7 +191,7 @@
     <ClInclude Include="Code\Input.h">
       <Filter>Code\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Engine.h">
+    <ClInclude Include="Code\EngineProperties.h">
       <Filter>Code\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Code\EngineRandom.h">
@@ -389,57 +260,6 @@
     <ClInclude Include="Code\Objects\Components\MeshComponent.h">
       <Filter>Code\Objects\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Rendering\Renderable.h">
-      <Filter>Code\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Shader.h">
-      <Filter>Code\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Vertex.h">
-      <Filter>Code\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\VertexBuffer.h">
-      <Filter>Code\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Mesh\JSModel.h">
-      <Filter>Code\Rendering\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Mesh\Mesh.h">
-      <Filter>Code\Rendering\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Mesh\Model.h">
-      <Filter>Code\Rendering\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Mesh\InstancedMesh.h">
-      <Filter>Code\Rendering\Mesh\Instanced</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Mesh\InstancedModel.h">
-      <Filter>Code\Rendering\Mesh\Instanced</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Texture\Texture.h">
-      <Filter>Code\Rendering\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Camera\Camera.h">
-      <Filter>Code\Rendering\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Camera\CameraShake.h">
-      <Filter>Code\Rendering\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Utility\CSM.h">
-      <Filter>Code\Rendering\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Utility\Framebuffer.h">
-      <Filter>Code\Rendering\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Utility\IndexBuffer.h">
-      <Filter>Code\Rendering\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Utility\ShaderManager.h">
-      <Filter>Code\Rendering\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Utility\SSAO.h">
-      <Filter>Code\Rendering\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Importers\ImageImporter.h">
       <Filter>Code\FileUtility\Importers</Filter>
     </ClInclude>
@@ -458,51 +278,6 @@
     <ClInclude Include="Code\UI\Game\GameUI.h">
       <Filter>Code\UI\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Code\UI\EngineUI\EngineUI.h">
-      <Filter>Code\UI\EngineUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\EngineUI\MeshTab.h">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\EngineUI\MaterialFunctions.h">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\EngineUI\MaterialTemplate.h">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\EngineUI\Material.h">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\EngineUI\EngineTab.h">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\EngineUI\EngineContextMenu.h">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\EngineUI\AddNewItemTab.h">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Default\ScrollObject.h">
-      <Filter>Code\UI\Default</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Default\TextField.h">
-      <Filter>Code\UI\Default</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Default\TextRenderer.h">
-      <Filter>Code\UI\Default</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Default\UIBorder.h">
-      <Filter>Code\UI\Default</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Default\UIButton.h">
-      <Filter>Code\UI\Default</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Default\UICanvas.h">
-      <Filter>Code\UI\Default</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\Default\VectorInputField.h">
-      <Filter>Code\UI\Default</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Sound\Sound.h">
       <Filter>Code\Sound</Filter>
     </ClInclude>
@@ -520,9 +295,6 @@
     </ClInclude>
     <ClInclude Include="Code\Objects\HubTeleporter.h">
       <Filter>Code\Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Rendering\Camera\FrustumCulling.h">
-      <Filter>Code\Rendering\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Code\Objects\OrbGate.h">
       <Filter>Code\Objects\Game</Filter>
@@ -548,86 +320,16 @@
     <ClInclude Include="Code\Objects\Components\PointLightComponent.h">
       <Filter>Code\Objects\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Rendering\Particle.h">
-      <Filter>Code\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\EngineUI\ParticleEditorTab.h">
-      <Filter>Code\UI\EngineUI\Tabs</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Objects\Components\ParticleComponent.h">
       <Filter>Code\Objects\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\basic.frag">
-      <Filter>Shaders\3D</Filter>
-    </None>
-    <None Include="Shaders\basic.vert">
-      <Filter>Shaders\3D</Filter>
-    </None>
-    <None Include="Shaders\ground.frag">
-      <Filter>Shaders\3D</Filter>
-    </None>
-    <None Include="Shaders\skybox.vert">
-      <Filter>Shaders\3D</Filter>
-    </None>
-    <None Include="Shaders\skybox.frag">
-      <Filter>Shaders\3D</Filter>
-    </None>
-    <None Include="Shaders\shadow.frag">
-      <Filter>Shaders\3D</Filter>
-    </None>
-    <None Include="Shaders\shadow.geom">
-      <Filter>Shaders\3D</Filter>
-    </None>
-    <None Include="Shaders\shadow.vert">
-      <Filter>Shaders\3D</Filter>
-    </None>
-    <None Include="Shaders\tree.frag">
-      <Filter>Shaders\3D</Filter>
-    </None>
-    <None Include="Shaders\tree.vert">
-      <Filter>Shaders\3D</Filter>
-    </None>
-    <None Include="Shaders\water.frag">
-      <Filter>Shaders\3D</Filter>
-    </None>
-    <None Include="Shaders\water.vert">
-      <Filter>Shaders\3D</Filter>
-    </None>
-    <None Include="Shaders\uishader.frag">
-      <Filter>Shaders\2D</Filter>
-    </None>
-    <None Include="Shaders\uishader.vert">
-      <Filter>Shaders\2D</Filter>
-    </None>
-    <None Include="Shaders\text.frag">
-      <Filter>Shaders\2D</Filter>
-    </None>
-    <None Include="Shaders\text.vert">
-      <Filter>Shaders\2D</Filter>
-    </None>
-    <None Include="Shaders\bloom.frag">
-      <Filter>Shaders\PostProcess</Filter>
-    </None>
-    <None Include="Shaders\postprocess.frag">
-      <Filter>Shaders\PostProcess</Filter>
-    </None>
-    <None Include="Shaders\postprocess.vert">
-      <Filter>Shaders\PostProcess</Filter>
-    </None>
-    <None Include="Shaders\ssao.frag">
-      <Filter>Shaders\PostProcess</Filter>
-    </None>
-    <None Include="Shaders\explosion.frag">
-      <Filter>Shaders\3D</Filter>
-    </None>
-    <None Include="Shaders\explosion.vert">
-      <Filter>Shaders\3D</Filter>
-    </None>
-    <None Include="Shaders\shared.frag">
-      <Filter>Shaders\3D</Filter>
-    </None>
     <None Include="Config.jss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Code\Engine.h">
+      <Filter>Code</Filter>
+    </Text>
   </ItemGroup>
 </Project>

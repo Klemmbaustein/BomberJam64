@@ -1,15 +1,6 @@
 #pragma once
-#ifdef EDITOR
-#define IS_IN_EDITOR true
-#else
-#define IS_IN_EDITOR false
-#endif
-#ifdef RELEASE
-#define ENGINE_DEBUG false
-#else
-#define ENGINE_DEBUG true
-#endif
-constexpr char ProjectName[] = "BomberSnek";
-constexpr char StartupMap[] = "Level1";
-#define VERSION_STRING "1.2"
-#define OPENGL_MIN_REQUIRED_VERSION "GL_VERSION_4_3"
+#include "Objects/WorldObject.h"
+#include <Scene.h>
+#include <Objects/Components/MeshComponent.h>
+#include <Objects/Components/CollisionComponent.h>
+#include <Objects/Components/CameraComponent.h>

@@ -375,9 +375,8 @@ void Particles::ParticleEmitter::Update(Camera* MainCamera)
 	for (unsigned int elem = 0; elem < ParticleInstances.size(); elem++)
 	{
 		std::vector<ParticleInstance> ParticlesToDelete;
-		for (unsigned int i = 0; i < ParticleInstances[elem].size(); i++)
+		for (auto& p : ParticleInstances[elem])
 		{
-			auto& p = ParticleInstances[elem][i];
 			p.Position += p.Velocity * Performance::DeltaTime;
 			p.Velocity += p.Force * Performance::DeltaTime;
 			p.LifeTime -= Performance::DeltaTime;

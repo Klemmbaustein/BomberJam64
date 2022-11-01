@@ -6,6 +6,7 @@
 #include <sstream>
 #include <Log.h>
 #include <Importers/Build/Pack.h>
+#include <GL/glew.h>
 
 
 extern const bool IsInEditor;
@@ -42,7 +43,7 @@ void Shader::Recompile()
 	CreateShader(VertexFileName.c_str(), FragmetFileName.c_str(), nullptr);
 }
 
-GLuint Shader::Compile(std::string ShaderCode, GLenum Type)
+GLuint Shader::Compile(std::string ShaderCode, unsigned int Type)
 {
 	GLuint id = glCreateShader(Type);
 	const char* src = ShaderCode.c_str();
@@ -187,7 +188,7 @@ GLuint Shader::CreateShader(const char* VertexShader, const char* FragmentShader
 		glDeleteShader(geometry);
 	return ShaderID;
 }
-void Shader::checkCompileErrors(GLuint shader, std::string type, std::string ShaderName)
+void Shader::checkCompileErrors(unsigned int shader, std::string type, std::string ShaderName)
 {
 	GLint success;
 	GLchar infoLog[1024];

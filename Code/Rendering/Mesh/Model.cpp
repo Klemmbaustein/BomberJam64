@@ -7,11 +7,12 @@
 #include <filesystem>
 #include <Rendering/Utility/ShaderManager.h>
 #include <Log.h>
-#include <UI/EngineUI/MaterialFunctions.h>
+#include <UI/EditorUI/MaterialFunctions.h>
 #include <Rendering/Mesh/JSModel.h>
 #include <World/Graphics.h>
 #include <World/Stats.h>
 #include <World/Assets.h>
+#include <GL/glew.h>
 namespace fs = std::filesystem;
 
 const extern bool IsInEditor;

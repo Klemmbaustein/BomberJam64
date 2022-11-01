@@ -74,13 +74,13 @@ void PlayerObject::TryLoadSave()
 			{
 				int NumWalls = std::stoi(InSave.GetPropterty("NumWalls").Value);
 				int NumOrbs = std::stoi(InSave.GetPropterty("NumOrbs").Value);
-				auto Walls = Objects::GetAllObjectsWithID(6); // Get All Walls
+				auto Walls = Objects::GetAllObjectsWithID(WallObject::GetID()); // Get All Walls
 
 				for (auto* w : Walls) // destroy all walls, because we are going to spawn new ones that are listed in the savegame
 				{
 					Objects::DestroyObject(w);
 				}
-				auto Orbs = Objects::GetAllObjectsWithID(8); // then do the same with the orbs
+				auto Orbs = Objects::GetAllObjectsWithID(Orb::GetID()); // then do the same with the orbs
 
 				for (auto* o : Orbs)
 				{
@@ -107,8 +107,9 @@ void PlayerObject::TryLoadSave()
 				}
 			}
 		}
-		catch (std::exception) // if we get an error when loading, that probably means the save file does not exist, so we treat this as a "new game"
+		catch (std::exception& e) // if we get an error when loading, that probably means the save file does not exist, so we treat this as a "new game"
 		{
+			Log::CreateNewLogMessage("Error while Loading save: " + std::string(e.what()), Vector3(1, 0, 0));
 		}
 	}
 }
@@ -365,6 +366,7 @@ void PlayerObject::Destroy()
 {
 	if (!IsInEditor)
 	{
+		Log::CreateNewLogMessage("Destroyed");
 		{
 			//Save general information into the main save
 			SaveGame PersistantSave = SaveGame("Main");
@@ -380,8 +382,8 @@ void PlayerObject::Destroy()
 		OutSave.SetPropterty(SaveGame::SaveProperty("PlayerPos", GetTransform().Location.ToString(), T_VECTOR3));
 
 		int i = 0;
-		auto Walls = Objects::GetAllObjectsWithID(6); //Get all Walls
-		auto Orbs = Objects::GetAllObjectsWithID(8); //Get all Orbs
+		auto Walls = Objects::GetAllObjectsWithID(WallObject::GetID()); //Get all Walls
+		auto Orbs = Objects::GetAllObjectsWithID(Orb::GetID()); //Get all Orbs
 
 		//then save the ammount of both into the level save file
 		OutSave.SetPropterty(SaveGame::SaveProperty("NumWalls", std::to_string(Walls.size()), T_INT));
@@ -431,18 +433,18 @@ bool PlayerObject::TryMove(Vector3 Offset, bool Vertical)
 
 			if (hit.Hit)
 			{
-				if (hit.HitObject->GetObjectDescription().ID == 7) // if its a bomb pickup
+				if (hit.HitObject->GetObjectDescription().ID == BombPickup::GetID()) // if its a bomb pickup
 				{
 					BombTime = dynamic_cast<BombPickup*>(hit.HitObject)->Amount;
 					MaxBombs = BombTime;
 				}
-				else if (hit.HitObject->GetObjectDescription().ID == 8) // if its an orb
+				else if (hit.HitObject->GetObjectDescription().ID == Orb::GetID()) // if its an orb
 				{
 					NumOrbs++;
 					Objects::DestroyObject(hit.HitObject);
 					Sound::PlaySound2D(OrbSound, 1.f, 0.2f);
 				}
-				else if (hit.HitObject->GetObjectDescription().ID == 9 && !InLevelTransition) // if its a teleporter
+				else if (hit.HitObject->GetObjectDescription().ID == HubTeleporter::GetID() && !InLevelTransition) // if its a teleporter
 				{
 					if (TeleportCancelTime <= 0)
 					{

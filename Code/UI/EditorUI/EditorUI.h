@@ -3,10 +3,10 @@
 #include "UI/Default/TextRenderer.h"
 #include "UI/Default/UIButton.h"
 #include <UI/Default/TextField.h>
-#include <UI/EngineUI/MaterialTemplate.h>
-#include <UI/EngineUI/EngineTab.h>
+#include <UI/EditorUI/MaterialTemplate.h>
+#include <UI/EditorUI/EditorTab.h>
 #include "Material.h"
-#include "EngineContextMenu.h"
+#include "EditorContextMenu.h"
 #include "MeshTab.h"
 #include "AddNewItemTab.h"
 #include "ParticleEditorTab.h"

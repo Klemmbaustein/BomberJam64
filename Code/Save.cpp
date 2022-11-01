@@ -26,8 +26,8 @@ SaveGame::SaveGame(std::string SaveName)
 	//if a save does not exist yet, it will be created on deconstruction.
 	if (std::filesystem::exists(SaveName))
 	{
-		std::ifstream InFile = std::ifstream(SaveName, std::ios::in);
 		IsNew = false;
+		std::ifstream InFile = std::ifstream(SaveName, std::ios::in);
 		char CurrentBuff[100];
 
 		//iterate through all lines which (hopefully) contain save values

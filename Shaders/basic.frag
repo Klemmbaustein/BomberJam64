@@ -46,9 +46,8 @@ vec4 ApplyFogColor(vec4 InColor)
 
 void main()
 {
-	vec3 texcolor;
-	vec3 normal = normalize(v_modelnormal);
 	bool transparent = false;
+	vec3 texcolor;
 	if(u_usetexture == 1)
 	{
 		texcolor = u_diffuse * texture(u_texture, v_texcoord).rgb;
@@ -58,6 +57,7 @@ void main()
 		texcolor = u_diffuse;
 	if(transparent)
 		discard;
+	vec3 normal = normalize(v_modelnormal);
 	vec3 color = GetLightingAt(v_position, normal, texcolor);
 	f_color = ApplyFogColor(vec4(color + u_emissive, 1));
 	brightcolor = f_color;

@@ -1,5 +1,4 @@
 #pragma once
-#include "GL/glew.h"
 #include <string>
 #include <iostream>
 struct Shader
@@ -19,12 +18,12 @@ struct Shader
 	void Recompile();
 
 private:
-	GLuint Compile(std::string ShaderCode, GLenum Type);
+	unsigned int Compile(std::string ShaderCode, unsigned int Type);
 	std::string parse(const char* Filename);
-	GLuint CreateShader(const char* VertexShader, const char* FragmentShader, const char* GeometryShader);
-	void checkCompileErrors(GLuint shader, std::string type, std::string ShaderName);
+	unsigned int CreateShader(const char* VertexShader, const char* FragmentShader, const char* GeometryShader);
+	void checkCompileErrors(unsigned int shader, std::string type, std::string ShaderName);
 
 	std::string VertexFileName, FragmetFileName;
 
-	GLuint ShaderID;
+	unsigned int ShaderID;
 };

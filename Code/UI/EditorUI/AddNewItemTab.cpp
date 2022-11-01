@@ -1,6 +1,6 @@
 #include "AddNewItemTab.h"
 #include <fstream>
-#include "EngineUI.h"
+#include "EditorUI.h"
 #include <FileUtility.h>
 
 std::string GetTypeNameFromExtension(std::string Extension)

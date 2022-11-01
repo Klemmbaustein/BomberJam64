@@ -15,13 +15,6 @@ void Orb::Begin()
 	GlowParticle = new ParticleComponent();
 	Attach(GlowParticle);
 	GlowParticle->LoadParticle("Orb");
-
-	LightComponent = new PointLightComponent();
-	Attach(LightComponent);
-	LightComponent->SetFalloff(2);
-	LightComponent->SetIntensity(250);
-	LightComponent->SetColor(Vector3(0, 0.5, 1));
-	LightComponent->SetRelativeLocation(0);
 }
 
 void Orb::Destroy()

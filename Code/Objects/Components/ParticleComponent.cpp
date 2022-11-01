@@ -19,6 +19,16 @@ void ParticleComponent::Tick()
 }
 void ParticleComponent::Destroy()
 {
+	for (auto f : Graphics::AllFramebuffers)
+	{
+		for (int i = 0; i < f->ParticleEmitters.size(); i++)
+		{
+			if (f->ParticleEmitters[i] == Emitter)
+			{
+				f->ParticleEmitters.erase(f->ParticleEmitters.begin() + i);
+			}
+		}
+	}
 	delete Emitter;
 }
 void ParticleComponent::LoadParticle(std::string Name)

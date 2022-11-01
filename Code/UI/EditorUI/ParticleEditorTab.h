@@ -1,5 +1,5 @@
 #pragma once
-#include <UI/EngineUI/EngineTab.h>
+#include <UI/EditorUI/EditorTab.h>
 #include <UI/Default/TextRenderer.h>
 #include <Rendering/Utility/Framebuffer.h>
 #include <Rendering/Particle.h>

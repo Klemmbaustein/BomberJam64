@@ -1,34 +1,18 @@
 #pragma once
 
-#include <GL/glew.h>
-
 #include "Rendering/Vertex.h"
 
 struct IndexBuffer
 {
-	IndexBuffer(void* data, int NumVertecies, int ElementSize)
-	{ 
-		glGenBuffers(1, &BufferID);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, BufferID);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, NumVertecies * ElementSize, data, GL_STATIC_DRAW);
-	}
+	IndexBuffer(void* data, int NumVertecies, int ElementSize);
 
-	virtual ~IndexBuffer()
-	{
-		glDeleteBuffers(1, &BufferID);
-	}
+	virtual ~IndexBuffer();
 
-	void Bind()
-	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, BufferID);
-	}
+	void Bind();
 
-	void Unbind()
-	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	}
+	void Unbind();
 
 
 private:
-	GLuint BufferID;
+	unsigned int BufferID;
 };

@@ -6,7 +6,7 @@ in vec2 v_texcoords;
 uniform sampler2D image;
   
 uniform bool horizontal;
-uniform float weight[5] = float[] (0.227027, 0.1945946, 0.1216216, 0.054054, 0.016216);
+uniform float weight[5] = float[] (0.257027, 0.2245946, 0.1516216, 0.084054, 0.016216);
 
 void main()
 {
@@ -14,7 +14,7 @@ void main()
     vec3 result = texture(image, v_texcoords).rgb * weight[0]; // current fragment's contribution
     if(horizontal)
     {
-        for(int i = 1; i < 5; ++i)
+        for(int i = 1; i < 3; ++i)
         {
             result += texture(image, v_texcoords + vec2(tex_offset.x * i, 0.0)).rgb * weight[i];
             result += texture(image, v_texcoords - vec2(tex_offset.x * i, 0.0)).rgb * weight[i];
@@ -22,7 +22,7 @@ void main()
     }
     else
     {
-        for(int i = 1; i < 5; ++i)
+        for(int i = 1; i < 3; ++i)
         {
             result += texture(image, v_texcoords + vec2(0.0, tex_offset.y * i)).rgb * weight[i];
             result += texture(image, v_texcoords - vec2(0.0, tex_offset.y * i)).rgb * weight[i];
