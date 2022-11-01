@@ -4,14 +4,14 @@
 #include <Windows.h>
 #include <Shlobj.h>
 #include <shobjidl.h> 
-#include <FileUtility.h>
+#include <Engine/FileUtility.h>
 #endif
 
 #if __linux__
 //Currently no linux implementation needs to include anything
 #endif
 
-#include <Log.h>
+#include <Engine/Log.h>
 
 
 #if _WIN32
@@ -24,8 +24,8 @@ void OS::SetConsoleWindowVisible(bool Visible)
 #if __linux__
 void OS::SetConsoleWindowVisible(bool Visible)
 {
+	//Clearing the Console is usually a bad idea on linux
 }
-
 #endif
 
 

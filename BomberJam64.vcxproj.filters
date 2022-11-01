@@ -4,332 +4,83 @@
     <Filter Include="Code">
       <UniqueIdentifier>{b9d9a3c6-cf35-4486-a3e0-5590206d55c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Code\Engine">
-      <UniqueIdentifier>{fe1f83b1-5537-4f10-b1e1-3955265b56a9}</UniqueIdentifier>
+    <Filter Include="Code\Game">
+      <UniqueIdentifier>{03273eca-e21c-4d10-8c77-424308c03144}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Code\Engine\Script">
-      <UniqueIdentifier>{7b330674-1927-462b-b2ae-8d81f44a6984}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Objects">
-      <UniqueIdentifier>{beab0df0-dd89-4d32-924b-83f2345e0808}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Objects\Game">
-      <UniqueIdentifier>{ae1e2f1b-cab4-41ac-b1d4-cf8ea9d449b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\FileUtility">
-      <UniqueIdentifier>{cf542aad-5209-481a-b03c-f51d28c27211}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Objects\Components">
-      <UniqueIdentifier>{f876c1cc-d63d-452b-a717-7e4650660692}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\FileUtility\Importers">
-      <UniqueIdentifier>{b9494dcf-ef2a-41d0-9e73-a8e43aaea0dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\FileUtility\Importers\Build">
-      <UniqueIdentifier>{131ad89e-2c57-41fd-b4ab-83cdb7640c7e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Math">
-      <UniqueIdentifier>{7152b9f5-4925-4d9d-a503-4eeedd4b7da2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Math\Collision">
-      <UniqueIdentifier>{b3373202-34f6-4b54-8d7e-2b10ee5b1792}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\UI">
+    <Filter Include="Code\Game\UI">
       <UniqueIdentifier>{0d3240f2-1610-422e-b346-b70317d27daf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Code\UI\Game">
+    <Filter Include="Code\Game\UI\Game">
       <UniqueIdentifier>{bf6b999c-4531-4be7-854d-8325000ce2f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Code\Objects\Mesh">
-      <UniqueIdentifier>{8e30d366-4d97-465b-a018-aa188e9e2ec4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\World">
-      <UniqueIdentifier>{b2edb64d-e3c8-4da8-8df1-33d33b7598ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Sound">
-      <UniqueIdentifier>{41f44cc7-e4bf-4803-9888-4396a73fec50}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Code\main.cpp">
-      <Filter>Code</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Scene.cpp">
-      <Filter>Code</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Input.cpp">
-      <Filter>Code\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\EngineRandom.cpp">
-      <Filter>Code\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Timer.cpp">
-      <Filter>Code\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Script.cpp">
-      <Filter>Code\Engine\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\Objects.cpp">
-      <Filter>Code\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\SoundObject.cpp">
-      <Filter>Code\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\WorldObject.cpp">
-      <Filter>Code\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Math\Math.cpp">
-      <Filter>Code\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Math\Vector.cpp">
-      <Filter>Code\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Math\Collision\Collision.cpp">
-      <Filter>Code\Math\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Math\Collision\CollisionBox.cpp">
-      <Filter>Code\Math\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\InstancedMeshObject.cpp">
-      <Filter>Code\Objects\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\MeshObject.cpp">
-      <Filter>Code\Objects\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\PlayerObject.cpp">
-      <Filter>Code\Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\FileUtility.cpp">
-      <Filter>Code\FileUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Save.cpp">
-      <Filter>Code\FileUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Console.cpp">
-      <Filter>Code\Engine\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\Components\CameraComponent.cpp">
-      <Filter>Code\Objects\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\Components\CollisionComponent.cpp">
-      <Filter>Code\Objects\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\Components\Component.cpp">
-      <Filter>Code\Objects\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\Components\InstancedMeshComponent.cpp">
-      <Filter>Code\Objects\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\Components\MeshComponent.cpp">
-      <Filter>Code\Objects\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Importers\ImageImporter.cpp">
-      <Filter>Code\FileUtility\Importers</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Importers\ModelConverter.cpp">
-      <Filter>Code\FileUtility\Importers</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Importers\Build\Build.cpp">
-      <Filter>Code\FileUtility\Importers\Build</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Importers\Build\Pack.cpp">
-      <Filter>Code\FileUtility\Importers\Build</Filter>
-    </ClCompile>
     <ClCompile Include="Code\UI\Game\GameUI.cpp">
-      <Filter>Code\UI\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Sound\Sound.cpp">
-      <Filter>Code\Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\Bomb.cpp">
-      <Filter>Code\Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\WallObject.cpp">
-      <Filter>Code\Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\BombPickup.cpp">
-      <Filter>Code\Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\Orb.cpp">
-      <Filter>Code\Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\HubTeleporter.cpp">
-      <Filter>Code\Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\OrbGate.cpp">
-      <Filter>Code\Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\Snowman.cpp">
-      <Filter>Code\Objects\Game</Filter>
+      <Filter>Code\Game\UI\Game</Filter>
     </ClCompile>
     <ClCompile Include="Code\Objects\Backpack.cpp">
-      <Filter>Code\Objects\Game</Filter>
+      <Filter>Code\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Code\OS.cpp">
-      <Filter>Code</Filter>
+    <ClCompile Include="Code\Objects\Bomb.cpp">
+      <Filter>Code\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Code\World\World.cpp">
-      <Filter>Code\World</Filter>
+    <ClCompile Include="Code\Objects\BombPickup.cpp">
+      <Filter>Code\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Objects\Components\PointLightComponent.cpp">
-      <Filter>Code\Objects\Components</Filter>
+    <ClCompile Include="Code\Objects\HubTeleporter.cpp">
+      <Filter>Code\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Objects\Components\ParticleComponent.cpp">
-      <Filter>Code\Objects\Components</Filter>
+    <ClCompile Include="Code\Objects\Orb.cpp">
+      <Filter>Code\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Objects\OrbGate.cpp">
+      <Filter>Code\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Objects\PlayerObject.cpp">
+      <Filter>Code\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Objects\Snowman.cpp">
+      <Filter>Code\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Objects\WallObject.cpp">
+      <Filter>Code\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Code\TypeEnun.h">
-      <Filter>Code</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Scene.h">
-      <Filter>Code</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Log.h">
-      <Filter>Code\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Input.h">
-      <Filter>Code\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\EngineProperties.h">
-      <Filter>Code\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\EngineRandom.h">
-      <Filter>Code\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Timer.h">
-      <Filter>Code\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Script.h">
-      <Filter>Code\Engine\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\Objects.h">
-      <Filter>Code\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\SoundObject.h">
-      <Filter>Code\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\WorldObject.h">
-      <Filter>Code\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Math\Math.h">
-      <Filter>Code\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Math\Vector.h">
-      <Filter>Code\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Math\Collision\Collision.h">
-      <Filter>Code\Math\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Math\Collision\CollisionBox.h">
-      <Filter>Code\Math\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Math\Collision\TriangleIntersect.h">
-      <Filter>Code\Math\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\MeshObject.h">
-      <Filter>Code\Objects\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\InstancedMeshObject.h">
-      <Filter>Code\Objects\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\PlayerObject.h">
-      <Filter>Code\Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\FileUtility.h">
-      <Filter>Code\FileUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Save.h">
-      <Filter>Code\FileUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Console.h">
-      <Filter>Code\Engine\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\Components\CameraComponent.h">
-      <Filter>Code\Objects\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\Components\CollisionComponent.h">
-      <Filter>Code\Objects\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\Components\Component.h">
-      <Filter>Code\Objects\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\Components\InstancedMeshComponent.h">
-      <Filter>Code\Objects\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\Components\MeshComponent.h">
-      <Filter>Code\Objects\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Importers\ImageImporter.h">
-      <Filter>Code\FileUtility\Importers</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Importers\ModelConverter.h">
-      <Filter>Code\FileUtility\Importers</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Importers\Build\Build.h">
-      <Filter>Code\FileUtility\Importers\Build</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Importers\Build\Pack.h">
-      <Filter>Code\FileUtility\Importers\Build</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\UI\UI.h">
-      <Filter>Code\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Code\UI\Game\GameUI.h">
-      <Filter>Code\UI\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Sound\Sound.h">
-      <Filter>Code\Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\Bomb.h">
-      <Filter>Code\Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\WallObject.h">
-      <Filter>Code\Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\BombPickup.h">
-      <Filter>Code\Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\Orb.h">
-      <Filter>Code\Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\HubTeleporter.h">
-      <Filter>Code\Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\OrbGate.h">
-      <Filter>Code\Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\Snowman.h">
-      <Filter>Code\Objects\Game</Filter>
+      <Filter>Code\Game\UI\Game</Filter>
     </ClInclude>
     <ClInclude Include="Code\Objects\Backpack.h">
-      <Filter>Code\Objects\Game</Filter>
+      <Filter>Code\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Code\OS.h">
-      <Filter>Code</Filter>
+    <ClInclude Include="Code\Objects\Bomb.h">
+      <Filter>Code\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Code\World\Graphics.h">
-      <Filter>Code\World</Filter>
+    <ClInclude Include="Code\Objects\BombPickup.h">
+      <Filter>Code\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Code\World\Stats.h">
-      <Filter>Code\World</Filter>
+    <ClInclude Include="Code\Objects\HubTeleporter.h">
+      <Filter>Code\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Code\World\Assets.h">
-      <Filter>Code\World</Filter>
+    <ClInclude Include="Code\Objects\Orb.h">
+      <Filter>Code\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Objects\Components\PointLightComponent.h">
-      <Filter>Code\Objects\Components</Filter>
+    <ClInclude Include="Code\Objects\OrbGate.h">
+      <Filter>Code\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Objects\Components\ParticleComponent.h">
-      <Filter>Code\Objects\Components</Filter>
+    <ClInclude Include="Code\Objects\Snowman.h">
+      <Filter>Code\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Objects\WallObject.h">
+      <Filter>Code\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Objects\PlayerObject.h">
+      <Filter>Code\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Config.jss" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Code\Engine.h">
-      <Filter>Code</Filter>
-    </Text>
+    <None Include="ToDo.md" />
   </ItemGroup>
 </Project>

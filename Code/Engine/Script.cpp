@@ -1,11 +1,11 @@
 #include "Script.h"
 #include <fstream>
 #include <iostream>
-#include <Console.h>
+#include <Engine/Console.h>
 #include "Script.h"
-#include <FileUtility.h>
+#include <Engine/FileUtility.h>
 #include <filesystem>
-#include <Log.h>
+#include <Engine/Log.h>
 #include <World/Stats.h>
 #include <World/Assets.h>
 

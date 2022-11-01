@@ -1,7 +1,7 @@
-#include "Engine/Save.h"
+#include "Save.h"
 #include <fstream>
 #include <filesystem>
-#include <Engine/Log.h>
+#include <Log.h>
 #include <sstream>
 
 std::string Types[] =

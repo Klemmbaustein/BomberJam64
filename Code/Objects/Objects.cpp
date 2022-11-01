@@ -1,5 +1,5 @@
 #include "Objects.h"
-#include <Scene.h>
+#include <Engine/Scene.h>
 #include <Objects/MeshObject.h>
 #include <Objects/SoundObject.h>
 #include <Objects/InstancedMeshObject.h>
@@ -12,7 +12,7 @@
 #include <Objects/OrbGate.h>
 #include <Objects/Snowman.h>
 #include <Objects/Backpack.h>
-#include <Log.h>
+#include <Engine/Log.h>
 
 template<typename T>
 inline T* Objects::SpawnObject(Transform ObjectTransform)

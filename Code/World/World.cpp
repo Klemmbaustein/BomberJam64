@@ -7,12 +7,12 @@
 #include <iostream>
 #include <filesystem>
 #include <Objects/Components/CollisionComponent.h>
-#include <EngineProperties.h>
+#include <Engine/EngineProperties.h>
 #include <UI/Default/ScrollObject.h>
-#include <FileUtility.h>
-#include <Scene.h>
+#include <Engine/FileUtility.h>
+#include <Engine/Scene.h>
 #include <Rendering/Utility/SSAO.h>
-#include <Log.h>
+#include <Engine/Log.h>
 #include <Rendering/Utility/Framebuffer.h>
 
 #include <SDL.h>

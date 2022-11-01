@@ -32,7 +32,7 @@
     <ProjectGuid>{53b4fa76-7692-4cbc-933a-275fb31cadb6}</ProjectGuid>
     <RootNamespace>BomberJam64</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Engine</ProjectName>
+    <ProjectName>Game</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -183,7 +183,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <AdditionalDependencies>assimp.lib;OpenAL32.lib;SDL2.lib;opengl32.lib;glew32s.lib;Rendering.lib;UI.lib;Editor.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;OpenAL32.lib;SDL2.lib;opengl32.lib;glew32s.lib;Rendering.lib;UI.lib;Editor.lib;Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
@@ -236,104 +236,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Code\Console.cpp" />
-    <ClCompile Include="Code\EngineRandom.cpp" />
-    <ClCompile Include="Code\FileUtility.cpp" />
-    <ClCompile Include="Code\Importers\Build\Build.cpp" />
-    <ClCompile Include="Code\Importers\Build\Pack.cpp" />
-    <ClCompile Include="Code\Importers\ImageImporter.cpp" />
-    <ClCompile Include="Code\Importers\ModelConverter.cpp" />
-    <ClCompile Include="Code\Input.cpp" />
     <ClCompile Include="Code\main.cpp" />
-    <ClCompile Include="Code\Math\Collision\Collision.cpp" />
-    <ClCompile Include="Code\Math\Collision\CollisionBox.cpp" />
-    <ClCompile Include="Code\Math\Math.cpp" />
-    <ClCompile Include="Code\Math\Vector.cpp" />
     <ClCompile Include="Code\Objects\Backpack.cpp" />
     <ClCompile Include="Code\Objects\Bomb.cpp" />
     <ClCompile Include="Code\Objects\BombPickup.cpp" />
-    <ClCompile Include="Code\Objects\Components\CameraComponent.cpp" />
-    <ClCompile Include="Code\Objects\Components\CollisionComponent.cpp" />
-    <ClCompile Include="Code\Objects\Components\Component.cpp" />
-    <ClCompile Include="Code\Objects\Components\InstancedMeshComponent.cpp" />
-    <ClCompile Include="Code\Objects\Components\MeshComponent.cpp" />
-    <ClCompile Include="Code\Objects\Components\ParticleComponent.cpp" />
-    <ClCompile Include="Code\Objects\Components\PointLightComponent.cpp" />
     <ClCompile Include="Code\Objects\HubTeleporter.cpp" />
-    <ClCompile Include="Code\Objects\InstancedMeshObject.cpp" />
-    <ClCompile Include="Code\Objects\MeshObject.cpp" />
-    <ClCompile Include="Code\Objects\Objects.cpp" />
     <ClCompile Include="Code\Objects\Orb.cpp" />
     <ClCompile Include="Code\Objects\OrbGate.cpp" />
     <ClCompile Include="Code\Objects\PlayerObject.cpp" />
     <ClCompile Include="Code\Objects\Snowman.cpp" />
-    <ClCompile Include="Code\Objects\SoundObject.cpp" />
     <ClCompile Include="Code\Objects\WallObject.cpp" />
-    <ClCompile Include="Code\Objects\WorldObject.cpp" />
-    <ClCompile Include="Code\OS.cpp" />
-    <ClCompile Include="Code\Save.cpp" />
-    <ClCompile Include="Code\Script.cpp" />
-    <ClCompile Include="Code\Sound\Sound.cpp" />
-    <ClCompile Include="Code\Timer.cpp" />
     <ClCompile Include="Code\UI\Game\GameUI.cpp" />
-    <ClCompile Include="Code\Scene.cpp" />
-    <ClCompile Include="Code\World\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Code\Console.h" />
-    <ClInclude Include="Code\EngineProperties.h" />
-    <ClInclude Include="Code\EngineRandom.h" />
-    <ClInclude Include="Code\FileUtility.h" />
-    <ClInclude Include="Code\Importers\Build\Build.h" />
-    <ClInclude Include="Code\Importers\Build\Pack.h" />
-    <ClInclude Include="Code\Importers\ImageImporter.h" />
-    <ClInclude Include="Code\Importers\ModelConverter.h" />
-    <ClInclude Include="Code\Input.h" />
-    <ClInclude Include="Code\Log.h" />
-    <ClInclude Include="Code\Math\Collision\Collision.h" />
-    <ClInclude Include="Code\Math\Collision\CollisionBox.h" />
-    <ClInclude Include="Code\Math\Collision\TriangleIntersect.h" />
-    <ClInclude Include="Code\Math\Math.h" />
-    <ClInclude Include="Code\Math\Vector.h" />
     <ClInclude Include="Code\Objects\Backpack.h" />
     <ClInclude Include="Code\Objects\Bomb.h" />
     <ClInclude Include="Code\Objects\BombPickup.h" />
-    <ClInclude Include="Code\Objects\Components\ParticleComponent.h" />
-    <ClInclude Include="Code\Objects\Components\PointLightComponent.h" />
     <ClInclude Include="Code\Objects\HubTeleporter.h" />
     <ClInclude Include="Code\Objects\Orb.h" />
     <ClInclude Include="Code\Objects\OrbGate.h" />
+    <ClInclude Include="Code\Objects\PlayerObject.h" />
     <ClInclude Include="Code\Objects\Snowman.h" />
     <ClInclude Include="Code\Objects\WallObject.h" />
-    <ClInclude Include="Code\Objects\Components\CameraComponent.h" />
-    <ClInclude Include="Code\Objects\Components\CollisionComponent.h" />
-    <ClInclude Include="Code\Objects\Components\Component.h" />
-    <ClInclude Include="Code\Objects\Components\InstancedMeshComponent.h" />
-    <ClInclude Include="Code\Objects\Components\MeshComponent.h" />
-    <ClInclude Include="Code\Objects\InstancedMeshObject.h" />
-    <ClInclude Include="Code\Objects\MeshObject.h" />
-    <ClInclude Include="Code\Objects\Objects.h" />
-    <ClInclude Include="Code\Objects\PlayerObject.h" />
-    <ClInclude Include="Code\Objects\SoundObject.h" />
-    <ClInclude Include="Code\Objects\WorldObject.h" />
-    <ClInclude Include="Code\OS.h" />
-    <ClInclude Include="Code\Save.h" />
-    <ClInclude Include="Code\Script.h" />
-    <ClInclude Include="Code\Sound\Sound.h" />
-    <ClInclude Include="Code\Timer.h" />
-    <ClInclude Include="Code\TypeEnun.h" />
     <ClInclude Include="Code\UI\Game\GameUI.h" />
-    <ClInclude Include="Code\UI\UI.h" />
-    <ClInclude Include="Code\Scene.h" />
-    <ClInclude Include="Code\World\Assets.h" />
-    <ClInclude Include="Code\World\Graphics.h" />
-    <ClInclude Include="Code\World\Stats.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config.jss" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Code\Engine.h" />
+    <None Include="ToDo.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,7 +7,7 @@
 #include <assimp/postprocess.h>
 #include "Math/Vector.h"
 #include <fstream>
-#include "FileUtility.h"
+#include "Engine/FileUtility.h"
 
 /*
 * MODEL IMPORTER USING ASSIMP

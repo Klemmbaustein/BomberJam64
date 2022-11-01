@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{e6579516-efbc-466b-85db-443ccc5629db}</ProjectGuid>
+    <RootNamespace>Engine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>D:\VS\OpenAL\include;D:\VS\BomberJam64\BuildTool\Output;G:\VSProjects\AssimpInclude\include;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;D:\VS\BomberJam64\Code;G:\VSProjects\glm\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level1</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <OutputFile>$(SolutionDir)Components\lib\$(TargetName).lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Code\Engine\Console.cpp" />
+    <ClCompile Include="..\..\Code\Engine\EngineRandom.cpp" />
+    <ClCompile Include="..\..\Code\Engine\FileUtility.cpp" />
+    <ClCompile Include="..\..\Code\Engine\Input.cpp" />
+    <ClCompile Include="..\..\Code\Engine\GameLoop.cpp" />
+    <ClCompile Include="..\..\Code\Engine\OS.cpp" />
+    <ClCompile Include="..\..\Code\Engine\Scene.cpp" />
+    <ClCompile Include="..\..\Code\Engine\Script.cpp" />
+    <ClCompile Include="..\..\Code\Engine\Timer.cpp" />
+    <ClCompile Include="..\..\Code\Importers\Build\Build.cpp" />
+    <ClCompile Include="..\..\Code\Importers\Build\Pack.cpp" />
+    <ClCompile Include="..\..\Code\Importers\ImageImporter.cpp" />
+    <ClCompile Include="..\..\Code\Importers\ModelConverter.cpp" />
+    <ClCompile Include="..\..\Code\Math\Collision\Collision.cpp" />
+    <ClCompile Include="..\..\Code\Math\Collision\CollisionBox.cpp" />
+    <ClCompile Include="..\..\Code\Math\Math.cpp" />
+    <ClCompile Include="..\..\Code\Math\Vector.cpp" />
+    <ClCompile Include="..\..\Code\Objects\Components\CameraComponent.cpp" />
+    <ClCompile Include="..\..\Code\Objects\Components\CollisionComponent.cpp" />
+    <ClCompile Include="..\..\Code\Objects\Components\Component.cpp" />
+    <ClCompile Include="..\..\Code\Objects\Components\InstancedMeshComponent.cpp" />
+    <ClCompile Include="..\..\Code\Objects\Components\MeshComponent.cpp" />
+    <ClCompile Include="..\..\Code\Objects\Components\ParticleComponent.cpp" />
+    <ClCompile Include="..\..\Code\Objects\Components\PointLightComponent.cpp" />
+    <ClCompile Include="..\..\Code\Objects\InstancedMeshObject.cpp" />
+    <ClCompile Include="..\..\Code\Objects\MeshObject.cpp" />
+    <ClCompile Include="..\..\Code\Objects\Objects.cpp" />
+    <ClCompile Include="..\..\Code\Objects\SoundObject.cpp" />
+    <ClCompile Include="..\..\Code\Objects\WorldObject.cpp" />
+    <ClCompile Include="..\..\Code\Save.cpp" />
+    <ClCompile Include="..\..\Code\Sound\Sound.cpp" />
+    <ClCompile Include="..\..\Code\World\World.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Code\Engine\Console.h" />
+    <ClInclude Include="..\..\Code\Engine\Engine.h" />
+    <ClInclude Include="..\..\Code\Engine\EngineProperties.h" />
+    <ClInclude Include="..\..\Code\Engine\EngineRandom.h" />
+    <ClInclude Include="..\..\Code\Engine\FileUtility.h" />
+    <ClInclude Include="..\..\Code\Engine\Input.h" />
+    <ClInclude Include="..\..\Code\Engine\Log.h" />
+    <ClInclude Include="..\..\Code\Engine\OS.h" />
+    <ClInclude Include="..\..\Code\Engine\Save.h" />
+    <ClInclude Include="..\..\Code\Engine\Scene.h" />
+    <ClInclude Include="..\..\Code\Engine\Script.h" />
+    <ClInclude Include="..\..\Code\Engine\Timer.h" />
+    <ClInclude Include="..\..\Code\Engine\TypeEnun.h" />
+    <ClInclude Include="..\..\Code\Importers\Build\Build.h" />
+    <ClInclude Include="..\..\Code\Importers\Build\Pack.h" />
+    <ClInclude Include="..\..\Code\Importers\ImageImporter.h" />
+    <ClInclude Include="..\..\Code\Importers\ModelConverter.h" />
+    <ClInclude Include="..\..\Code\Math\Collision\Collision.h" />
+    <ClInclude Include="..\..\Code\Math\Collision\CollisionBox.h" />
+    <ClInclude Include="..\..\Code\Math\Collision\TriangleIntersect.h" />
+    <ClInclude Include="..\..\Code\Math\Math.h" />
+    <ClInclude Include="..\..\Code\Math\Vector.h" />
+    <ClInclude Include="..\..\Code\Objects\Components\CameraComponent.h" />
+    <ClInclude Include="..\..\Code\Objects\Components\CollisionComponent.h" />
+    <ClInclude Include="..\..\Code\Objects\Components\Component.h" />
+    <ClInclude Include="..\..\Code\Objects\Components\InstancedMeshComponent.h" />
+    <ClInclude Include="..\..\Code\Objects\Components\MeshComponent.h" />
+    <ClInclude Include="..\..\Code\Objects\Components\ParticleComponent.h" />
+    <ClInclude Include="..\..\Code\Objects\Components\PointLightComponent.h" />
+    <ClInclude Include="..\..\Code\Objects\InstancedMeshObject.h" />
+    <ClInclude Include="..\..\Code\Objects\MeshObject.h" />
+    <ClInclude Include="..\..\Code\Objects\Objects.h" />
+    <ClInclude Include="..\..\Code\Objects\SoundObject.h" />
+    <ClInclude Include="..\..\Code\Objects\WorldObject.h" />
+    <ClInclude Include="..\..\Code\Sound\Sound.h" />
+    <ClInclude Include="..\..\Code\World\Assets.h" />
+    <ClInclude Include="..\..\Code\World\Graphics.h" />
+    <ClInclude Include="..\..\Code\World\Stats.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

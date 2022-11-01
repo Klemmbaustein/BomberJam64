@@ -84,6 +84,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Code\main.cpp" />
     <ClCompile Include="..\..\Code\UI\Default\ScrollObject.cpp" />
     <ClCompile Include="..\..\Code\UI\Default\TextField.cpp" />
     <ClCompile Include="..\..\Code\UI\Default\TextRenderer.cpp" />
@@ -100,6 +101,7 @@
     <ClInclude Include="..\..\Code\UI\Default\UIButton.h" />
     <ClInclude Include="..\..\Code\UI\Default\UICanvas.h" />
     <ClInclude Include="..\..\Code\UI\Default\VectorInputField.h" />
+    <ClInclude Include="..\..\Code\UI\UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

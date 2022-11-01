@@ -1,17 +1,17 @@
 #include "Console.h"
 #include <Rendering/Utility/CSM.h>
 #include <Sound/Sound.h>
-#include <EngineProperties.h>
+#include <Engine/EngineProperties.h>
 #include <sstream>
 #include <Rendering/Utility/ShaderManager.h>
 #include <map>
-#include <Script.h>
+#include <Engine/Script.h>
 #include <regex>
 #include <Math/Math.h>
 #include <Rendering/Camera/CameraShake.h>
-#include <Log.h>
+#include <Engine/Log.h>
 #include <Importers/Build/Pack.h>
-#include <OS.h>
+#include <Engine/OS.h>
 
 #include <World/Graphics.h>
 #include <World/Stats.h>

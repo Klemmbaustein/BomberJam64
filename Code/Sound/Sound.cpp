@@ -1,12 +1,12 @@
 #include "Sound.h"
 #include <AL/al.h>
-#include <FileUtility.h>
+#include <Engine/FileUtility.h>
 #include <AL/alc.h>
 #include "AL/alext.h"
 #include <fstream>
 #include <sstream>
 #include <cmath>
-#include <Log.h>
+#include <Engine/Log.h>
 #include <Rendering/Camera/Camera.h>
 #include <World/Assets.h>
 #include <iostream>

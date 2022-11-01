@@ -1,8 +1,8 @@
 #include "Bomb.h"
 #include <Objects/Objects.h>
 #include <Sound/Sound.h>
-#include <Log.h>
-#include <EngineRandom.h>
+#include <Engine/Log.h>
+#include <Engine/EngineRandom.h>
 #include <algorithm>
 #include <Rendering/Camera/CameraShake.h>
 #include <Objects/WallObject.h>

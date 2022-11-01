@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "Math/Vector.h"
-#include <TypeEnun.h>
+#include <Engine/TypeEnun.h>
 
 class EngineContextMenu;
 

@@ -1,8 +1,8 @@
 #include "Build.h"
 #include <filesystem>
 #include <Importers/Build/Pack.h>
-#include <Log.h>
-#include <EngineProperties.h>
+#include <Engine/Log.h>
+#include <Engine/EngineProperties.h>
 #include <fstream>
 #include <sstream>
 #include <World/Stats.h>
