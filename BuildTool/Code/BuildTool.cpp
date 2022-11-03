@@ -27,7 +27,7 @@ inline uint32_t hash_str_uint32(const std::string& str) {
 void WriteObjectList(std::vector<std::string> Objects, std::string TargetFolder)
 {
 	std::ofstream OutStream = std::ofstream(TargetFolder + "/GENERATED_ListOfObjects.h", std::ios::out);
-	Log::Print(TargetFolder + "/GENERATED_ListOfObjects.h");
+	Log::Print("Written: " + TargetFolder + "/GENERATED_ListOfObjects.h");
 	for (unsigned int i = 0; i < Objects.size(); i++)
 	{
 		uint32_t ID = hash_str_uint32(Objects[i]);
@@ -39,7 +39,7 @@ void WriteObjectList(std::vector<std::string> Objects, std::string TargetFolder)
 void WriteSpawnList(std::vector<std::string> Objects, std::string TargetFolder)
 {
 	std::ofstream OutStream = std::ofstream(TargetFolder + "/GENERATED_Spawnlist.h", std::ios::out);
-	Log::Print(TargetFolder + "/GENERATED_Spawnlist.h");
+	Log::Print("Written: " + TargetFolder + "/GENERATED_Spawnlist.h");
 	for (unsigned int i = 0; i < Objects.size(); i++)
 	{
 		uint32_t ID = hash_str_uint32(Objects[i]);
@@ -50,6 +50,7 @@ void WriteSpawnList(std::vector<std::string> Objects, std::string TargetFolder)
 
 void WriteHeaderForObject(std::string TargetFolder, std::string Object)
 {
+	Log::Print("Written: " + TargetFolder + "/GENERATED_" + Object + ".h");
 	unsigned int ID = hash_str_uint32(Object);
 	std::ofstream OutStream = std::ofstream(TargetFolder + "/GENERATED_" + Object + ".h", std::ios::out);
 	OutStream << "#pragma once" << std::endl;
@@ -65,26 +66,19 @@ int main(int argc, char** argv)
 {
 	try
 	{
-		std::string InLoc;
+		std::vector<std::string> InLoc;
 		std::string OutLoc;
 		for (int i = 0; i < argc; i++)
 		{
 			std::string ArgStr = argv[i];
 			if (ArgStr.substr(0, ArgStr.find_first_of("=")) == "In")
 			{
-				if (InLoc.empty())
+				ArgStr = ArgStr.substr(ArgStr.find_first_of("=") + 1);
+				if (!std::filesystem::exists(ArgStr))
 				{
-					ArgStr = ArgStr.substr(ArgStr.find_first_of("=") + 1);
-					if (!std::filesystem::exists(ArgStr))
-					{
-						throw ParseException("In path does not exist: " + ArgStr);
-					}
-					InLoc = ArgStr;
+					throw ParseException("In path does not exist: " + ArgStr);
 				}
-				else
-				{
-					throw ParseException("In path has been defined more than once");
-				}
+				InLoc.push_back(ArgStr);
 			}
 
 			if (ArgStr.substr(0, ArgStr.find_first_of("=")) == "Out")
@@ -112,23 +106,26 @@ int main(int argc, char** argv)
 
 		std::filesystem::create_directories(OutLoc);
 		std::vector<std::string> Objects;
-		for (const auto& entry : std::filesystem::directory_iterator(InLoc))
+		for (auto location : InLoc)
 		{
-			if (entry.is_directory())
+			for (const auto& entry : std::filesystem::directory_iterator(location))
 			{
-				//TODO: recursive search
-			}
-			else
-			{
-				std::string Filename = entry.path().string();
-				//Ignore Objects.h header
-				auto Begin = std::max(Filename.find_last_of("/"), Filename.find_last_of("\\"));
-				std::string Name = Filename.substr(Begin + 1, Filename.find_last_of(".") - Begin - 1);
-				if (Name != "Objects" && Name != "WorldObject")
+				if (entry.is_directory())
 				{
-					if (Filename.substr(Filename.find_last_of(".") + 1) == "h")
+					//TODO: recursive search
+				}
+				else
+				{
+					std::string Filename = entry.path().string();
+					//Ignore Objects.h header
+					auto Begin = std::max(Filename.find_last_of("/"), Filename.find_last_of("\\"));
+					std::string Name = Filename.substr(Begin + 1, Filename.find_last_of(".") - Begin - 1);
+					if (Name != "Objects" && Name != "WorldObject")
 					{
-						Objects.push_back(Name);
+						if (Filename.substr(Filename.find_last_of(".") + 1) == "h")
+						{
+							Objects.push_back(Name);
+						}
 					}
 				}
 			}

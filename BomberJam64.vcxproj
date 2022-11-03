@@ -102,15 +102,15 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\VS\BomberJam64\BuildTool\Output;D:\VS\OpenAL\include;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;G:\VSProjects\glm\include;G:\VSProjects\AssimpInclude\include;D:\VS\BomberJam64\Code;$(IncludePath)</IncludePath>
+    <IncludePath>G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;D:\VS\BomberJam64\Games\BomberJam64;D:\VS\BomberJam64\BuildTool\Output;G:\VSProjects\glm\include;D:\VS\BomberJam64\EngineSource;$(IncludePath)</IncludePath>
     <LibraryPath>D:\VS\BomberJam64\Components\lib;D:\VS\OpenAL\bin;G:\VSProjects\Assimp5.0.1Libs;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\lib\x64;G:\VSProjects\glew\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Editor|x64'">
-    <IncludePath>D:\VS\BomberJam64\BuildTool\Output;D:\VS\OpenAL\include;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;G:\VSProjects\glm\include;G:\VSProjects\AssimpInclude\include;D:\VS\BomberJam64\Code;$(IncludePath)</IncludePath>
+    <IncludePath>G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;D:\VS\BomberJam64\Games\BomberJam64;D:\VS\BomberJam64\BuildTool\Output;G:\VSProjects\glm\include;D:\VS\BomberJam64\EngineSource;$(IncludePath)</IncludePath>
     <LibraryPath>D:\VS\BomberJam64\Components\lib;D:\VS\OpenAL\bin;G:\VSProjects\Assimp5.0.1Libs;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\lib\x64;G:\VSProjects\glew\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-EngineBuild|x64'">
-    <IncludePath>D:\VS\BomberJam64\BuildTool\Output;D:\VS\OpenAL\include;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;G:\VSProjects\glm\include;G:\VSProjects\AssimpInclude\include;D:\VS\BomberJam64\Code;$(IncludePath)</IncludePath>
+    <IncludePath>G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\include;G:\VSProjects\glew\glew-2.1.0\include;D:\VS\BomberJam64\Games\BomberJam64;D:\VS\BomberJam64\BuildTool\Output;G:\VSProjects\glm\include;D:\VS\BomberJam64\EngineSource;$(IncludePath)</IncludePath>
     <LibraryPath>D:\VS\BomberJam64\Components\lib;D:\VS\OpenAL\bin;G:\VSProjects\Assimp5.0.1Libs;G:\VSProjects\SDL2\SDL2-devel-2.0.20-VC\SDL2-2.0.20\lib\x64;G:\VSProjects\glew\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -208,7 +208,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <AdditionalDependencies>assimp.lib;OpenAL32.lib;SDL2.lib;opengl32.lib;glew32s.lib;Rendering.lib;UI.lib;Editor.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;OpenAL32.lib;SDL2.lib;opengl32.lib;glew32s.lib;Rendering.lib;UI.lib;Editor.lib;Engine_Editor.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
@@ -232,37 +232,42 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp.lib;OpenAL32.lib;SDL2.lib;opengl32.lib;glew32s.lib;Rendering.lib;UI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;OpenAL32.lib;SDL2.lib;opengl32.lib;glew32s.lib;Rendering_Release.lib;UI_Release.lib;Engine_Release.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Code\main.cpp" />
-    <ClCompile Include="Code\Objects\Backpack.cpp" />
-    <ClCompile Include="Code\Objects\Bomb.cpp" />
-    <ClCompile Include="Code\Objects\BombPickup.cpp" />
-    <ClCompile Include="Code\Objects\HubTeleporter.cpp" />
-    <ClCompile Include="Code\Objects\Orb.cpp" />
-    <ClCompile Include="Code\Objects\OrbGate.cpp" />
-    <ClCompile Include="Code\Objects\PlayerObject.cpp" />
-    <ClCompile Include="Code\Objects\Snowman.cpp" />
-    <ClCompile Include="Code\Objects\WallObject.cpp" />
-    <ClCompile Include="Code\UI\Game\GameUI.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Code\Objects\Backpack.h" />
-    <ClInclude Include="Code\Objects\Bomb.h" />
-    <ClInclude Include="Code\Objects\BombPickup.h" />
-    <ClInclude Include="Code\Objects\HubTeleporter.h" />
-    <ClInclude Include="Code\Objects\Orb.h" />
-    <ClInclude Include="Code\Objects\OrbGate.h" />
-    <ClInclude Include="Code\Objects\PlayerObject.h" />
-    <ClInclude Include="Code\Objects\Snowman.h" />
-    <ClInclude Include="Code\Objects\WallObject.h" />
-    <ClInclude Include="Code\UI\Game\GameUI.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Config.jss" />
     <None Include="ToDo.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EngineSource\Objects\SoundObject.cpp" />
+    <ClCompile Include="EngineSource\UI\EditorUI\EditorUI.cpp" />
+    <ClCompile Include="Games\BomberJam64\main.cpp" />
+    <ClCompile Include="Games\BomberJam64\Objects\Backpack.cpp" />
+    <ClCompile Include="Games\BomberJam64\Objects\Bomb.cpp" />
+    <ClCompile Include="Games\BomberJam64\Objects\BombPickup.cpp" />
+    <ClCompile Include="Games\BomberJam64\Objects\HubTeleporter.cpp" />
+    <ClCompile Include="Games\BomberJam64\Objects\Objects.cpp" />
+    <ClCompile Include="Games\BomberJam64\Objects\Orb.cpp" />
+    <ClCompile Include="Games\BomberJam64\Objects\OrbGate.cpp" />
+    <ClCompile Include="Games\BomberJam64\Objects\PlayerObject.cpp" />
+    <ClCompile Include="Games\BomberJam64\Objects\Snowman.cpp" />
+    <ClCompile Include="Games\BomberJam64\Objects\WallObject.cpp" />
+    <ClCompile Include="Games\BomberJam64\UI\GameUI.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EngineSource\Objects\SoundObject.h" />
+    <ClInclude Include="Games\BomberJam64\Objects\Backpack.h" />
+    <ClInclude Include="Games\BomberJam64\Objects\Bomb.h" />
+    <ClInclude Include="Games\BomberJam64\Objects\BombPickup.h" />
+    <ClInclude Include="Games\BomberJam64\Objects\HubTeleporter.h" />
+    <ClInclude Include="Games\BomberJam64\Objects\Objects.h" />
+    <ClInclude Include="Games\BomberJam64\Objects\Orb.h" />
+    <ClInclude Include="Games\BomberJam64\Objects\OrbGate.h" />
+    <ClInclude Include="Games\BomberJam64\Objects\PlayerObject.h" />
+    <ClInclude Include="Games\BomberJam64\Objects\Snowman.h" />
+    <ClInclude Include="Games\BomberJam64\Objects\WallObject.h" />
+    <ClInclude Include="Games\BomberJam64\UI\GameUI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

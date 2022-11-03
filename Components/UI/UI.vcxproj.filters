@@ -6,51 +6,51 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Code\UI\Default\ScrollObject.cpp">
+    <ClCompile Include="..\..\EngineSource\UI\UI.cpp" />
+    <ClCompile Include="..\..\EngineSource\UI\Default\ScrollObject.cpp">
       <Filter>Default</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\UI\Default\TextField.cpp">
+    <ClCompile Include="..\..\EngineSource\UI\Default\TextField.cpp">
       <Filter>Default</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\UI\Default\TextRenderer.cpp">
+    <ClCompile Include="..\..\EngineSource\UI\Default\TextRenderer.cpp">
       <Filter>Default</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\UI\Default\UIBorder.cpp">
+    <ClCompile Include="..\..\EngineSource\UI\Default\UIBorder.cpp">
       <Filter>Default</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\UI\Default\UIButton.cpp">
+    <ClCompile Include="..\..\EngineSource\UI\Default\UIButton.cpp">
       <Filter>Default</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\UI\Default\UICanvas.cpp">
+    <ClCompile Include="..\..\EngineSource\UI\Default\UICanvas.cpp">
       <Filter>Default</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\UI\Default\VectorInputField.cpp">
+    <ClCompile Include="..\..\EngineSource\UI\Default\VectorInputField.cpp">
       <Filter>Default</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Code\UI\Default\ScrollObject.h">
+    <ClInclude Include="..\..\EngineSource\UI\UI.h" />
+    <ClInclude Include="..\..\EngineSource\UI\Default\ScrollObject.h">
       <Filter>Default</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\Default\TextField.h">
+    <ClInclude Include="..\..\EngineSource\UI\Default\TextField.h">
       <Filter>Default</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\Default\TextRenderer.h">
+    <ClInclude Include="..\..\EngineSource\UI\Default\TextRenderer.h">
       <Filter>Default</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\Default\UIBorder.h">
+    <ClInclude Include="..\..\EngineSource\UI\Default\UIBorder.h">
       <Filter>Default</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\Default\UIButton.h">
+    <ClInclude Include="..\..\EngineSource\UI\Default\UIButton.h">
       <Filter>Default</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\Default\UICanvas.h">
+    <ClInclude Include="..\..\EngineSource\UI\Default\UICanvas.h">
       <Filter>Default</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\Default\VectorInputField.h">
+    <ClInclude Include="..\..\EngineSource\UI\Default\VectorInputField.h">
       <Filter>Default</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\UI.h" />
   </ItemGroup>
 </Project>

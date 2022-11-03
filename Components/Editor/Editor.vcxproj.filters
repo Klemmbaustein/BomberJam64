@@ -9,57 +9,54 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Code\UI\EditorUI\EditorContextMenu.cpp">
+    <ClCompile Include="..\..\EngineSource\UI\EditorUI\EditorContextMenu.cpp">
       <Filter>EditorUI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\UI\EditorUI\EditorUI.cpp">
-      <Filter>EditorUI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Code\UI\EditorUI\Material.cpp">
+    <ClCompile Include="..\..\EngineSource\UI\EditorUI\Material.cpp">
       <Filter>EditorUI\Tabs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\UI\EditorUI\MaterialFunctions.cpp">
+    <ClCompile Include="..\..\EngineSource\UI\EditorUI\MaterialFunctions.cpp">
       <Filter>EditorUI\Tabs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\UI\EditorUI\MaterialTemplate.cpp">
+    <ClCompile Include="..\..\EngineSource\UI\EditorUI\MaterialTemplate.cpp">
       <Filter>EditorUI\Tabs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\UI\EditorUI\MeshTab.cpp">
+    <ClCompile Include="..\..\EngineSource\UI\EditorUI\MeshTab.cpp">
       <Filter>EditorUI\Tabs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\UI\EditorUI\ParticleEditorTab.cpp">
+    <ClCompile Include="..\..\EngineSource\UI\EditorUI\ParticleEditorTab.cpp">
       <Filter>EditorUI\Tabs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Code\UI\EditorUI\AddNewItemTab.cpp">
+    <ClCompile Include="..\..\EngineSource\UI\EditorUI\AddNewItemTab.cpp">
       <Filter>EditorUI\Tabs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Code\UI\EditorUI\EditorContextMenu.h">
+    <ClInclude Include="..\..\EngineSource\UI\EditorUI\EditorContextMenu.h">
       <Filter>EditorUI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\EditorUI\EditorUI.h">
+    <ClInclude Include="..\..\EngineSource\UI\EditorUI\EditorUI.h">
       <Filter>EditorUI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\EditorUI\ParticleEditorTab.h">
+    <ClInclude Include="..\..\EngineSource\UI\EditorUI\EditorTab.h">
       <Filter>EditorUI\Tabs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\EditorUI\Material.h">
+    <ClInclude Include="..\..\EngineSource\UI\EditorUI\Material.h">
       <Filter>EditorUI\Tabs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\EditorUI\MaterialFunctions.h">
+    <ClInclude Include="..\..\EngineSource\UI\EditorUI\MaterialFunctions.h">
       <Filter>EditorUI\Tabs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\EditorUI\MaterialTemplate.h">
+    <ClInclude Include="..\..\EngineSource\UI\EditorUI\MaterialTemplate.h">
       <Filter>EditorUI\Tabs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\EditorUI\MeshTab.h">
+    <ClInclude Include="..\..\EngineSource\UI\EditorUI\MeshTab.h">
       <Filter>EditorUI\Tabs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\EditorUI\EditorTab.h">
+    <ClInclude Include="..\..\EngineSource\UI\EditorUI\ParticleEditorTab.h">
       <Filter>EditorUI\Tabs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\UI\EditorUI\AddNewItemTab.h">
+    <ClInclude Include="..\..\EngineSource\UI\EditorUI\AddNewItemTab.h">
       <Filter>EditorUI\Tabs</Filter>
     </ClInclude>
   </ItemGroup>

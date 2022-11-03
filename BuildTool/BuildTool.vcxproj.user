@@ -3,6 +3,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LocalDebuggerCommand>$(TargetPath)</LocalDebuggerCommand>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>In=../Code/Objects Out=Output/GENERATED</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>In=../EngineSource/Objects In=../Games/BomberJam64/Objects Out=Output/GENERATED</LocalDebuggerCommandArguments>
   </PropertyGroup>
 </Project>

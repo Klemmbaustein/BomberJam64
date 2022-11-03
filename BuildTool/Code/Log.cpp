@@ -55,5 +55,5 @@ void Log::PrintVerbose(std::string Message)
 	}
 }
 #elif __linux__
-//TODO
+//TODO Log on Linux
 #endif

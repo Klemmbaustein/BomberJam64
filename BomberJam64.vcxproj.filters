@@ -10,77 +10,97 @@
     <Filter Include="Code\Game\UI">
       <UniqueIdentifier>{0d3240f2-1610-422e-b346-b70317d27daf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Code\Game\UI\Game">
-      <UniqueIdentifier>{bf6b999c-4531-4be7-854d-8325000ce2f7}</UniqueIdentifier>
+    <Filter Include="Code\Game\Objects">
+      <UniqueIdentifier>{135354a7-8234-4929-8f87-a589de511eda}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Code\UI\Game\GameUI.cpp">
-      <Filter>Code\Game\UI\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\Backpack.cpp">
-      <Filter>Code\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\Bomb.cpp">
-      <Filter>Code\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\BombPickup.cpp">
-      <Filter>Code\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\HubTeleporter.cpp">
-      <Filter>Code\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\Orb.cpp">
-      <Filter>Code\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\OrbGate.cpp">
-      <Filter>Code\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\PlayerObject.cpp">
-      <Filter>Code\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\Snowman.cpp">
-      <Filter>Code\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Objects\WallObject.cpp">
-      <Filter>Code\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Code\UI\Game\GameUI.h">
-      <Filter>Code\Game\UI\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\Backpack.h">
-      <Filter>Code\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\Bomb.h">
-      <Filter>Code\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\BombPickup.h">
-      <Filter>Code\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\HubTeleporter.h">
-      <Filter>Code\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\Orb.h">
-      <Filter>Code\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\OrbGate.h">
-      <Filter>Code\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\Snowman.h">
-      <Filter>Code\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\WallObject.h">
-      <Filter>Code\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Objects\PlayerObject.h">
-      <Filter>Code\Game</Filter>
-    </ClInclude>
+    <Filter Include="Code\Etc">
+      <UniqueIdentifier>{6930b92b-cbea-46f9-ab97-00bee63c3c9f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Config.jss" />
     <None Include="ToDo.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Games\BomberJam64\main.cpp">
+      <Filter>Code\Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\BomberJam64\Objects\Backpack.cpp">
+      <Filter>Code\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\BomberJam64\Objects\Bomb.cpp">
+      <Filter>Code\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\BomberJam64\Objects\BombPickup.cpp">
+      <Filter>Code\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\BomberJam64\Objects\HubTeleporter.cpp">
+      <Filter>Code\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\BomberJam64\Objects\Orb.cpp">
+      <Filter>Code\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\BomberJam64\Objects\OrbGate.cpp">
+      <Filter>Code\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\BomberJam64\Objects\PlayerObject.cpp">
+      <Filter>Code\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\BomberJam64\Objects\Snowman.cpp">
+      <Filter>Code\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\BomberJam64\Objects\WallObject.cpp">
+      <Filter>Code\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\BomberJam64\UI\GameUI.cpp">
+      <Filter>Code\Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\BomberJam64\Objects\Objects.cpp">
+      <Filter>Code\Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\Objects\SoundObject.cpp">
+      <Filter>Code\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\UI\EditorUI\EditorUI.cpp">
+      <Filter>Code\Etc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Games\BomberJam64\Objects\Backpack.h">
+      <Filter>Code\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\BomberJam64\Objects\Bomb.h">
+      <Filter>Code\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\BomberJam64\Objects\BombPickup.h">
+      <Filter>Code\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\BomberJam64\Objects\HubTeleporter.h">
+      <Filter>Code\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\BomberJam64\Objects\Orb.h">
+      <Filter>Code\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\BomberJam64\Objects\OrbGate.h">
+      <Filter>Code\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\BomberJam64\Objects\PlayerObject.h">
+      <Filter>Code\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\BomberJam64\Objects\Snowman.h">
+      <Filter>Code\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\BomberJam64\Objects\WallObject.h">
+      <Filter>Code\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\BomberJam64\UI\GameUI.h">
+      <Filter>Code\Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\BomberJam64\Objects\Objects.h">
+      <Filter>Code\Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineSource\Objects\SoundObject.h">
+      <Filter>Code\Game\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
